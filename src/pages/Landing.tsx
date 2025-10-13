@@ -86,22 +86,154 @@ const Landing = () => {
         </div>
       </section>
 
-      {/* Trusted By Section */}
-      <section className="py-20">
+      {/* Trusted By Section - Inverted Pyramid */}
+      <section className="py-20 bg-background">
         <div className="container mx-auto px-4">
           <h2 className="text-4xl font-bold text-foreground text-center mb-4">
             Trusted by the World's Most Dependable Businesses
           </h2>
-          <p className="text-center text-muted-foreground mb-12">
-            Leading companies across industries rely on BeFiSc for verification and fraud detection
+          <p className="text-center text-muted-foreground mb-16 max-w-3xl mx-auto">
+            BeFiSc partners with leading organizations across lending, fintech, and verification ecosystems to power real-time trust.
           </p>
           
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
-            {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
-              <div key={i} className="flex items-center justify-center h-24 bg-muted rounded-lg border border-border hover:border-primary transition-colors">
-                <Users className="h-12 w-12 text-muted-foreground" />
-              </div>
-            ))}
+          {/* Row 1 - NBFC & Lending Giants (Widest) */}
+          <div className="mb-12 animate-fade-in">
+            <h3 className="text-center text-sm font-semibold text-primary mb-6 uppercase tracking-wide">
+              NBFC & Lending Giants
+            </h3>
+            <div className="flex flex-wrap justify-center gap-4 max-w-6xl mx-auto">
+              {[
+                'Bajaj Finserv',
+                'Muthoot Capital',
+                'Navi',
+                'Varthana',
+                'Lendbox',
+                'Arthan Finance'
+              ].map((company, i) => (
+                <div 
+                  key={i} 
+                  className="flex items-center gap-3 bg-card rounded-xl px-6 py-4 border border-border hover:border-primary hover:scale-105 transition-all shadow-sm hover:shadow-md"
+                  style={{ animationDelay: `${i * 0.1}s` }}
+                >
+                  <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center flex-shrink-0">
+                    <Users className="w-6 h-6 text-muted-foreground" />
+                  </div>
+                  <span className="font-medium text-foreground whitespace-nowrap">{company}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Row 2 - Insurance & Wealth Management */}
+          <div className="mb-12 animate-fade-in" style={{ animationDelay: '0.2s' }}>
+            <h3 className="text-center text-sm font-semibold text-primary mb-6 uppercase tracking-wide">
+              Insurance & Wealth Management
+            </h3>
+            <div className="flex flex-wrap justify-center gap-4 max-w-5xl mx-auto">
+              {[
+                'Go Digit Life Insurance',
+                'Go Digit General Insurance',
+                'First Advisors Insurance',
+                'Mufkam Insurance Marketing',
+                'HealthCred'
+              ].map((company, i) => (
+                <div 
+                  key={i} 
+                  className="flex items-center gap-3 bg-card rounded-xl px-6 py-4 border border-border hover:border-primary hover:scale-105 transition-all shadow-sm hover:shadow-md"
+                  style={{ animationDelay: `${(i + 6) * 0.1}s` }}
+                >
+                  <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center flex-shrink-0">
+                    <Shield className="w-6 h-6 text-muted-foreground" />
+                  </div>
+                  <span className="font-medium text-foreground whitespace-nowrap">{company}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Row 3 - Fintechs */}
+          <div className="mb-12 animate-fade-in" style={{ animationDelay: '0.4s' }}>
+            <h3 className="text-center text-sm font-semibold text-primary mb-6 uppercase tracking-wide">
+              Fintechs
+            </h3>
+            <div className="flex flex-wrap justify-center gap-4 max-w-4xl mx-auto">
+              {[
+                'Cashflo',
+                'Snapmint',
+                'Velocity',
+                'Freo',
+                'FinBox',
+                'Paytail',
+                'MoneyWide'
+              ].map((company, i) => (
+                <div 
+                  key={i} 
+                  className="flex items-center gap-3 bg-card rounded-xl px-6 py-4 border border-border hover:border-primary hover:scale-105 transition-all shadow-sm hover:shadow-md"
+                  style={{ animationDelay: `${(i + 11) * 0.1}s` }}
+                >
+                  <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center flex-shrink-0">
+                    <TrendingUp className="w-6 h-6 text-muted-foreground" />
+                  </div>
+                  <span className="font-medium text-foreground whitespace-nowrap">{company}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Row 4 - Marketplaces & Shared Economy */}
+          <div className="mb-12 animate-fade-in" style={{ animationDelay: '0.6s' }}>
+            <h3 className="text-center text-sm font-semibold text-primary mb-6 uppercase tracking-wide">
+              Marketplaces & Shared Economy
+            </h3>
+            <div className="flex flex-wrap justify-center gap-4 max-w-3xl mx-auto">
+              {[
+                'Indiamart',
+                'Proptension',
+                'Voorent',
+                'Ratify Global',
+                'Human Crayon',
+                'Gaadi Booking'
+              ].map((company, i) => (
+                <div 
+                  key={i} 
+                  className="flex items-center gap-3 bg-card rounded-xl px-6 py-4 border border-border hover:border-primary hover:scale-105 transition-all shadow-sm hover:shadow-md"
+                  style={{ animationDelay: `${(i + 18) * 0.1}s` }}
+                >
+                  <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center flex-shrink-0">
+                    <Users className="w-6 h-6 text-muted-foreground" />
+                  </div>
+                  <span className="font-medium text-foreground whitespace-nowrap">{company}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Row 5 - Background Verification & HR Tech (Narrowest) */}
+          <div className="animate-fade-in" style={{ animationDelay: '0.8s' }}>
+            <h3 className="text-center text-sm font-semibold text-primary mb-6 uppercase tracking-wide">
+              Background Verification & HR Tech
+            </h3>
+            <div className="flex flex-wrap justify-center gap-4 max-w-2xl mx-auto">
+              {[
+                'Ongrid',
+                '4SL Background Check',
+                'AMS Inform',
+                'Verification Street',
+                'SecureSearch Screening Services',
+                'VeriProbus HR Technologies'
+              ].map((company, i) => (
+                <div 
+                  key={i} 
+                  className="flex items-center gap-3 bg-card rounded-xl px-6 py-4 border border-border hover:border-primary hover:scale-105 transition-all shadow-sm hover:shadow-md"
+                  style={{ animationDelay: `${(i + 24) * 0.1}s` }}
+                >
+                  <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center flex-shrink-0">
+                    <Award className="w-6 h-6 text-muted-foreground" />
+                  </div>
+                  <span className="font-medium text-foreground whitespace-nowrap">{company}</span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>

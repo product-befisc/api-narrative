@@ -1,17 +1,21 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeft, Car, User, FileText, Shield, Calendar } from 'lucide-react';
+import { ArrowLeft, Car, User, FileText, Shield, Calendar, Eye, EyeOff } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
+import { Checkbox } from '@/components/ui/checkbox';
 import Navbar from '@/components/Navbar';
+import { maskData } from '@/lib/utils';
 
 const ChassisToRC = () => {
   const navigate = useNavigate();
   const [chassisNo, setChassisNo] = useState('MBLJAW141MHC21171');
   const [response, setResponse] = useState<any>(null);
   const [loading, setLoading] = useState(false);
+  const [showData, setShowData] = useState(false);
+  const [consent, setConsent] = useState(true);
 
   const handleFetch = () => {
     setLoading(true);
@@ -68,7 +72,7 @@ const ChassisToRC = () => {
             <CardHeader>
               <CardTitle>Enter Chassis Number</CardTitle>
             </CardHeader>
-            <CardContent>
+            <CardContent className="space-y-4">
               <div className="flex gap-4">
                 <Input
                   value={chassisNo}
@@ -76,15 +80,27 @@ const ChassisToRC = () => {
                   placeholder="Chassis Number"
                   className="flex-1"
                 />
-                <Button onClick={handleFetch} disabled={loading}>
+                <Button onClick={handleFetch} disabled={loading || !consent}>
                   {loading ? 'Fetching...' : 'Fetch Details'}
                 </Button>
+              </div>
+              <div className="flex items-start space-x-2">
+                <Checkbox id="consent" checked={consent} onCheckedChange={(checked) => setConsent(checked === true)} />
+                <label htmlFor="consent" className="text-sm text-muted-foreground leading-relaxed cursor-pointer">
+                  I authorize BeFiSc to verify and fetch details linked to the information I've provided from authorized data sources for compliance and risk checks, in line with the DPDP Act, 2023.
+                </label>
               </div>
             </CardContent>
           </Card>
 
           {response && (
             <div className="space-y-6 animate-fade-in">
+              <div className="flex justify-end mb-4">
+                <Button variant="outline" size="sm" onClick={() => setShowData(!showData)}>
+                  {showData ? <EyeOff className="h-4 w-4 mr-2" /> : <Eye className="h-4 w-4 mr-2" />}
+                  {showData ? 'Hide' : 'Show'} Data
+                </Button>
+              </div>
               <Card className="border-2 border-primary">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
@@ -96,18 +112,18 @@ const ChassisToRC = () => {
                   <div className="flex items-center justify-between">
                     <div>
                       <p className="text-sm text-muted-foreground">Owner Name</p>
-                      <p className="font-semibold text-foreground text-lg">{response.owner_name}</p>
+                      <p className="font-semibold text-foreground text-lg">{maskData(response.owner_name, showData)}</p>
                     </div>
                     <Badge className="bg-gradient-primary text-white">{response.status}</Badge>
                   </div>
                   <div className="grid md:grid-cols-2 gap-4">
                     <div>
                       <p className="text-sm text-muted-foreground">Father's Name</p>
-                      <p className="font-medium text-foreground">{response.father_name}</p>
+                      <p className="font-medium text-foreground">{maskData(response.father_name, showData)}</p>
                     </div>
                     <div>
                       <p className="text-sm text-muted-foreground">Vehicle Number</p>
-                      <p className="font-semibold text-foreground">{response.vehicle_number}</p>
+                      <p className="font-semibold text-foreground">{maskData(response.vehicle_number, showData)}</p>
                     </div>
                     <div>
                       <p className="text-sm text-muted-foreground">Registration Date</p>
@@ -210,10 +226,10 @@ const ChassisToRC = () => {
                       <p className="font-semibold text-foreground">{response.insurance.provider}</p>
                     </div>
                     <div className="grid md:grid-cols-2 gap-4">
-                      <div>
-                        <p className="text-sm text-muted-foreground">Policy Number</p>
-                        <p className="font-medium text-foreground">{response.insurance.policy_number}</p>
-                      </div>
+                    <div>
+                      <p className="text-sm text-muted-foreground">Policy Number</p>
+                      <p className="font-medium text-foreground">{maskData(response.insurance.policy_number, showData)}</p>
+                    </div>
                       <div>
                         <p className="text-sm text-muted-foreground">Valid Till</p>
                         <p className="font-medium text-foreground">{response.insurance.valid_till}</p>

@@ -4,14 +4,18 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Checkbox } from "@/components/ui/checkbox";
 import Navbar from "@/components/Navbar";
-import { ArrowLeft, User, Calendar, MapPin, IdCard, Car, CheckCircle2 } from "lucide-react";
+import { ArrowLeft, User, Calendar, MapPin, IdCard, Car, CheckCircle2, Eye, EyeOff } from "lucide-react";
+import { maskData, maskEmail, maskPhone } from "@/lib/utils";
 
 const DrivingLicense = () => {
   const navigate = useNavigate();
-  const [dlNumber, setDlNumber] = useState("");
+  const [dlNumber, setDlNumber] = useState("DL-0720220123456");
   const [responseData, setResponseData] = useState<any>(null);
   const [loading, setLoading] = useState(false);
+  const [showData, setShowData] = useState(false);
+  const [consent, setConsent] = useState(true);
 
   const mockResponse = {
     dl_number: "DL-0720220123456",
@@ -109,15 +113,27 @@ const DrivingLicense = () => {
                   value={dlNumber}
                   onChange={(e) => setDlNumber(e.target.value.toUpperCase())}
                 />
-                <Button onClick={handleFetch} disabled={loading || !dlNumber}>
+                <Button onClick={handleFetch} disabled={loading || !consent}>
                   {loading ? "Fetching..." : "Fetch Details"}
                 </Button>
+              </div>
+              <div className="flex items-start space-x-2">
+                <Checkbox id="consent" checked={consent} onCheckedChange={(checked) => setConsent(checked === true)} />
+                <label htmlFor="consent" className="text-sm text-muted-foreground leading-relaxed cursor-pointer">
+                  I authorize BeFiSc to verify and fetch details linked to the information I've provided from authorized data sources for compliance and risk checks, in line with the DPDP Act, 2023.
+                </label>
               </div>
             </CardContent>
           </Card>
 
           {responseData && (
             <div className="space-y-6 animate-fade-in">
+              <div className="flex justify-end mb-4">
+                <Button variant="outline" size="sm" onClick={() => setShowData(!showData)}>
+                  {showData ? <EyeOff className="h-4 w-4 mr-2" /> : <Eye className="h-4 w-4 mr-2" />}
+                  {showData ? 'Hide' : 'Show'} Data
+                </Button>
+              </div>
               {/* Profile Card with Image */}
               <Card className="border-primary/20">
                 <CardContent className="pt-6">
@@ -132,12 +148,12 @@ const DrivingLicense = () => {
                     <div className="flex-1 space-y-4">
                       <div>
                         <p className="text-sm text-muted-foreground">Full Name</p>
-                        <p className="text-2xl font-bold">{responseData.full_name}</p>
+                        <p className="text-2xl font-bold">{maskData(responseData.full_name, showData)}</p>
                       </div>
                       <div className="grid md:grid-cols-3 gap-4">
                         <div>
                           <p className="text-sm text-muted-foreground">DL Number</p>
-                          <p className="font-mono font-semibold">{responseData.dl_number}</p>
+                          <p className="font-mono font-semibold">{maskData(responseData.dl_number, showData)}</p>
                         </div>
                         <div>
                           <p className="text-sm text-muted-foreground">Status</p>
@@ -169,7 +185,7 @@ const DrivingLicense = () => {
                     <div className="space-y-4">
                       <div>
                         <p className="text-sm text-muted-foreground">Father/Husband Name</p>
-                        <p className="font-medium">{responseData.father_husband_name}</p>
+                        <p className="font-medium">{maskData(responseData.father_husband_name, showData)}</p>
                       </div>
                       <div>
                         <p className="text-sm text-muted-foreground">Date of Birth</p>
@@ -292,19 +308,19 @@ const DrivingLicense = () => {
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-sm leading-relaxed">{responseData.permanent_address.full_address}</p>
+                    <p className="text-sm leading-relaxed">{maskData(responseData.permanent_address.full_address, showData)}</p>
                     <div className="grid grid-cols-2 gap-3 mt-4">
                       <div>
                         <p className="text-sm text-muted-foreground">City</p>
-                        <p className="text-sm">{responseData.permanent_address.city}</p>
+                        <p className="text-sm">{maskData(responseData.permanent_address.city, showData)}</p>
                       </div>
                       <div>
                         <p className="text-sm text-muted-foreground">State</p>
-                        <p className="text-sm">{responseData.permanent_address.state}</p>
+                        <p className="text-sm">{maskData(responseData.permanent_address.state, showData)}</p>
                       </div>
                       <div>
                         <p className="text-sm text-muted-foreground">Pincode</p>
-                        <p className="text-sm font-mono">{responseData.permanent_address.pincode}</p>
+                        <p className="text-sm font-mono">{maskData(responseData.permanent_address.pincode, showData)}</p>
                       </div>
                     </div>
                   </CardContent>
@@ -318,19 +334,19 @@ const DrivingLicense = () => {
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-sm leading-relaxed">{responseData.present_address.full_address}</p>
+                    <p className="text-sm leading-relaxed">{maskData(responseData.present_address.full_address, showData)}</p>
                     <div className="grid grid-cols-2 gap-3 mt-4">
                       <div>
                         <p className="text-sm text-muted-foreground">City</p>
-                        <p className="text-sm">{responseData.present_address.city}</p>
+                        <p className="text-sm">{maskData(responseData.present_address.city, showData)}</p>
                       </div>
                       <div>
                         <p className="text-sm text-muted-foreground">State</p>
-                        <p className="text-sm">{responseData.present_address.state}</p>
+                        <p className="text-sm">{maskData(responseData.present_address.state, showData)}</p>
                       </div>
                       <div>
                         <p className="text-sm text-muted-foreground">Pincode</p>
-                        <p className="text-sm font-mono">{responseData.present_address.pincode}</p>
+                        <p className="text-sm font-mono">{maskData(responseData.present_address.pincode, showData)}</p>
                       </div>
                     </div>
                   </CardContent>

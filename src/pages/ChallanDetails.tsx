@@ -1,17 +1,21 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeft, AlertTriangle, FileText, Calendar, IndianRupee, Download } from 'lucide-react';
+import { ArrowLeft, AlertTriangle, FileText, Calendar, IndianRupee, Download, Eye, EyeOff } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
+import { Checkbox } from '@/components/ui/checkbox';
 import Navbar from '@/components/Navbar';
+import { maskData } from '@/lib/utils';
 
 const ChallanDetails = () => {
   const navigate = useNavigate();
   const [vehicleNo, setVehicleNo] = useState('DL3SFF1234');
   const [response, setResponse] = useState<any>(null);
   const [loading, setLoading] = useState(false);
+  const [showData, setShowData] = useState(false);
+  const [consent, setConsent] = useState(true);
 
   const handleFetch = () => {
     setLoading(true);
@@ -53,7 +57,7 @@ const ChallanDetails = () => {
             <CardHeader>
               <CardTitle>Enter Vehicle Number</CardTitle>
             </CardHeader>
-            <CardContent>
+            <CardContent className="space-y-4">
               <div className="flex gap-4">
                 <Input
                   value={vehicleNo}
@@ -61,15 +65,27 @@ const ChallanDetails = () => {
                   placeholder="Vehicle Number"
                   className="flex-1"
                 />
-                <Button onClick={handleFetch} disabled={loading}>
+                <Button onClick={handleFetch} disabled={loading || !consent}>
                   {loading ? 'Fetching...' : 'Fetch Challan'}
                 </Button>
+              </div>
+              <div className="flex items-start space-x-2">
+                <Checkbox id="consent" checked={consent} onCheckedChange={(checked) => setConsent(checked === true)} />
+                <label htmlFor="consent" className="text-sm text-muted-foreground leading-relaxed cursor-pointer">
+                  I authorize BeFiSc to verify and fetch details linked to the information I've provided from authorized data sources for compliance and risk checks, in line with the DPDP Act, 2023.
+                </label>
               </div>
             </CardContent>
           </Card>
 
           {response && (
             <div className="space-y-6 animate-fade-in">
+              <div className="flex justify-end mb-4">
+                <Button variant="outline" size="sm" onClick={() => setShowData(!showData)}>
+                  {showData ? <EyeOff className="h-4 w-4 mr-2" /> : <Eye className="h-4 w-4 mr-2" />}
+                  {showData ? 'Hide' : 'Show'} Data
+                </Button>
+              </div>
               <Card className="border-2 border-destructive">
                 <CardContent className="pt-6">
                   <div className="flex items-center gap-3 mb-4">
@@ -90,7 +106,7 @@ const ChallanDetails = () => {
                   </div>
                   <div className="bg-muted rounded-lg p-4">
                     <p className="text-sm text-muted-foreground mb-1">Challan Number</p>
-                    <p className="font-mono text-foreground">{response.challan_number}</p>
+                    <p className="font-mono text-foreground">{maskData(response.challan_number, showData)}</p>
                   </div>
                 </CardContent>
               </Card>
@@ -123,11 +139,11 @@ const ChallanDetails = () => {
                   <div className="grid md:grid-cols-2 gap-4">
                     <div>
                       <p className="text-sm text-muted-foreground">Accused Name</p>
-                      <p className="font-medium text-foreground">{response.accused_name}</p>
+                      <p className="font-medium text-foreground">{maskData(response.accused_name, showData)}</p>
                     </div>
                     <div>
                       <p className="text-sm text-muted-foreground">Vehicle Number</p>
-                      <p className="font-semibold text-foreground">{response.vehicle_number}</p>
+                      <p className="font-semibold text-foreground">{maskData(response.vehicle_number, showData)}</p>
                     </div>
                   </div>
                   <div className="pt-2">

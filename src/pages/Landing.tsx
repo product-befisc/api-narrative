@@ -97,158 +97,173 @@ const Landing = () => {
           </p>
           
           {/* Row 1 - NBFC & Lending (Widest - 8 companies) */}
-          <div className="mb-12 animate-fade-in flex items-center justify-center gap-8">
-            <div className="flex flex-wrap justify-center gap-4 max-w-7xl">
-              {[
-                'Bajaj Finserv',
-                'Muthoot Capital',
-                'Navi',
-                'Varthana',
-                'Lendbox',
-                'Arthan Finance',
-                'Cashflo',
-                'Snapmint'
-              ].map((company, i) => (
-                <div 
-                  key={i} 
-                  className="flex items-center gap-3 bg-card rounded-xl px-6 py-4 border border-border hover:border-primary hover:scale-105 transition-all shadow-sm hover:shadow-md"
-                  style={{ animationDelay: `${i * 0.1}s` }}
-                >
-                  <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center flex-shrink-0">
-                    <Users className="w-6 h-6 text-muted-foreground" />
+          <div className="mb-12 animate-fade-in">
+            <div className="flex items-center justify-center gap-8 pb-6">
+              <div className="text-left">
+                <h3 className="text-sm font-semibold text-primary uppercase tracking-wide whitespace-nowrap mb-2">
+                  NBFC & Lending
+                </h3>
+                <div className="h-0.5 w-24 bg-gradient-to-r from-primary to-transparent"></div>
+              </div>
+              <div className="flex flex-wrap justify-center gap-4 max-w-7xl">
+                {[
+                  'Bajaj Finserv',
+                  'Muthoot Capital',
+                  'Navi',
+                  'Varthana',
+                  'Lendbox',
+                  'Arthan Finance',
+                  'Cashflo',
+                  'Snapmint'
+                ].map((company, i) => (
+                  <div 
+                    key={i} 
+                    className="flex items-center gap-3 bg-card rounded-xl px-6 py-4 border border-border hover:border-primary hover:scale-105 transition-all shadow-sm hover:shadow-md"
+                    style={{ animationDelay: `${i * 0.1}s` }}
+                  >
+                    <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center flex-shrink-0">
+                      <Users className="w-6 h-6 text-muted-foreground" />
+                    </div>
+                    <span className="font-medium text-foreground whitespace-nowrap">{company}</span>
                   </div>
-                  <span className="font-medium text-foreground whitespace-nowrap">{company}</span>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
-            <div className="text-right">
-              <h3 className="text-sm font-semibold text-primary uppercase tracking-wide whitespace-nowrap mb-2">
-                NBFC & Lending
-              </h3>
-              <div className="h-0.5 w-24 bg-gradient-to-r from-primary to-transparent ml-auto"></div>
-            </div>
+            <div className="h-px bg-gradient-to-r from-border via-primary/30 to-border max-w-7xl mx-auto"></div>
           </div>
 
           {/* Row 2 - Insurance & Wealth (7 companies) */}
-          <div className="mb-12 animate-fade-in flex items-center justify-center gap-8" style={{ animationDelay: '0.2s' }}>
-            <div className="flex flex-wrap justify-center gap-4 max-w-6xl">
-              {[
-                'Go Digit Life Insurance',
-                'Go Digit General Insurance',
-                'First Advisors Insurance',
-                'Mufkam Insurance Marketing',
-                'HealthCred',
-                'Velocity',
-                'Freo'
-              ].map((company, i) => (
-                <div 
-                  key={i} 
-                  className="flex items-center gap-3 bg-card rounded-xl px-6 py-4 border border-border hover:border-primary hover:scale-105 transition-all shadow-sm hover:shadow-md"
-                  style={{ animationDelay: `${(i + 6) * 0.1}s` }}
-                >
-                  <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center flex-shrink-0">
-                    <Shield className="w-6 h-6 text-muted-foreground" />
+          <div className="mb-12 animate-fade-in" style={{ animationDelay: '0.2s' }}>
+            <div className="flex items-center justify-center gap-8 pb-6">
+              <div className="text-left">
+                <h3 className="text-sm font-semibold text-primary uppercase tracking-wide whitespace-nowrap mb-2">
+                  Insurance & Wealth
+                </h3>
+                <div className="h-0.5 w-24 bg-gradient-to-r from-primary to-transparent"></div>
+              </div>
+              <div className="flex flex-wrap justify-center gap-4 max-w-6xl">
+                {[
+                  'Go Digit Life Insurance',
+                  'Go Digit General Insurance',
+                  'First Advisors Insurance',
+                  'Mufkam Insurance Marketing',
+                  'HealthCred',
+                  'Velocity',
+                  'Freo'
+                ].map((company, i) => (
+                  <div 
+                    key={i} 
+                    className="flex items-center gap-3 bg-card rounded-xl px-6 py-4 border border-border hover:border-primary hover:scale-105 transition-all shadow-sm hover:shadow-md"
+                    style={{ animationDelay: `${(i + 8) * 0.1}s` }}
+                  >
+                    <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center flex-shrink-0">
+                      <Shield className="w-6 h-6 text-muted-foreground" />
+                    </div>
+                    <span className="font-medium text-foreground whitespace-nowrap">{company}</span>
                   </div>
-                  <span className="font-medium text-foreground whitespace-nowrap">{company}</span>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
-            <div className="text-right">
-              <h3 className="text-sm font-semibold text-primary uppercase tracking-wide whitespace-nowrap mb-2">
-                Insurance & Wealth
-              </h3>
-              <div className="h-0.5 w-24 bg-gradient-to-r from-primary to-transparent ml-auto"></div>
-            </div>
+            <div className="h-px bg-gradient-to-r from-border via-primary/30 to-border max-w-6xl mx-auto"></div>
           </div>
 
           {/* Row 3 - Fintechs (6 companies) */}
-          <div className="mb-12 animate-fade-in flex items-center justify-center gap-8" style={{ animationDelay: '0.4s' }}>
-            <div className="flex flex-wrap justify-center gap-4 max-w-5xl">
-              {[
-                'FinBox',
-                'Paytail',
-                'MoneyWide',
-                'Indiamart',
-                'Proptension',
-                'Voorent'
-              ].map((company, i) => (
-                <div 
-                  key={i} 
-                  className="flex items-center gap-3 bg-card rounded-xl px-6 py-4 border border-border hover:border-primary hover:scale-105 transition-all shadow-sm hover:shadow-md"
-                  style={{ animationDelay: `${(i + 11) * 0.1}s` }}
-                >
-                  <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center flex-shrink-0">
-                    <TrendingUp className="w-6 h-6 text-muted-foreground" />
+          <div className="mb-12 animate-fade-in" style={{ animationDelay: '0.4s' }}>
+            <div className="flex items-center justify-center gap-8 pb-6">
+              <div className="text-left">
+                <h3 className="text-sm font-semibold text-primary uppercase tracking-wide whitespace-nowrap mb-2">
+                  Fintechs
+                </h3>
+                <div className="h-0.5 w-24 bg-gradient-to-r from-primary to-transparent"></div>
+              </div>
+              <div className="flex flex-wrap justify-center gap-4 max-w-5xl">
+                {[
+                  'FinBox',
+                  'Paytail',
+                  'MoneyWide',
+                  'Indiamart',
+                  'Proptension',
+                  'Voorent'
+                ].map((company, i) => (
+                  <div 
+                    key={i} 
+                    className="flex items-center gap-3 bg-card rounded-xl px-6 py-4 border border-border hover:border-primary hover:scale-105 transition-all shadow-sm hover:shadow-md"
+                    style={{ animationDelay: `${(i + 15) * 0.1}s` }}
+                  >
+                    <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center flex-shrink-0">
+                      <TrendingUp className="w-6 h-6 text-muted-foreground" />
+                    </div>
+                    <span className="font-medium text-foreground whitespace-nowrap">{company}</span>
                   </div>
-                  <span className="font-medium text-foreground whitespace-nowrap">{company}</span>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
-            <div className="text-right">
-              <h3 className="text-sm font-semibold text-primary uppercase tracking-wide whitespace-nowrap mb-2">
-                Fintechs
-              </h3>
-              <div className="h-0.5 w-24 bg-gradient-to-r from-primary to-transparent ml-auto"></div>
-            </div>
+            <div className="h-px bg-gradient-to-r from-border via-primary/30 to-border max-w-5xl mx-auto"></div>
           </div>
 
           {/* Row 4 - Marketplaces (5 companies) */}
-          <div className="mb-12 animate-fade-in flex items-center justify-center gap-8" style={{ animationDelay: '0.6s' }}>
-            <div className="flex flex-wrap justify-center gap-4 max-w-4xl">
-              {[
-                'Ratify Global',
-                'Human Crayon',
-                'Gaadi Booking',
-                'Ongrid',
-                '4SL Background Check'
-              ].map((company, i) => (
-                <div 
-                  key={i} 
-                  className="flex items-center gap-3 bg-card rounded-xl px-6 py-4 border border-border hover:border-primary hover:scale-105 transition-all shadow-sm hover:shadow-md"
-                  style={{ animationDelay: `${(i + 18) * 0.1}s` }}
-                >
-                  <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center flex-shrink-0">
-                    <Users className="w-6 h-6 text-muted-foreground" />
+          <div className="mb-12 animate-fade-in" style={{ animationDelay: '0.6s' }}>
+            <div className="flex items-center justify-center gap-8 pb-6">
+              <div className="text-left">
+                <h3 className="text-sm font-semibold text-primary uppercase tracking-wide whitespace-nowrap mb-2">
+                  Marketplaces
+                </h3>
+                <div className="h-0.5 w-24 bg-gradient-to-r from-primary to-transparent"></div>
+              </div>
+              <div className="flex flex-wrap justify-center gap-4 max-w-4xl">
+                {[
+                  'Ratify Global',
+                  'Human Crayon',
+                  'Gaadi Booking',
+                  'Ongrid',
+                  '4SL Background Check'
+                ].map((company, i) => (
+                  <div 
+                    key={i} 
+                    className="flex items-center gap-3 bg-card rounded-xl px-6 py-4 border border-border hover:border-primary hover:scale-105 transition-all shadow-sm hover:shadow-md"
+                    style={{ animationDelay: `${(i + 21) * 0.1}s` }}
+                  >
+                    <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center flex-shrink-0">
+                      <Users className="w-6 h-6 text-muted-foreground" />
+                    </div>
+                    <span className="font-medium text-foreground whitespace-nowrap">{company}</span>
                   </div>
-                  <span className="font-medium text-foreground whitespace-nowrap">{company}</span>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
-            <div className="text-right">
-              <h3 className="text-sm font-semibold text-primary uppercase tracking-wide whitespace-nowrap mb-2">
-                Marketplaces
-              </h3>
-              <div className="h-0.5 w-24 bg-gradient-to-r from-primary to-transparent ml-auto"></div>
-            </div>
+            <div className="h-px bg-gradient-to-r from-border via-primary/30 to-border max-w-4xl mx-auto"></div>
           </div>
 
           {/* Row 5 - Verification & HR (Narrowest - 4 companies) */}
-          <div className="animate-fade-in flex items-center justify-center gap-8" style={{ animationDelay: '0.8s' }}>
-            <div className="flex flex-wrap justify-center gap-4 max-w-3xl">
-              {[
-                'AMS Inform',
-                'Verification Street',
-                'SecureSearch',
-                'VeriProbus'
-              ].map((company, i) => (
-                <div 
-                  key={i} 
-                  className="flex items-center gap-3 bg-card rounded-xl px-6 py-4 border border-border hover:border-primary hover:scale-105 transition-all shadow-sm hover:shadow-md"
-                  style={{ animationDelay: `${(i + 24) * 0.1}s` }}
-                >
-                  <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center flex-shrink-0">
-                    <Award className="w-6 h-6 text-muted-foreground" />
+          <div className="animate-fade-in" style={{ animationDelay: '0.8s' }}>
+            <div className="flex items-center justify-center gap-8 pb-6">
+              <div className="text-left">
+                <h3 className="text-sm font-semibold text-primary uppercase tracking-wide whitespace-nowrap mb-2">
+                  Verification & HR
+                </h3>
+                <div className="h-0.5 w-24 bg-gradient-to-r from-primary to-transparent"></div>
+              </div>
+              <div className="flex flex-wrap justify-center gap-4 max-w-3xl">
+                {[
+                  'AMS Inform',
+                  'Verification Street',
+                  'SecureSearch',
+                  'VeriProbus'
+                ].map((company, i) => (
+                  <div 
+                    key={i} 
+                    className="flex items-center gap-3 bg-card rounded-xl px-6 py-4 border border-border hover:border-primary hover:scale-105 transition-all shadow-sm hover:shadow-md"
+                    style={{ animationDelay: `${(i + 26) * 0.1}s` }}
+                  >
+                    <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center flex-shrink-0">
+                      <Award className="w-6 h-6 text-muted-foreground" />
+                    </div>
+                    <span className="font-medium text-foreground whitespace-nowrap">{company}</span>
                   </div>
-                  <span className="font-medium text-foreground whitespace-nowrap">{company}</span>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
-            <div className="text-right">
-              <h3 className="text-sm font-semibold text-primary uppercase tracking-wide whitespace-nowrap mb-2">
-                Verification & HR
-              </h3>
-              <div className="h-0.5 w-24 bg-gradient-to-r from-primary to-transparent ml-auto"></div>
-            </div>
+            <div className="h-px bg-gradient-to-r from-border via-primary/30 to-border max-w-3xl mx-auto"></div>
           </div>
         </div>
       </section>

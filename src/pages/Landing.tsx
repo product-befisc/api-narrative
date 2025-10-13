@@ -96,16 +96,18 @@ const Landing = () => {
             BeFiSc partners with leading organizations across lending, fintech, and verification ecosystems to power real-time trust.
           </p>
           
-          {/* Row 1 - NBFC & Lending Giants (Widest) */}
+          {/* Row 1 - NBFC & Lending (Widest - 8 companies) */}
           <div className="mb-12 animate-fade-in flex items-center justify-center gap-8">
-            <div className="flex flex-wrap justify-center gap-4 max-w-6xl">
+            <div className="flex flex-wrap justify-center gap-4 max-w-7xl">
               {[
                 'Bajaj Finserv',
                 'Muthoot Capital',
                 'Navi',
                 'Varthana',
                 'Lendbox',
-                'Arthan Finance'
+                'Arthan Finance',
+                'Cashflo',
+                'Snapmint'
               ].map((company, i) => (
                 <div 
                   key={i} 
@@ -120,19 +122,21 @@ const Landing = () => {
               ))}
             </div>
             <h3 className="text-sm font-semibold text-primary uppercase tracking-wide whitespace-nowrap">
-              NBFC & Lending Giants
+              NBFC & Lending
             </h3>
           </div>
 
-          {/* Row 2 - Insurance & Wealth Management */}
+          {/* Row 2 - Insurance & Wealth (7 companies) */}
           <div className="mb-12 animate-fade-in flex items-center justify-center gap-8" style={{ animationDelay: '0.2s' }}>
-            <div className="flex flex-wrap justify-center gap-4 max-w-5xl">
+            <div className="flex flex-wrap justify-center gap-4 max-w-6xl">
               {[
                 'Go Digit Life Insurance',
                 'Go Digit General Insurance',
                 'First Advisors Insurance',
                 'Mufkam Insurance Marketing',
-                'HealthCred'
+                'HealthCred',
+                'Velocity',
+                'Freo'
               ].map((company, i) => (
                 <div 
                   key={i} 
@@ -147,21 +151,20 @@ const Landing = () => {
               ))}
             </div>
             <h3 className="text-sm font-semibold text-primary uppercase tracking-wide whitespace-nowrap">
-              Insurance & Wealth Management
+              Insurance & Wealth
             </h3>
           </div>
 
-          {/* Row 3 - Fintechs */}
+          {/* Row 3 - Fintechs (6 companies) */}
           <div className="mb-12 animate-fade-in flex items-center justify-center gap-8" style={{ animationDelay: '0.4s' }}>
-            <div className="flex flex-wrap justify-center gap-4 max-w-4xl">
+            <div className="flex flex-wrap justify-center gap-4 max-w-5xl">
               {[
-                'Cashflo',
-                'Snapmint',
-                'Velocity',
-                'Freo',
                 'FinBox',
                 'Paytail',
-                'MoneyWide'
+                'MoneyWide',
+                'Indiamart',
+                'Proptension',
+                'Voorent'
               ].map((company, i) => (
                 <div 
                   key={i} 
@@ -180,16 +183,15 @@ const Landing = () => {
             </h3>
           </div>
 
-          {/* Row 4 - Marketplaces & Shared Economy */}
+          {/* Row 4 - Marketplaces (5 companies) */}
           <div className="mb-12 animate-fade-in flex items-center justify-center gap-8" style={{ animationDelay: '0.6s' }}>
-            <div className="flex flex-wrap justify-center gap-4 max-w-3xl">
+            <div className="flex flex-wrap justify-center gap-4 max-w-4xl">
               {[
-                'Indiamart',
-                'Proptension',
-                'Voorent',
                 'Ratify Global',
                 'Human Crayon',
-                'Gaadi Booking'
+                'Gaadi Booking',
+                'Ongrid',
+                '4SL Background Check'
               ].map((company, i) => (
                 <div 
                   key={i} 
@@ -204,20 +206,18 @@ const Landing = () => {
               ))}
             </div>
             <h3 className="text-sm font-semibold text-primary uppercase tracking-wide whitespace-nowrap">
-              Marketplaces & Shared Economy
+              Marketplaces
             </h3>
           </div>
 
-          {/* Row 5 - Background Verification & HR Tech (Narrowest) */}
+          {/* Row 5 - Verification & HR (Narrowest - 4 companies) */}
           <div className="animate-fade-in flex items-center justify-center gap-8" style={{ animationDelay: '0.8s' }}>
-            <div className="flex flex-wrap justify-center gap-4 max-w-2xl">
+            <div className="flex flex-wrap justify-center gap-4 max-w-3xl">
               {[
-                'Ongrid',
-                '4SL Background Check',
                 'AMS Inform',
                 'Verification Street',
-                'SecureSearch Screening Services',
-                'VeriProbus HR Technologies'
+                'SecureSearch',
+                'VeriProbus'
               ].map((company, i) => (
                 <div 
                   key={i} 
@@ -232,7 +232,7 @@ const Landing = () => {
               ))}
             </div>
             <h3 className="text-sm font-semibold text-primary uppercase tracking-wide whitespace-nowrap">
-              Background Verification & HR Tech
+              Verification & HR
             </h3>
           </div>
         </div>

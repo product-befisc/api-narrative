@@ -14,6 +14,11 @@ import ProductPage from "./pages/ProductPage";
 import CategoryPage from "./pages/CategoryPage";
 import APIDetailPage from "./pages/APIDetailPage";
 import NotFound from "./pages/NotFound";
+import PANVerification from "./pages/PANVerification";
+import CustomerProfiling from "./pages/CustomerProfiling";
+import BusinessProfiling from "./pages/BusinessProfiling";
+import DrivingLicense from "./pages/DrivingLicense";
+import AddressTracing from "./pages/AddressTracing";
 
 const queryClient = new QueryClient();
 
@@ -31,6 +36,11 @@ const App = () => (
           <Route path="/product/bounce-proof" element={<BounceProof />} />
           <Route path="/product/tamper-proof" element={<TamperProof />} />
           <Route path="/product/bsa" element={<BSA />} />
+          <Route path="/product/id-proof/pan-verification" element={<PANVerification />} />
+          <Route path="/product/id-proof/customer-profiling" element={<CustomerProfiling />} />
+          <Route path="/product/id-proof/business-profiling" element={<BusinessProfiling />} />
+          <Route path="/product/id-proof/driving-license" element={<DrivingLicense />} />
+          <Route path="/product/id-proof/address-tracing" element={<AddressTracing />} />
           <Route path="/product/:productId" element={<ProductPage />} />
           <Route path="/category/:categoryId" element={<CategoryPage />} />
           <Route path="/api/:apiId" element={<APIDetailPage />} />

@@ -51,7 +51,7 @@ const APIDetailPage = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <Navbar onSearch={() => {}} />
+      <Navbar />
       
       <main className="container mx-auto px-4 py-8">
         <Button

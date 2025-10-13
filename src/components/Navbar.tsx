@@ -1,16 +1,11 @@
-import { Search } from 'lucide-react';
-import { Input } from '@/components/ui/input';
+import { Link } from 'react-router-dom';
 
-interface NavbarProps {
-  onSearch: (query: string) => void;
-}
-
-const Navbar = ({ onSearch }: NavbarProps) => {
+const Navbar = () => {
   return (
-    <nav className="sticky top-0 z-50 border-b border-border bg-card/95 backdrop-blur supports-[backdrop-filter]:bg-card/60">
+    <nav className="border-b border-border bg-card/95 backdrop-blur supports-[backdrop-filter]:bg-card/60">
       <div className="container mx-auto px-4 py-4">
-        <div className="flex items-center justify-between gap-4">
-          <div className="flex items-center gap-3">
+        <div className="flex items-center justify-between">
+          <Link to="/" className="flex items-center gap-3">
             <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-primary">
               <span className="text-lg font-bold text-white">API</span>
             </div>
@@ -18,17 +13,7 @@ const Navbar = ({ onSearch }: NavbarProps) => {
               <h1 className="text-lg font-bold text-foreground">API Demo Portal</h1>
               <p className="text-xs text-muted-foreground">Digital Data Intelligence</p>
             </div>
-          </div>
-
-          <div className="relative flex-1 max-w-md">
-            <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-            <Input
-              type="search"
-              placeholder="Search APIs..."
-              className="pl-10"
-              onChange={(e) => onSearch(e.target.value)}
-            />
-          </div>
+          </Link>
 
           <div className="flex items-center gap-2">
             <div className="hidden sm:flex items-center gap-2 text-xs">

@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Navbar from '@/components/Navbar';
+import { Search, Zap } from 'lucide-react';
 import CategoryCard from '@/components/CategoryCard';
 import { categories } from '@/data/apiData';
+import { Input } from '@/components/ui/input';
+import { Badge } from '@/components/ui/badge';
 
 const Index = () => {
   const navigate = useNavigate();
@@ -15,19 +17,49 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <Navbar onSearch={setSearchQuery} />
-      
-      <main className="container mx-auto px-4 py-8">
-        <div className="mb-12 text-center">
-          <h1 className="text-4xl font-bold text-foreground mb-4">
-            Welcome to API Demo Portal
+      {/* Hero Section */}
+      <section className="container mx-auto px-4 pt-20 pb-16">
+        <div className="max-w-4xl mx-auto text-center">
+          {/* Badge */}
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-info/10 border border-info/20 mb-8">
+            <Zap className="h-4 w-4 text-info" />
+            <span className="text-sm font-medium text-info">150+ APIs Ready to Demo</span>
+          </div>
+
+          {/* Main Heading */}
+          <h1 className="text-5xl md:text-6xl font-bold mb-6">
+            <span className="text-foreground">API Intelligence</span>
+            <br />
+            <span className="text-primary">Demo Portal</span>
           </h1>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Interactive showcase of 150+ APIs for KYC, KYB, Utilities, Mobile Intelligence, and Financial verification services
+
+          {/* Subtitle */}
+          <p className="text-lg text-muted-foreground mb-12 max-w-2xl mx-auto">
+            Explore our comprehensive suite of verification APIs with live demos, visual responses, and real-time data intelligence.
           </p>
+
+          {/* Search Bar */}
+          <div className="relative max-w-2xl mx-auto">
+            <Search className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" />
+            <Input
+              type="search"
+              placeholder="Search APIs or categories..."
+              className="h-14 pl-12 text-base bg-card border-border shadow-md"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Categories Section */}
+      <section className="container mx-auto px-4 py-16">
+        <div className="mb-8">
+          <h2 className="text-3xl font-bold text-foreground mb-2">API Categories</h2>
+          <p className="text-muted-foreground">Choose a category to explore our verification APIs</p>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 mb-12">
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {filteredCategories.map((category) => (
             <CategoryCard
               key={category.id}
@@ -41,21 +73,12 @@ const Index = () => {
           ))}
         </div>
 
-        <div className="grid gap-6 md:grid-cols-3 text-center">
-          <div className="p-6 rounded-lg bg-gradient-card border border-border">
-            <div className="text-3xl font-bold text-primary mb-2">150+</div>
-            <div className="text-sm text-muted-foreground">Total APIs</div>
+        {filteredCategories.length === 0 && (
+          <div className="text-center py-12">
+            <p className="text-muted-foreground">No categories found matching your search.</p>
           </div>
-          <div className="p-6 rounded-lg bg-gradient-card border border-border">
-            <div className="text-3xl font-bold text-success mb-2">99.9%</div>
-            <div className="text-sm text-muted-foreground">Uptime</div>
-          </div>
-          <div className="p-6 rounded-lg bg-gradient-card border border-border">
-            <div className="text-3xl font-bold text-info mb-2">&lt;200ms</div>
-            <div className="text-sm text-muted-foreground">Avg Response Time</div>
-          </div>
-        </div>
-      </main>
+        )}
+      </section>
     </div>
   );
 };

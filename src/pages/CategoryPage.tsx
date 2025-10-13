@@ -1,8 +1,9 @@
 import { useParams, useNavigate } from 'react-router-dom';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Search } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import APICard from '@/components/APICard';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import { categories, apiEndpoints } from '@/data/apiData';
 import { useState } from 'react';
 
@@ -25,7 +26,7 @@ const CategoryPage = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <Navbar onSearch={setSearchQuery} />
+      <Navbar />
       
       <main className="container mx-auto px-4 py-8">
         <Button
@@ -39,7 +40,19 @@ const CategoryPage = () => {
 
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-foreground mb-2">{category.name}</h1>
-          <p className="text-muted-foreground">{category.description}</p>
+          <p className="text-muted-foreground mb-6">{category.description}</p>
+
+          {/* Search Bar */}
+          <div className="relative max-w-md">
+            <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+            <Input
+              type="search"
+              placeholder="Search APIs..."
+              className="pl-10"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+          </div>
         </div>
 
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">

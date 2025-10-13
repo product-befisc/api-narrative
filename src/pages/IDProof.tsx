@@ -20,12 +20,12 @@ const IDProof = () => {
     { name: 'Business Profiling', icon: Building, description: 'Company data visualization', path: '/product/id-proof/business-profiling' },
     { name: 'Address Tracing', icon: MapPin, description: 'Address mapping via mobile', path: '/product/id-proof/address-tracing' },
     { name: 'RC Advanced V3', icon: Car, description: 'Vehicle registration verification' },
-    { name: 'Challan Details', icon: FileCheck, description: 'Traffic violation records' },
-    { name: 'Chassis to RC V2', icon: Scan, description: 'Vehicle chassis verification' },
-    { name: 'Bank Verification - Penny Drop', icon: CreditCard, description: 'Bank account verification' },
-    { name: 'Bank Verification - Pennyless', icon: CreditCard, description: 'Non-monetary verification' },
-    { name: 'UAN History V3', icon: FileText, description: 'Employment history via UAN' },
-    { name: 'Captcha Reader', icon: Scan, description: 'Automated captcha solving' },
+    { name: 'Challan Details', icon: FileCheck, description: 'Traffic violation records', path: '/product/id-proof/challan-details' },
+    { name: 'Chassis to RC V2', icon: Scan, description: 'Vehicle chassis verification', path: '/product/id-proof/chassis-to-rc' },
+    { name: 'Bank Verification - Penny Drop', icon: CreditCard, description: 'Bank account verification', path: '/product/id-proof/bank-verification-pennydrop' },
+    { name: 'Bank Verification - Pennyless', icon: CreditCard, description: 'Non-monetary verification', path: '/product/id-proof/bank-verification-pennyless' },
+    { name: 'UAN History V3', icon: FileText, description: 'Employment history via UAN', path: '/product/id-proof/uan-history' },
+    { name: 'Captcha Reader', icon: Scan, description: 'Automated captcha solving', path: '/product/id-proof/captcha-reader' },
   ];
 
   return (

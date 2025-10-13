@@ -19,6 +19,12 @@ import CustomerProfiling from "./pages/CustomerProfiling";
 import BusinessProfiling from "./pages/BusinessProfiling";
 import DrivingLicense from "./pages/DrivingLicense";
 import AddressTracing from "./pages/AddressTracing";
+import CaptchaReader from "./pages/CaptchaReader";
+import UANHistory from "./pages/UANHistory";
+import BankVerificationPennyless from "./pages/BankVerificationPennyless";
+import BankVerificationPennyDrop from "./pages/BankVerificationPennyDrop";
+import ChassisToRC from "./pages/ChassisToRC";
+import ChallanDetails from "./pages/ChallanDetails";
 
 const queryClient = new QueryClient();
 
@@ -41,6 +47,12 @@ const App = () => (
           <Route path="/product/id-proof/business-profiling" element={<BusinessProfiling />} />
           <Route path="/product/id-proof/driving-license" element={<DrivingLicense />} />
           <Route path="/product/id-proof/address-tracing" element={<AddressTracing />} />
+          <Route path="/product/id-proof/captcha-reader" element={<CaptchaReader />} />
+          <Route path="/product/id-proof/uan-history" element={<UANHistory />} />
+          <Route path="/product/id-proof/bank-verification-pennyless" element={<BankVerificationPennyless />} />
+          <Route path="/product/id-proof/bank-verification-pennydrop" element={<BankVerificationPennyDrop />} />
+          <Route path="/product/id-proof/chassis-to-rc" element={<ChassisToRC />} />
+          <Route path="/product/id-proof/challan-details" element={<ChallanDetails />} />
           <Route path="/product/:productId" element={<ProductPage />} />
           <Route path="/category/:categoryId" element={<CategoryPage />} />
           <Route path="/api/:apiId" element={<APIDetailPage />} />

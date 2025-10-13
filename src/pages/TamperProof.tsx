@@ -9,12 +9,15 @@ import Navbar from '@/components/Navbar';
 const TamperProof = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const [uploaded, setUploaded] = useState(false);
   const [result, setResult] = useState<any>(null);
 
   const handleScan = () => {
+    setUploaded(true);
     setLoading(true);
     setTimeout(() => {
       setResult({
+        fileName: 'Salary_Slip_Oct_2024.pdf',
         signature: 'Valid',
         tampered: true,
         metadata: {
@@ -61,19 +64,31 @@ const TamperProof = () => {
             <h2 className="text-2xl font-bold text-foreground">Upload Document</h2>
           </div>
           
-          <div className="border-2 border-dashed border-border rounded-lg p-12 text-center mb-6 hover:border-primary transition-colors cursor-pointer">
-            <Upload className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-            <p className="text-muted-foreground mb-2">Click to upload or drag and drop</p>
-            <p className="text-sm text-muted-foreground">PDF files only (max 10MB)</p>
-          </div>
+          {!uploaded ? (
+            <div className="border-2 border-dashed border-border rounded-lg p-12 text-center mb-6 hover:border-primary transition-colors">
+              <Upload className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
+              <p className="text-muted-foreground mb-2">Upload salary slip for verification</p>
+              <p className="text-sm text-muted-foreground">PDF files only (max 10MB)</p>
+            </div>
+          ) : (
+            <div className="border-2 border-success rounded-lg p-6 mb-6 bg-success/5">
+              <div className="flex items-center gap-3">
+                <FileCheck className="h-8 w-8 text-success" />
+                <div className="text-left">
+                  <p className="font-semibold text-foreground">Salary_Slip_Oct_2024.pdf</p>
+                  <p className="text-sm text-muted-foreground">Document uploaded successfully</p>
+                </div>
+              </div>
+            </div>
+          )}
           
           <Button 
             onClick={handleScan}
-            disabled={loading}
+            disabled={loading || uploaded}
             className="w-full"
             size="lg"
           >
-            {loading ? 'Scanning Document...' : 'Scan for Tampering'}
+            {loading ? 'Scanning Document...' : uploaded ? 'Scanning...' : 'Upload & Scan'}
           </Button>
         </Card>
 

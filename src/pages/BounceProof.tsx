@@ -14,6 +14,10 @@ const BounceProof = () => {
   const [result, setResult] = useState<any>(null);
 
   const handleVerify = () => {
+    // Auto-populate email if empty
+    if (!email) {
+      setEmail('gaurav@befisc.com');
+    }
     setLoading(true);
     setTimeout(() => {
       setResult({

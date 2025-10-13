@@ -31,10 +31,9 @@ const IDVerificationWorkflow = () => {
     }, 1500);
   };
 
-  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      handleNextStep();
-    }
+  const handleFileUpload = () => {
+    // Auto-populate with dummy PAN card
+    handleNextStep();
   };
 
   const progressPercentage = ((currentStep + 1) / steps.length) * 100;
@@ -112,18 +111,12 @@ const IDVerificationWorkflow = () => {
                   <p className="text-muted-foreground mb-6">
                     Upload a clear photo of your government-issued ID card (Aadhaar, PAN, Driving License, etc.)
                   </p>
-                  <input
-                    type="file"
-                    accept="image/*"
-                    onChange={handleFileUpload}
-                    className="hidden"
-                    id="id-upload"
-                  />
-                  <label htmlFor="id-upload">
-                    <Button size="lg" className="cursor-pointer" asChild>
-                      <span>Choose File</span>
-                    </Button>
-                  </label>
+                  <Button size="lg" onClick={handleFileUpload}>
+                    Upload PAN Card
+                  </Button>
+                  <p className="text-xs text-muted-foreground mt-4">
+                    Demo will auto-upload a sample PAN card
+                  </p>
                 </div>
               </div>
             )}

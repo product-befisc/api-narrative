@@ -9,12 +9,15 @@ import Navbar from '@/components/Navbar';
 const BSA = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const [uploaded, setUploaded] = useState(false);
   const [result, setResult] = useState<any>(null);
 
   const handleAnalyze = () => {
+    setUploaded(true);
     setLoading(true);
     setTimeout(() => {
       setResult({
+        fileName: 'HDFC_Bank_Statement_Q3_2024.pdf',
         incomeSummary: {
           totalInflow: '₹5,45,000',
           totalOutflow: '₹4,32,000',
@@ -64,19 +67,31 @@ const BSA = () => {
             <h2 className="text-2xl font-bold text-foreground">Upload Bank Statement</h2>
           </div>
           
-          <div className="border-2 border-dashed border-border rounded-lg p-12 text-center mb-6 hover:border-primary transition-colors cursor-pointer">
-            <Upload className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-            <p className="text-muted-foreground mb-2">Click to upload or drag and drop</p>
-            <p className="text-sm text-muted-foreground">PDF or Excel files (max 20MB)</p>
-          </div>
+          {!uploaded ? (
+            <div className="border-2 border-dashed border-border rounded-lg p-12 text-center mb-6 hover:border-primary transition-colors">
+              <Upload className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
+              <p className="text-muted-foreground mb-2">Upload bank statement for analysis</p>
+              <p className="text-sm text-muted-foreground">PDF or Excel files (max 20MB)</p>
+            </div>
+          ) : (
+            <div className="border-2 border-success rounded-lg p-6 mb-6 bg-success/5">
+              <div className="flex items-center gap-3">
+                <FileText className="h-8 w-8 text-success" />
+                <div className="text-left">
+                  <p className="font-semibold text-foreground">HDFC_Bank_Statement_Q3_2024.pdf</p>
+                  <p className="text-sm text-muted-foreground">Statement uploaded successfully</p>
+                </div>
+              </div>
+            </div>
+          )}
           
           <Button 
             onClick={handleAnalyze}
-            disabled={loading}
+            disabled={loading || uploaded}
             className="w-full"
             size="lg"
           >
-            {loading ? 'Analyzing Statement...' : 'Analyze Statement'}
+            {loading ? 'Analyzing Statement...' : uploaded ? 'Analyzing...' : 'Upload & Analyze'}
           </Button>
 
           {loading && (

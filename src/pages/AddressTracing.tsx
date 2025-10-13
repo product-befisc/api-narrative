@@ -4,14 +4,18 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Checkbox } from "@/components/ui/checkbox";
 import Navbar from "@/components/Navbar";
-import { ArrowLeft, MapPin, Phone, Mail, User, Calendar, Package } from "lucide-react";
+import { ArrowLeft, MapPin, Phone, Mail, User, Calendar, Package, Eye, EyeOff } from "lucide-react";
+import { maskData, maskEmail, maskPhone } from "@/lib/utils";
 
 const AddressTracing = () => {
   const navigate = useNavigate();
-  const [mobileNumber, setMobileNumber] = useState("");
+  const [mobileNumber, setMobileNumber] = useState("+91-9876543210");
   const [responseData, setResponseData] = useState<any>(null);
   const [loading, setLoading] = useState(false);
+  const [showData, setShowData] = useState(false);
+  const [consent, setConsent] = useState(true);
 
   const mockResponse = {
     mobile: "+91-9876543210",
@@ -120,15 +124,27 @@ const AddressTracing = () => {
                   value={mobileNumber}
                   onChange={(e) => setMobileNumber(e.target.value)}
                 />
-                <Button onClick={handleFetch} disabled={loading || !mobileNumber}>
+                <Button onClick={handleFetch} disabled={loading || !mobileNumber || !consent}>
                   {loading ? "Fetching..." : "Trace Addresses"}
                 </Button>
+              </div>
+              <div className="flex items-start space-x-2">
+                <Checkbox id="consent" checked={consent} onCheckedChange={(checked) => setConsent(checked === true)} />
+                <label htmlFor="consent" className="text-sm text-muted-foreground leading-relaxed cursor-pointer">
+                  I authorize BeFiSc to verify and fetch details linked to the information I've provided from authorized data sources for compliance and risk checks, in line with the DPDP Act, 2023.
+                </label>
               </div>
             </CardContent>
           </Card>
 
           {responseData && (
             <div className="space-y-6 animate-fade-in">
+              <div className="flex justify-end mb-4">
+                <Button variant="outline" size="sm" onClick={() => setShowData(!showData)}>
+                  {showData ? <EyeOff className="h-4 w-4 mr-2" /> : <Eye className="h-4 w-4 mr-2" />}
+                  {showData ? 'Hide' : 'Show'} Data
+                </Button>
+              </div>
               {/* Summary Card */}
               <Card className="border-primary/20">
                 <CardContent className="pt-6">
@@ -154,7 +170,7 @@ const AddressTracing = () => {
                         <div className="space-y-1">
                           <CardTitle className="flex items-center gap-2">
                             <User className="h-5 w-5" />
-                            {address.full_name}
+                            {maskData(address.full_name, showData)}
                             {address.is_primary && (
                               <Badge variant="default" className="ml-2">Primary</Badge>
                             )}
@@ -179,9 +195,9 @@ const AddressTracing = () => {
                             <div className="space-y-1">
                               <p className="text-sm text-muted-foreground">Full Address</p>
                               <p className="font-medium leading-relaxed">
-                                {address.address1}<br />
-                                {address.address2}<br />
-                                {address.city}, {address.state} - {address.pincode}<br />
+                                {maskData(address.address1, showData)}<br />
+                                {maskData(address.address2, showData)}<br />
+                                {maskData(address.city, showData)}, {maskData(address.state, showData)} - {maskData(address.pincode, showData)}<br />
                                 {address.country}
                               </p>
                             </div>
@@ -193,14 +209,14 @@ const AddressTracing = () => {
                             <Phone className="h-5 w-5 text-muted-foreground flex-shrink-0" />
                             <div>
                               <p className="text-sm text-muted-foreground">Mobile</p>
-                              <p className="font-mono text-sm">{address.mobile}</p>
+                              <p className="font-mono text-sm">{maskPhone(address.mobile, showData)}</p>
                             </div>
                           </div>
                           <div className="flex items-center gap-3">
                             <Mail className="h-5 w-5 text-muted-foreground flex-shrink-0" />
                             <div>
                               <p className="text-sm text-muted-foreground">Email</p>
-                              <p className="text-sm break-all">{address.email}</p>
+                              <p className="text-sm break-all">{maskEmail(address.email, showData)}</p>
                             </div>
                           </div>
                         </div>

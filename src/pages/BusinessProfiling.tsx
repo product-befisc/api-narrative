@@ -4,14 +4,18 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Checkbox } from "@/components/ui/checkbox";
 import Navbar from "@/components/Navbar";
-import { ArrowLeft, Building2, MapPin, Phone, Mail, Calendar, CheckCircle2, Factory } from "lucide-react";
+import { ArrowLeft, Building2, MapPin, Phone, Mail, Calendar, CheckCircle2, Factory, Eye, EyeOff } from "lucide-react";
+import { maskData, maskEmail, maskPhone } from "@/lib/utils";
 
 const BusinessProfiling = () => {
   const navigate = useNavigate();
-  const [mobileNumber, setMobileNumber] = useState("");
+  const [mobileNumber, setMobileNumber] = useState("+91-9876543210");
   const [responseData, setResponseData] = useState<any>(null);
   const [loading, setLoading] = useState(false);
+  const [showData, setShowData] = useState(false);
+  const [consent, setConsent] = useState(true);
 
   const mockResponse = {
     mobile: "+91-9876543210",
@@ -121,15 +125,27 @@ const BusinessProfiling = () => {
                   value={mobileNumber}
                   onChange={(e) => setMobileNumber(e.target.value)}
                 />
-                <Button onClick={handleFetch} disabled={loading || !mobileNumber}>
+                <Button onClick={handleFetch} disabled={loading || !mobileNumber || !consent}>
                   {loading ? "Fetching..." : "Fetch Profile"}
                 </Button>
+              </div>
+              <div className="flex items-start space-x-2">
+                <Checkbox id="consent" checked={consent} onCheckedChange={(checked) => setConsent(checked === true)} />
+                <label htmlFor="consent" className="text-sm text-muted-foreground leading-relaxed cursor-pointer">
+                  I authorize BeFiSc to verify and fetch details linked to the information I've provided from authorized data sources for compliance and risk checks, in line with the DPDP Act, 2023.
+                </label>
               </div>
             </CardContent>
           </Card>
 
           {responseData && (
             <div className="space-y-6 animate-fade-in">
+              <div className="flex justify-end mb-4">
+                <Button variant="outline" size="sm" onClick={() => setShowData(!showData)}>
+                  {showData ? <EyeOff className="h-4 w-4 mr-2" /> : <Eye className="h-4 w-4 mr-2" />}
+                  {showData ? 'Hide' : 'Show'} Data
+                </Button>
+              </div>
               {/* Key Highlights */}
               <Card className="border-primary/20">
                 <CardHeader>

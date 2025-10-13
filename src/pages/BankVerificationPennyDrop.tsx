@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeft, Building2, CheckCircle2, CreditCard, MapPin } from 'lucide-react';
+import { ArrowLeft, Building2, CheckCircle2, CreditCard, MapPin, Eye, EyeOff } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
+import { Checkbox } from '@/components/ui/checkbox';
 import Navbar from '@/components/Navbar';
+import { maskData } from '@/lib/utils';
 
 const BankVerificationPennyDrop = () => {
   const navigate = useNavigate();
@@ -14,6 +16,8 @@ const BankVerificationPennyDrop = () => {
   const [name, setName] = useState('RAM KUMAR');
   const [response, setResponse] = useState<any>(null);
   const [loading, setLoading] = useState(false);
+  const [showData, setShowData] = useState(false);
+  const [consent, setConsent] = useState(true);
 
   const handleFetch = () => {
     setLoading(true);
@@ -61,7 +65,7 @@ const BankVerificationPennyDrop = () => {
             <CardHeader>
               <CardTitle>Enter Bank Details</CardTitle>
             </CardHeader>
-            <CardContent>
+            <CardContent className="space-y-4">
               <div className="space-y-4">
                 <Input
                   value={accountNo}
@@ -80,9 +84,15 @@ const BankVerificationPennyDrop = () => {
                     placeholder="Account Holder Name"
                     className="flex-1"
                   />
-                  <Button onClick={handleFetch} disabled={loading}>
+                  <Button onClick={handleFetch} disabled={loading || !consent}>
                     {loading ? 'Verifying...' : 'Verify'}
                   </Button>
+                </div>
+                <div className="flex items-start space-x-2">
+                  <Checkbox id="consent" checked={consent} onCheckedChange={(checked) => setConsent(checked === true)} />
+                  <label htmlFor="consent" className="text-sm text-muted-foreground leading-relaxed cursor-pointer">
+                    I authorize BeFiSc to verify and fetch details linked to the information I've provided from authorized data sources for compliance and risk checks, in line with the DPDP Act, 2023.
+                  </label>
                 </div>
               </div>
             </CardContent>
@@ -90,6 +100,12 @@ const BankVerificationPennyDrop = () => {
 
           {response && (
             <div className="space-y-6 animate-fade-in">
+              <div className="flex justify-end mb-4">
+                <Button variant="outline" size="sm" onClick={() => setShowData(!showData)}>
+                  {showData ? <EyeOff className="h-4 w-4 mr-2" /> : <Eye className="h-4 w-4 mr-2" />}
+                  {showData ? 'Hide' : 'Show'} Data
+                </Button>
+              </div>
               <Card className="border-2 border-primary">
                 <CardContent className="pt-6">
                   <div className="flex items-center gap-3 mb-4">
@@ -119,7 +135,7 @@ const BankVerificationPennyDrop = () => {
                   <div className="space-y-4">
                     <div>
                       <p className="text-sm text-muted-foreground">Beneficiary Name</p>
-                      <p className="font-semibold text-foreground text-lg">{response.beneficiary_name}</p>
+                      <p className="font-semibold text-foreground text-lg">{maskData(response.beneficiary_name, showData)}</p>
                     </div>
                     <div className="flex items-center justify-between p-4 bg-muted rounded-lg">
                       <div>

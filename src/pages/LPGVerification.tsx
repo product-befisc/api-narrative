@@ -1,17 +1,21 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeft, Flame, MapPin, User, Phone, CheckCircle2 } from 'lucide-react';
+import { ArrowLeft, Flame, MapPin, User, Phone, CheckCircle2, Eye, EyeOff } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
+import { Checkbox } from '@/components/ui/checkbox';
 import Navbar from '@/components/Navbar';
+import { maskData, maskPhone } from '@/lib/utils';
 
 const LPGVerification = () => {
   const navigate = useNavigate();
   const [mobileNo, setMobileNo] = useState('9876543210');
   const [response, setResponse] = useState<any>(null);
   const [loading, setLoading] = useState(false);
+  const [showData, setShowData] = useState(false);
+  const [consent, setConsent] = useState(true);
 
   const handleFetch = () => {
     setLoading(true);
@@ -83,7 +87,7 @@ const LPGVerification = () => {
             <CardHeader>
               <CardTitle>Enter Mobile Number</CardTitle>
             </CardHeader>
-            <CardContent>
+            <CardContent className="space-y-4">
               <div className="flex gap-4">
                 <Input
                   value={mobileNo}
@@ -91,15 +95,27 @@ const LPGVerification = () => {
                   placeholder="Mobile Number"
                   className="flex-1"
                 />
-                <Button onClick={handleFetch} disabled={loading}>
+                <Button onClick={handleFetch} disabled={loading || !consent}>
                   {loading ? 'Verifying...' : 'Fetch'}
                 </Button>
+              </div>
+              <div className="flex items-start space-x-2">
+                <Checkbox id="consent" checked={consent} onCheckedChange={(checked) => setConsent(checked === true)} />
+                <label htmlFor="consent" className="text-sm text-muted-foreground leading-relaxed cursor-pointer">
+                  I authorize BeFiSc to verify and fetch details linked to the information I've provided from authorized data sources for compliance and risk checks, in line with the DPDP Act, 2023.
+                </label>
               </div>
             </CardContent>
           </Card>
 
           {response && (
             <div className="space-y-6 animate-fade-in">
+              <div className="flex justify-end mb-4">
+                <Button variant="outline" size="sm" onClick={() => setShowData(!showData)}>
+                  {showData ? <EyeOff className="h-4 w-4 mr-2" /> : <Eye className="h-4 w-4 mr-2" />}
+                  {showData ? 'Hide' : 'Show'} Data
+                </Button>
+              </div>
               {/* Highlights Section */}
               <Card className="border-2 border-primary">
                 <CardContent className="pt-6">
@@ -185,11 +201,11 @@ const LPGVerification = () => {
                       <div className="grid md:grid-cols-2 gap-4">
                         <div>
                           <p className="text-xs text-muted-foreground">Consumer Name</p>
-                          <p className="font-semibold text-foreground">{connection.consumer_name}</p>
+                          <p className="font-semibold text-foreground">{maskData(connection.consumer_name, showData)}</p>
                         </div>
                         <div>
                           <p className="text-xs text-muted-foreground">Consumer ID</p>
-                          <p className="font-semibold text-foreground">{connection.consumer_id}</p>
+                          <p className="font-semibold text-foreground">{maskData(connection.consumer_id, showData)}</p>
                         </div>
                       </div>
                       <div className="grid md:grid-cols-2 gap-4">
@@ -197,7 +213,7 @@ const LPGVerification = () => {
                           <Phone className="h-4 w-4 text-muted-foreground" />
                           <div>
                             <p className="text-xs text-muted-foreground">Mobile</p>
-                            <p className="font-medium text-foreground">{connection.consumer_mobile}</p>
+                            <p className="font-medium text-foreground">{maskPhone(connection.consumer_mobile, showData)}</p>
                           </div>
                         </div>
                         <div>
@@ -205,10 +221,10 @@ const LPGVerification = () => {
                           <Badge variant="outline">{connection.connection_type}</Badge>
                         </div>
                       </div>
-                      <div>
-                        <p className="text-xs text-muted-foreground">Address</p>
-                        <p className="font-medium text-foreground">{connection.address}</p>
-                      </div>
+                        <div>
+                          <p className="text-xs text-muted-foreground">Address</p>
+                          <p className="font-medium text-foreground">{maskData(connection.address, showData)}</p>
+                        </div>
                     </div>
                   </CardContent>
                 </Card>

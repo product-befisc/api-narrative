@@ -4,14 +4,18 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Checkbox } from "@/components/ui/checkbox";
 import Navbar from "@/components/Navbar";
-import { ArrowLeft, User, CreditCard, Briefcase, Phone, MapPin, Building2, Fuel, CheckCircle2 } from "lucide-react";
+import { ArrowLeft, User, CreditCard, Briefcase, Phone, MapPin, Building2, Fuel, CheckCircle2, Eye, EyeOff } from "lucide-react";
+import { maskData, maskEmail, maskPhone } from "@/lib/utils";
 
 const CustomerProfiling = () => {
   const navigate = useNavigate();
-  const [mobileNumber, setMobileNumber] = useState("");
+  const [mobileNumber, setMobileNumber] = useState("+91-9876543210");
   const [responseData, setResponseData] = useState<any>(null);
   const [loading, setLoading] = useState(false);
+  const [showData, setShowData] = useState(false);
+  const [consent, setConsent] = useState(true);
 
   const mockResponse = {
     mobile: "+91-9876543210",
@@ -120,15 +124,27 @@ const CustomerProfiling = () => {
                   value={mobileNumber}
                   onChange={(e) => setMobileNumber(e.target.value)}
                 />
-                <Button onClick={handleFetch} disabled={loading || !mobileNumber}>
+                <Button onClick={handleFetch} disabled={loading || !mobileNumber || !consent}>
                   {loading ? "Fetching..." : "Fetch Profile"}
                 </Button>
+              </div>
+              <div className="flex items-start space-x-2">
+                <Checkbox id="consent" checked={consent} onCheckedChange={(checked) => setConsent(checked === true)} />
+                <label htmlFor="consent" className="text-sm text-muted-foreground leading-relaxed cursor-pointer">
+                  I authorize BeFiSc to verify and fetch details linked to the information I've provided from authorized data sources for compliance and risk checks, in line with the DPDP Act, 2023.
+                </label>
               </div>
             </CardContent>
           </Card>
 
           {responseData && (
             <div className="space-y-6 animate-fade-in">
+              <div className="flex justify-end mb-4">
+                <Button variant="outline" size="sm" onClick={() => setShowData(!showData)}>
+                  {showData ? <EyeOff className="h-4 w-4 mr-2" /> : <Eye className="h-4 w-4 mr-2" />}
+                  {showData ? 'Hide' : 'Show'} Data
+                </Button>
+              </div>
               {/* Key Highlights */}
               <Card className="border-primary/20">
                 <CardHeader>
@@ -186,15 +202,15 @@ const CustomerProfiling = () => {
                     <div className="space-y-4">
                       <div>
                         <p className="text-sm text-muted-foreground">Name</p>
-                        <p className="font-semibold">{responseData.digital_payment_id.name}</p>
+                        <p className="font-semibold">{maskData(responseData.digital_payment_id.name, showData)}</p>
                       </div>
                       <div>
                         <p className="text-sm text-muted-foreground">UPI ID</p>
-                        <p className="font-mono text-sm">{responseData.digital_payment_id.upi_id}</p>
+                        <p className="font-mono text-sm">{maskData(responseData.digital_payment_id.upi_id, showData)}</p>
                       </div>
                       <div>
                         <p className="text-sm text-muted-foreground">Contact</p>
-                        <p>{responseData.digital_payment_id.contact}</p>
+                        <p>{maskPhone(responseData.digital_payment_id.contact, showData)}</p>
                       </div>
                     </div>
                     <div className="space-y-4">
@@ -208,7 +224,7 @@ const CustomerProfiling = () => {
                       </div>
                       <div>
                         <p className="text-sm text-muted-foreground">Address</p>
-                        <p className="text-sm">{responseData.digital_payment_id.address}</p>
+                        <p className="text-sm">{maskData(responseData.digital_payment_id.address, showData)}</p>
                       </div>
                     </div>
                   </div>
@@ -235,7 +251,7 @@ const CustomerProfiling = () => {
                             </div>
                             <div>
                               <p className="text-sm text-muted-foreground">Consumer ID</p>
-                              <p className="font-mono text-sm">{lpg.consumer_id}</p>
+                              <p className="font-mono text-sm">{maskData(lpg.consumer_id, showData)}</p>
                             </div>
                             <div>
                               <p className="text-sm text-muted-foreground">Distributor</p>
@@ -243,7 +259,7 @@ const CustomerProfiling = () => {
                             </div>
                             <div>
                               <p className="text-sm text-muted-foreground">Contact</p>
-                              <p className="text-sm">{lpg.distributor_contact}</p>
+                              <p className="text-sm">{maskPhone(lpg.distributor_contact, showData)}</p>
                             </div>
                             <div className="md:col-span-2">
                               <p className="text-sm text-muted-foreground">Address</p>
@@ -327,11 +343,11 @@ const CustomerProfiling = () => {
                     <div className="grid md:grid-cols-3 gap-4">
                       <div>
                         <p className="text-sm text-muted-foreground">PAN</p>
-                        <p className="font-mono">{responseData.director_info.pan}</p>
+                        <p className="font-mono">{maskData(responseData.director_info.pan, showData)}</p>
                       </div>
                       <div>
                         <p className="text-sm text-muted-foreground">DIN</p>
-                        <p className="font-mono">{responseData.director_info.din}</p>
+                        <p className="font-mono">{maskData(responseData.director_info.din, showData)}</p>
                       </div>
                       <div>
                         <p className="text-sm text-muted-foreground">Companies</p>
@@ -384,12 +400,12 @@ const CustomerProfiling = () => {
                   <CardContent className="space-y-4">
                     <div>
                       <p className="text-sm text-muted-foreground">GSTIN</p>
-                      <p className="font-mono text-sm">{responseData.gst_info.gstin}</p>
+                      <p className="font-mono text-sm">{maskData(responseData.gst_info.gstin, showData)}</p>
                       <p className="text-sm mt-1">{responseData.gst_info.trade_name}</p>
                     </div>
                     <div>
                       <p className="text-sm text-muted-foreground">IEC Code</p>
-                      <p className="font-mono text-sm">{responseData.iec_info.iec_code}</p>
+                      <p className="font-mono text-sm">{maskData(responseData.iec_info.iec_code, showData)}</p>
                     </div>
                   </CardContent>
                 </Card>

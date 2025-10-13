@@ -25,6 +25,10 @@ import BankVerificationPennyless from "./pages/BankVerificationPennyless";
 import BankVerificationPennyDrop from "./pages/BankVerificationPennyDrop";
 import ChassisToRC from "./pages/ChassisToRC";
 import ChallanDetails from "./pages/ChallanDetails";
+import RCAdvance from "./pages/RCAdvance";
+import LPGVerification from "./pages/LPGVerification";
+import PassportVerification from "./pages/PassportVerification";
+import VoterIDVerification from "./pages/VoterIDVerification";
 
 const queryClient = new QueryClient();
 
@@ -53,6 +57,10 @@ const App = () => (
           <Route path="/product/id-proof/bank-verification-pennydrop" element={<BankVerificationPennyDrop />} />
           <Route path="/product/id-proof/chassis-to-rc" element={<ChassisToRC />} />
           <Route path="/product/id-proof/challan-details" element={<ChallanDetails />} />
+          <Route path="/product/id-proof/rc-advance" element={<RCAdvance />} />
+          <Route path="/product/id-proof/lpg-verification" element={<LPGVerification />} />
+          <Route path="/product/id-proof/passport-verification" element={<PassportVerification />} />
+          <Route path="/product/id-proof/voter-id-verification" element={<VoterIDVerification />} />
           <Route path="/product/:productId" element={<ProductPage />} />
           <Route path="/category/:categoryId" element={<CategoryPage />} />
           <Route path="/api/:apiId" element={<APIDetailPage />} />

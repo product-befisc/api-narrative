@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
+import { ShieldCheck, FileCheck, MailCheck, FileBarChart } from 'lucide-react';
 import { Card } from '@/components/ui/card';
-import { Shield, Mail, FileCheck, BarChart3 } from 'lucide-react';
+import Navbar from '@/components/Navbar';
 
 const Home = () => {
   const navigate = useNavigate();
@@ -8,91 +9,72 @@ const Home = () => {
   const products = [
     {
       id: 'id-proof',
-      name: 'ID Proof',
-      description: 'Comprehensive identity verification with OCR, face match, and liveliness detection',
-      icon: Shield,
-      gradient: 'from-primary to-accent',
-    },
-    {
-      id: 'tamper-proof',
-      name: 'Tamper Proof',
-      description: 'Advanced document tampering detection with metadata analysis and signature validation',
-      icon: FileCheck,
-      gradient: 'from-accent to-primary',
+      title: 'ID Proof',
+      description: 'Digital identity verification made instant',
+      icon: ShieldCheck,
     },
     {
       id: 'bounce-proof',
-      name: 'Bounce Proof',
-      description: 'Email verification and validation with domain checks and deliverability scoring',
-      icon: Mail,
-      gradient: 'from-primary to-info',
+      title: 'Bounce Proof',
+      description: 'Email validation that keeps your network clean',
+      icon: MailCheck,
+    },
+    {
+      id: 'tamper-proof',
+      title: 'Tamper Proof',
+      description: 'Document integrity, verified automatically',
+      icon: FileCheck,
     },
     {
       id: 'bsa',
-      name: 'BSA',
-      description: 'Bank Statement Analyzer with behavioral scoring and spending pattern analysis',
-      icon: BarChart3,
-      gradient: 'from-info to-primary',
+      title: 'BSA',
+      description: 'Bank Statement Analyzer - Financial statements analyzed',
+      icon: FileBarChart,
     },
   ];
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Navbar */}
-      <nav className="border-b border-border bg-card/95 backdrop-blur">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3 cursor-pointer" onClick={() => navigate('/')}>
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-primary">
-                <span className="text-lg font-bold text-white">B</span>
-              </div>
-              <h1 className="text-xl font-bold text-foreground">BeFiSc</h1>
-            </div>
-          </div>
-        </div>
-      </nav>
-
-      {/* Hero Section */}
-      <section className="container mx-auto px-4 pt-20 pb-16">
-        <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-5xl md:text-6xl font-bold mb-6 text-foreground">
-            Choose Your Product
+      <Navbar />
+      
+      <div className="container mx-auto px-4 py-16">
+        <div className="text-center mb-16">
+          <h1 className="text-5xl font-bold text-foreground mb-4">
+            Product Dashboard
           </h1>
-          <p className="text-lg text-muted-foreground mb-12 max-w-2xl mx-auto">
-            Select a product to explore live demos with visual responses and real-time data intelligence
+          <p className="text-xl text-muted-foreground">
+            Choose a product to explore its capabilities
           </p>
         </div>
-      </section>
 
-      {/* Products Grid */}
-      <section className="container mx-auto px-4 pb-20">
-        <div className="grid gap-8 md:grid-cols-2 max-w-6xl mx-auto">
+        <div className="grid gap-8 md:grid-cols-2 max-w-5xl mx-auto">
           {products.map((product) => {
             const Icon = product.icon;
             return (
               <Card
                 key={product.id}
-                className="group relative overflow-hidden cursor-pointer transition-all duration-300 hover:shadow-xl hover:scale-[1.02] border-2 hover:border-primary bg-card p-8"
+                className="cursor-pointer hover:shadow-xl transition-all hover:scale-[1.02] border-2 hover:border-primary p-8 group"
                 onClick={() => navigate(`/product/${product.id}`)}
               >
-                <div className="relative z-10">
-                  <div className={`inline-flex p-4 rounded-2xl bg-gradient-to-br ${product.gradient} mb-6`}>
+                <div className="flex flex-col items-center text-center">
+                  <div className="w-20 h-20 rounded-2xl bg-gradient-primary flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                     <Icon className="h-10 w-10 text-white" />
                   </div>
-                  <h3 className="text-2xl font-bold text-foreground mb-3 group-hover:text-primary transition-colors">
-                    {product.name}
+                  <h3 className="text-2xl font-bold text-foreground mb-3">
+                    {product.title}
                   </h3>
-                  <p className="text-muted-foreground leading-relaxed">
+                  <p className="text-muted-foreground mb-4">
                     {product.description}
                   </p>
+                  <span className="text-primary font-semibold group-hover:underline">
+                    Explore →
+                  </span>
                 </div>
-                
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
               </Card>
             );
           })}
         </div>
-      </section>
+      </div>
     </div>
   );
 };

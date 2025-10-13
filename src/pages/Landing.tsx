@@ -5,20 +5,12 @@ import { ArrowRight, Shield, TrendingUp, Users, Award } from 'lucide-react';
 const Landing = () => {
   const navigate = useNavigate();
 
-  const stats = [
-    { label: '3.5 Mn ARR', icon: TrendingUp },
-    { label: 'ISO Certified', icon: Shield },
-    { label: 'CISA Certified', icon: Shield },
-    { label: 'Secure & Compliant', icon: Shield },
-    { label: 'FinTech Customer Experience Awardee', icon: Award },
-  ];
-
-  const performanceStats = [
-    { value: '20M+', label: 'API Calls / Month' },
-    { value: '150+', label: 'Formats' },
-    { value: '99.99%', label: 'Uptime' },
-    { value: '3s', label: 'Avg Response' },
-    { value: '98.2%', label: 'OCR Accuracy' },
+  const quickFacts = [
+    '3.5 Mn ARR',
+    'ISO Certified',
+    '20M+ API Calls / Month',
+    '99.99% Uptime',
+    'FinTech CX Awardee'
   ];
 
   return (
@@ -38,8 +30,8 @@ const Landing = () => {
       </nav>
 
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-hero py-24">
-        <div className="absolute inset-0 opacity-10">
+      <section className="relative overflow-hidden bg-gradient-hero py-32">
+        <div className="absolute inset-0 opacity-5">
           <svg className="h-full w-full" xmlns="http://www.w3.org/2000/svg">
             <defs>
               <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
@@ -54,46 +46,42 @@ const Landing = () => {
           <h1 className="mb-6 text-6xl font-bold text-foreground">
             Beyond Financial Score
           </h1>
-          <p className="mb-12 text-xl text-muted-foreground max-w-2xl mx-auto">
+          <p className="mb-8 text-xl text-muted-foreground max-w-2xl mx-auto">
             Built to make fraud detection effortless.
           </p>
           <Button 
             size="lg" 
-            className="h-14 px-8 text-lg"
+            className="h-14 px-8 text-lg mb-12"
             onClick={() => navigate('/home')}
           >
             Get Started
             <ArrowRight className="ml-2 h-5 w-5" />
           </Button>
+
+          {/* Quick Facts Bar */}
+          <div className="flex flex-wrap justify-center gap-4 items-center text-sm text-muted-foreground">
+            {quickFacts.map((fact, index) => (
+              <div key={index} className="flex items-center gap-4">
+                <span className="font-medium">{fact}</span>
+                {index < quickFacts.length - 1 && (
+                  <div className="w-px h-4 bg-border" />
+                )}
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* About Section */}
-      <section className="py-20 bg-muted">
+      <section className="py-20 bg-background">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-4xl font-bold text-foreground mb-6">About BeFiSc</h2>
-            <p className="text-lg text-muted-foreground mb-12 leading-relaxed">
+            <p className="text-lg text-muted-foreground leading-relaxed">
               Founded in 2022, BeFiSc builds technology that helps companies trust what they see. 
               We specialize in fraud detection, identity verification, and document intelligence — 
               empowering businesses to make confident decisions with AI-powered verification tools.
             </p>
-            
-            {/* Stats Bar */}
-            <div className="flex flex-wrap justify-center gap-6 items-center">
-              {stats.map((stat, index) => {
-                const Icon = stat.icon;
-                return (
-                  <div key={index} className="flex items-center gap-2">
-                    <Icon className="h-5 w-5 text-primary" />
-                    <span className="text-sm font-medium text-foreground">{stat.label}</span>
-                    {index < stats.length - 1 && (
-                      <div className="hidden sm:block w-px h-6 bg-border ml-6" />
-                    )}
-                  </div>
-                );
-              })}
-            </div>
           </div>
         </div>
       </section>
@@ -130,12 +118,7 @@ const Landing = () => {
                 <div className="flex-1 text-center md:text-left">
                   <h3 className="text-3xl font-bold text-foreground mb-2">Shobhit Goyal</h3>
                   <p className="text-primary font-semibold mb-4">Founder & CEO</p>
-                  <p className="text-muted-foreground mb-6 leading-relaxed">
-                    With a vision to revolutionize fraud detection and identity verification, 
-                    Shobhit founded BeFiSc to empower businesses with cutting-edge AI-driven solutions. 
-                    His commitment to innovation and security has positioned BeFiSc as a leader in the fintech space.
-                  </p>
-                  <blockquote className="border-l-4 border-primary pl-4 italic text-foreground">
+                  <blockquote className="text-2xl font-semibold text-foreground italic">
                     "Fraud will evolve. So will we; faster."
                   </blockquote>
                 </div>
@@ -146,7 +129,7 @@ const Landing = () => {
       </section>
 
       {/* Performance Section */}
-      <section className="py-20">
+      <section className="py-20 bg-background">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold text-foreground mb-4">
@@ -155,12 +138,26 @@ const Landing = () => {
           </div>
           
           <div className="grid grid-cols-2 md:grid-cols-5 gap-6 max-w-5xl mx-auto mb-8">
-            {performanceStats.map((stat, index) => (
-              <div key={index} className="bg-muted rounded-xl p-6 text-center border border-border hover:border-primary transition-colors">
-                <div className="text-4xl font-bold text-primary mb-2">{stat.value}</div>
-                <div className="text-sm text-muted-foreground">{stat.label}</div>
-              </div>
-            ))}
+            <div className="bg-muted rounded-xl p-6 text-center border border-border">
+              <div className="text-4xl font-bold text-primary mb-2">20M+</div>
+              <div className="text-sm text-muted-foreground">API Calls / Month</div>
+            </div>
+            <div className="bg-muted rounded-xl p-6 text-center border border-border">
+              <div className="text-4xl font-bold text-primary mb-2">150+</div>
+              <div className="text-sm text-muted-foreground">Formats</div>
+            </div>
+            <div className="bg-muted rounded-xl p-6 text-center border border-border">
+              <div className="text-4xl font-bold text-primary mb-2">99.99%</div>
+              <div className="text-sm text-muted-foreground">Uptime</div>
+            </div>
+            <div className="bg-muted rounded-xl p-6 text-center border border-border">
+              <div className="text-4xl font-bold text-primary mb-2">3s</div>
+              <div className="text-sm text-muted-foreground">Avg Response</div>
+            </div>
+            <div className="bg-muted rounded-xl p-6 text-center border border-border">
+              <div className="text-4xl font-bold text-primary mb-2">98.2%</div>
+              <div className="text-sm text-muted-foreground">OCR Accuracy</div>
+            </div>
           </div>
           
           <p className="text-center text-muted-foreground text-lg">

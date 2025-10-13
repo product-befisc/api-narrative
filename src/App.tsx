@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Landing from "./pages/Landing";
 import Home from "./pages/Home";
 import IDProof from "./pages/IDProof";
+import IDVerificationWorkflow from "./pages/IDVerificationWorkflow";
 import BounceProof from "./pages/BounceProof";
 import TamperProof from "./pages/TamperProof";
 import BSA from "./pages/BSA";
@@ -26,6 +27,7 @@ const App = () => (
           <Route path="/" element={<Landing />} />
           <Route path="/home" element={<Home />} />
           <Route path="/product/id-proof" element={<IDProof />} />
+          <Route path="/id-verification-workflow" element={<IDVerificationWorkflow />} />
           <Route path="/product/bounce-proof" element={<BounceProof />} />
           <Route path="/product/tamper-proof" element={<TamperProof />} />
           <Route path="/product/bsa" element={<BSA />} />

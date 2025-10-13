@@ -31,11 +31,11 @@ const CategoryPage = () => {
       <main className="container mx-auto px-4 py-8">
         <Button
           variant="ghost"
-          onClick={() => navigate('/')}
+          onClick={() => navigate('/home')}
           className="mb-6"
         >
           <ArrowLeft className="h-4 w-4 mr-2" />
-          Back to Categories
+          Back to Products
         </Button>
 
         <div className="mb-8">

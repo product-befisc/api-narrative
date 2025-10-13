@@ -97,11 +97,8 @@ const Landing = () => {
           </p>
           
           {/* Row 1 - NBFC & Lending Giants (Widest) */}
-          <div className="mb-12 animate-fade-in">
-            <h3 className="text-center text-sm font-semibold text-primary mb-6 uppercase tracking-wide">
-              NBFC & Lending Giants
-            </h3>
-            <div className="flex flex-wrap justify-center gap-4 max-w-6xl mx-auto">
+          <div className="mb-12 animate-fade-in flex items-center justify-center gap-8">
+            <div className="flex flex-wrap justify-center gap-4 max-w-6xl">
               {[
                 'Bajaj Finserv',
                 'Muthoot Capital',
@@ -122,14 +119,14 @@ const Landing = () => {
                 </div>
               ))}
             </div>
+            <h3 className="text-sm font-semibold text-primary uppercase tracking-wide whitespace-nowrap">
+              NBFC & Lending Giants
+            </h3>
           </div>
 
           {/* Row 2 - Insurance & Wealth Management */}
-          <div className="mb-12 animate-fade-in" style={{ animationDelay: '0.2s' }}>
-            <h3 className="text-center text-sm font-semibold text-primary mb-6 uppercase tracking-wide">
-              Insurance & Wealth Management
-            </h3>
-            <div className="flex flex-wrap justify-center gap-4 max-w-5xl mx-auto">
+          <div className="mb-12 animate-fade-in flex items-center justify-center gap-8" style={{ animationDelay: '0.2s' }}>
+            <div className="flex flex-wrap justify-center gap-4 max-w-5xl">
               {[
                 'Go Digit Life Insurance',
                 'Go Digit General Insurance',
@@ -149,14 +146,14 @@ const Landing = () => {
                 </div>
               ))}
             </div>
+            <h3 className="text-sm font-semibold text-primary uppercase tracking-wide whitespace-nowrap">
+              Insurance & Wealth Management
+            </h3>
           </div>
 
           {/* Row 3 - Fintechs */}
-          <div className="mb-12 animate-fade-in" style={{ animationDelay: '0.4s' }}>
-            <h3 className="text-center text-sm font-semibold text-primary mb-6 uppercase tracking-wide">
-              Fintechs
-            </h3>
-            <div className="flex flex-wrap justify-center gap-4 max-w-4xl mx-auto">
+          <div className="mb-12 animate-fade-in flex items-center justify-center gap-8" style={{ animationDelay: '0.4s' }}>
+            <div className="flex flex-wrap justify-center gap-4 max-w-4xl">
               {[
                 'Cashflo',
                 'Snapmint',
@@ -178,14 +175,14 @@ const Landing = () => {
                 </div>
               ))}
             </div>
+            <h3 className="text-sm font-semibold text-primary uppercase tracking-wide whitespace-nowrap">
+              Fintechs
+            </h3>
           </div>
 
           {/* Row 4 - Marketplaces & Shared Economy */}
-          <div className="mb-12 animate-fade-in" style={{ animationDelay: '0.6s' }}>
-            <h3 className="text-center text-sm font-semibold text-primary mb-6 uppercase tracking-wide">
-              Marketplaces & Shared Economy
-            </h3>
-            <div className="flex flex-wrap justify-center gap-4 max-w-3xl mx-auto">
+          <div className="mb-12 animate-fade-in flex items-center justify-center gap-8" style={{ animationDelay: '0.6s' }}>
+            <div className="flex flex-wrap justify-center gap-4 max-w-3xl">
               {[
                 'Indiamart',
                 'Proptension',
@@ -206,14 +203,14 @@ const Landing = () => {
                 </div>
               ))}
             </div>
+            <h3 className="text-sm font-semibold text-primary uppercase tracking-wide whitespace-nowrap">
+              Marketplaces & Shared Economy
+            </h3>
           </div>
 
           {/* Row 5 - Background Verification & HR Tech (Narrowest) */}
-          <div className="animate-fade-in" style={{ animationDelay: '0.8s' }}>
-            <h3 className="text-center text-sm font-semibold text-primary mb-6 uppercase tracking-wide">
-              Background Verification & HR Tech
-            </h3>
-            <div className="flex flex-wrap justify-center gap-4 max-w-2xl mx-auto">
+          <div className="animate-fade-in flex items-center justify-center gap-8" style={{ animationDelay: '0.8s' }}>
+            <div className="flex flex-wrap justify-center gap-4 max-w-2xl">
               {[
                 'Ongrid',
                 '4SL Background Check',
@@ -234,6 +231,9 @@ const Landing = () => {
                 </div>
               ))}
             </div>
+            <h3 className="text-sm font-semibold text-primary uppercase tracking-wide whitespace-nowrap">
+              Background Verification & HR Tech
+            </h3>
           </div>
         </div>
       </section>

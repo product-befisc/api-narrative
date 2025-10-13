@@ -121,9 +121,12 @@ const Landing = () => {
                 </div>
               ))}
             </div>
-            <h3 className="text-sm font-semibold text-primary uppercase tracking-wide whitespace-nowrap">
-              NBFC & Lending
-            </h3>
+            <div className="text-right">
+              <h3 className="text-sm font-semibold text-primary uppercase tracking-wide whitespace-nowrap mb-2">
+                NBFC & Lending
+              </h3>
+              <div className="h-0.5 w-24 bg-gradient-to-r from-primary to-transparent ml-auto"></div>
+            </div>
           </div>
 
           {/* Row 2 - Insurance & Wealth (7 companies) */}
@@ -150,9 +153,12 @@ const Landing = () => {
                 </div>
               ))}
             </div>
-            <h3 className="text-sm font-semibold text-primary uppercase tracking-wide whitespace-nowrap">
-              Insurance & Wealth
-            </h3>
+            <div className="text-right">
+              <h3 className="text-sm font-semibold text-primary uppercase tracking-wide whitespace-nowrap mb-2">
+                Insurance & Wealth
+              </h3>
+              <div className="h-0.5 w-24 bg-gradient-to-r from-primary to-transparent ml-auto"></div>
+            </div>
           </div>
 
           {/* Row 3 - Fintechs (6 companies) */}
@@ -178,9 +184,12 @@ const Landing = () => {
                 </div>
               ))}
             </div>
-            <h3 className="text-sm font-semibold text-primary uppercase tracking-wide whitespace-nowrap">
-              Fintechs
-            </h3>
+            <div className="text-right">
+              <h3 className="text-sm font-semibold text-primary uppercase tracking-wide whitespace-nowrap mb-2">
+                Fintechs
+              </h3>
+              <div className="h-0.5 w-24 bg-gradient-to-r from-primary to-transparent ml-auto"></div>
+            </div>
           </div>
 
           {/* Row 4 - Marketplaces (5 companies) */}
@@ -205,9 +214,12 @@ const Landing = () => {
                 </div>
               ))}
             </div>
-            <h3 className="text-sm font-semibold text-primary uppercase tracking-wide whitespace-nowrap">
-              Marketplaces
-            </h3>
+            <div className="text-right">
+              <h3 className="text-sm font-semibold text-primary uppercase tracking-wide whitespace-nowrap mb-2">
+                Marketplaces
+              </h3>
+              <div className="h-0.5 w-24 bg-gradient-to-r from-primary to-transparent ml-auto"></div>
+            </div>
           </div>
 
           {/* Row 5 - Verification & HR (Narrowest - 4 companies) */}
@@ -231,9 +243,12 @@ const Landing = () => {
                 </div>
               ))}
             </div>
-            <h3 className="text-sm font-semibold text-primary uppercase tracking-wide whitespace-nowrap">
-              Verification & HR
-            </h3>
+            <div className="text-right">
+              <h3 className="text-sm font-semibold text-primary uppercase tracking-wide whitespace-nowrap mb-2">
+                Verification & HR
+              </h3>
+              <div className="h-0.5 w-24 bg-gradient-to-r from-primary to-transparent ml-auto"></div>
+            </div>
           </div>
         </div>
       </section>

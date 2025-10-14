@@ -1,15 +1,13 @@
 import { Link } from 'react-router-dom';
+import logo from '@/assets/BeFiSc_New_Logo.svg';
 
 const Navbar = () => {
   return (
     <nav className="border-b border-border bg-card/95 backdrop-blur supports-[backdrop-filter]:bg-card/60">
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
-          <Link to="/" className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-primary">
-              <span className="text-lg font-bold text-white">B</span>
-            </div>
-            <h1 className="text-xl font-bold text-foreground">BeFiSc</h1>
+          <Link to="/" className="flex items-center">
+            <img src={logo} alt="BeFiSc" className="h-10" />
           </Link>
 
           <div className="flex items-center gap-2">

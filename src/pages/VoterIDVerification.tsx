@@ -83,14 +83,13 @@ const VoterIDVerification = () => {
           <Card className="mb-6">
             <CardHeader>
               <CardTitle>Enter Voter ID</CardTitle>
-              <p className="text-sm text-muted-foreground mt-1">Format: ZTS0412345 (3 letters + 7 digits)</p>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="flex gap-4">
                 <Input
                   value={voterId}
                   onChange={(e) => setVoterId(e.target.value)}
-                  placeholder="Voter ID / EPIC Number (e.g., ZTS0412345)"
+                  placeholder="Voter ID / EPIC Number"
                   className="flex-1"
                 />
                 <Button onClick={handleFetch} disabled={loading || !consent}>

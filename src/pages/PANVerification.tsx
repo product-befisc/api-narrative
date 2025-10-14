@@ -82,7 +82,6 @@ const PANVerification = () => {
           <Card>
             <CardHeader>
               <CardTitle>Enter PAN Number</CardTitle>
-              <CardDescription>Format: AAAPA1234A (5 letters + 4 digits + 1 letter)</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="flex gap-4">

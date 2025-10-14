@@ -1,42 +1,66 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeft, Upload, FileText, Camera, Shield, ScanFace, MapPin, CheckCircle, Loader2 } from 'lucide-react';
+import { ArrowLeft, Upload, FileText, Camera, Shield, ScanFace, MapPin, CheckCircle, ChevronRight, Palette } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
-import { Progress } from '@/components/ui/progress';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import Navbar from '@/components/Navbar';
 
 const IDVerificationWorkflow = () => {
   const navigate = useNavigate();
-  const [currentStep, setCurrentStep] = useState(0);
-  const [isProcessing, setIsProcessing] = useState(false);
+  const [activeStep, setActiveStep] = useState(1);
 
   const steps = [
-    { id: 0, label: 'Upload ID', icon: Upload, description: 'Upload your government-issued ID' },
-    { id: 1, label: 'OCR Extract', icon: FileText, description: 'Extracting data from document' },
-    { id: 2, label: 'Selfie Capture', icon: Camera, description: 'Capture a selfie for verification' },
-    { id: 3, label: 'Liveliness Check', icon: Shield, description: 'Verifying you are a real person' },
-    { id: 4, label: 'Face Match', icon: ScanFace, description: 'Matching face with ID photo' },
-    { id: 5, label: 'Address Match', icon: MapPin, description: 'Verifying address details' },
-    { id: 6, label: 'Verified', icon: CheckCircle, description: 'Verification complete' },
+    {
+      id: 1,
+      title: 'Upload ID Document',
+      icon: Upload,
+      description: 'Submit your government-issued ID',
+    },
+    {
+      id: 2,
+      title: 'OCR Data Extraction',
+      icon: FileText,
+      description: 'Extract information from document',
+    },
+    {
+      id: 3,
+      title: 'Selfie Capture',
+      icon: Camera,
+      description: 'Capture photo for face verification',
+    },
+    {
+      id: 4,
+      title: 'Liveliness Detection',
+      icon: Shield,
+      description: 'Verify you are a real person',
+    },
+    {
+      id: 5,
+      title: 'Face Matching',
+      icon: ScanFace,
+      description: 'Compare selfie with ID photo',
+    },
+    {
+      id: 6,
+      title: 'Address Verification',
+      icon: MapPin,
+      description: 'Verify address details',
+    },
+    {
+      id: 7,
+      title: 'Customization',
+      icon: Palette,
+      description: 'White-label with your brand',
+    },
   ];
 
   const handleNextStep = () => {
-    setIsProcessing(true);
-    setTimeout(() => {
-      setIsProcessing(false);
-      if (currentStep < steps.length - 1) {
-        setCurrentStep(currentStep + 1);
-      }
-    }, 1500);
+    if (activeStep < 7) {
+      setActiveStep(activeStep + 1);
+    }
   };
-
-  const handleFileUpload = () => {
-    // Auto-populate with dummy PAN card
-    handleNextStep();
-  };
-
-  const progressPercentage = ((currentStep + 1) / steps.length) * 100;
 
   return (
     <div className="min-h-screen bg-background">
@@ -52,274 +76,377 @@ const IDVerificationWorkflow = () => {
           Back to ID Proof
         </Button>
 
-        {/* Hero */}
+        {/* Hero Section */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-foreground mb-4">
-            ID Verification Workflow
+          <h1 className="text-5xl font-bold text-foreground mb-4">
+            ID Verification Workflow Journey
           </h1>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Complete end-to-end identity verification with OCR, face matching, and liveliness detection
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+            A step-by-step visual walkthrough of complete identity verification with OCR, face matching, and liveliness detection
           </p>
         </div>
 
-        {/* Progress Steps */}
+        {/* Journey Timeline */}
         <div className="mb-12">
-          <div className="flex justify-between items-start max-w-5xl mx-auto mb-6">
-            {steps.map((step, index) => {
+          <div className="flex items-center justify-between max-w-6xl mx-auto relative">
+            {/* Progress Line */}
+            <div className="absolute top-6 left-0 right-0 h-0.5 bg-muted -z-10">
+              <div 
+                className="h-full bg-primary transition-all duration-500"
+                style={{ width: `${((activeStep - 1) / 6) * 100}%` }}
+              />
+            </div>
+
+            {steps.map((step) => {
               const Icon = step.icon;
-              const isCompleted = index < currentStep;
-              const isCurrent = index === currentStep;
-              
+              const isActive = step.id === activeStep;
+              const isCompleted = step.id < activeStep;
+
               return (
-                <div key={step.id} className="flex flex-col items-center flex-1">
-                  <div
-                    className={`w-16 h-16 rounded-full flex items-center justify-center mb-3 transition-all ${
-                      isCompleted
-                        ? 'bg-success'
-                        : isCurrent
-                        ? 'bg-primary animate-pulse'
-                        : 'bg-muted'
+                <div key={step.id} className="flex flex-col items-center relative">
+                  <button
+                    onClick={() => step.id <= activeStep && setActiveStep(step.id)}
+                    className={`w-12 h-12 rounded-full flex items-center justify-center mb-3 transition-all duration-300 ${
+                      isActive
+                        ? 'bg-primary text-primary-foreground scale-110 shadow-lg'
+                        : isCompleted
+                        ? 'bg-primary/20 text-primary'
+                        : 'bg-muted text-muted-foreground'
                     }`}
                   >
-                    <Icon className={`h-8 w-8 ${isCompleted || isCurrent ? 'text-white' : 'text-muted-foreground'}`} />
-                  </div>
-                  <p className={`text-xs font-medium text-center ${isCurrent ? 'text-foreground' : 'text-muted-foreground'}`}>
-                    {step.label}
-                  </p>
-                  {isCompleted && (
-                    <CheckCircle className="h-5 w-5 text-success mt-2" />
-                  )}
+                    <Icon className="h-5 w-5" />
+                  </button>
+                  <span className={`text-sm font-medium text-center max-w-[100px] ${
+                    isActive || isCompleted ? 'text-foreground' : 'text-muted-foreground'
+                  }`}>
+                    {step.title}
+                  </span>
                 </div>
               );
             })}
           </div>
-          <Progress value={progressPercentage} className="max-w-5xl mx-auto" />
         </div>
 
-        {/* Action Card */}
-        <Card className="max-w-2xl mx-auto p-8 mb-8">
-          <div className="text-center">
-            {currentStep === 0 && (
-              <div className="space-y-6">
-                <div className="flex justify-center">
-                  <div className="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center">
-                    <Upload className="h-10 w-10 text-primary" />
+        {/* Step Content */}
+        <div className="max-w-4xl mx-auto animate-fade-in">
+          {/* Step 1: Upload ID Document */}
+          {activeStep === 1 && (
+            <Card className="border-2 border-primary/20">
+              <CardHeader>
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
+                    <Upload className="h-6 w-6 text-primary" />
                   </div>
+                  <CardTitle className="text-2xl">Step 1: Upload ID Document</CardTitle>
                 </div>
-                <div>
-                  <h3 className="text-2xl font-bold text-foreground mb-2">Upload Your ID</h3>
-                  <p className="text-muted-foreground mb-6">
-                    Upload a clear photo of your government-issued ID card (Aadhaar, PAN, Driving License, etc.)
+                <p className="text-muted-foreground">Submit a clear photo of your government-issued ID</p>
+              </CardHeader>
+              <CardContent>
+                <div className="bg-gradient-to-br from-primary/10 to-primary/5 rounded-lg p-8 mb-6 text-center">
+                  <Upload className="h-16 w-16 text-primary mx-auto mb-4" />
+                  <p className="text-lg font-semibold text-foreground mb-2">
+                    Upload your PAN Card, Aadhaar, or Driving License
                   </p>
-                  <Button size="lg" onClick={handleFileUpload}>
-                    Upload PAN Card
-                  </Button>
-                  <p className="text-xs text-muted-foreground mt-4">
-                    Demo will auto-upload a sample PAN card
-                  </p>
-                </div>
-              </div>
-            )}
-
-            {currentStep === 1 && (
-              <div className="space-y-6">
-                <div className="flex justify-center">
-                  <Loader2 className="h-16 w-16 text-primary animate-spin" />
-                </div>
-                <div>
-                  <h3 className="text-2xl font-bold text-foreground mb-2">Extracting Data</h3>
                   <p className="text-muted-foreground mb-4">
-                    Using OCR to extract information from your ID...
+                    Ensure the document is clear and all details are visible
                   </p>
-                  <div className="text-left max-w-md mx-auto space-y-2 text-sm">
-                    <p className="flex justify-between">
-                      <span className="text-muted-foreground">Name:</span>
-                      <span className="font-semibold">Rohit Sharma</span>
-                    </p>
-                    <p className="flex justify-between">
-                      <span className="text-muted-foreground">DOB:</span>
-                      <span className="font-semibold">20/06/1990</span>
-                    </p>
-                    <p className="flex justify-between">
-                      <span className="text-muted-foreground">ID Number:</span>
-                      <span className="font-semibold">XXXX-XXXX-2547</span>
-                    </p>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {currentStep === 2 && (
-              <div className="space-y-6">
-                <div className="flex justify-center">
-                  <div className="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center">
-                    <Camera className="h-10 w-10 text-primary" />
-                  </div>
-                </div>
-                <div>
-                  <h3 className="text-2xl font-bold text-foreground mb-2">Capture Selfie</h3>
-                  <p className="text-muted-foreground mb-6">
-                    Take a selfie to verify your identity matches the ID document
-                  </p>
-                  <Button size="lg" onClick={handleNextStep} disabled={isProcessing}>
-                    {isProcessing ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Camera className="mr-2 h-4 w-4" />}
-                    Capture Selfie
+                  <Button variant="outline" size="lg">
+                    <Upload className="mr-2 h-4 w-4" />
+                    Select Document
                   </Button>
                 </div>
-              </div>
-            )}
-
-            {currentStep === 3 && (
-              <div className="space-y-6">
-                <div className="flex justify-center">
-                  <Loader2 className="h-16 w-16 text-primary animate-spin" />
+                <div className="bg-primary/10 rounded-lg p-4 mb-6">
+                  <p className="text-sm text-foreground">
+                    ✓ Supports PAN, Aadhaar, Driving License, Passport, and Voter ID
+                  </p>
                 </div>
-                <div>
-                  <h3 className="text-2xl font-bold text-foreground mb-2">Liveliness Check</h3>
+                <Button onClick={handleNextStep} className="w-full" size="lg">
+                  Continue with Sample PAN Card
+                  <ChevronRight className="ml-2 h-4 w-4" />
+                </Button>
+              </CardContent>
+            </Card>
+          )}
+
+          {/* Step 2: OCR Data Extraction */}
+          {activeStep === 2 && (
+            <Card className="border-2 border-primary/20">
+              <CardHeader>
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
+                    <FileText className="h-6 w-6 text-primary" />
+                  </div>
+                  <CardTitle className="text-2xl">Step 2: OCR Data Extraction</CardTitle>
+                </div>
+                <p className="text-muted-foreground">Automatically extract information from the document</p>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4 mb-6">
+                  <div className="space-y-2">
+                    <Label htmlFor="name">Full Name</Label>
+                    <Input id="name" value="Rohit Sharma" readOnly className="bg-muted/50" />
+                  </div>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="dob">Date of Birth</Label>
+                      <Input id="dob" value="20/06/1990" readOnly className="bg-muted/50" />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="id_number">ID Number</Label>
+                      <Input id="id_number" value="ABCD1234E" readOnly className="bg-muted/50" />
+                    </div>
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="father_name">Father's Name</Label>
+                    <Input id="father_name" value="Gurunath Sharma" readOnly className="bg-muted/50" />
+                  </div>
+                </div>
+                <div className="bg-primary/10 rounded-lg p-4 mb-6">
+                  <p className="text-sm text-foreground">
+                    ✓ Data extracted successfully using AI-powered OCR
+                  </p>
+                </div>
+                <Button onClick={handleNextStep} className="w-full" size="lg">
+                  Proceed to Selfie Capture
+                  <ChevronRight className="ml-2 h-4 w-4" />
+                </Button>
+              </CardContent>
+            </Card>
+          )}
+
+          {/* Step 3: Selfie Capture */}
+          {activeStep === 3 && (
+            <Card className="border-2 border-primary/20">
+              <CardHeader>
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
+                    <Camera className="h-6 w-6 text-primary" />
+                  </div>
+                  <CardTitle className="text-2xl">Step 3: Selfie Capture</CardTitle>
+                </div>
+                <p className="text-muted-foreground">Take a selfie for identity verification</p>
+              </CardHeader>
+              <CardContent>
+                <div className="bg-gradient-to-br from-primary/10 to-primary/5 rounded-lg p-8 mb-6 text-center">
+                  <Camera className="h-16 w-16 text-primary mx-auto mb-4" />
+                  <p className="text-lg font-semibold text-foreground mb-2">
+                    Position your face in the frame
+                  </p>
+                  <p className="text-muted-foreground mb-4">
+                    Make sure your face is clearly visible and well-lit
+                  </p>
+                  <div className="w-48 h-48 mx-auto bg-muted/30 rounded-lg border-2 border-dashed border-primary/40 flex items-center justify-center">
+                    <Camera className="h-12 w-12 text-muted-foreground" />
+                  </div>
+                </div>
+                <Button onClick={handleNextStep} className="w-full" size="lg">
+                  Capture Selfie
+                  <ChevronRight className="ml-2 h-4 w-4" />
+                </Button>
+              </CardContent>
+            </Card>
+          )}
+
+          {/* Step 4: Liveliness Detection */}
+          {activeStep === 4 && (
+            <Card className="border-2 border-primary/20">
+              <CardHeader>
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
+                    <Shield className="h-6 w-6 text-primary" />
+                  </div>
+                  <CardTitle className="text-2xl">Step 4: Liveliness Detection</CardTitle>
+                </div>
+                <p className="text-muted-foreground">Verify you are a real person</p>
+              </CardHeader>
+              <CardContent>
+                <div className="bg-gradient-to-br from-primary/10 to-primary/5 rounded-lg p-8 mb-6">
+                  <div className="flex items-center justify-center mb-6">
+                    <div className="w-20 h-20 rounded-full bg-primary/20 flex items-center justify-center animate-pulse">
+                      <Shield className="h-12 w-12 text-primary" />
+                    </div>
+                  </div>
+                  <div className="space-y-4">
+                    <div className="flex items-center gap-3 p-3 bg-background rounded-lg">
+                      <CheckCircle className="h-5 w-5 text-primary" />
+                      <span className="text-foreground">Face detected successfully</span>
+                    </div>
+                    <div className="flex items-center gap-3 p-3 bg-background rounded-lg">
+                      <CheckCircle className="h-5 w-5 text-primary" />
+                      <span className="text-foreground">Movement verified</span>
+                    </div>
+                    <div className="flex items-center gap-3 p-3 bg-background rounded-lg">
+                      <CheckCircle className="h-5 w-5 text-primary" />
+                      <span className="text-foreground">Liveliness confirmed</span>
+                    </div>
+                  </div>
+                </div>
+                <Button onClick={handleNextStep} className="w-full" size="lg">
+                  Continue to Face Matching
+                  <ChevronRight className="ml-2 h-4 w-4" />
+                </Button>
+              </CardContent>
+            </Card>
+          )}
+
+          {/* Step 5: Face Matching */}
+          {activeStep === 5 && (
+            <Card className="border-2 border-primary/20">
+              <CardHeader>
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
+                    <ScanFace className="h-6 w-6 text-primary" />
+                  </div>
+                  <CardTitle className="text-2xl">Step 5: Face Matching</CardTitle>
+                </div>
+                <p className="text-muted-foreground">Compare selfie with ID document photo</p>
+              </CardHeader>
+              <CardContent>
+                <div className="bg-gradient-to-br from-primary/10 to-primary/5 rounded-lg p-8 mb-6 text-center">
+                  <ScanFace className="h-16 w-16 text-primary mx-auto mb-4 animate-pulse" />
+                  <p className="text-lg font-semibold text-foreground mb-4">
+                    Analyzing facial features...
+                  </p>
+                  <div className="bg-background rounded-lg p-6 max-w-xs mx-auto">
+                    <p className="text-5xl font-bold text-primary mb-2">98.5%</p>
+                    <p className="text-sm text-muted-foreground">Match Confidence Score</p>
+                  </div>
+                </div>
+                <div className="bg-primary/10 rounded-lg p-4 mb-6">
+                  <p className="text-sm text-foreground">
+                    ✓ Face match successful - Identity verified
+                  </p>
+                </div>
+                <Button onClick={handleNextStep} className="w-full" size="lg">
+                  Proceed to Address Verification
+                  <ChevronRight className="ml-2 h-4 w-4" />
+                </Button>
+              </CardContent>
+            </Card>
+          )}
+
+          {/* Step 6: Address Verification */}
+          {activeStep === 6 && (
+            <Card className="border-2 border-primary/20">
+              <CardHeader>
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
+                    <MapPin className="h-6 w-6 text-primary" />
+                  </div>
+                  <CardTitle className="text-2xl">Step 6: Address Verification</CardTitle>
+                </div>
+                <p className="text-muted-foreground">Verify address details from the ID document</p>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4 mb-6">
+                  <div className="space-y-2">
+                    <Label htmlFor="address">Address</Label>
+                    <Input id="address" value="123, Marine Drive, Mumbai" readOnly className="bg-muted/50" />
+                  </div>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="city">City</Label>
+                      <Input id="city" value="Mumbai" readOnly className="bg-muted/50" />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="state">State</Label>
+                      <Input id="state" value="Maharashtra" readOnly className="bg-muted/50" />
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="pincode">Pincode</Label>
+                      <Input id="pincode" value="400001" readOnly className="bg-muted/50" />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="country">Country</Label>
+                      <Input id="country" value="India" readOnly className="bg-muted/50" />
+                    </div>
+                  </div>
+                </div>
+                <div className="bg-primary/10 rounded-lg p-4 mb-6">
+                  <p className="text-sm text-foreground">
+                    ✓ Address verified successfully
+                  </p>
+                </div>
+                <div className="bg-gradient-to-br from-green-500/10 to-green-500/5 border-2 border-green-500/20 rounded-lg p-6 mb-6 text-center">
+                  <div className="w-20 h-20 rounded-full bg-green-500/20 flex items-center justify-center mx-auto mb-4 animate-scale-in">
+                    <CheckCircle className="h-12 w-12 text-green-600" />
+                  </div>
+                  <p className="text-xl font-semibold text-foreground mb-2">
+                    ✓ Verification Complete!
+                  </p>
                   <p className="text-muted-foreground">
-                    Detecting signs of life to ensure you're a real person...
-                  </p>
-                  <div className="mt-4 space-y-2 text-sm">
-                    <p className="flex items-center justify-center gap-2 text-success">
-                      <CheckCircle className="h-4 w-4" />
-                      Face detected
-                    </p>
-                    <p className="flex items-center justify-center gap-2 text-success">
-                      <CheckCircle className="h-4 w-4" />
-                      Movement verified
-                    </p>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {currentStep === 4 && (
-              <div className="space-y-6">
-                <div className="flex justify-center">
-                  <Loader2 className="h-16 w-16 text-primary animate-spin" />
-                </div>
-                <div>
-                  <h3 className="text-2xl font-bold text-foreground mb-2">Face Matching</h3>
-                  <p className="text-muted-foreground mb-4">
-                    Comparing your selfie with the ID photo...
-                  </p>
-                  <div className="text-center">
-                    <p className="text-4xl font-bold text-success">98.5%</p>
-                    <p className="text-sm text-muted-foreground">Match Score</p>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {currentStep === 5 && (
-              <div className="space-y-6">
-                <div className="flex justify-center">
-                  <Loader2 className="h-16 w-16 text-primary animate-spin" />
-                </div>
-                <div>
-                  <h3 className="text-2xl font-bold text-foreground mb-2">Address Verification</h3>
-                  <p className="text-muted-foreground mb-4">
-                    Verifying address details from your ID...
-                  </p>
-                  <div className="text-left max-w-md mx-auto space-y-2 text-sm">
-                    <p className="flex justify-between">
-                      <span className="text-muted-foreground">Address:</span>
-                      <span className="font-semibold">Mumbai, Maharashtra</span>
-                    </p>
-                    <p className="flex justify-between">
-                      <span className="text-muted-foreground">Pincode:</span>
-                      <span className="font-semibold">400001</span>
-                    </p>
-                    <p className="flex items-center justify-end gap-2 text-success">
-                      <CheckCircle className="h-4 w-4" />
-                      Verified
-                    </p>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {currentStep === 6 && (
-              <div className="space-y-6">
-                <div className="flex justify-center">
-                  <div className="w-20 h-20 rounded-full bg-success flex items-center justify-center animate-scale-in">
-                    <CheckCircle className="h-12 w-12 text-white" />
-                  </div>
-                </div>
-                <div>
-                  <h3 className="text-2xl font-bold text-foreground mb-2">Verification Complete!</h3>
-                  <p className="text-muted-foreground mb-6">
-                    Your identity has been successfully verified
+                    All checks passed successfully
                   </p>
                 </div>
-              </div>
-            )}
-          </div>
-        </Card>
+                <Button onClick={handleNextStep} className="w-full" size="lg">
+                  View Customization Options
+                  <ChevronRight className="ml-2 h-4 w-4" />
+                </Button>
+              </CardContent>
+            </Card>
+          )}
 
-        {/* Result Card - Only show when verified */}
-        {currentStep === 6 && (
-          <Card className="max-w-2xl mx-auto p-8 border-2 border-success animate-fade-in">
-            <div className="flex items-start justify-between mb-6">
-              <h3 className="text-2xl font-bold text-foreground">Verification Result</h3>
-              <span className="bg-success text-white px-4 py-1 rounded-full text-sm font-semibold">
-                ✓ Verified
-              </span>
-            </div>
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <p className="text-sm text-muted-foreground mb-1">Full Name</p>
-                <p className="font-semibold">Rohit Sharma</p>
-              </div>
-              <div>
-                <p className="text-sm text-muted-foreground mb-1">Date of Birth</p>
-                <p className="font-semibold">20/06/1990</p>
-              </div>
-              <div>
-                <p className="text-sm text-muted-foreground mb-1">Address</p>
-                <p className="font-semibold">Mumbai, Maharashtra</p>
-              </div>
-              <div>
-                <p className="text-sm text-muted-foreground mb-1">Match Score</p>
-                <p className="font-semibold text-success">98.5%</p>
-              </div>
-              <div>
-                <p className="text-sm text-muted-foreground mb-1">ID Number</p>
-                <p className="font-semibold">XXXX-XXXX-2547</p>
-              </div>
-              <div>
-                <p className="text-sm text-muted-foreground mb-1">Liveliness</p>
-                <p className="font-semibold text-success">Confirmed ✓</p>
-              </div>
-            </div>
-            <div className="mt-6 pt-6 border-t">
-              <Button onClick={() => setCurrentStep(0)} variant="outline" className="w-full">
-                Start New Verification
-              </Button>
-            </div>
-          </Card>
-        )}
+          {/* Step 7: White-label Customization */}
+          {activeStep === 7 && (
+            <Card className="border-2 border-primary/20">
+              <CardHeader>
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
+                    <Palette className="h-6 w-6 text-primary" />
+                  </div>
+                  <CardTitle className="text-2xl">Step 7: Custom Branding & White-Labeling</CardTitle>
+                </div>
+                <p className="text-muted-foreground">Personalize the verification journey with your brand identity</p>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-6">
+                  <div className="bg-gradient-to-br from-primary/10 to-primary/5 rounded-lg p-8 border-2 border-dashed border-primary/30">
+                    <div className="flex items-start justify-between mb-4">
+                      <div>
+                        <p className="text-lg font-semibold text-foreground mb-2">
+                          Fully Customizable Journey
+                        </p>
+                        <p className="text-muted-foreground text-sm">
+                          This entire verification workflow can be customized with your company's logo, color theme, and branding elements.
+                        </p>
+                      </div>
+                      <div className="w-16 h-16 rounded-lg bg-background border-2 border-dashed border-primary/40 flex items-center justify-center text-xs text-muted-foreground">
+                        Your Logo
+                      </div>
+                    </div>
+                    
+                    <div className="grid grid-cols-3 gap-4 mb-4">
+                      <div className="bg-background rounded-lg p-3 text-center">
+                        <div className="w-8 h-8 rounded-full bg-primary/20 mx-auto mb-2"></div>
+                        <p className="text-xs text-muted-foreground">Brand Colors</p>
+                      </div>
+                      <div className="bg-background rounded-lg p-3 text-center">
+                        <Palette className="w-8 h-8 text-primary mx-auto mb-2" />
+                        <p className="text-xs text-muted-foreground">Custom Theme</p>
+                      </div>
+                      <div className="bg-background rounded-lg p-3 text-center">
+                        <FileText className="w-8 h-8 text-primary mx-auto mb-2" />
+                        <p className="text-xs text-muted-foreground">Custom Text</p>
+                      </div>
+                    </div>
+                  </div>
 
-        {/* Auto-progress for processing steps */}
-        {currentStep > 0 && currentStep < 6 && !isProcessing && (
-          <div className="text-center">
-            <Button
-              onClick={handleNextStep}
-              disabled={isProcessing}
-              size="lg"
-              className="animate-fade-in"
-            >
-              {isProcessing ? (
-                <>
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Processing...
-                </>
-              ) : (
-                'Continue'
-              )}
-            </Button>
-          </div>
-        )}
+                  <div className="text-center py-4">
+                    <p className="text-sm text-muted-foreground">
+                      Powered by <span className="font-semibold text-primary">SmartAuth ID Verification</span>
+                    </p>
+                  </div>
+
+                  <Button onClick={() => setActiveStep(1)} variant="outline" className="w-full" size="lg">
+                    Restart Journey
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          )}
+        </div>
       </div>
     </div>
   );

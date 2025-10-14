@@ -295,13 +295,9 @@ const DigiLockerAadhaar = () => {
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  <div className="bg-muted/50 rounded-lg p-6 font-mono text-sm">
-                    <p className="text-muted-foreground mb-2">API Request:</p>
-                    <pre className="text-foreground">
-{`{
-  "transaction_id": "98bcd0-871gssd-1asd3nd"
-}`}
-                    </pre>
+                  <div className="space-y-2 mb-4">
+                    <Label htmlFor="transaction_id">Transaction ID</Label>
+                    <Input id="transaction_id" value="98bcd0-871gssd-1asd3nd" readOnly className="bg-muted/50 font-mono" />
                   </div>
                   <div className="bg-primary/10 rounded-lg p-4">
                     <p className="text-sm font-medium text-foreground mb-2">

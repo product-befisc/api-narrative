@@ -3,6 +3,16 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Shield, TrendingUp, Users, Award } from "lucide-react";
 import logo from '@/assets/BeFiSc_New_Logo.svg';
 import founderPhoto from '@/assets/founder-photo.svg';
+import affordplanLogo from '@/assets/clients/affordplan.svg';
+import bajajLogo from '@/assets/clients/bajaj.svg';
+import credflowLogo from '@/assets/clients/credflow.svg';
+import eximpeLogo from '@/assets/clients/eximpe.svg';
+import indiamartLogo from '@/assets/clients/indiamart.svg';
+import quidLogo from '@/assets/clients/quid.svg';
+import rupyaLogo from '@/assets/clients/rupya.svg';
+import sabpaisaLogo from '@/assets/clients/sabpaisa.svg';
+import vibrantLogo from '@/assets/clients/vibrant.svg';
+import yaperLogo from '@/assets/clients/yaper.svg';
 
 const Landing = () => {
   const navigate = useNavigate();
@@ -87,24 +97,28 @@ const Landing = () => {
               </div>
               <div className="flex flex-wrap justify-center gap-4 max-w-7xl">
                 {[
-                  "Bajaj Finserv",
-                  "Muthoot Capital",
-                  "Navi",
-                  "Varthana",
-                  "Lendbox",
-                  "Arthan Finance",
-                  "Cashflo",
-                  "Snapmint",
+                  { name: "Bajaj Finserv", logo: bajajLogo },
+                  { name: "Affordplan", logo: affordplanLogo },
+                  { name: "Rupya", logo: rupyaLogo },
+                  { name: "Muthoot Capital", logo: null },
+                  { name: "Navi", logo: null },
+                  { name: "Varthana", logo: null },
+                  { name: "Lendbox", logo: null },
+                  { name: "Arthan Finance", logo: null },
                 ].map((company, i) => (
                   <div
                     key={i}
                     className="flex items-center gap-3 bg-card rounded-xl px-6 py-4 border border-border hover:border-primary hover:scale-105 transition-all shadow-sm hover:shadow-md"
                     style={{ animationDelay: `${i * 0.1}s` }}
                   >
-                    <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center flex-shrink-0">
-                      <Users className="w-6 h-6 text-muted-foreground" />
-                    </div>
-                    <span className="font-medium text-foreground whitespace-nowrap">{company}</span>
+                    {company.logo ? (
+                      <img src={company.logo} alt={company.name} className="w-12 h-12 object-contain flex-shrink-0" />
+                    ) : (
+                      <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center flex-shrink-0">
+                        <Users className="w-6 h-6 text-muted-foreground" />
+                      </div>
+                    )}
+                    <span className="font-medium text-foreground whitespace-nowrap">{company.name}</span>
                   </div>
                 ))}
               </div>
@@ -157,16 +171,28 @@ const Landing = () => {
                 <div className="h-0.5 w-24 bg-gradient-to-r from-primary to-transparent"></div>
               </div>
               <div className="flex flex-wrap justify-center gap-4 max-w-5xl">
-                {["FinBox", "Paytail", "MoneyWide", "Indiamart", "Proptension", "Voorent"].map((company, i) => (
+                {[
+                  { name: "CredFlow", logo: credflowLogo },
+                  { name: "Indiamart", logo: indiamartLogo },
+                  { name: "Quid", logo: quidLogo },
+                  { name: "Sabpaisa", logo: sabpaisaLogo },
+                  { name: "Vibrant", logo: vibrantLogo },
+                  { name: "Yaper", logo: yaperLogo },
+                  { name: "EximPe", logo: eximpeLogo },
+                ].map((company, i) => (
                   <div
                     key={i}
                     className="flex items-center gap-3 bg-card rounded-xl px-6 py-4 border border-border hover:border-primary hover:scale-105 transition-all shadow-sm hover:shadow-md"
                     style={{ animationDelay: `${(i + 15) * 0.1}s` }}
                   >
-                    <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center flex-shrink-0">
-                      <TrendingUp className="w-6 h-6 text-muted-foreground" />
-                    </div>
-                    <span className="font-medium text-foreground whitespace-nowrap">{company}</span>
+                    {company.logo ? (
+                      <img src={company.logo} alt={company.name} className="w-12 h-12 object-contain flex-shrink-0" />
+                    ) : (
+                      <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center flex-shrink-0">
+                        <TrendingUp className="w-6 h-6 text-muted-foreground" />
+                      </div>
+                    )}
+                    <span className="font-medium text-foreground whitespace-nowrap">{company.name}</span>
                   </div>
                 ))}
               </div>

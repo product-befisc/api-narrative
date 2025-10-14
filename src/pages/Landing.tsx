@@ -9,7 +9,7 @@ import founderPhoto from '@/assets/founder-photo.svg';
 import affordplanLogo from '@/assets/clients/affordplan.svg';
 import arthanFinanceLogo from '@/assets/clients/arthan-finance.svg';
 import bajajLogo from '@/assets/clients/bajaj.svg';
-import bharatxLogo from '@/assets/clients/bharatx.svg';
+import supermoneyLogo from '@/assets/clients/supermoney.png';
 import cashrichLogo from '@/assets/clients/cashrich.svg';
 import credflowLogo from '@/assets/clients/credflow.svg';
 import epaylaterLogo from '@/assets/clients/epaylater.svg';
@@ -230,7 +230,7 @@ const Landing = () => {
                   { name: "Navi", logo: naviLogo },
                   { name: "Affordplan", logo: affordplanLogo },
                   { name: "Roopya", logo: rupyaLogo },
-                  { name: "BharatX", logo: bharatxLogo },
+                  { name: "SuperMoney", logo: supermoneyLogo },
                   { name: "EPay Later", logo: epaylaterLogo },
                   { name: "Snapmint", logo: snapmintLogo },
                   { name: "Arthan Finance", logo: arthanFinanceLogo },

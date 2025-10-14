@@ -116,7 +116,6 @@ const BusinessProfiling = () => {
           <Card>
             <CardHeader>
               <CardTitle>Enter Mobile Number</CardTitle>
-              <CardDescription>Format: +91-XXXXXXXXXX or 10 digits</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="flex gap-4">

@@ -100,71 +100,79 @@ const Landing = () => {
       </section>
 
       {/* Stats Showcase Section */}
-      <section className="py-24 bg-gradient-to-b from-background via-primary/5 to-background relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-radial from-primary/10 via-transparent to-transparent opacity-50"></div>
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-6xl mx-auto">
-            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4 md:gap-6">
+      <section className="py-24 bg-muted/30">
+        <div className="container mx-auto px-4">
+          <div className="max-w-7xl mx-auto">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-9 gap-4 md:gap-6">
               {/* 3.5 Mn ARR */}
-              <div className="group relative bg-gradient-to-br from-card via-card to-primary/5 rounded-2xl p-6 border border-primary/20 hover:border-primary/60 hover:shadow-2xl hover:shadow-primary/20 transition-all duration-300 hover:-translate-y-2 backdrop-blur-sm">
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/0 to-primary/10 opacity-0 group-hover:opacity-100 rounded-2xl transition-opacity duration-300"></div>
-                <div className="relative z-10">
-                  <div className="text-3xl md:text-4xl font-black bg-gradient-to-br from-primary via-primary to-primary/60 bg-clip-text text-transparent mb-2">3.5M</div>
-                  <div className="text-xs md:text-sm font-semibold text-muted-foreground uppercase tracking-wider">ARR</div>
+              <div className="group relative bg-background/60 backdrop-blur-sm rounded-2xl p-6 border border-border/50 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 hover:-translate-y-1">
+                <div className="text-center">
+                  <div className="text-3xl md:text-4xl font-bold text-primary mb-2">3.5M</div>
+                  <div className="text-xs md:text-sm font-medium text-muted-foreground uppercase tracking-wide">ARR</div>
                 </div>
               </div>
 
               {/* ISO Certified */}
-              <div className="group relative bg-gradient-to-br from-card via-card to-success/5 rounded-2xl p-6 border border-success/20 hover:border-success/60 hover:shadow-2xl hover:shadow-success/20 transition-all duration-300 hover:-translate-y-2 backdrop-blur-sm">
-                <div className="absolute inset-0 bg-gradient-to-br from-success/0 to-success/10 opacity-0 group-hover:opacity-100 rounded-2xl transition-opacity duration-300"></div>
-                <div className="relative z-10">
-                  <div className="text-3xl md:text-4xl font-black bg-gradient-to-br from-success via-success to-success/60 bg-clip-text text-transparent mb-2">ISO</div>
-                  <div className="text-xs md:text-sm font-semibold text-muted-foreground uppercase tracking-wider">Certified</div>
+              <div className="group relative bg-background/60 backdrop-blur-sm rounded-2xl p-6 border border-border/50 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 hover:-translate-y-1">
+                <div className="text-center">
+                  <div className="text-3xl md:text-4xl font-bold text-primary mb-2">ISO</div>
+                  <div className="text-xs md:text-sm font-medium text-muted-foreground uppercase tracking-wide">Certified</div>
                 </div>
               </div>
 
-              {/* 30M+ API Calls / Month */}
-              <div className="group relative bg-gradient-to-br from-card via-card to-info/5 rounded-2xl p-6 border border-info/20 hover:border-info/60 hover:shadow-2xl hover:shadow-info/20 transition-all duration-300 hover:-translate-y-2 backdrop-blur-sm">
-                <div className="absolute inset-0 bg-gradient-to-br from-info/0 to-info/10 opacity-0 group-hover:opacity-100 rounded-2xl transition-opacity duration-300"></div>
-                <div className="relative z-10">
-                  <div className="text-3xl md:text-4xl font-black bg-gradient-to-br from-info via-info to-info/60 bg-clip-text text-transparent mb-2">30M+</div>
-                  <div className="text-xs md:text-sm font-semibold text-muted-foreground uppercase tracking-wider">API Calls</div>
+              {/* 30M+ API Calls */}
+              <div className="group relative bg-background/60 backdrop-blur-sm rounded-2xl p-6 border border-border/50 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 hover:-translate-y-1">
+                <div className="text-center">
+                  <div className="text-3xl md:text-4xl font-bold text-primary mb-2">30M+</div>
+                  <div className="text-xs md:text-sm font-medium text-muted-foreground uppercase tracking-wide">API Calls</div>
                 </div>
               </div>
 
               {/* 99.99% Uptime */}
-              <div className="group relative bg-gradient-to-br from-card via-card to-warning/5 rounded-2xl p-6 border border-warning/20 hover:border-warning/60 hover:shadow-2xl hover:shadow-warning/20 transition-all duration-300 hover:-translate-y-2 backdrop-blur-sm">
-                <div className="absolute inset-0 bg-gradient-to-br from-warning/0 to-warning/10 opacity-0 group-hover:opacity-100 rounded-2xl transition-opacity duration-300"></div>
-                <div className="relative z-10">
-                  <div className="text-3xl md:text-4xl font-black bg-gradient-to-br from-warning via-warning to-warning/60 bg-clip-text text-transparent mb-2">99.99%</div>
-                  <div className="text-xs md:text-sm font-semibold text-muted-foreground uppercase tracking-wider">Uptime</div>
+              <div className="group relative bg-background/60 backdrop-blur-sm rounded-2xl p-6 border border-border/50 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 hover:-translate-y-1">
+                <div className="text-center">
+                  <div className="text-3xl md:text-4xl font-bold text-primary mb-2">99.99%</div>
+                  <div className="text-xs md:text-sm font-medium text-muted-foreground uppercase tracking-wide">Uptime</div>
                 </div>
               </div>
 
               {/* FinTech CX Awardee */}
-              <div className="group relative bg-gradient-to-br from-card via-card to-accent/5 rounded-2xl p-6 border border-accent/20 hover:border-accent/60 hover:shadow-2xl hover:shadow-accent/20 transition-all duration-300 hover:-translate-y-2 backdrop-blur-sm">
-                <div className="absolute inset-0 bg-gradient-to-br from-accent/0 to-accent/10 opacity-0 group-hover:opacity-100 rounded-2xl transition-opacity duration-300"></div>
-                <div className="relative z-10">
-                  <div className="text-2xl md:text-3xl font-black bg-gradient-to-br from-accent via-accent to-accent/60 bg-clip-text text-transparent mb-2">CX</div>
-                  <div className="text-xs md:text-sm font-semibold text-muted-foreground uppercase tracking-wider">Awardee</div>
+              <div className="group relative bg-background/60 backdrop-blur-sm rounded-2xl p-6 border border-border/50 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 hover:-translate-y-1">
+                <div className="text-center">
+                  <div className="text-2xl md:text-3xl font-bold text-primary mb-2">CX</div>
+                  <div className="text-xs md:text-sm font-medium text-muted-foreground uppercase tracking-wide">Awardee</div>
                 </div>
               </div>
 
               {/* 150+ Services */}
-              <div className="group relative bg-gradient-to-br from-card via-card to-primary/5 rounded-2xl p-6 border border-primary/20 hover:border-primary/60 hover:shadow-2xl hover:shadow-primary/20 transition-all duration-300 hover:-translate-y-2 backdrop-blur-sm">
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/0 to-primary/10 opacity-0 group-hover:opacity-100 rounded-2xl transition-opacity duration-300"></div>
-                <div className="relative z-10">
-                  <div className="text-3xl md:text-4xl font-black bg-gradient-to-br from-primary via-primary to-primary/60 bg-clip-text text-transparent mb-2">150+</div>
-                  <div className="text-xs md:text-sm font-semibold text-muted-foreground uppercase tracking-wider">Services</div>
+              <div className="group relative bg-background/60 backdrop-blur-sm rounded-2xl p-6 border border-border/50 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 hover:-translate-y-1">
+                <div className="text-center">
+                  <div className="text-3xl md:text-4xl font-bold text-primary mb-2">150+</div>
+                  <div className="text-xs md:text-sm font-medium text-muted-foreground uppercase tracking-wide">Services</div>
                 </div>
               </div>
 
               {/* 140+ Clients */}
-              <div className="group relative bg-gradient-to-br from-card via-card to-secondary/5 rounded-2xl p-6 border border-secondary/20 hover:border-secondary/60 hover:shadow-2xl hover:shadow-secondary/20 transition-all duration-300 hover:-translate-y-2 backdrop-blur-sm">
-                <div className="absolute inset-0 bg-gradient-to-br from-secondary/0 to-secondary/10 opacity-0 group-hover:opacity-100 rounded-2xl transition-opacity duration-300"></div>
-                <div className="relative z-10">
-                  <div className="text-3xl md:text-4xl font-black bg-gradient-to-br from-secondary via-secondary to-secondary/60 bg-clip-text text-transparent mb-2">140+</div>
-                  <div className="text-xs md:text-sm font-semibold text-muted-foreground uppercase tracking-wider">Clients</div>
+              <div className="group relative bg-background/60 backdrop-blur-sm rounded-2xl p-6 border border-border/50 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 hover:-translate-y-1">
+                <div className="text-center">
+                  <div className="text-3xl md:text-4xl font-bold text-primary mb-2">140+</div>
+                  <div className="text-xs md:text-sm font-medium text-muted-foreground uppercase tracking-wide">Clients</div>
+                </div>
+              </div>
+
+              {/* 3s Avg Response */}
+              <div className="group relative bg-background/60 backdrop-blur-sm rounded-2xl p-6 border border-border/50 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 hover:-translate-y-1">
+                <div className="text-center">
+                  <div className="text-3xl md:text-4xl font-bold text-primary mb-2">3s</div>
+                  <div className="text-xs md:text-sm font-medium text-muted-foreground uppercase tracking-wide">Avg Response</div>
+                </div>
+              </div>
+
+              {/* 98.2% OCR Accuracy */}
+              <div className="group relative bg-background/60 backdrop-blur-sm rounded-2xl p-6 border border-border/50 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 hover:-translate-y-1">
+                <div className="text-center">
+                  <div className="text-3xl md:text-4xl font-bold text-primary mb-2">98.2%</div>
+                  <div className="text-xs md:text-sm font-medium text-muted-foreground uppercase tracking-wide">OCR Accuracy</div>
                 </div>
               </div>
             </div>

@@ -228,11 +228,10 @@ const Landing = () => {
                   { name: "Muthoot Capital", logo: muthootLogo },
                   { name: "Navi", logo: naviLogo },
                   { name: "Affordplan", logo: affordplanLogo },
-                  { name: "Rupya", logo: rupyaLogo },
+                  { name: "Roopya", logo: rupyaLogo },
                   { name: "BharatX", logo: bharatxLogo },
                   { name: "EPay Later", logo: epaylaterLogo },
                   { name: "Snapmint", logo: snapmintLogo },
-                  { name: "CashRich", logo: cashrichLogo },
                   { name: "Arthan Finance", logo: arthanFinanceLogo },
                   { name: "Lendbox", logo: lendboxLogo },
                   { name: "Varthana", logo: varthanaLogo },
@@ -274,6 +273,7 @@ const Landing = () => {
                   { name: "HealthCred", logo: healthcredLogo },
                   { name: "Velocity", logo: velocityLogo },
                   { name: "Freo", logo: freoLogo },
+                  { name: "CashRich", logo: cashrichLogo },
                 ].map((company, i) => (
                   <div
                     key={i}
@@ -312,7 +312,6 @@ const Landing = () => {
                   { name: "Vibrant", logo: vibrantLogo },
                   { name: "Yaper", logo: yaperLogo },
                   { name: "EximPe", logo: eximpeLogo },
-                  { name: "Niro", logo: niroLogo },
                 ].map((company, i) => (
                   <div
                     key={i}

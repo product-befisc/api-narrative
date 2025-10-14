@@ -149,7 +149,6 @@ const Landing = () => {
                   { name: "Go Digit Life Insurance", logo: null },
                   { name: "Go Digit General Insurance", logo: null },
                   { name: "First Advisors Insurance", logo: null },
-                  { name: "Mufkam Insurance Marketing", logo: null },
                   { name: "HealthCred", logo: null },
                   { name: "Velocity", logo: null },
                   { name: "Freo", logo: freoLogo },

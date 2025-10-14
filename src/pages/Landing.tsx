@@ -270,7 +270,7 @@ const Landing = () => {
 
           <div className="grid grid-cols-2 md:grid-cols-5 gap-6 max-w-5xl mx-auto mb-8">
             <div className="bg-muted rounded-xl p-6 text-center border border-border">
-              <div className="text-4xl font-bold text-primary mb-2">20M+</div>
+              <div className="text-4xl font-bold text-primary mb-2">30M+</div>
               <div className="text-sm text-muted-foreground">API Calls / Month</div>
             </div>
             <div className="bg-muted rounded-xl p-6 text-center border border-border">

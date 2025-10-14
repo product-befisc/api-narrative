@@ -1,6 +1,8 @@
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Shield, TrendingUp, Users, Award } from "lucide-react";
+import { EmailVerificationModal } from "@/components/EmailVerificationModal";
 import logo from '@/assets/BeFiSc_New_Logo.svg';
 import founderPhoto from '@/assets/founder-photo.svg';
 import affordplanLogo from '@/assets/clients/affordplan.svg';
@@ -38,11 +40,37 @@ import fourSlLogo from '@/assets/clients/4sl-background-check.svg';
 
 const Landing = () => {
   const navigate = useNavigate();
+  const [showVerification, setShowVerification] = useState(false);
+  const [isVerified, setIsVerified] = useState(false);
+
+  useEffect(() => {
+    // Check if user has already verified
+    const verified = localStorage.getItem("emailVerified");
+    if (verified === "true") {
+      setIsVerified(true);
+    } else {
+      // Show modal after a brief delay for better UX
+      setTimeout(() => setShowVerification(true), 500);
+    }
+  }, []);
+
+  const handleVerified = () => {
+    localStorage.setItem("emailVerified", "true");
+    setIsVerified(true);
+    setShowVerification(false);
+  };
 
   const quickFacts = ["3.5 Mn ARR", "ISO Certified", "30M+ API Calls / Month", "99.99% Uptime", "FinTech CX Awardee"];
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background relative">
+      {/* Email Verification Modal */}
+      <EmailVerificationModal open={showVerification} onVerified={handleVerified} />
+
+      {/* Blur overlay when modal is open */}
+      {showVerification && (
+        <div className="fixed inset-0 backdrop-blur-md bg-background/40 z-40" />
+      )}
       {/* Navbar */}
       <nav className="border-b border-border bg-card/95 backdrop-blur">
         <div className="container mx-auto px-4 py-4">

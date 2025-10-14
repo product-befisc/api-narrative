@@ -17,17 +17,34 @@ const TamperProof = () => {
     setLoading(true);
     setTimeout(() => {
       setResult({
-        fileName: 'Salary_Slip_Oct_2024.pdf',
-        signature: 'Valid',
-        tampered: true,
-        metadata: {
-          creationDate: '2024-01-15',
-          modificationDate: '2024-10-10',
-          editor: 'Adobe Acrobat Pro',
-          pages: 5,
-          producer: 'Adobe PDF Library 15.0',
+        fileName: 'Trips_Flight_Downloa...pdf',
+        creditsUsed: 1,
+        pages: 3,
+        date: '06 Oct 2025',
+        verdict: 'SAFE',
+        metadataCheck: {
+          status: 'issue',
+          created: '01 Oct 2025 at 12:53',
+          modified: '01 Oct 2025 at 12:53',
         },
-        embeddedFiles: false,
+        structureCheck: {
+          status: 'ok',
+          description: 'No Structural Change',
+        },
+        editorUsed: {
+          status: 'ok',
+          editors: 'NO Suspicious editor detected',
+        },
+        digitalSignature: {
+          status: 'issue',
+          presence: 'No',
+          authentic: 'No',
+        },
+        embeddedFile: {
+          status: 'ok',
+          description: 'No embedded files are present',
+        },
+        suspectedText: '[NONE]',
       });
       setLoading(false);
     }, 2000);
@@ -67,16 +84,27 @@ const TamperProof = () => {
           {!uploaded ? (
             <div className="border-2 border-dashed border-border rounded-lg p-12 text-center mb-6 hover:border-primary transition-colors">
               <Upload className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-              <p className="text-muted-foreground mb-2">Upload salary slip for verification</p>
+              <p className="text-muted-foreground mb-2">Upload documents for verification</p>
               <p className="text-sm text-muted-foreground">PDF files only (max 10MB)</p>
             </div>
           ) : (
-            <div className="border-2 border-success rounded-lg p-6 mb-6 bg-success/5">
-              <div className="flex items-center gap-3">
-                <FileCheck className="h-8 w-8 text-success" />
-                <div className="text-left">
-                  <p className="font-semibold text-foreground">Salary_Slip_Oct_2024.pdf</p>
-                  <p className="text-sm text-muted-foreground">Document uploaded successfully</p>
+            <div className="space-y-4 mb-6">
+              <div className="border-2 border-success rounded-lg p-6 bg-success/5">
+                <div className="flex items-center gap-3">
+                  <FileCheck className="h-8 w-8 text-success" />
+                  <div className="text-left">
+                    <p className="font-semibold text-foreground">Bank_Statement_Sep_2024.pdf</p>
+                    <p className="text-sm text-muted-foreground">Document uploaded successfully</p>
+                  </div>
+                </div>
+              </div>
+              <div className="border-2 border-success rounded-lg p-6 bg-success/5">
+                <div className="flex items-center gap-3">
+                  <FileCheck className="h-8 w-8 text-success" />
+                  <div className="text-left">
+                    <p className="font-semibold text-foreground">Salary_Slip_Oct_2024.pdf</p>
+                    <p className="text-sm text-muted-foreground">Document uploaded successfully</p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -94,67 +122,147 @@ const TamperProof = () => {
 
         {/* Result Card */}
         {result && (
-          <Card className="max-w-2xl mx-auto p-8 animate-fade-in border-2 border-destructive">
-            <div className="flex items-start justify-between mb-6">
-              <h3 className="text-2xl font-bold text-foreground">Scan Report</h3>
-              <Badge className="bg-destructive text-white">
-                <AlertTriangle className="h-4 w-4 mr-1" />
-                Tampered
-              </Badge>
-            </div>
-            
-            <div className="space-y-4 mb-6">
-              <div className="flex items-center justify-between py-3 border-b">
-                <span className="text-muted-foreground">Signature</span>
-                <span className="font-semibold flex items-center gap-2">
-                  <CheckCircle className="h-4 w-4 text-success" />
-                  {result.signature}
-                </span>
-              </div>
-              
-              <div className="flex items-center justify-between py-3 border-b">
-                <span className="text-muted-foreground">Tampering Detected</span>
-                <Badge className={result.tampered ? 'bg-destructive' : 'bg-success'}>
-                  {result.tampered ? <XCircle className="h-4 w-4 mr-1" /> : <CheckCircle className="h-4 w-4 mr-1" />}
-                  {result.tampered ? 'Yes' : 'No'}
-                </Badge>
-              </div>
-              
-              <div className="flex items-center justify-between py-3 border-b">
-                <span className="text-muted-foreground">Embedded Files</span>
-                <span className="font-semibold">{result.embeddedFiles ? 'Yes' : 'No'}</span>
-              </div>
-            </div>
-
-            <div className="bg-muted p-6 rounded-lg">
-              <h4 className="font-semibold text-foreground mb-4">Document Metadata</h4>
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <p className="text-sm text-muted-foreground mb-1">Creation Date</p>
-                  <p className="font-medium">{result.metadata.creationDate}</p>
+          <Card className="max-w-5xl mx-auto animate-fade-in">
+            {/* Header */}
+            <div className="bg-gradient-to-r from-primary/10 via-primary/5 to-background border-b p-6">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <FileCheck className="h-8 w-8 text-primary" />
+                  <h2 className="text-3xl font-bold text-foreground">TamperProof Report</h2>
                 </div>
-                <div>
-                  <p className="text-sm text-muted-foreground mb-1">Modification Date</p>
-                  <p className="font-medium text-destructive">{result.metadata.modificationDate}</p>
-                </div>
-                <div>
-                  <p className="text-sm text-muted-foreground mb-1">Editor</p>
-                  <p className="font-medium">{result.metadata.editor}</p>
-                </div>
-                <div>
-                  <p className="text-sm text-muted-foreground mb-1">Pages</p>
-                  <p className="font-medium">{result.metadata.pages}</p>
-                </div>
-                <div className="col-span-2">
-                  <p className="text-sm text-muted-foreground mb-1">Producer</p>
-                  <p className="font-medium">{result.metadata.producer}</p>
+                <div className="text-right">
+                  <p className="text-xs text-muted-foreground mb-1">Your Plan</p>
+                  <Badge className="bg-success text-white text-sm px-4 py-1">Supreme</Badge>
                 </div>
               </div>
             </div>
 
-            <Button variant="outline" className="w-full mt-6">
-              View Highlighted Edits
-            </Button>
+            <div className="p-8">
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+                {/* Document Details */}
+                <Card className="lg:col-span-2 p-6">
+                  <h3 className="text-xl font-bold text-foreground mb-4">Document Details</h3>
+                  <div className="space-y-3">
+                    <div>
+                      <span className="text-sm text-muted-foreground">File Name : </span>
+                      <span className="font-medium text-foreground">{result.fileName}</span>
+                    </div>
+                    <div className="flex gap-8 items-center">
+                      <div>
+                        <div className="text-2xl font-bold text-foreground">{String(result.creditsUsed).padStart(2, '0')}</div>
+                        <div className="text-sm text-muted-foreground">Credits used</div>
+                      </div>
+                      <div>
+                        <div className="text-2xl font-bold text-foreground">{String(result.pages).padStart(2, '0')}</div>
+                        <div className="text-sm text-muted-foreground">No. of pages</div>
+                      </div>
+                      <div className="ml-auto text-right">
+                        <span className="text-sm text-muted-foreground">Date : </span>
+                        <span className="font-medium text-foreground">{result.date}</span>
+                      </div>
+                    </div>
+                  </div>
+                </Card>
+
+                {/* Verdict Card */}
+                <Card className="p-6 border-2 border-primary/30 bg-primary/5">
+                  <div className="text-center">
+                    <p className="text-sm text-primary mb-2">Verdict</p>
+                    <h3 className="text-4xl font-bold text-primary">{result.verdict}</h3>
+                  </div>
+                </Card>
+              </div>
+
+              {/* Checks Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                {/* Metadata Check */}
+                <Card className="p-6">
+                  <div className="flex items-start justify-between mb-4">
+                    <h4 className="text-lg font-bold text-destructive">Metadata Check</h4>
+                    <div className="w-3 h-3 rounded-full bg-destructive"></div>
+                  </div>
+                  <p className="text-sm text-muted-foreground mb-4">
+                    Document timestamps and creation metadata analyzed for authenticity
+                  </p>
+                  <div className="space-y-2 text-sm">
+                    <div>
+                      <span className="text-muted-foreground">Created: </span>
+                      <span className="text-foreground">{result.metadataCheck.created}</span>
+                    </div>
+                    <div>
+                      <span className="text-muted-foreground">Modified: </span>
+                      <span className="text-foreground">{result.metadataCheck.modified}</span>
+                    </div>
+                  </div>
+                </Card>
+
+                {/* Structure Change Check */}
+                <Card className="p-6">
+                  <div className="flex items-start justify-between mb-4">
+                    <h4 className="text-lg font-bold text-primary">Structure Change Check</h4>
+                    <div className="w-3 h-3 rounded-full bg-primary"></div>
+                  </div>
+                  <p className="text-sm text-muted-foreground mb-4">
+                    Checks for hidden object stream issues, font mismatches, and size variations in your PDFs to keep them authentic.
+                  </p>
+                  <p className="text-sm font-medium text-primary">Status: {result.structureCheck.description}</p>
+                </Card>
+
+                {/* Editor Used */}
+                <Card className="p-6">
+                  <div className="flex items-start justify-between mb-4">
+                    <h4 className="text-lg font-bold text-primary">Editor Used</h4>
+                    <div className="w-3 h-3 rounded-full bg-primary"></div>
+                  </div>
+                  <p className="text-sm text-muted-foreground mb-4">{result.editorUsed.editors}</p>
+                  <p className="text-sm font-medium text-primary">Detected Editors:</p>
+                </Card>
+
+                {/* Digital Signature */}
+                <Card className="p-6">
+                  <div className="flex items-start justify-between mb-4">
+                    <h4 className="text-lg font-bold text-destructive">Digital Signature Validation</h4>
+                    <div className="w-3 h-3 rounded-full bg-destructive"></div>
+                  </div>
+                  <p className="text-sm text-muted-foreground mb-4">
+                    Check digital signatures to ensure the document is trusted.
+                  </p>
+                  <div className="space-y-2 text-sm">
+                    <div>
+                      <span className="text-muted-foreground">Presence: </span>
+                      <span className="text-foreground">{result.digitalSignature.presence}</span>
+                    </div>
+                    <div>
+                      <span className="text-muted-foreground">Authentic: </span>
+                      <span className="text-foreground">{result.digitalSignature.authentic}</span>
+                    </div>
+                  </div>
+                </Card>
+
+                {/* Embedded File Check */}
+                <Card className="p-6">
+                  <div className="flex items-start justify-between mb-4">
+                    <h4 className="text-lg font-bold text-primary">Embedded File Check</h4>
+                    <div className="w-3 h-3 rounded-full bg-primary"></div>
+                  </div>
+                  <p className="text-sm text-muted-foreground mb-4">
+                    Detecting harmful file injections inside PDFs to protect from hidden threats.
+                  </p>
+                  <p className="text-sm font-medium text-primary">Status: {result.embeddedFile.description}</p>
+                </Card>
+              </div>
+
+              {/* Suspected Text */}
+              <Card className="p-6 bg-muted/50">
+                <div className="flex items-start gap-2 mb-4">
+                  <h4 className="text-lg font-bold text-foreground">Suspected Text (Edited)</h4>
+                  <div className="w-3 h-3 rounded-full bg-primary mt-1"></div>
+                </div>
+                <div className="bg-primary/5 border border-primary/20 rounded-lg p-4">
+                  <p className="text-primary font-mono">{result.suspectedText}</p>
+                </div>
+              </Card>
+            </div>
           </Card>
         )}
       </div>

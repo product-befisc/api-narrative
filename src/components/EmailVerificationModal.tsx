@@ -39,6 +39,17 @@ export const EmailVerificationModal = ({ open, onVerified }: EmailVerificationMo
       return;
     }
 
+    // Check if email is from befisc.com domain
+    const domain = email.split('@')[1]?.toLowerCase();
+    if (domain !== 'befisc.com') {
+      toast({
+        title: "Access Restricted",
+        description: "Only @befisc.com emails are allowed. Please contact support@befisc.com for access.",
+        variant: "destructive",
+      });
+      return;
+    }
+
     // Generate random 6-digit OTP
     const newOtp = Math.floor(100000 + Math.random() * 900000).toString();
     setGeneratedOtp(newOtp);

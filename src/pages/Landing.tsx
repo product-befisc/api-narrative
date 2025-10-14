@@ -4,6 +4,7 @@ import { ArrowRight, Shield, TrendingUp, Users, Award } from "lucide-react";
 import logo from '@/assets/BeFiSc_New_Logo.svg';
 import founderPhoto from '@/assets/founder-photo.svg';
 import affordplanLogo from '@/assets/clients/affordplan.svg';
+import arthanFinanceLogo from '@/assets/clients/arthan-finance.svg';
 import bajajLogo from '@/assets/clients/bajaj.svg';
 import bharatxLogo from '@/assets/clients/bharatx.svg';
 import cashrichLogo from '@/assets/clients/cashrich.svg';
@@ -11,7 +12,10 @@ import credflowLogo from '@/assets/clients/credflow.svg';
 import epaylaterLogo from '@/assets/clients/epaylater.svg';
 import eximpeLogo from '@/assets/clients/eximpe.svg';
 import freoLogo from '@/assets/clients/freo.svg';
+import godigitLogo from '@/assets/clients/godigit.svg';
+import healthcredLogo from '@/assets/clients/healthcred.svg';
 import indiamartLogo from '@/assets/clients/indiamart.svg';
+import lendboxLogo from '@/assets/clients/lendbox.svg';
 import muthootLogo from '@/assets/clients/muthoot.svg';
 import naviLogo from '@/assets/clients/navi.svg';
 import niroLogo from '@/assets/clients/niro.svg';
@@ -19,6 +23,7 @@ import quidLogo from '@/assets/clients/quid.svg';
 import rupyaLogo from '@/assets/clients/rupya.svg';
 import sabpaisaLogo from '@/assets/clients/sabpaisa.svg';
 import snapmintLogo from '@/assets/clients/snapmint.svg';
+import varthanaLogo from '@/assets/clients/varthana.svg';
 import vibrantLogo from '@/assets/clients/vibrant.svg';
 import yaperLogo from '@/assets/clients/yaper.svg';
 
@@ -114,6 +119,9 @@ const Landing = () => {
                   { name: "EPay Later", logo: epaylaterLogo },
                   { name: "Snapmint", logo: snapmintLogo },
                   { name: "CashRich", logo: cashrichLogo },
+                  { name: "Arthan Finance", logo: arthanFinanceLogo },
+                  { name: "Lendbox", logo: lendboxLogo },
+                  { name: "Varthana", logo: varthanaLogo },
                 ].map((company, i) => (
                   <div
                     key={i}
@@ -146,10 +154,10 @@ const Landing = () => {
               </div>
               <div className="flex flex-wrap justify-center gap-4 max-w-6xl">
                 {[
-                  { name: "Go Digit Life Insurance", logo: null },
-                  { name: "Go Digit General Insurance", logo: null },
+                  { name: "Go Digit Life Insurance", logo: godigitLogo },
+                  { name: "Go Digit General Insurance", logo: godigitLogo },
                   { name: "First Advisors Insurance", logo: null },
-                  { name: "HealthCred", logo: null },
+                  { name: "HealthCred", logo: healthcredLogo },
                   { name: "Velocity", logo: null },
                   { name: "Freo", logo: freoLogo },
                 ].map((company, i) => (

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeft, Upload, FileText, Camera, Shield, ScanFace, MapPin, CheckCircle, ChevronRight, Palette } from 'lucide-react';
+import { ArrowLeft, Upload, FileText, Camera, Shield, ScanFace, MapPin, CheckCircle, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -48,16 +48,10 @@ const IDVerificationWorkflow = () => {
       icon: MapPin,
       description: 'Verify address details',
     },
-    {
-      id: 7,
-      title: 'Customization',
-      icon: Palette,
-      description: 'White-label with your brand',
-    },
   ];
 
   const handleNextStep = () => {
-    if (activeStep < 7) {
+    if (activeStep < 6) {
       setActiveStep(activeStep + 1);
     }
   };
@@ -93,7 +87,7 @@ const IDVerificationWorkflow = () => {
             <div className="absolute top-6 left-0 right-0 h-0.5 bg-muted -z-10">
               <div 
                 className="h-full bg-primary transition-all duration-500"
-                style={{ width: `${((activeStep - 1) / 6) * 100}%` }}
+                style={{ width: `${((activeStep - 1) / 5) * 100}%` }}
               />
             </div>
 
@@ -380,69 +374,9 @@ const IDVerificationWorkflow = () => {
                     All checks passed successfully
                   </p>
                 </div>
-                <Button onClick={handleNextStep} className="w-full" size="lg">
-                  View Customization Options
-                  <ChevronRight className="ml-2 h-4 w-4" />
+                <Button onClick={() => setActiveStep(1)} variant="outline" className="w-full" size="lg">
+                  Restart Journey
                 </Button>
-              </CardContent>
-            </Card>
-          )}
-
-          {/* Step 7: White-label Customization */}
-          {activeStep === 7 && (
-            <Card className="border-2 border-primary/20">
-              <CardHeader>
-                <div className="flex items-center gap-3 mb-2">
-                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
-                    <Palette className="h-6 w-6 text-primary" />
-                  </div>
-                  <CardTitle className="text-2xl">Step 7: Custom Branding & White-Labeling</CardTitle>
-                </div>
-                <p className="text-muted-foreground">Personalize the verification journey with your brand identity</p>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-6">
-                  <div className="bg-gradient-to-br from-primary/10 to-primary/5 rounded-lg p-8 border-2 border-dashed border-primary/30">
-                    <div className="flex items-start justify-between mb-4">
-                      <div>
-                        <p className="text-lg font-semibold text-foreground mb-2">
-                          Fully Customizable Journey
-                        </p>
-                        <p className="text-muted-foreground text-sm">
-                          This entire verification workflow can be customized with your company's logo, color theme, and branding elements.
-                        </p>
-                      </div>
-                      <div className="w-16 h-16 rounded-lg bg-background border-2 border-dashed border-primary/40 flex items-center justify-center text-xs text-muted-foreground">
-                        Your Logo
-                      </div>
-                    </div>
-                    
-                    <div className="grid grid-cols-3 gap-4 mb-4">
-                      <div className="bg-background rounded-lg p-3 text-center">
-                        <div className="w-8 h-8 rounded-full bg-primary/20 mx-auto mb-2"></div>
-                        <p className="text-xs text-muted-foreground">Brand Colors</p>
-                      </div>
-                      <div className="bg-background rounded-lg p-3 text-center">
-                        <Palette className="w-8 h-8 text-primary mx-auto mb-2" />
-                        <p className="text-xs text-muted-foreground">Custom Theme</p>
-                      </div>
-                      <div className="bg-background rounded-lg p-3 text-center">
-                        <FileText className="w-8 h-8 text-primary mx-auto mb-2" />
-                        <p className="text-xs text-muted-foreground">Custom Text</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="text-center py-4">
-                    <p className="text-sm text-muted-foreground">
-                      Powered by <span className="font-semibold text-primary">SmartAuth ID Verification</span>
-                    </p>
-                  </div>
-
-                  <Button onClick={() => setActiveStep(1)} variant="outline" className="w-full" size="lg">
-                    Restart Journey
-                  </Button>
-                </div>
               </CardContent>
             </Card>
           )}

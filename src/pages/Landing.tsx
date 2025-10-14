@@ -60,8 +60,6 @@ const Landing = () => {
     setShowVerification(false);
   };
 
-  const quickFacts = ["3.5 Mn ARR", "ISO Certified", "30M+ API Calls / Month", "99.99% Uptime", "FinTech CX Awardee"];
-
   return (
     <div className="min-h-screen bg-background relative">
       {/* Email Verification Modal */}
@@ -98,15 +96,78 @@ const Landing = () => {
           <p className="mb-8 text-xl text-muted-foreground max-w-2xl mx-auto">
             Built to make fraud detection effortless.
           </p>
+        </div>
+      </section>
 
-          {/* Quick Facts Bar */}
-          <div className="flex flex-wrap justify-center gap-4 items-center text-sm text-muted-foreground">
-            {quickFacts.map((fact, index) => (
-              <div key={index} className="flex items-center gap-4 animate-fade-in" style={{ animationDelay: `${index * 0.15}s` }}>
-                <span className="font-semibold px-4 py-2 rounded-lg bg-card/50 border border-primary/20 hover:border-primary/40 hover:bg-card/80 transition-all duration-300 hover:scale-105 hover:shadow-lg">{fact}</span>
-                {index < quickFacts.length - 1 && <div className="w-px h-4 bg-border" />}
+      {/* Stats Showcase Section */}
+      <section className="py-24 bg-gradient-to-b from-background via-primary/5 to-background relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-radial from-primary/10 via-transparent to-transparent opacity-50"></div>
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="max-w-6xl mx-auto">
+            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4 md:gap-6">
+              {/* 3.5 Mn ARR */}
+              <div className="group relative bg-gradient-to-br from-card via-card to-primary/5 rounded-2xl p-6 border border-primary/20 hover:border-primary/60 hover:shadow-2xl hover:shadow-primary/20 transition-all duration-300 hover:-translate-y-2 backdrop-blur-sm">
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/0 to-primary/10 opacity-0 group-hover:opacity-100 rounded-2xl transition-opacity duration-300"></div>
+                <div className="relative z-10">
+                  <div className="text-3xl md:text-4xl font-black bg-gradient-to-br from-primary via-primary to-primary/60 bg-clip-text text-transparent mb-2">3.5M</div>
+                  <div className="text-xs md:text-sm font-semibold text-muted-foreground uppercase tracking-wider">ARR</div>
+                </div>
               </div>
-            ))}
+
+              {/* ISO Certified */}
+              <div className="group relative bg-gradient-to-br from-card via-card to-success/5 rounded-2xl p-6 border border-success/20 hover:border-success/60 hover:shadow-2xl hover:shadow-success/20 transition-all duration-300 hover:-translate-y-2 backdrop-blur-sm">
+                <div className="absolute inset-0 bg-gradient-to-br from-success/0 to-success/10 opacity-0 group-hover:opacity-100 rounded-2xl transition-opacity duration-300"></div>
+                <div className="relative z-10">
+                  <div className="text-3xl md:text-4xl font-black bg-gradient-to-br from-success via-success to-success/60 bg-clip-text text-transparent mb-2">ISO</div>
+                  <div className="text-xs md:text-sm font-semibold text-muted-foreground uppercase tracking-wider">Certified</div>
+                </div>
+              </div>
+
+              {/* 30M+ API Calls / Month */}
+              <div className="group relative bg-gradient-to-br from-card via-card to-info/5 rounded-2xl p-6 border border-info/20 hover:border-info/60 hover:shadow-2xl hover:shadow-info/20 transition-all duration-300 hover:-translate-y-2 backdrop-blur-sm">
+                <div className="absolute inset-0 bg-gradient-to-br from-info/0 to-info/10 opacity-0 group-hover:opacity-100 rounded-2xl transition-opacity duration-300"></div>
+                <div className="relative z-10">
+                  <div className="text-3xl md:text-4xl font-black bg-gradient-to-br from-info via-info to-info/60 bg-clip-text text-transparent mb-2">30M+</div>
+                  <div className="text-xs md:text-sm font-semibold text-muted-foreground uppercase tracking-wider">API Calls</div>
+                </div>
+              </div>
+
+              {/* 99.99% Uptime */}
+              <div className="group relative bg-gradient-to-br from-card via-card to-warning/5 rounded-2xl p-6 border border-warning/20 hover:border-warning/60 hover:shadow-2xl hover:shadow-warning/20 transition-all duration-300 hover:-translate-y-2 backdrop-blur-sm">
+                <div className="absolute inset-0 bg-gradient-to-br from-warning/0 to-warning/10 opacity-0 group-hover:opacity-100 rounded-2xl transition-opacity duration-300"></div>
+                <div className="relative z-10">
+                  <div className="text-3xl md:text-4xl font-black bg-gradient-to-br from-warning via-warning to-warning/60 bg-clip-text text-transparent mb-2">99.99%</div>
+                  <div className="text-xs md:text-sm font-semibold text-muted-foreground uppercase tracking-wider">Uptime</div>
+                </div>
+              </div>
+
+              {/* FinTech CX Awardee */}
+              <div className="group relative bg-gradient-to-br from-card via-card to-accent/5 rounded-2xl p-6 border border-accent/20 hover:border-accent/60 hover:shadow-2xl hover:shadow-accent/20 transition-all duration-300 hover:-translate-y-2 backdrop-blur-sm">
+                <div className="absolute inset-0 bg-gradient-to-br from-accent/0 to-accent/10 opacity-0 group-hover:opacity-100 rounded-2xl transition-opacity duration-300"></div>
+                <div className="relative z-10">
+                  <div className="text-2xl md:text-3xl font-black bg-gradient-to-br from-accent via-accent to-accent/60 bg-clip-text text-transparent mb-2">CX</div>
+                  <div className="text-xs md:text-sm font-semibold text-muted-foreground uppercase tracking-wider">Awardee</div>
+                </div>
+              </div>
+
+              {/* 150+ Services */}
+              <div className="group relative bg-gradient-to-br from-card via-card to-primary/5 rounded-2xl p-6 border border-primary/20 hover:border-primary/60 hover:shadow-2xl hover:shadow-primary/20 transition-all duration-300 hover:-translate-y-2 backdrop-blur-sm">
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/0 to-primary/10 opacity-0 group-hover:opacity-100 rounded-2xl transition-opacity duration-300"></div>
+                <div className="relative z-10">
+                  <div className="text-3xl md:text-4xl font-black bg-gradient-to-br from-primary via-primary to-primary/60 bg-clip-text text-transparent mb-2">150+</div>
+                  <div className="text-xs md:text-sm font-semibold text-muted-foreground uppercase tracking-wider">Services</div>
+                </div>
+              </div>
+
+              {/* 140+ Clients */}
+              <div className="group relative bg-gradient-to-br from-card via-card to-secondary/5 rounded-2xl p-6 border border-secondary/20 hover:border-secondary/60 hover:shadow-2xl hover:shadow-secondary/20 transition-all duration-300 hover:-translate-y-2 backdrop-blur-sm">
+                <div className="absolute inset-0 bg-gradient-to-br from-secondary/0 to-secondary/10 opacity-0 group-hover:opacity-100 rounded-2xl transition-opacity duration-300"></div>
+                <div className="relative z-10">
+                  <div className="text-3xl md:text-4xl font-black bg-gradient-to-br from-secondary via-secondary to-secondary/60 bg-clip-text text-transparent mb-2">140+</div>
+                  <div className="text-xs md:text-sm font-semibold text-muted-foreground uppercase tracking-wider">Clients</div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -354,41 +415,6 @@ const Landing = () => {
         </div>
       </section>
 
-      {/* Performance Section */}
-      <section className="py-20 bg-background">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-foreground mb-4">Performance isn't a promise. It's proof.</h2>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-6 max-w-5xl mx-auto mb-8">
-            <div className="bg-muted rounded-xl p-6 text-center border border-border">
-              <div className="text-4xl font-bold text-primary mb-2">30M+</div>
-              <div className="text-sm text-muted-foreground">API Calls / Month</div>
-            </div>
-            <div className="bg-muted rounded-xl p-6 text-center border border-border">
-              <div className="text-4xl font-bold text-primary mb-2">150+</div>
-              <div className="text-sm text-muted-foreground">Formats</div>
-            </div>
-            <div className="bg-muted rounded-xl p-6 text-center border border-border">
-              <div className="text-4xl font-bold text-primary mb-2">99.99%</div>
-              <div className="text-sm text-muted-foreground">Uptime</div>
-            </div>
-            <div className="bg-muted rounded-xl p-6 text-center border border-border">
-              <div className="text-4xl font-bold text-primary mb-2">3s</div>
-              <div className="text-sm text-muted-foreground">Avg Response</div>
-            </div>
-            <div className="bg-muted rounded-xl p-6 text-center border border-border">
-              <div className="text-4xl font-bold text-primary mb-2">98.2%</div>
-              <div className="text-sm text-muted-foreground">OCR Accuracy</div>
-            </div>
-          </div>
-
-          <p className="text-center text-muted-foreground text-lg">
-            Accuracy, speed, and security; built in from day one.
-          </p>
-        </div>
-      </section>
 
       {/* CTA Section */}
       <section className="py-20 bg-background">

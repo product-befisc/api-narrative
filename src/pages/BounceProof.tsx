@@ -9,25 +9,25 @@ import Navbar from '@/components/Navbar';
 
 const BounceProof = () => {
   const navigate = useNavigate();
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState('john.doe@gmail.com');
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<any>(null);
 
   const handleVerify = () => {
     // Auto-populate email if empty
     if (!email) {
-      setEmail('gaurav@befisc.com');
+      setEmail('john.doe@gmail.com');
     }
     setLoading(true);
     setTimeout(() => {
       setResult({
-        email: email || 'gaurav@befisc.com',
+        email: email || 'john.doe@gmail.com',
         reason: 'Safe',
         domain: 'Active',
         mxFound: true,
-        firstName: 'Gaurav',
-        lastName: 'Bhardwaj',
-        companyName: 'Befisc',
+        firstName: 'John',
+        lastName: 'Doe',
+        companyName: 'Example Corp',
       });
       setLoading(false);
     }, 1500);

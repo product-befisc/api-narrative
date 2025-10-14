@@ -16,15 +16,11 @@ export const EmailVerificationModal = ({ open, onVerified }: EmailVerificationMo
   const [otp, setOtp] = useState(["", "", "", "", "", ""]);
   const [resendTimer, setResendTimer] = useState(0);
   const [isVerifying, setIsVerifying] = useState(false);
-  const [isSending, setIsSending] = useState(false);
-  const [token, setToken] = useState("");
   const otpRefs = useRef<(HTMLInputElement | null)[]>([]);
   const { toast } = useToast();
 
-  const API_URL = "https://7xyx6aw7jes7vfkec2humb7spm0ibcqx.lambda-url.ap-south-1.on.aws/";
-
-  // Base64 encode email
-  const encodeEmail = (email: string) => btoa(email);
+  // Simulated OTP for demo purposes
+  const [generatedOtp, setGeneratedOtp] = useState("");
 
   useEffect(() => {
     if (resendTimer > 0) {
@@ -33,7 +29,7 @@ export const EmailVerificationModal = ({ open, onVerified }: EmailVerificationMo
     }
   }, [resendTimer]);
 
-  const handleSendOtp = async () => {
+  const handleSendOtp = () => {
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       toast({
         title: "Invalid Email",
@@ -43,70 +39,18 @@ export const EmailVerificationModal = ({ open, onVerified }: EmailVerificationMo
       return;
     }
 
-    setIsSending(true);
+    // Generate random 6-digit OTP
+    const newOtp = Math.floor(100000 + Math.random() * 900000).toString();
+    setGeneratedOtp(newOtp);
+    
+    toast({
+      title: "OTP Sent!",
+      description: `Verification code sent to ${email}. (Demo: ${newOtp})`,
+    });
 
-    try {
-      // Step 1: Generate OTP
-      const encodedEmail = encodeEmail(email);
-      const generateResponse = await fetch(API_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          action: "GENERATE_OTP",
-          email: encodedEmail,
-        }),
-      });
-
-      if (!generateResponse.ok) {
-        throw new Error("Failed to send OTP");
-      }
-
-      const generateData = await generateResponse.json();
-      const otpToken = generateData.token;
-
-      if (!otpToken) {
-        throw new Error("No token received");
-      }
-
-      // Step 2: Validate OTP Token (silent)
-      const validateResponse = await fetch(API_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          action: "VALIDATE_OTP_TOKEN",
-          token: otpToken,
-        }),
-      });
-
-      if (!validateResponse.ok) {
-        throw new Error("Token validation failed");
-      }
-
-      const validateData = await validateResponse.json();
-      
-      if (!validateData.valid) {
-        throw new Error("Session expired, please try again");
-      }
-
-      // Success - store token and move to OTP entry
-      setToken(otpToken);
-      toast({
-        title: "OTP Sent!",
-        description: `Verification code sent to ${email}`,
-      });
-
-      setStep("otp");
-      setResendTimer(60);
-      setTimeout(() => otpRefs.current[0]?.focus(), 100);
-    } catch (error) {
-      toast({
-        title: "Error",
-        description: error instanceof Error ? error.message : "Failed to send OTP. Please try again.",
-        variant: "destructive",
-      });
-    } finally {
-      setIsSending(false);
-    }
+    setStep("otp");
+    setResendTimer(30);
+    setTimeout(() => otpRefs.current[0]?.focus(), 100);
   };
 
   const handleResendOtp = () => {
@@ -134,56 +78,28 @@ export const EmailVerificationModal = ({ open, onVerified }: EmailVerificationMo
     }
   };
 
-  const handleVerifyOtp = async () => {
+  const handleVerifyOtp = () => {
     setIsVerifying(true);
     const enteredOtp = otp.join("");
 
-    try {
-      // Step 3: Verify OTP
-      const encodedEmail = encodeEmail(email);
-      const verifyResponse = await fetch(API_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          action: "VALIDATE_OTP",
-          email: encodedEmail,
-          token: token,
-          otp: enteredOtp,
-        }),
-      });
-
-      if (!verifyResponse.ok) {
-        throw new Error("Failed to verify OTP");
-      }
-
-      const verifyData = await verifyResponse.json();
-
-      if (verifyData.valid) {
-        // Store session token
-        if (verifyData.sessionToken) {
-          sessionStorage.setItem("befiscSessionToken", verifyData.sessionToken);
-        }
-        
+    setTimeout(() => {
+      if (enteredOtp === generatedOtp) {
         toast({
-          title: "✨ Verification Successful!",
+          title: "Verification Successful!",
           description: "Welcome to BeFiSc",
         });
-        
         onVerified();
       } else {
-        throw new Error("Invalid OTP");
+        toast({
+          title: "Invalid OTP",
+          description: "Please check the code and try again",
+          variant: "destructive",
+        });
+        setOtp(["", "", "", "", "", ""]);
+        otpRefs.current[0]?.focus();
       }
-    } catch (error) {
-      toast({
-        title: "Invalid OTP",
-        description: error instanceof Error ? error.message : "Please check the code and try again",
-        variant: "destructive",
-      });
-      setOtp(["", "", "", "", "", ""]);
-      otpRefs.current[0]?.focus();
-    } finally {
       setIsVerifying(false);
-    }
+    }, 1000);
   };
 
   return (
@@ -231,10 +147,9 @@ export const EmailVerificationModal = ({ open, onVerified }: EmailVerificationMo
 
                 <Button
                   onClick={handleSendOtp}
-                  disabled={isSending}
-                  className="w-full h-12 text-base bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full h-12 text-base bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
                 >
-                  {isSending ? "Sending OTP to your email..." : "Send OTP"}
+                  Send OTP
                 </Button>
               </div>
             </>

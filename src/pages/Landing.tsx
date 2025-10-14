@@ -103,76 +103,76 @@ const Landing = () => {
       <section className="py-24 bg-muted/30">
         <div className="container mx-auto px-4">
           <div className="max-w-7xl mx-auto">
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-9 gap-4 md:gap-6">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6">
               {/* 3.5 Mn ARR */}
               <div className="group relative bg-background/60 backdrop-blur-sm rounded-2xl p-6 border border-border/50 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 hover:-translate-y-1">
-                <div className="text-center">
+                <div className="flex flex-col items-center justify-center h-full min-h-[100px]">
                   <div className="text-3xl md:text-4xl font-bold text-primary mb-2">3.5M</div>
-                  <div className="text-xs md:text-sm font-medium text-muted-foreground uppercase tracking-wide">ARR</div>
+                  <div className="text-xs font-medium text-muted-foreground uppercase tracking-wide text-center">ARR</div>
                 </div>
               </div>
 
               {/* ISO Certified */}
               <div className="group relative bg-background/60 backdrop-blur-sm rounded-2xl p-6 border border-border/50 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 hover:-translate-y-1">
-                <div className="text-center">
+                <div className="flex flex-col items-center justify-center h-full min-h-[100px]">
                   <div className="text-3xl md:text-4xl font-bold text-primary mb-2">ISO</div>
-                  <div className="text-xs md:text-sm font-medium text-muted-foreground uppercase tracking-wide">Certified</div>
+                  <div className="text-xs font-medium text-muted-foreground uppercase tracking-wide text-center">Certified</div>
                 </div>
               </div>
 
               {/* 30M+ API Calls */}
               <div className="group relative bg-background/60 backdrop-blur-sm rounded-2xl p-6 border border-border/50 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 hover:-translate-y-1">
-                <div className="text-center">
+                <div className="flex flex-col items-center justify-center h-full min-h-[100px]">
                   <div className="text-3xl md:text-4xl font-bold text-primary mb-2">30M+</div>
-                  <div className="text-xs md:text-sm font-medium text-muted-foreground uppercase tracking-wide">API Calls</div>
+                  <div className="text-xs font-medium text-muted-foreground uppercase tracking-wide text-center leading-tight">API Calls<br />/ Month</div>
                 </div>
               </div>
 
               {/* 99.99% Uptime */}
               <div className="group relative bg-background/60 backdrop-blur-sm rounded-2xl p-6 border border-border/50 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 hover:-translate-y-1">
-                <div className="text-center">
+                <div className="flex flex-col items-center justify-center h-full min-h-[100px]">
                   <div className="text-3xl md:text-4xl font-bold text-primary mb-2">99.99%</div>
-                  <div className="text-xs md:text-sm font-medium text-muted-foreground uppercase tracking-wide">Uptime</div>
+                  <div className="text-xs font-medium text-muted-foreground uppercase tracking-wide text-center">Uptime</div>
                 </div>
               </div>
 
               {/* FinTech CX Awardee */}
               <div className="group relative bg-background/60 backdrop-blur-sm rounded-2xl p-6 border border-border/50 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 hover:-translate-y-1">
-                <div className="text-center">
-                  <div className="text-2xl md:text-3xl font-bold text-primary mb-2">CX</div>
-                  <div className="text-xs md:text-sm font-medium text-muted-foreground uppercase tracking-wide">Awardee</div>
+                <div className="flex flex-col items-center justify-center h-full min-h-[100px]">
+                  <div className="text-2xl md:text-3xl font-bold text-primary mb-2">FinTech</div>
+                  <div className="text-xs font-medium text-muted-foreground uppercase tracking-wide text-center leading-tight">CX<br />Awardee</div>
                 </div>
               </div>
 
               {/* 150+ Services */}
               <div className="group relative bg-background/60 backdrop-blur-sm rounded-2xl p-6 border border-border/50 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 hover:-translate-y-1">
-                <div className="text-center">
+                <div className="flex flex-col items-center justify-center h-full min-h-[100px]">
                   <div className="text-3xl md:text-4xl font-bold text-primary mb-2">150+</div>
-                  <div className="text-xs md:text-sm font-medium text-muted-foreground uppercase tracking-wide">Services</div>
+                  <div className="text-xs font-medium text-muted-foreground uppercase tracking-wide text-center">Services</div>
                 </div>
               </div>
 
               {/* 140+ Clients */}
               <div className="group relative bg-background/60 backdrop-blur-sm rounded-2xl p-6 border border-border/50 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 hover:-translate-y-1">
-                <div className="text-center">
+                <div className="flex flex-col items-center justify-center h-full min-h-[100px]">
                   <div className="text-3xl md:text-4xl font-bold text-primary mb-2">140+</div>
-                  <div className="text-xs md:text-sm font-medium text-muted-foreground uppercase tracking-wide">Clients</div>
+                  <div className="text-xs font-medium text-muted-foreground uppercase tracking-wide text-center">Clients</div>
                 </div>
               </div>
 
               {/* 3s Avg Response */}
               <div className="group relative bg-background/60 backdrop-blur-sm rounded-2xl p-6 border border-border/50 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 hover:-translate-y-1">
-                <div className="text-center">
+                <div className="flex flex-col items-center justify-center h-full min-h-[100px]">
                   <div className="text-3xl md:text-4xl font-bold text-primary mb-2">3s</div>
-                  <div className="text-xs md:text-sm font-medium text-muted-foreground uppercase tracking-wide">Avg Response</div>
+                  <div className="text-xs font-medium text-muted-foreground uppercase tracking-wide text-center leading-tight">Avg<br />Response</div>
                 </div>
               </div>
 
               {/* 98.2% OCR Accuracy */}
               <div className="group relative bg-background/60 backdrop-blur-sm rounded-2xl p-6 border border-border/50 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 hover:-translate-y-1">
-                <div className="text-center">
+                <div className="flex flex-col items-center justify-center h-full min-h-[100px]">
                   <div className="text-3xl md:text-4xl font-bold text-primary mb-2">98.2%</div>
-                  <div className="text-xs md:text-sm font-medium text-muted-foreground uppercase tracking-wide">OCR Accuracy</div>
+                  <div className="text-xs font-medium text-muted-foreground uppercase tracking-wide text-center leading-tight">OCR<br />Accuracy</div>
                 </div>
               </div>
             </div>

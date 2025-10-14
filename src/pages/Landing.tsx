@@ -1,17 +1,11 @@
-import { useNavigate } from 'react-router-dom';
-import { Button } from '@/components/ui/button';
-import { ArrowRight, Shield, TrendingUp, Users, Award } from 'lucide-react';
+import { useNavigate } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { ArrowRight, Shield, TrendingUp, Users, Award } from "lucide-react";
 
 const Landing = () => {
   const navigate = useNavigate();
 
-  const quickFacts = [
-    '3.5 Mn ARR',
-    'ISO Certified',
-    '20M+ API Calls / Month',
-    '99.99% Uptime',
-    'FinTech CX Awardee'
-  ];
+  const quickFacts = ["3.5 Mn ARR", "ISO Certified", "30M+ API Calls / Month", "99.99% Uptime", "FinTech CX Awardee"];
 
   return (
     <div className="min-h-screen bg-background">
@@ -35,25 +29,19 @@ const Landing = () => {
           <svg className="h-full w-full" xmlns="http://www.w3.org/2000/svg">
             <defs>
               <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-                <path d="M 40 0 L 0 0 0 40" fill="none" stroke="currentColor" strokeWidth="0.5"/>
+                <path d="M 40 0 L 0 0 0 40" fill="none" stroke="currentColor" strokeWidth="0.5" />
               </pattern>
             </defs>
             <rect width="100%" height="100%" fill="url(#grid)" />
           </svg>
         </div>
-        
+
         <div className="container relative mx-auto px-4 text-center">
-          <h1 className="mb-6 text-6xl font-bold text-foreground">
-            Beyond Financial Score
-          </h1>
+          <h1 className="mb-6 text-6xl font-bold text-foreground">Beyond Financial Score</h1>
           <p className="mb-8 text-xl text-muted-foreground max-w-2xl mx-auto">
             Built to make fraud detection effortless.
           </p>
-          <Button 
-            size="lg" 
-            className="h-14 px-8 text-lg mb-12"
-            onClick={() => navigate('/home')}
-          >
+          <Button size="lg" className="h-14 px-8 text-lg mb-12" onClick={() => navigate("/home")}>
             Get Started
             <ArrowRight className="ml-2 h-5 w-5" />
           </Button>
@@ -63,9 +51,7 @@ const Landing = () => {
             {quickFacts.map((fact, index) => (
               <div key={index} className="flex items-center gap-4">
                 <span className="font-medium">{fact}</span>
-                {index < quickFacts.length - 1 && (
-                  <div className="w-px h-4 bg-border" />
-                )}
+                {index < quickFacts.length - 1 && <div className="w-px h-4 bg-border" />}
               </div>
             ))}
           </div>
@@ -78,9 +64,9 @@ const Landing = () => {
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-4xl font-bold text-foreground mb-6">About BeFiSc</h2>
             <p className="text-lg text-muted-foreground leading-relaxed">
-              Founded in 2022, BeFiSc builds technology that helps companies trust what they see. 
-              We specialize in fraud detection, identity verification, and document intelligence — 
-              empowering businesses to make confident decisions with AI-powered verification tools.
+              Founded in 2023, BeFiSc builds technology that helps companies trust what they see. We specialize in fraud
+              detection, identity verification, and document intelligence — empowering businesses to make confident
+              decisions with AI-powered verification tools.
             </p>
           </div>
         </div>
@@ -93,9 +79,10 @@ const Landing = () => {
             Trusted by the World's Most Dependable Businesses
           </h2>
           <p className="text-center text-muted-foreground mb-16 max-w-3xl mx-auto">
-            BeFiSc partners with leading organizations across lending, fintech, and verification ecosystems to power real-time trust.
+            BeFiSc partners with leading organizations across lending, fintech, and verification ecosystems to power
+            real-time trust.
           </p>
-          
+
           {/* Row 1 - NBFC & Lending (Widest - 8 companies) */}
           <div className="mb-12 animate-fade-in">
             <div className="flex items-center justify-center gap-8 pb-6">
@@ -107,17 +94,17 @@ const Landing = () => {
               </div>
               <div className="flex flex-wrap justify-center gap-4 max-w-7xl">
                 {[
-                  'Bajaj Finserv',
-                  'Muthoot Capital',
-                  'Navi',
-                  'Varthana',
-                  'Lendbox',
-                  'Arthan Finance',
-                  'Cashflo',
-                  'Snapmint'
+                  "Bajaj Finserv",
+                  "Muthoot Capital",
+                  "Navi",
+                  "Varthana",
+                  "Lendbox",
+                  "Arthan Finance",
+                  "Cashflo",
+                  "Snapmint",
                 ].map((company, i) => (
-                  <div 
-                    key={i} 
+                  <div
+                    key={i}
                     className="flex items-center gap-3 bg-card rounded-xl px-6 py-4 border border-border hover:border-primary hover:scale-105 transition-all shadow-sm hover:shadow-md"
                     style={{ animationDelay: `${i * 0.1}s` }}
                   >
@@ -133,7 +120,7 @@ const Landing = () => {
           </div>
 
           {/* Row 2 - Insurance & Wealth (7 companies) */}
-          <div className="mb-12 animate-fade-in" style={{ animationDelay: '0.2s' }}>
+          <div className="mb-12 animate-fade-in" style={{ animationDelay: "0.2s" }}>
             <div className="flex items-center justify-center gap-8 pb-6">
               <div className="text-left">
                 <h3 className="text-sm font-semibold text-primary uppercase tracking-wide whitespace-nowrap mb-2">
@@ -143,16 +130,16 @@ const Landing = () => {
               </div>
               <div className="flex flex-wrap justify-center gap-4 max-w-6xl">
                 {[
-                  'Go Digit Life Insurance',
-                  'Go Digit General Insurance',
-                  'First Advisors Insurance',
-                  'Mufkam Insurance Marketing',
-                  'HealthCred',
-                  'Velocity',
-                  'Freo'
+                  "Go Digit Life Insurance",
+                  "Go Digit General Insurance",
+                  "First Advisors Insurance",
+                  "Mufkam Insurance Marketing",
+                  "HealthCred",
+                  "Velocity",
+                  "Freo",
                 ].map((company, i) => (
-                  <div 
-                    key={i} 
+                  <div
+                    key={i}
                     className="flex items-center gap-3 bg-card rounded-xl px-6 py-4 border border-border hover:border-primary hover:scale-105 transition-all shadow-sm hover:shadow-md"
                     style={{ animationDelay: `${(i + 8) * 0.1}s` }}
                   >
@@ -168,7 +155,7 @@ const Landing = () => {
           </div>
 
           {/* Row 3 - Fintechs (6 companies) */}
-          <div className="mb-12 animate-fade-in" style={{ animationDelay: '0.4s' }}>
+          <div className="mb-12 animate-fade-in" style={{ animationDelay: "0.4s" }}>
             <div className="flex items-center justify-center gap-8 pb-6">
               <div className="text-left">
                 <h3 className="text-sm font-semibold text-primary uppercase tracking-wide whitespace-nowrap mb-2">
@@ -177,16 +164,9 @@ const Landing = () => {
                 <div className="h-0.5 w-24 bg-gradient-to-r from-primary to-transparent"></div>
               </div>
               <div className="flex flex-wrap justify-center gap-4 max-w-5xl">
-                {[
-                  'FinBox',
-                  'Paytail',
-                  'MoneyWide',
-                  'Indiamart',
-                  'Proptension',
-                  'Voorent'
-                ].map((company, i) => (
-                  <div 
-                    key={i} 
+                {["FinBox", "Paytail", "MoneyWide", "Indiamart", "Proptension", "Voorent"].map((company, i) => (
+                  <div
+                    key={i}
                     className="flex items-center gap-3 bg-card rounded-xl px-6 py-4 border border-border hover:border-primary hover:scale-105 transition-all shadow-sm hover:shadow-md"
                     style={{ animationDelay: `${(i + 15) * 0.1}s` }}
                   >
@@ -202,7 +182,7 @@ const Landing = () => {
           </div>
 
           {/* Row 4 - Marketplaces (5 companies) */}
-          <div className="mb-12 animate-fade-in" style={{ animationDelay: '0.6s' }}>
+          <div className="mb-12 animate-fade-in" style={{ animationDelay: "0.6s" }}>
             <div className="flex items-center justify-center gap-8 pb-6">
               <div className="text-left">
                 <h3 className="text-sm font-semibold text-primary uppercase tracking-wide whitespace-nowrap mb-2">
@@ -211,31 +191,27 @@ const Landing = () => {
                 <div className="h-0.5 w-24 bg-gradient-to-r from-primary to-transparent"></div>
               </div>
               <div className="flex flex-wrap justify-center gap-4 max-w-4xl">
-                {[
-                  'Ratify Global',
-                  'Human Crayon',
-                  'Gaadi Booking',
-                  'Ongrid',
-                  '4SL Background Check'
-                ].map((company, i) => (
-                  <div 
-                    key={i} 
-                    className="flex items-center gap-3 bg-card rounded-xl px-6 py-4 border border-border hover:border-primary hover:scale-105 transition-all shadow-sm hover:shadow-md"
-                    style={{ animationDelay: `${(i + 21) * 0.1}s` }}
-                  >
-                    <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center flex-shrink-0">
-                      <Users className="w-6 h-6 text-muted-foreground" />
+                {["Ratify Global", "Human Crayon", "Gaadi Booking", "Ongrid", "4SL Background Check"].map(
+                  (company, i) => (
+                    <div
+                      key={i}
+                      className="flex items-center gap-3 bg-card rounded-xl px-6 py-4 border border-border hover:border-primary hover:scale-105 transition-all shadow-sm hover:shadow-md"
+                      style={{ animationDelay: `${(i + 21) * 0.1}s` }}
+                    >
+                      <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center flex-shrink-0">
+                        <Users className="w-6 h-6 text-muted-foreground" />
+                      </div>
+                      <span className="font-medium text-foreground whitespace-nowrap">{company}</span>
                     </div>
-                    <span className="font-medium text-foreground whitespace-nowrap">{company}</span>
-                  </div>
-                ))}
+                  ),
+                )}
               </div>
             </div>
             <div className="h-px bg-gradient-to-r from-border via-primary/30 to-border max-w-4xl mx-auto"></div>
           </div>
 
           {/* Row 5 - Verification & HR (Narrowest - 4 companies) */}
-          <div className="animate-fade-in" style={{ animationDelay: '0.8s' }}>
+          <div className="animate-fade-in" style={{ animationDelay: "0.8s" }}>
             <div className="flex items-center justify-center gap-8 pb-6">
               <div className="text-left">
                 <h3 className="text-sm font-semibold text-primary uppercase tracking-wide whitespace-nowrap mb-2">
@@ -244,14 +220,9 @@ const Landing = () => {
                 <div className="h-0.5 w-24 bg-gradient-to-r from-primary to-transparent"></div>
               </div>
               <div className="flex flex-wrap justify-center gap-4 max-w-3xl">
-                {[
-                  'AMS Inform',
-                  'Verification Street',
-                  'SecureSearch',
-                  'VeriProbus'
-                ].map((company, i) => (
-                  <div 
-                    key={i} 
+                {["AMS Inform", "Verification Street", "SecureSearch", "VeriProbus"].map((company, i) => (
+                  <div
+                    key={i}
                     className="flex items-center gap-3 bg-card rounded-xl px-6 py-4 border border-border hover:border-primary hover:scale-105 transition-all shadow-sm hover:shadow-md"
                     style={{ animationDelay: `${(i + 26) * 0.1}s` }}
                   >
@@ -294,11 +265,9 @@ const Landing = () => {
       <section className="py-20 bg-background">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-foreground mb-4">
-              Performance isn't a promise. It's proof.
-            </h2>
+            <h2 className="text-4xl font-bold text-foreground mb-4">Performance isn't a promise. It's proof.</h2>
           </div>
-          
+
           <div className="grid grid-cols-2 md:grid-cols-5 gap-6 max-w-5xl mx-auto mb-8">
             <div className="bg-muted rounded-xl p-6 text-center border border-border">
               <div className="text-4xl font-bold text-primary mb-2">20M+</div>
@@ -321,7 +290,7 @@ const Landing = () => {
               <div className="text-sm text-muted-foreground">OCR Accuracy</div>
             </div>
           </div>
-          
+
           <p className="text-center text-muted-foreground text-lg">
             Accuracy, speed, and security; built in from day one.
           </p>
@@ -331,9 +300,7 @@ const Landing = () => {
       {/* Footer */}
       <footer className="border-t border-border py-8 bg-muted">
         <div className="container mx-auto px-4 text-center">
-          <p className="text-muted-foreground">
-            © 2025 BeFiSc. All rights reserved.
-          </p>
+          <p className="text-muted-foreground">© 2025 BeFiSc. All rights reserved.</p>
         </div>
       </footer>
     </div>

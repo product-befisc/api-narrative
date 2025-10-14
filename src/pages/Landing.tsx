@@ -241,8 +241,6 @@ const Landing = () => {
               <div className="flex flex-wrap justify-center gap-4 max-w-4xl">
                 {[
                   { name: "Indiamart", logo: indiamartLogo },
-                  { name: "Ratify Global", logo: null },
-                  { name: "Human Crayon", logo: null },
                   { name: "Gaadi Booking", logo: gaadiBookingLogo },
                   { name: "Ongrid", logo: ongridLogo },
                   { name: "4SL Background Check", logo: fourSlLogo },

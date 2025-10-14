@@ -38,10 +38,6 @@ const Landing = () => {
           <p className="mb-8 text-xl text-muted-foreground max-w-2xl mx-auto">
             Built to make fraud detection effortless.
           </p>
-          <Button size="lg" className="h-14 px-8 text-lg mb-12" onClick={() => navigate("/home")}>
-            Get Started
-            <ArrowRight className="ml-2 h-5 w-5" />
-          </Button>
 
           {/* Quick Facts Bar */}
           <div className="flex flex-wrap justify-center gap-4 items-center text-sm text-muted-foreground">
@@ -291,6 +287,16 @@ const Landing = () => {
           <p className="text-center text-muted-foreground text-lg">
             Accuracy, speed, and security; built in from day one.
           </p>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20 bg-background">
+        <div className="container mx-auto px-4 text-center">
+          <Button size="lg" className="h-14 px-8 text-lg" onClick={() => navigate("/home")}>
+            Get Started
+            <ArrowRight className="ml-2 h-5 w-5" />
+          </Button>
         </div>
       </section>
 

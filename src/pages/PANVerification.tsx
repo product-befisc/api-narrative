@@ -11,14 +11,14 @@ import { maskData, maskEmail, maskPhone } from "@/lib/utils";
 
 const PANVerification = () => {
   const navigate = useNavigate();
-  const [panNumber, setPanNumber] = useState("ABCDE1234F");
+  const [panNumber, setPanNumber] = useState("AAAPA1234A");
   const [responseData, setResponseData] = useState<any>(null);
   const [loading, setLoading] = useState(false);
   const [showData, setShowData] = useState(false);
   const [consent, setConsent] = useState(true);
 
   const mockResponse = {
-    pan: "ABCDE1234F",
+    pan: "AAAPA1234A",
     full_name: "Rajesh Kumar Sharma",
     first_name: "Rajesh",
     middle_name: "Kumar",
@@ -82,7 +82,7 @@ const PANVerification = () => {
           <Card>
             <CardHeader>
               <CardTitle>Enter PAN Number</CardTitle>
-              <CardDescription>Format: ABCDE1234F</CardDescription>
+              <CardDescription>Format: AAAPA1234A (5 letters + 4 digits + 1 letter)</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="flex gap-4">

@@ -145,20 +145,14 @@ const DigiLockerAadhaar = () => {
                     <Label htmlFor="doc_type">Document Type</Label>
                     <Input id="doc_type" value="Aadhaar, PAN" readOnly className="bg-muted/50" />
                   </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="aadhaar">Aadhaar Number</Label>
+                    <Input id="aadhaar" value="1234 5678 9123" readOnly className="bg-muted/50" placeholder="12 digits, spaced every 4 digits" />
+                  </div>
                   <div className="grid grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <Label htmlFor="udf1">Transaction ID</Label>
                       <Input id="udf1" value="368e4d358b5f" readOnly className="bg-muted/50" />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="udf2">Field Type</Label>
-                      <Input id="udf2" value="first_name" readOnly className="bg-muted/50" />
-                    </div>
-                  </div>
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="udf3">User Name</Label>
-                      <Input id="udf3" value="ram" readOnly className="bg-muted/50" />
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="consent">Consent</Label>
@@ -224,7 +218,7 @@ const DigiLockerAadhaar = () => {
                         type="text"
                         className="w-full px-4 py-2 border border-input rounded-md bg-background"
                         placeholder="Enter mobile or Aadhaar number"
-                        defaultValue="9876543210"
+                        defaultValue="1234 5678 9123"
                       />
                     </div>
                     <div>

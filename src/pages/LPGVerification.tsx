@@ -86,13 +86,14 @@ const LPGVerification = () => {
           <Card className="mb-6">
             <CardHeader>
               <CardTitle>Enter Mobile Number</CardTitle>
+              <p className="text-sm text-muted-foreground mt-1">Format: 9876543210 (10 digits, Indian mobile format)</p>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="flex gap-4">
                 <Input
                   value={mobileNo}
                   onChange={(e) => setMobileNo(e.target.value)}
-                  placeholder="Mobile Number"
+                  placeholder="Mobile Number (e.g., 9876543210)"
                   className="flex-1"
                 />
                 <Button onClick={handleFetch} disabled={loading || !consent}>

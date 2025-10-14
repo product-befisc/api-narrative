@@ -11,7 +11,7 @@ import { maskData } from '@/lib/utils';
 
 const VoterIDVerification = () => {
   const navigate = useNavigate();
-  const [voterId, setVoterId] = useState('ABC1234567');
+  const [voterId, setVoterId] = useState('ZTS0412345');
   const [response, setResponse] = useState<any>(null);
   const [loading, setLoading] = useState(false);
   const [showData, setShowData] = useState(false);
@@ -28,7 +28,7 @@ const VoterIDVerification = () => {
           gender: 'Male',
           relative_name: 'RAMESH KUMAR SHARMA',
           relation: 'FATHER',
-          epic_number: 'ABC1234567',
+          epic_number: 'ZTS0412345',
           last_updated: '08/02/2023'
         },
         address: {
@@ -83,13 +83,14 @@ const VoterIDVerification = () => {
           <Card className="mb-6">
             <CardHeader>
               <CardTitle>Enter Voter ID</CardTitle>
+              <p className="text-sm text-muted-foreground mt-1">Format: ZTS0412345 (3 letters + 7 digits)</p>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="flex gap-4">
                 <Input
                   value={voterId}
                   onChange={(e) => setVoterId(e.target.value)}
-                  placeholder="Voter ID / EPIC Number"
+                  placeholder="Voter ID / EPIC Number (e.g., ZTS0412345)"
                   className="flex-1"
                 />
                 <Button onClick={handleFetch} disabled={loading || !consent}>

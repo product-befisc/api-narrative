@@ -70,6 +70,7 @@ const PassportVerification = () => {
           <Card className="mb-6">
             <CardHeader>
               <CardTitle>Enter Passport Details</CardTitle>
+              <p className="text-sm text-muted-foreground mt-1">Passport: 1 letter + 7 digits • File: 2 letters + 13 digits • DOB: DD/MM/YYYY</p>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="space-y-4">
@@ -77,12 +78,12 @@ const PassportVerification = () => {
                   <Input
                     value={passportNo}
                     onChange={(e) => setPassportNo(e.target.value)}
-                    placeholder="Passport Number"
+                    placeholder="Passport Number (e.g., T1234567)"
                   />
                   <Input
                     value={fileNo}
                     onChange={(e) => setFileNo(e.target.value)}
-                    placeholder="File Number"
+                    placeholder="File Number (e.g., UP1234567890122)"
                   />
                 </div>
                 <div className="flex gap-4">

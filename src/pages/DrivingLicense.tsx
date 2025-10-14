@@ -104,7 +104,7 @@ const DrivingLicense = () => {
           <Card>
             <CardHeader>
               <CardTitle>Enter DL Number</CardTitle>
-              <CardDescription>Format: DL-0720220123456</CardDescription>
+              <CardDescription>Format: DL-0720220123456 (State code + RTO code + year + 7 digits)</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="flex gap-4">

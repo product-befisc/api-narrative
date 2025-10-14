@@ -129,13 +129,14 @@ const RCAdvance = () => {
           <Card className="mb-6">
             <CardHeader>
               <CardTitle>Enter Vehicle Details</CardTitle>
+              <p className="text-sm text-muted-foreground mt-1">Format: DL1ABC1234 (2 letters + 1-2 digits + 2 letters + 4 digits)</p>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="flex gap-4">
                 <Input
                   value={vehicleNo}
                   onChange={(e) => setVehicleNo(e.target.value)}
-                  placeholder="Vehicle Number"
+                  placeholder="Vehicle Number (e.g., DL1ABC1234)"
                   className="flex-1"
                 />
                 <Button onClick={handleFetch} disabled={loading || !consent}>

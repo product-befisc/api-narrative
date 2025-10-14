@@ -503,14 +503,6 @@ const BSA = () => {
                 </div>
               </Card>
             </div>
-
-            {/* Download Button */}
-            <div className="flex justify-center">
-              <Button size="lg" className="px-8">
-                <Download className="mr-2 h-5 w-5" />
-                Download Complete Report
-              </Button>
-            </div>
           </div>
         )}
       </div>

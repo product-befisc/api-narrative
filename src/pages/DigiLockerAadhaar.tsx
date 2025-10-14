@@ -300,11 +300,8 @@ const DigiLockerAadhaar = () => {
                   </div>
                   <div className="bg-gradient-to-br from-muted/50 to-muted/30 rounded-lg p-6 text-center">
                     <Download className="h-12 w-12 text-primary mx-auto mb-3" />
-                    <Button variant="outline" size="lg" className="mb-2">
-                      <Download className="mr-2 h-4 w-4" />
-                      Download document.pdf
-                    </Button>
-                    <p className="text-xs text-muted-foreground">Verified Aadhaar Document</p>
+                    <p className="text-sm font-medium text-foreground mb-2">Document successfully retrieved from DigiLocker</p>
+                    <p className="text-xs text-muted-foreground">Verified Aadhaar Document Available</p>
                   </div>
                 </div>
                 <Button onClick={handleNextStep} className="w-full mt-6" size="lg">

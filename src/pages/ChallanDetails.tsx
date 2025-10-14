@@ -156,24 +156,6 @@ const ChallanDetails = () => {
                 </CardContent>
               </Card>
 
-              <Card>
-                <CardHeader>
-                  <CardTitle>Document Access</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex gap-4">
-                    <Button variant="outline" className="flex-1" onClick={() => window.open(response.pdf_url, '_blank')}>
-                      <Download className="mr-2 h-4 w-4" />
-                      Download Challan PDF
-                    </Button>
-                    <Button variant="outline" className="flex-1" onClick={() => window.open(response.receipt_url, '_blank')}>
-                      <Download className="mr-2 h-4 w-4" />
-                      Download Receipt
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-
               <div className="text-xs text-muted-foreground text-right">
                 Response Time: {new Date(response.timestamp).toLocaleString()}
               </div>

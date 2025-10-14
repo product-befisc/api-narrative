@@ -47,6 +47,29 @@ const Landing = () => {
         </div>
       </section>
 
+      {/* Stats Section */}
+      <section className="py-20 bg-muted">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-4xl font-bold text-foreground text-center mb-12">
+              Why Leading Companies Choose BeFiSc
+            </h2>
+            
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
+              {stats.map((stat, index) => (
+                <div
+                  key={index}
+                  className="bg-gradient-to-br from-primary/10 to-primary/5 rounded-2xl p-8 text-center border-2 border-primary/20 hover:border-primary/40 transition-all hover:scale-105 shadow-lg hover:shadow-xl"
+                >
+                  <div className="text-3xl font-bold text-primary mb-2">{stat.value}</div>
+                  <div className="text-sm font-medium text-foreground">{stat.label}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* About Section */}
       <section className="py-20 bg-background">
         <div className="container mx-auto px-4">
@@ -286,32 +309,20 @@ const Landing = () => {
         </div>
       </section>
 
-      {/* Stats & CTA Section */}
+      {/* CTA Section */}
       <section className="py-20 bg-muted">
         <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <h2 className="text-4xl font-bold text-foreground text-center mb-12">
-              Why Leading Companies Choose BeFiSc
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-4xl font-bold text-foreground mb-6">
+              Ready to Transform Your Verification Process?
             </h2>
-            
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-6 mb-12">
-              {stats.map((stat, index) => (
-                <div
-                  key={index}
-                  className="bg-gradient-to-br from-primary/10 to-primary/5 rounded-2xl p-8 text-center border-2 border-primary/20 hover:border-primary/40 transition-all hover:scale-105 shadow-lg hover:shadow-xl"
-                >
-                  <div className="text-3xl font-bold text-primary mb-2">{stat.value}</div>
-                  <div className="text-sm font-medium text-foreground">{stat.label}</div>
-                </div>
-              ))}
-            </div>
-
-            <div className="text-center">
-              <Button size="lg" className="h-14 px-12 text-lg" onClick={() => navigate("/home")}>
-                Get Started
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
-            </div>
+            <p className="text-xl text-muted-foreground mb-8">
+              Join leading companies in making fraud detection effortless
+            </p>
+            <Button size="lg" className="h-14 px-12 text-lg" onClick={() => navigate("/home")}>
+              Get Started
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Button>
           </div>
         </div>
       </section>

@@ -26,6 +26,8 @@ import snapmintLogo from '@/assets/clients/snapmint.svg';
 import varthanaLogo from '@/assets/clients/varthana.svg';
 import vibrantLogo from '@/assets/clients/vibrant.svg';
 import yaperLogo from '@/assets/clients/yaper.svg';
+import firstAdvisorsLogo from '@/assets/clients/first-advisors.svg';
+import velocityLogo from '@/assets/clients/velocity.svg';
 import amsInformLogo from '@/assets/clients/ams-inform.svg';
 import gaadiBookingLogo from '@/assets/clients/gaadi-booking.svg';
 import ongridLogo from '@/assets/clients/ongrid.svg';
@@ -163,9 +165,9 @@ const Landing = () => {
                 {[
                   { name: "Go Digit Life Insurance", logo: godigitLogo },
                   { name: "Go Digit General Insurance", logo: godigitLogo },
-                  { name: "First Advisors Insurance", logo: null },
+                  { name: "First Advisors Insurance", logo: firstAdvisorsLogo },
                   { name: "HealthCred", logo: healthcredLogo },
-                  { name: "Velocity", logo: null },
+                  { name: "Velocity", logo: velocityLogo },
                   { name: "Freo", logo: freoLogo },
                 ].map((company, i) => (
                   <div

@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, FileStack, Lock, CheckCircle, Download, Palette, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import Navbar from '@/components/Navbar';
 
 const DigiLockerAadhaar = () => {
@@ -138,16 +140,31 @@ const DigiLockerAadhaar = () => {
                 <p className="text-muted-foreground">Document request details ready for submission</p>
               </CardHeader>
               <CardContent>
-                <div className="bg-muted/50 rounded-lg p-6 font-mono text-sm mb-4">
-                  <pre className="text-foreground">
-{`{
-  "doc_type": ["aadhaar", "pan"],
-  "udf1": "368e4d358b5f",
-  "udf2": "first_name",
-  "udf3": "ram",
-  "consent": "Y"
-}`}
-                  </pre>
+                <div className="space-y-4 mb-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="doc_type">Document Type</Label>
+                    <Input id="doc_type" value="Aadhaar, PAN" readOnly className="bg-muted/50" />
+                  </div>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="udf1">Transaction ID</Label>
+                      <Input id="udf1" value="368e4d358b5f" readOnly className="bg-muted/50" />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="udf2">Field Type</Label>
+                      <Input id="udf2" value="first_name" readOnly className="bg-muted/50" />
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="udf3">User Name</Label>
+                      <Input id="udf3" value="ram" readOnly className="bg-muted/50" />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="consent">Consent</Label>
+                      <Input id="consent" value="Yes" readOnly className="bg-muted/50" />
+                    </div>
+                  </div>
                 </div>
                 <div className="bg-primary/10 rounded-lg p-4 mb-6">
                   <p className="text-sm text-foreground">

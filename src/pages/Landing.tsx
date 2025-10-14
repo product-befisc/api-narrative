@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Shield, TrendingUp, Users, Award } from "lucide-react";
 import { EmailVerificationModal } from "@/components/EmailVerificationModal";
 import logo from '@/assets/BeFiSc_New_Logo.svg';
+import saloraCapitalLogo from '@/assets/clients/salora-capital.png';
 import founderPhoto from '@/assets/founder-photo.svg';
 import affordplanLogo from '@/assets/clients/affordplan.svg';
 import arthanFinanceLogo from '@/assets/clients/arthan-finance.svg';
@@ -235,6 +236,7 @@ const Landing = () => {
                   { name: "Arthan Finance", logo: arthanFinanceLogo },
                   { name: "Lendbox", logo: lendboxLogo },
                   { name: "Varthana", logo: varthanaLogo },
+                  { name: "Salora Capital", logo: saloraCapitalLogo },
                 ].map((company, i) => (
                   <div
                     key={i}

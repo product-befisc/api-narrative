@@ -60,8 +60,8 @@ const Landing = () => {
           {/* Quick Facts Bar */}
           <div className="flex flex-wrap justify-center gap-4 items-center text-sm text-muted-foreground">
             {quickFacts.map((fact, index) => (
-              <div key={index} className="flex items-center gap-4">
-                <span className="font-medium">{fact}</span>
+              <div key={index} className="flex items-center gap-4 animate-fade-in" style={{ animationDelay: `${index * 0.15}s` }}>
+                <span className="font-semibold px-4 py-2 rounded-lg bg-card/50 border border-primary/20 hover:border-primary/40 hover:bg-card/80 transition-all duration-300 hover:scale-105 hover:shadow-lg">{fact}</span>
                 {index < quickFacts.length - 1 && <div className="w-px h-4 bg-border" />}
               </div>
             ))}

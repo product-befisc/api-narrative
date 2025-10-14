@@ -64,7 +64,7 @@ const ChassisToRC = () => {
 
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-8">
-            <h1 className="text-4xl font-bold text-foreground mb-3">Chassis to RC V2</h1>
+            <h1 className="text-4xl font-bold text-foreground mb-3">Chassis to RC Details</h1>
             <p className="text-muted-foreground">Vehicle registration details via chassis number</p>
           </div>
 

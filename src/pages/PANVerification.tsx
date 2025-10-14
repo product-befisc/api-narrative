@@ -75,7 +75,7 @@ const PANVerification = () => {
 
         <div className="max-w-4xl mx-auto space-y-6">
           <div className="text-center space-y-2">
-            <h1 className="text-4xl font-bold">PAN Verification</h1>
+            <h1 className="text-4xl font-bold">PAN Profiling</h1>
             <p className="text-muted-foreground">Verify PAN details and get comprehensive profile information</p>
           </div>
 

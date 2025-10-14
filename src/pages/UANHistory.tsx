@@ -55,7 +55,7 @@ const UANHistory = () => {
 
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-8">
-            <h1 className="text-4xl font-bold text-foreground mb-3">UAN History V3</h1>
+            <h1 className="text-4xl font-bold text-foreground mb-3">UAN Details</h1>
             <p className="text-muted-foreground">Comprehensive employment history via Universal Account Number</p>
           </div>
 

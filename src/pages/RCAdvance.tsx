@@ -122,7 +122,7 @@ const RCAdvance = () => {
 
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-8">
-            <h1 className="text-4xl font-bold text-foreground mb-3">RC Advance v3</h1>
+            <h1 className="text-4xl font-bold text-foreground mb-3">RC Advanced Details</h1>
             <p className="text-muted-foreground">Comprehensive vehicle registration certificate verification</p>
           </div>
 

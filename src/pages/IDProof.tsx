@@ -9,7 +9,7 @@ const IDProof = () => {
   const navigate = useNavigate();
 
   const solutions = [
-    { name: 'PAN Verification', icon: CreditCard, description: 'PAN card verification & profiling', path: '/product/id-proof/pan-verification' },
+    { name: 'PAN Profiling', icon: CreditCard, description: 'PAN card verification & profiling', path: '/product/id-proof/pan-verification' },
     { name: 'Customer Profiling', icon: User, description: 'Profile insights via mobile', path: '/product/id-proof/customer-profiling' },
     { name: 'Business Profiling', icon: Building, description: 'Company data visualization', path: '/product/id-proof/business-profiling' },
     { name: 'Address Tracing', icon: MapPin, description: 'Address mapping via mobile', path: '/product/id-proof/address-tracing' },
@@ -22,12 +22,12 @@ const IDProof = () => {
     { name: 'Voter ID', icon: User, description: 'Voter card verification', path: '/product/id-proof/voter-id-verification' },
     { name: 'Passport', icon: FileText, description: 'Passport verification', path: '/product/id-proof/passport-verification' },
     { name: 'LPG Verification', icon: Phone, description: 'LPG connection via mobile', path: '/product/id-proof/lpg-verification' },
-    { name: 'RC Advanced V3', icon: Car, description: 'Vehicle registration verification', path: '/product/id-proof/rc-advance' },
+    { name: 'RC Advanced Details', icon: Car, description: 'Vehicle registration verification', path: '/product/id-proof/rc-advance' },
     { name: 'Challan Details', icon: FileCheck, description: 'Traffic violation records', path: '/product/id-proof/challan-details' },
-    { name: 'Chassis to RC V2', icon: Scan, description: 'Vehicle chassis verification', path: '/product/id-proof/chassis-to-rc' },
+    { name: 'Chassis to RC Details', icon: Scan, description: 'Vehicle chassis verification', path: '/product/id-proof/chassis-to-rc' },
     { name: 'Bank Verification - Penny Drop', icon: CreditCard, description: 'Bank account verification', path: '/product/id-proof/bank-verification-pennydrop' },
     { name: 'Bank Verification - Pennyless', icon: CreditCard, description: 'Non-monetary verification', path: '/product/id-proof/bank-verification-pennyless' },
-    { name: 'UAN History V3', icon: FileText, description: 'Employment history via UAN', path: '/product/id-proof/uan-history' },
+    { name: 'UAN Details', icon: FileText, description: 'Employment history via UAN', path: '/product/id-proof/uan-history' },
     { name: 'Captcha Reader', icon: Scan, description: 'Automated captcha solving', path: '/product/id-proof/captcha-reader' },
   ];
 

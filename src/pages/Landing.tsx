@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Shield, TrendingUp, Users, Award } from "lucide-react";
 import logo from '@/assets/BeFiSc_New_Logo.svg';
+import founderPhoto from '@/assets/founder-photo.svg';
 
 const Landing = () => {
   const navigate = useNavigate();
@@ -242,7 +243,7 @@ const Landing = () => {
             <div className="bg-card rounded-2xl shadow-lg p-8 md:p-12 border border-border">
               <div className="flex flex-col md:flex-row gap-8 items-center">
                 <div className="w-48 h-48 rounded-full overflow-hidden flex-shrink-0 bg-muted">
-                  <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=400&fit=crop" alt="Shobhit Goyal" className="w-full h-full object-cover" />
+                  <img src={founderPhoto} alt="Shobhit Goyal" className="w-full h-full object-cover" />
                 </div>
                 <div className="flex-1 text-center md:text-left">
                   <h3 className="text-3xl font-bold text-foreground mb-2">Shobhit Goyal</h3>

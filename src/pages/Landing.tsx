@@ -7,7 +7,13 @@ import founderPhoto from '@/assets/founder-photo.svg';
 const Landing = () => {
   const navigate = useNavigate();
 
-  const quickFacts = ["3.5 Mn ARR", "ISO Certified", "30M+ API Calls / Month", "99.99% Uptime", "FinTech CX Awardee"];
+  const stats = [
+    { value: "3.5 Mn", label: "ARR" },
+    { value: "ISO", label: "Certified" },
+    { value: "30M+", label: "API Calls / Month" },
+    { value: "99.99%", label: "Uptime" },
+    { value: "Winner", label: "FinTech CX Awardee" }
+  ];
 
   return (
     <div className="min-h-screen bg-background">
@@ -38,20 +44,6 @@ const Landing = () => {
           <p className="mb-8 text-xl text-muted-foreground max-w-2xl mx-auto">
             Built to make fraud detection effortless.
           </p>
-          <Button size="lg" className="h-14 px-8 text-lg mb-12" onClick={() => navigate("/home")}>
-            Get Started
-            <ArrowRight className="ml-2 h-5 w-5" />
-          </Button>
-
-          {/* Quick Facts Bar */}
-          <div className="flex flex-wrap justify-center gap-4 items-center text-sm text-muted-foreground">
-            {quickFacts.map((fact, index) => (
-              <div key={index} className="flex items-center gap-4">
-                <span className="font-medium">{fact}</span>
-                {index < quickFacts.length - 1 && <div className="w-px h-4 bg-border" />}
-              </div>
-            ))}
-          </div>
         </div>
       </section>
 
@@ -291,6 +283,36 @@ const Landing = () => {
           <p className="text-center text-muted-foreground text-lg">
             Accuracy, speed, and security; built in from day one.
           </p>
+        </div>
+      </section>
+
+      {/* Stats & CTA Section */}
+      <section className="py-20 bg-muted">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-4xl font-bold text-foreground text-center mb-12">
+              Why Leading Companies Choose BeFiSc
+            </h2>
+            
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-6 mb-12">
+              {stats.map((stat, index) => (
+                <div
+                  key={index}
+                  className="bg-gradient-to-br from-primary/10 to-primary/5 rounded-2xl p-8 text-center border-2 border-primary/20 hover:border-primary/40 transition-all hover:scale-105 shadow-lg hover:shadow-xl"
+                >
+                  <div className="text-3xl font-bold text-primary mb-2">{stat.value}</div>
+                  <div className="text-sm font-medium text-foreground">{stat.label}</div>
+                </div>
+              ))}
+            </div>
+
+            <div className="text-center">
+              <Button size="lg" className="h-14 px-12 text-lg" onClick={() => navigate("/home")}>
+                Get Started
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Button>
+            </div>
+          </div>
         </div>
       </section>
 

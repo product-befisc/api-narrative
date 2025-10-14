@@ -29,6 +29,7 @@ import RCAdvance from "./pages/RCAdvance";
 import LPGVerification from "./pages/LPGVerification";
 import PassportVerification from "./pages/PassportVerification";
 import VoterIDVerification from "./pages/VoterIDVerification";
+import DigiLockerAadhaar from "./pages/DigiLockerAadhaar";
 
 const queryClient = new QueryClient();
 
@@ -42,6 +43,7 @@ const App = () => (
           <Route path="/" element={<Landing />} />
           <Route path="/home" element={<Home />} />
           <Route path="/product/id-proof" element={<IDProof />} />
+          <Route path="/product/id-proof/digilocker-aadhaar" element={<DigiLockerAadhaar />} />
           <Route path="/id-verification-workflow" element={<IDVerificationWorkflow />} />
           <Route path="/product/bounce-proof" element={<BounceProof />} />
           <Route path="/product/tamper-proof" element={<TamperProof />} />

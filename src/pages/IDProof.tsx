@@ -17,7 +17,7 @@ const IDProof = () => {
 
   const products = [
     { name: 'ID Verification Workflow', icon: Shield, description: 'Complete verification flow', path: '/id-verification-workflow' },
-    { name: 'Digilocker Aadhaar', icon: FileText, description: 'Aadhaar verification via Digilocker' },
+    { name: 'Digilocker Aadhaar', icon: FileText, description: 'Aadhaar verification via Digilocker', path: '/product/id-proof/digilocker-aadhaar' },
     { name: 'Driving License', icon: Car, description: 'DL verification & details', path: '/product/id-proof/driving-license' },
     { name: 'Voter ID', icon: User, description: 'Voter card verification', path: '/product/id-proof/voter-id-verification' },
     { name: 'Passport', icon: FileText, description: 'Passport verification', path: '/product/id-proof/passport-verification' },

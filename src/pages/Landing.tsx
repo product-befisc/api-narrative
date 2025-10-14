@@ -2,11 +2,6 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Shield, TrendingUp, Users, Award } from "lucide-react";
 import logo from '@/assets/BeFiSc_New_Logo.svg';
-import bajajLogo from '@/assets/logos/bajaj-finserv.png';
-import naviLogo from '@/assets/logos/navi.png';
-import indiamartLogo from '@/assets/logos/indiamart.png';
-import finboxLogo from '@/assets/logos/finbox.png';
-import goDigitLogo from '@/assets/logos/go-digit.png';
 
 const Landing = () => {
   const navigate = useNavigate();
@@ -95,25 +90,24 @@ const Landing = () => {
               </div>
               <div className="flex flex-wrap justify-center gap-4 max-w-7xl">
                 {[
-                  { name: "Bajaj Finserv", logo: bajajLogo },
-                  { name: "Muthoot Capital" },
-                  { name: "Navi", logo: naviLogo },
-                  { name: "Varthana" },
-                  { name: "Lendbox" },
-                  { name: "Arthan Finance" },
-                  { name: "Cashflo" },
-                  { name: "Snapmint" },
+                  "Bajaj Finserv",
+                  "Muthoot Capital",
+                  "Navi",
+                  "Varthana",
+                  "Lendbox",
+                  "Arthan Finance",
+                  "Cashflo",
+                  "Snapmint",
                 ].map((company, i) => (
                   <div
                     key={i}
-                    className="flex items-center justify-center bg-card rounded-xl px-6 py-4 border border-border hover:border-primary hover:scale-105 transition-all shadow-sm hover:shadow-md min-w-[140px]"
+                    className="flex items-center gap-3 bg-card rounded-xl px-6 py-4 border border-border hover:border-primary hover:scale-105 transition-all shadow-sm hover:shadow-md"
                     style={{ animationDelay: `${i * 0.1}s` }}
                   >
-                    {company.logo ? (
-                      <img src={company.logo} alt={company.name} className="h-8 w-auto object-contain" />
-                    ) : (
-                      <span className="font-semibold text-foreground whitespace-nowrap text-sm">{company.name}</span>
-                    )}
+                    <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center flex-shrink-0">
+                      <Users className="w-6 h-6 text-muted-foreground" />
+                    </div>
+                    <span className="font-medium text-foreground whitespace-nowrap">{company}</span>
                   </div>
                 ))}
               </div>
@@ -132,24 +126,23 @@ const Landing = () => {
               </div>
               <div className="flex flex-wrap justify-center gap-4 max-w-6xl">
                 {[
-                  { name: "Go Digit Life Insurance", logo: goDigitLogo },
-                  { name: "Go Digit General Insurance", logo: goDigitLogo },
-                  { name: "First Advisors Insurance" },
-                  { name: "Mufkam Insurance Marketing" },
-                  { name: "HealthCred" },
-                  { name: "Velocity" },
-                  { name: "Freo" },
+                  "Go Digit Life Insurance",
+                  "Go Digit General Insurance",
+                  "First Advisors Insurance",
+                  "Mufkam Insurance Marketing",
+                  "HealthCred",
+                  "Velocity",
+                  "Freo",
                 ].map((company, i) => (
                   <div
                     key={i}
-                    className="flex items-center justify-center bg-card rounded-xl px-6 py-4 border border-border hover:border-primary hover:scale-105 transition-all shadow-sm hover:shadow-md min-w-[140px]"
+                    className="flex items-center gap-3 bg-card rounded-xl px-6 py-4 border border-border hover:border-primary hover:scale-105 transition-all shadow-sm hover:shadow-md"
                     style={{ animationDelay: `${(i + 8) * 0.1}s` }}
                   >
-                    {company.logo ? (
-                      <img src={company.logo} alt={company.name} className="h-8 w-auto object-contain" />
-                    ) : (
-                      <span className="font-semibold text-foreground whitespace-nowrap text-sm">{company.name}</span>
-                    )}
+                    <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center flex-shrink-0">
+                      <Shield className="w-6 h-6 text-muted-foreground" />
+                    </div>
+                    <span className="font-medium text-foreground whitespace-nowrap">{company}</span>
                   </div>
                 ))}
               </div>
@@ -167,24 +160,16 @@ const Landing = () => {
                 <div className="h-0.5 w-24 bg-gradient-to-r from-primary to-transparent"></div>
               </div>
               <div className="flex flex-wrap justify-center gap-4 max-w-5xl">
-                {[
-                  { name: "FinBox", logo: finboxLogo },
-                  { name: "Paytail" },
-                  { name: "MoneyWide" },
-                  { name: "Indiamart", logo: indiamartLogo },
-                  { name: "Proptension" },
-                  { name: "Voorent" },
-                ].map((company, i) => (
+                {["FinBox", "Paytail", "MoneyWide", "Indiamart", "Proptension", "Voorent"].map((company, i) => (
                   <div
                     key={i}
-                    className="flex items-center justify-center bg-card rounded-xl px-6 py-4 border border-border hover:border-primary hover:scale-105 transition-all shadow-sm hover:shadow-md min-w-[140px]"
+                    className="flex items-center gap-3 bg-card rounded-xl px-6 py-4 border border-border hover:border-primary hover:scale-105 transition-all shadow-sm hover:shadow-md"
                     style={{ animationDelay: `${(i + 15) * 0.1}s` }}
                   >
-                    {company.logo ? (
-                      <img src={company.logo} alt={company.name} className="h-8 w-auto object-contain" />
-                    ) : (
-                      <span className="font-semibold text-foreground whitespace-nowrap text-sm">{company.name}</span>
-                    )}
+                    <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center flex-shrink-0">
+                      <TrendingUp className="w-6 h-6 text-muted-foreground" />
+                    </div>
+                    <span className="font-medium text-foreground whitespace-nowrap">{company}</span>
                   </div>
                 ))}
               </div>
@@ -202,21 +187,20 @@ const Landing = () => {
                 <div className="h-0.5 w-24 bg-gradient-to-r from-primary to-transparent"></div>
               </div>
               <div className="flex flex-wrap justify-center gap-4 max-w-4xl">
-                {[
-                  { name: "Ratify Global" },
-                  { name: "Human Crayon" },
-                  { name: "Gaadi Booking" },
-                  { name: "Ongrid" },
-                  { name: "4SL Background Check" },
-                ].map((company, i) => (
-                  <div
-                    key={i}
-                    className="flex items-center justify-center bg-card rounded-xl px-6 py-4 border border-border hover:border-primary hover:scale-105 transition-all shadow-sm hover:shadow-md min-w-[140px]"
-                    style={{ animationDelay: `${(i + 21) * 0.1}s` }}
-                  >
-                    <span className="font-semibold text-foreground whitespace-nowrap text-sm">{company.name}</span>
-                  </div>
-                ))}
+                {["Ratify Global", "Human Crayon", "Gaadi Booking", "Ongrid", "4SL Background Check"].map(
+                  (company, i) => (
+                    <div
+                      key={i}
+                      className="flex items-center gap-3 bg-card rounded-xl px-6 py-4 border border-border hover:border-primary hover:scale-105 transition-all shadow-sm hover:shadow-md"
+                      style={{ animationDelay: `${(i + 21) * 0.1}s` }}
+                    >
+                      <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center flex-shrink-0">
+                        <Users className="w-6 h-6 text-muted-foreground" />
+                      </div>
+                      <span className="font-medium text-foreground whitespace-nowrap">{company}</span>
+                    </div>
+                  ),
+                )}
               </div>
             </div>
             <div className="h-px bg-gradient-to-r from-border via-primary/30 to-border max-w-4xl mx-auto"></div>
@@ -232,18 +216,16 @@ const Landing = () => {
                 <div className="h-0.5 w-24 bg-gradient-to-r from-primary to-transparent"></div>
               </div>
               <div className="flex flex-wrap justify-center gap-4 max-w-3xl">
-                {[
-                  { name: "AMS Inform" },
-                  { name: "Verification Street" },
-                  { name: "SecureSearch" },
-                  { name: "VeriProbus" },
-                ].map((company, i) => (
+                {["AMS Inform", "Verification Street", "SecureSearch", "VeriProbus"].map((company, i) => (
                   <div
                     key={i}
-                    className="flex items-center justify-center bg-card rounded-xl px-6 py-4 border border-border hover:border-primary hover:scale-105 transition-all shadow-sm hover:shadow-md min-w-[140px]"
+                    className="flex items-center gap-3 bg-card rounded-xl px-6 py-4 border border-border hover:border-primary hover:scale-105 transition-all shadow-sm hover:shadow-md"
                     style={{ animationDelay: `${(i + 26) * 0.1}s` }}
                   >
-                    <span className="font-semibold text-foreground whitespace-nowrap text-sm">{company.name}</span>
+                    <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center flex-shrink-0">
+                      <Award className="w-6 h-6 text-muted-foreground" />
+                    </div>
+                    <span className="font-medium text-foreground whitespace-nowrap">{company}</span>
                   </div>
                 ))}
               </div>

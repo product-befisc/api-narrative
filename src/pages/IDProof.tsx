@@ -18,7 +18,6 @@ const IDProof = () => {
   const products = [
     { name: 'ID Verification Workflow', icon: Shield, description: 'Complete verification flow', path: '/id-verification-workflow' },
     { name: 'Digilocker Aadhaar', icon: FileText, description: 'Aadhaar verification via Digilocker' },
-    { name: 'Aadhaar Workflow', icon: FileCheck, description: 'End-to-end Aadhaar verification' },
     { name: 'Driving License', icon: Car, description: 'DL verification & details', path: '/product/id-proof/driving-license' },
     { name: 'Voter ID', icon: User, description: 'Voter card verification', path: '/product/id-proof/voter-id-verification' },
     { name: 'Passport', icon: FileText, description: 'Passport verification', path: '/product/id-proof/passport-verification' },
@@ -76,8 +75,8 @@ const IDProof = () => {
                       onClick={() => product.path && navigate(product.path)}
                     >
                       <div className="flex items-start gap-4">
-                        <div className="w-12 h-12 rounded-lg bg-gradient-primary flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
-                          <Icon className="h-6 w-6 text-white" />
+                        <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                          <Icon className="h-6 w-6 text-primary" />
                         </div>
                         <div>
                           <h3 className="font-semibold text-foreground mb-1">{product.name}</h3>
@@ -104,8 +103,8 @@ const IDProof = () => {
                       onClick={() => solution.path && navigate(solution.path)}
                     >
                       <div className="flex items-start gap-4">
-                        <div className="w-12 h-12 rounded-lg bg-gradient-primary flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
-                          <Icon className="h-6 w-6 text-white" />
+                        <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                          <Icon className="h-6 w-6 text-primary" />
                         </div>
                         <div>
                           <h3 className="font-semibold text-foreground mb-1">{solution.name}</h3>

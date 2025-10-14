@@ -26,6 +26,13 @@ import snapmintLogo from '@/assets/clients/snapmint.svg';
 import varthanaLogo from '@/assets/clients/varthana.svg';
 import vibrantLogo from '@/assets/clients/vibrant.svg';
 import yaperLogo from '@/assets/clients/yaper.svg';
+import amsInformLogo from '@/assets/clients/ams-inform.svg';
+import gaadiBookingLogo from '@/assets/clients/gaadi-booking.svg';
+import ongridLogo from '@/assets/clients/ongrid.svg';
+import secureSearchLogo from '@/assets/clients/securesearch.svg';
+import verificationStreetLogo from '@/assets/clients/verification-street.svg';
+import veriprobusLogo from '@/assets/clients/veriprobus.svg';
+import fourSlLogo from '@/assets/clients/4sl-background-check.svg';
 
 const Landing = () => {
   const navigate = useNavigate();
@@ -234,9 +241,9 @@ const Landing = () => {
                   { name: "Indiamart", logo: indiamartLogo },
                   { name: "Ratify Global", logo: null },
                   { name: "Human Crayon", logo: null },
-                  { name: "Gaadi Booking", logo: null },
-                  { name: "Ongrid", logo: null },
-                  { name: "4SL Background Check", logo: null },
+                  { name: "Gaadi Booking", logo: gaadiBookingLogo },
+                  { name: "Ongrid", logo: ongridLogo },
+                  { name: "4SL Background Check", logo: fourSlLogo },
                 ].map((company, i) => (
                     <div
                       key={i}
@@ -269,16 +276,25 @@ const Landing = () => {
                 <div className="h-0.5 w-24 bg-gradient-to-r from-primary to-transparent"></div>
               </div>
               <div className="flex flex-wrap justify-center gap-4 max-w-3xl">
-                {["AMS Inform", "Verification Street", "SecureSearch", "VeriProbus"].map((company, i) => (
+                {[
+                  { name: "AMS Inform", logo: amsInformLogo },
+                  { name: "Verification Street", logo: verificationStreetLogo },
+                  { name: "SecureSearch", logo: secureSearchLogo },
+                  { name: "VeriProbus", logo: veriprobusLogo },
+                ].map((company, i) => (
                   <div
                     key={i}
                     className="flex items-center gap-3 bg-card rounded-xl px-6 py-4 border border-border hover:border-primary hover:scale-105 transition-all shadow-sm hover:shadow-md"
                     style={{ animationDelay: `${(i + 26) * 0.1}s` }}
                   >
-                    <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center flex-shrink-0">
-                      <Award className="w-6 h-6 text-muted-foreground" />
-                    </div>
-                    <span className="font-medium text-foreground whitespace-nowrap">{company}</span>
+                    {company.logo ? (
+                      <img src={company.logo} alt={company.name} className="w-12 h-12 object-contain flex-shrink-0" />
+                    ) : (
+                      <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center flex-shrink-0">
+                        <Award className="w-6 h-6 text-muted-foreground" />
+                      </div>
+                    )}
+                    <span className="font-medium text-foreground whitespace-nowrap">{company.name}</span>
                   </div>
                 ))}
               </div>

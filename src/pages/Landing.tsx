@@ -5,12 +5,20 @@ import logo from '@/assets/BeFiSc_New_Logo.svg';
 import founderPhoto from '@/assets/founder-photo.svg';
 import affordplanLogo from '@/assets/clients/affordplan.svg';
 import bajajLogo from '@/assets/clients/bajaj.svg';
+import bharatxLogo from '@/assets/clients/bharatx.svg';
+import cashrichLogo from '@/assets/clients/cashrich.svg';
 import credflowLogo from '@/assets/clients/credflow.svg';
+import epaylaterLogo from '@/assets/clients/epaylater.svg';
 import eximpeLogo from '@/assets/clients/eximpe.svg';
+import freoLogo from '@/assets/clients/freo.svg';
 import indiamartLogo from '@/assets/clients/indiamart.svg';
+import muthootLogo from '@/assets/clients/muthoot.svg';
+import naviLogo from '@/assets/clients/navi.svg';
+import niroLogo from '@/assets/clients/niro.svg';
 import quidLogo from '@/assets/clients/quid.svg';
 import rupyaLogo from '@/assets/clients/rupya.svg';
 import sabpaisaLogo from '@/assets/clients/sabpaisa.svg';
+import snapmintLogo from '@/assets/clients/snapmint.svg';
 import vibrantLogo from '@/assets/clients/vibrant.svg';
 import yaperLogo from '@/assets/clients/yaper.svg';
 
@@ -98,13 +106,14 @@ const Landing = () => {
               <div className="flex flex-wrap justify-center gap-4 max-w-7xl">
                 {[
                   { name: "Bajaj Finserv", logo: bajajLogo },
+                  { name: "Muthoot Capital", logo: muthootLogo },
+                  { name: "Navi", logo: naviLogo },
                   { name: "Affordplan", logo: affordplanLogo },
                   { name: "Rupya", logo: rupyaLogo },
-                  { name: "Muthoot Capital", logo: null },
-                  { name: "Navi", logo: null },
-                  { name: "Varthana", logo: null },
-                  { name: "Lendbox", logo: null },
-                  { name: "Arthan Finance", logo: null },
+                  { name: "BharatX", logo: bharatxLogo },
+                  { name: "EPay Later", logo: epaylaterLogo },
+                  { name: "Snapmint", logo: snapmintLogo },
+                  { name: "CashRich", logo: cashrichLogo },
                 ].map((company, i) => (
                   <div
                     key={i}
@@ -137,23 +146,27 @@ const Landing = () => {
               </div>
               <div className="flex flex-wrap justify-center gap-4 max-w-6xl">
                 {[
-                  "Go Digit Life Insurance",
-                  "Go Digit General Insurance",
-                  "First Advisors Insurance",
-                  "Mufkam Insurance Marketing",
-                  "HealthCred",
-                  "Velocity",
-                  "Freo",
+                  { name: "Go Digit Life Insurance", logo: null },
+                  { name: "Go Digit General Insurance", logo: null },
+                  { name: "First Advisors Insurance", logo: null },
+                  { name: "Mufkam Insurance Marketing", logo: null },
+                  { name: "HealthCred", logo: null },
+                  { name: "Velocity", logo: null },
+                  { name: "Freo", logo: freoLogo },
                 ].map((company, i) => (
                   <div
                     key={i}
                     className="flex items-center gap-3 bg-card rounded-xl px-6 py-4 border border-border hover:border-primary hover:scale-105 transition-all shadow-sm hover:shadow-md"
                     style={{ animationDelay: `${(i + 8) * 0.1}s` }}
                   >
-                    <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center flex-shrink-0">
-                      <Shield className="w-6 h-6 text-muted-foreground" />
-                    </div>
-                    <span className="font-medium text-foreground whitespace-nowrap">{company}</span>
+                    {company.logo ? (
+                      <img src={company.logo} alt={company.name} className="w-12 h-12 object-contain flex-shrink-0" />
+                    ) : (
+                      <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center flex-shrink-0">
+                        <Shield className="w-6 h-6 text-muted-foreground" />
+                      </div>
+                    )}
+                    <span className="font-medium text-foreground whitespace-nowrap">{company.name}</span>
                   </div>
                 ))}
               </div>
@@ -178,6 +191,7 @@ const Landing = () => {
                   { name: "Vibrant", logo: vibrantLogo },
                   { name: "Yaper", logo: yaperLogo },
                   { name: "EximPe", logo: eximpeLogo },
+                  { name: "Niro", logo: niroLogo },
                 ].map((company, i) => (
                   <div
                     key={i}

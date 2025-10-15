@@ -17,6 +17,7 @@ const CustomerProfiling = () => {
   const [showData, setShowData] = useState(false);
   const [consent, setConsent] = useState(true);
   const [showFullBureauReport, setShowFullBureauReport] = useState(false);
+  const [showFullESICDetails, setShowFullESICDetails] = useState(false);
 
   const mockResponse = {
     mobile: "+91-9876543210",
@@ -83,6 +84,68 @@ const CustomerProfiling = () => {
       registered: true,
       insurance_number: "1234567890123456"
     },
+    esic_details: [
+      {
+        esic_number: "6543214933",
+        name: "RAM SINGH",
+        employer_code: "28000540987654321",
+        employer_name: "ABC ENGINEERING",
+        mobile: "9876543210",
+        uan_number: "1021987654321",
+        bank_name: "HDFC BANK",
+        branch_name: "KOLKATA - STEPHEN HOUSE (BBD BAG)",
+        bank_account_status: "Not Verified",
+        uhid_number: "",
+        date_of_birth: "01/01/1999",
+        registration_date: "04/11/2024",
+        dispensary_name: "Renukoot, Sonbhadra, UP (ESIS Disp.)",
+        disability_type: "",
+        first_date_of_appointment: "26/10/2024",
+        employer_details: {
+          employer_code: "12345678987654321",
+          employer_name: "ABC Private Limited",
+          address: "Nirayan Sales&Marketing,Mehmoorgaj Varanasi",
+          state: "Uttar Pradesh",
+          district: "Varanasi",
+          pincode: "221001",
+          email: "abc@email.com",
+          mobile: ""
+        },
+        address: "SHIV MANDIR RENUSAGAR Sonbhadra Uttar Pradesh 231218",
+        age: "26",
+        gender: "Male"
+      },
+      {
+        esic_number: "1234567833",
+        name: "RAM SINGH",
+        employer_code: "43210540987654321",
+        employer_name: "ABC Private Limited",
+        mobile: "9876543210",
+        uan_number: "102145654321",
+        bank_name: "HDFC BANK",
+        branch_name: "KOLKATA - STEPHEN HOUSE (BBD BAG)",
+        bank_account_status: "Not Verified",
+        uhid_number: "",
+        date_of_birth: "01/01/1999",
+        registration_date: "04/11/2024",
+        dispensary_name: "Renukoot, Sonbhadra, UP (ESIS Disp.)",
+        disability_type: "",
+        first_date_of_appointment: "26/10/2024",
+        employer_details: {
+          employer_code: "12345678987654321",
+          employer_name: "ABC Private Limited",
+          address: "Nirayan Sales&Marketing,Mehmoorgaj Varanasi",
+          state: "Uttar Pradesh",
+          district: "Varanasi",
+          pincode: "221001",
+          email: "abc@email.com",
+          mobile: ""
+        },
+        address: "SHIV MANDIR RENUSAGAR Sonbhadra Uttar Pradesh 231218",
+        age: "26",
+        gender: "Male"
+      }
+    ],
     bureau_report: {
       name: "RAM SINGH",
       mobile: "9876543210",
@@ -249,7 +312,7 @@ const CustomerProfiling = () => {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+                  <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4">
                     <div className="space-y-1">
                       <p className="text-sm text-muted-foreground">MSME</p>
                       <Badge variant={responseData.msme_info.registered ? "default" : "secondary"}>
@@ -278,6 +341,18 @@ const CustomerProfiling = () => {
                       <p className="text-sm text-muted-foreground">Director</p>
                       <Badge variant={responseData.director_info.is_director ? "default" : "secondary"}>
                         {responseData.director_info.is_director ? "Yes" : "No"}
+                      </Badge>
+                    </div>
+                    <div className="space-y-1">
+                      <p className="text-sm text-muted-foreground">ESIC</p>
+                      <Badge variant={responseData.esic_info.registered ? "default" : "secondary"}>
+                        {responseData.esic_info.registered ? "Registered" : "Not Registered"}
+                      </Badge>
+                    </div>
+                    <div className="space-y-1">
+                      <p className="text-sm text-muted-foreground">Bureau Data</p>
+                      <Badge variant="default">
+                        Available
                       </Badge>
                     </div>
                   </div>
@@ -700,6 +775,236 @@ const CustomerProfiling = () => {
                         <p className="text-sm text-muted-foreground mb-2">FCIREX Score</p>
                         <p className="text-4xl font-bold text-primary">{responseData.bureau_report.credit_report.SCORE.FCIREXScore}</p>
                       </div>
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
+
+              {/* ESIC Details */}
+              <Card className="border-primary/20">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Briefcase className="h-5 w-5" />
+                    ESIC Details
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  {/* Summary */}
+                  <div className="bg-primary/5 border border-primary/20 rounded-lg p-4">
+                    <div className="grid md:grid-cols-3 gap-4">
+                      <div>
+                        <p className="text-sm text-muted-foreground">Total Records</p>
+                        <p className="text-2xl font-bold">{responseData.esic_details.length}</p>
+                      </div>
+                      <div>
+                        <p className="text-sm text-muted-foreground">Primary Name</p>
+                        <p className="font-semibold break-words">{maskData(responseData.esic_details[0].name, showData)}</p>
+                      </div>
+                      <div>
+                        <p className="text-sm text-muted-foreground">Primary ESIC Number</p>
+                        <p className="font-mono font-semibold break-all">{maskData(responseData.esic_details[0].esic_number, showData)}</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Basic Details of First Record */}
+                  <div className="space-y-3">
+                    <h4 className="font-semibold">Primary Employment Details</h4>
+                    <div className="grid md:grid-cols-4 gap-4">
+                      <div className="bg-muted/50 p-3 rounded-lg">
+                        <p className="text-xs text-muted-foreground">Employer Name</p>
+                        <p className="text-sm font-medium break-words">{responseData.esic_details[0].employer_name}</p>
+                      </div>
+                      <div className="bg-muted/50 p-3 rounded-lg">
+                        <p className="text-xs text-muted-foreground">Registration Date</p>
+                        <p className="text-sm font-medium">{responseData.esic_details[0].registration_date}</p>
+                      </div>
+                      <div className="bg-muted/50 p-3 rounded-lg">
+                        <p className="text-xs text-muted-foreground">Bank</p>
+                        <p className="text-sm font-medium break-words">{responseData.esic_details[0].bank_name}</p>
+                      </div>
+                      <div className="bg-muted/50 p-3 rounded-lg">
+                        <p className="text-xs text-muted-foreground">Account Status</p>
+                        <Badge variant="outline">{responseData.esic_details[0].bank_account_status}</Badge>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Show More Button */}
+                  <Button 
+                    variant="outline" 
+                    className="w-full"
+                    onClick={() => setShowFullESICDetails(!showFullESICDetails)}
+                  >
+                    {showFullESICDetails ? (
+                      <>
+                        <ChevronUp className="h-4 w-4 mr-2" />
+                        Show Less
+                      </>
+                    ) : (
+                      <>
+                        <ChevronDown className="h-4 w-4 mr-2" />
+                        Show More Details
+                      </>
+                    )}
+                  </Button>
+
+                  {/* Expanded Content */}
+                  {showFullESICDetails && (
+                    <div className="space-y-4 animate-fade-in">
+                      {/* All ESIC Records */}
+                      {responseData.esic_details.map((esic: any, idx: number) => (
+                        <Card key={idx} className="border-primary/20">
+                          <CardContent className="pt-6 space-y-4">
+                            <div className="flex items-center justify-between mb-4">
+                              <h5 className="font-semibold">ESIC Record #{idx + 1}</h5>
+                              <Badge>{esic.employer_name}</Badge>
+                            </div>
+
+                            {/* Personal Details */}
+                            <div>
+                              <h6 className="text-sm font-semibold mb-3">Personal Details</h6>
+                              <div className="grid md:grid-cols-4 gap-4 bg-muted/30 p-4 rounded-lg">
+                                <div>
+                                  <p className="text-sm text-muted-foreground">Name</p>
+                                  <p className="text-sm break-words">{maskData(esic.name, showData)}</p>
+                                </div>
+                                <div>
+                                  <p className="text-sm text-muted-foreground">ESIC Number</p>
+                                  <p className="text-sm font-mono break-all">{maskData(esic.esic_number, showData)}</p>
+                                </div>
+                                <div>
+                                  <p className="text-sm text-muted-foreground">Mobile</p>
+                                  <p className="text-sm break-all">{maskPhone(esic.mobile, showData)}</p>
+                                </div>
+                                <div>
+                                  <p className="text-sm text-muted-foreground">Date of Birth</p>
+                                  <p className="text-sm">{esic.date_of_birth}</p>
+                                </div>
+                                <div>
+                                  <p className="text-sm text-muted-foreground">Age</p>
+                                  <p className="text-sm">{esic.age} years</p>
+                                </div>
+                                <div>
+                                  <p className="text-sm text-muted-foreground">Gender</p>
+                                  <p className="text-sm">{esic.gender}</p>
+                                </div>
+                                <div>
+                                  <p className="text-sm text-muted-foreground">UAN Number</p>
+                                  <p className="text-sm font-mono break-all">{maskData(esic.uan_number, showData)}</p>
+                                </div>
+                                <div>
+                                  <p className="text-sm text-muted-foreground">UHID Number</p>
+                                  <p className="text-sm">{esic.uhid_number || "N/A"}</p>
+                                </div>
+                              </div>
+                            </div>
+
+                            {/* Employment Details */}
+                            <div>
+                              <h6 className="text-sm font-semibold mb-3">Employment Details</h6>
+                              <div className="grid md:grid-cols-3 gap-4 bg-muted/30 p-4 rounded-lg">
+                                <div>
+                                  <p className="text-sm text-muted-foreground">Employer Name</p>
+                                  <p className="text-sm font-medium break-words">{esic.employer_name}</p>
+                                </div>
+                                <div>
+                                  <p className="text-sm text-muted-foreground">Employer Code</p>
+                                  <p className="text-sm font-mono break-all">{maskData(esic.employer_code, showData)}</p>
+                                </div>
+                                <div>
+                                  <p className="text-sm text-muted-foreground">Registration Date</p>
+                                  <p className="text-sm">{esic.registration_date}</p>
+                                </div>
+                                <div>
+                                  <p className="text-sm text-muted-foreground">First Appointment</p>
+                                  <p className="text-sm">{esic.first_date_of_appointment}</p>
+                                </div>
+                                <div>
+                                  <p className="text-sm text-muted-foreground">Dispensary</p>
+                                  <p className="text-sm break-words">{esic.dispensary_name}</p>
+                                </div>
+                                <div>
+                                  <p className="text-sm text-muted-foreground">Disability Type</p>
+                                  <p className="text-sm">{esic.disability_type || "None"}</p>
+                                </div>
+                              </div>
+                            </div>
+
+                            {/* Bank Details */}
+                            <div>
+                              <h6 className="text-sm font-semibold mb-3">Bank Details</h6>
+                              <div className="grid md:grid-cols-3 gap-4 bg-muted/30 p-4 rounded-lg">
+                                <div>
+                                  <p className="text-sm text-muted-foreground">Bank Name</p>
+                                  <p className="text-sm break-words">{esic.bank_name}</p>
+                                </div>
+                                <div>
+                                  <p className="text-sm text-muted-foreground">Branch Name</p>
+                                  <p className="text-sm break-words">{esic.branch_name}</p>
+                                </div>
+                                <div>
+                                  <p className="text-sm text-muted-foreground">Account Status</p>
+                                  <Badge variant="outline">{esic.bank_account_status}</Badge>
+                                </div>
+                              </div>
+                            </div>
+
+                            {/* Employer Details */}
+                            <div>
+                              <h6 className="text-sm font-semibold mb-3">Employer Details</h6>
+                              <div className="bg-muted/30 p-4 rounded-lg space-y-3">
+                                <div className="grid md:grid-cols-2 gap-4">
+                                  <div>
+                                    <p className="text-sm text-muted-foreground">Employer Name</p>
+                                    <p className="text-sm break-words">{esic.employer_details.employer_name}</p>
+                                  </div>
+                                  <div>
+                                    <p className="text-sm text-muted-foreground">Employer Code</p>
+                                    <p className="text-sm font-mono break-all">{maskData(esic.employer_details.employer_code, showData)}</p>
+                                  </div>
+                                </div>
+                                <div>
+                                  <p className="text-sm text-muted-foreground">Address</p>
+                                  <p className="text-sm break-words">{esic.employer_details.address}</p>
+                                </div>
+                                <div className="grid md:grid-cols-3 gap-4">
+                                  <div>
+                                    <p className="text-sm text-muted-foreground">State</p>
+                                    <p className="text-sm">{esic.employer_details.state}</p>
+                                  </div>
+                                  <div>
+                                    <p className="text-sm text-muted-foreground">District</p>
+                                    <p className="text-sm">{esic.employer_details.district}</p>
+                                  </div>
+                                  <div>
+                                    <p className="text-sm text-muted-foreground">Pincode</p>
+                                    <p className="text-sm">{esic.employer_details.pincode}</p>
+                                  </div>
+                                </div>
+                                <div className="grid md:grid-cols-2 gap-4">
+                                  <div>
+                                    <p className="text-sm text-muted-foreground">Email</p>
+                                    <p className="text-sm break-all">{maskEmail(esic.employer_details.email, showData)}</p>
+                                  </div>
+                                  <div>
+                                    <p className="text-sm text-muted-foreground">Mobile</p>
+                                    <p className="text-sm">{esic.employer_details.mobile || "N/A"}</p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+
+                            {/* Address */}
+                            <div>
+                              <h6 className="text-sm font-semibold mb-3">Employee Address</h6>
+                              <div className="bg-muted/30 p-4 rounded-lg">
+                                <p className="text-sm break-words">{maskData(esic.address, showData)}</p>
+                              </div>
+                            </div>
+                          </CardContent>
+                        </Card>
+                      ))}
                     </div>
                   )}
                 </CardContent>

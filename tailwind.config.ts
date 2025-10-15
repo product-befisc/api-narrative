@@ -108,9 +108,9 @@ export default {
             transform: "translateY(-20px)"
           },
         },
-        "meteor": {
+        "grid-light-horizontal": {
           "0%": {
-            transform: "translate(-100%, -100%) rotate(45deg)",
+            transform: "translateX(-100%)",
             opacity: "0"
           },
           "10%": {
@@ -120,7 +120,23 @@ export default {
             opacity: "1"
           },
           "100%": {
-            transform: "translate(100vw, 100vh) rotate(45deg)",
+            transform: "translateX(100vw)",
+            opacity: "0"
+          },
+        },
+        "grid-light-vertical": {
+          "0%": {
+            transform: "translateY(-100%)",
+            opacity: "0"
+          },
+          "10%": {
+            opacity: "1"
+          },
+          "90%": {
+            opacity: "1"
+          },
+          "100%": {
+            transform: "translateY(100vh)",
             opacity: "0"
           },
         },
@@ -129,7 +145,8 @@ export default {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "float": "float 6s ease-in-out infinite",
-        "meteor": "meteor 8s linear infinite",
+        "grid-light-h": "grid-light-horizontal 4s linear infinite",
+        "grid-light-v": "grid-light-vertical 4s linear infinite",
       },
     },
   },

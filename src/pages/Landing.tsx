@@ -99,19 +99,28 @@ const Landing = () => {
           </svg>
         </div>
 
-        {/* Meteor Effects */}
+        {/* Running Lights Through Grid */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          {/* Meteor 1 */}
-          <div className="absolute top-0 left-0 w-[200px] h-[2px] animate-meteor" style={{ animationDelay: '0s' }}>
-            <div className="w-full h-full bg-gradient-to-r from-transparent via-primary to-transparent opacity-75 blur-sm"></div>
+          {/* Horizontal Lights */}
+          <div className="absolute left-0 h-[2px] w-full animate-grid-light-h" style={{ top: '20%', animationDelay: '0s' }}>
+            <div className="w-40 h-full bg-gradient-to-r from-transparent via-primary to-transparent shadow-[0_0_20px_rgba(var(--primary),0.8)]"></div>
           </div>
-          {/* Meteor 2 */}
-          <div className="absolute top-0 left-0 w-[200px] h-[2px] animate-meteor" style={{ animationDelay: '3s' }}>
-            <div className="w-full h-full bg-gradient-to-r from-transparent via-primary/60 to-transparent opacity-75 blur-sm"></div>
+          <div className="absolute left-0 h-[2px] w-full animate-grid-light-h" style={{ top: '45%', animationDelay: '1.5s' }}>
+            <div className="w-40 h-full bg-gradient-to-r from-transparent via-primary/70 to-transparent shadow-[0_0_20px_rgba(var(--primary),0.6)]"></div>
           </div>
-          {/* Meteor 3 */}
-          <div className="absolute top-0 left-0 w-[200px] h-[2px] animate-meteor" style={{ animationDelay: '6s' }}>
-            <div className="w-full h-full bg-gradient-to-r from-transparent via-primary/80 to-transparent opacity-75 blur-sm"></div>
+          <div className="absolute left-0 h-[2px] w-full animate-grid-light-h" style={{ top: '70%', animationDelay: '3s' }}>
+            <div className="w-40 h-full bg-gradient-to-r from-transparent via-primary/80 to-transparent shadow-[0_0_20px_rgba(var(--primary),0.7)]"></div>
+          </div>
+          
+          {/* Vertical Lights */}
+          <div className="absolute top-0 w-[2px] h-full animate-grid-light-v" style={{ left: '25%', animationDelay: '0.5s' }}>
+            <div className="h-40 w-full bg-gradient-to-b from-transparent via-primary to-transparent shadow-[0_0_20px_rgba(var(--primary),0.8)]"></div>
+          </div>
+          <div className="absolute top-0 w-[2px] h-full animate-grid-light-v" style={{ left: '60%', animationDelay: '2s' }}>
+            <div className="h-40 w-full bg-gradient-to-b from-transparent via-primary/70 to-transparent shadow-[0_0_20px_rgba(var(--primary),0.6)]"></div>
+          </div>
+          <div className="absolute top-0 w-[2px] h-full animate-grid-light-v" style={{ left: '80%', animationDelay: '3.5s' }}>
+            <div className="h-40 w-full bg-gradient-to-b from-transparent via-primary/80 to-transparent shadow-[0_0_20px_rgba(var(--primary),0.7)]"></div>
           </div>
         </div>
 

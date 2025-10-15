@@ -146,7 +146,7 @@ const Landing = () => {
           </div>
 
           {/* Bottom Left Card - Financial Statement */}
-          <div className="absolute bottom-[15%] left-[15%] hidden lg:block animate-float" style={{ animationDelay: '2.5s' }}>
+          <div className="absolute bottom-[15%] left-[12%] hidden md:block animate-float" style={{ animationDelay: '2.5s' }}>
             <div className="group relative bg-background/80 backdrop-blur-xl rounded-2xl p-4 border border-primary/20 shadow-2xl hover:shadow-primary/20 transition-all duration-500 hover:scale-110 hover:border-primary/40">
               <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent rounded-2xl opacity-50"></div>
               <img src={financialStatementIcon} alt="Financial Statement" className="w-16 h-16 relative z-10" />

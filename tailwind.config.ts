@@ -76,7 +76,7 @@ export default {
         'smooth': 'var(--transition-smooth)',
       },
       fontFamily: {
-        sans: ['Poppins', 'system-ui', 'sans-serif'],
+        sans: ['Noto Sans TC', 'system-ui', 'sans-serif'],
       },
       borderRadius: {
         lg: "var(--radius)",

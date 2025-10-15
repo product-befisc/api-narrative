@@ -1,53 +1,72 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeft, Upload, FileCheck, AlertTriangle, CheckCircle, XCircle } from 'lucide-react';
+import { ArrowLeft, Upload, FileCheck, AlertTriangle, CheckCircle, XCircle, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import Navbar from '@/components/Navbar';
 
 const TamperProof = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const [uploading, setUploading] = useState(false);
   const [uploaded, setUploaded] = useState(false);
   const [result, setResult] = useState<any>(null);
+  const [documentType, setDocumentType] = useState<string>('');
+
+  const getFileName = (type: string) => {
+    const fileNames: Record<string, string> = {
+      'Salary slip': 'Salary_Slip_Oct_2024.pdf',
+      'Bank statement': 'Bank_Statement_Sep_2024.pdf',
+      'Resume': 'Resume_John_Doe_2024.pdf',
+      'Other PDF': 'Document_Sample.pdf',
+    };
+    return fileNames[type] || 'Document.pdf';
+  };
 
   const handleScan = () => {
-    setUploaded(true);
-    setLoading(true);
+    if (!documentType) return;
+    
+    setUploading(true);
     setTimeout(() => {
-      setResult({
-        fileName: 'Trips_Flight_Downloa...pdf',
-        creditsUsed: 1,
-        pages: 3,
-        date: '06 Oct 2025',
-        verdict: 'SAFE',
-        metadataCheck: {
-          status: 'issue',
-          created: '01 Oct 2025 at 12:53',
-          modified: '01 Oct 2025 at 12:53',
-        },
-        structureCheck: {
-          status: 'ok',
-          description: 'No Structural Change',
-        },
-        editorUsed: {
-          status: 'ok',
-          editors: 'NO Suspicious editor detected',
-        },
-        digitalSignature: {
-          status: 'issue',
-          presence: 'No',
-          authentic: 'No',
-        },
-        embeddedFile: {
-          status: 'ok',
-          description: 'No embedded files are present',
-        },
-        suspectedText: '[NONE]',
-      });
-      setLoading(false);
-    }, 2000);
+      setUploading(false);
+      setUploaded(true);
+      setLoading(true);
+      setTimeout(() => {
+        setResult({
+          fileName: getFileName(documentType),
+          creditsUsed: 1,
+          pages: 3,
+          date: '06 Oct 2025',
+          verdict: 'SAFE',
+          metadataCheck: {
+            status: 'issue',
+            created: '01 Oct 2025 at 12:53',
+            modified: '01 Oct 2025 at 12:53',
+          },
+          structureCheck: {
+            status: 'ok',
+            description: 'No Structural Change',
+          },
+          editorUsed: {
+            status: 'ok',
+            editors: 'NO Suspicious editor detected',
+          },
+          digitalSignature: {
+            status: 'issue',
+            presence: 'No',
+            authentic: 'No',
+          },
+          embeddedFile: {
+            status: 'ok',
+            description: 'No embedded files are present',
+          },
+          suspectedText: '[NONE]',
+        });
+        setLoading(false);
+      }, 2000);
+    }, 1500);
   };
 
   return (
@@ -80,8 +99,32 @@ const TamperProof = () => {
             <FileCheck className="h-6 w-6 text-primary" />
             <h2 className="text-2xl font-bold text-foreground">Upload Document</h2>
           </div>
+
+          {/* Document Type Selector */}
+          <div className="mb-6">
+            <label className="text-sm font-medium text-foreground mb-2 block">
+              Select Document Type
+            </label>
+            <Select value={documentType} onValueChange={setDocumentType} disabled={uploaded || uploading}>
+              <SelectTrigger className="w-full">
+                <SelectValue placeholder="Choose document type..." />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="Salary slip">Salary slip</SelectItem>
+                <SelectItem value="Bank statement">Bank statement</SelectItem>
+                <SelectItem value="Resume">Resume</SelectItem>
+                <SelectItem value="Other PDF">Other PDF</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
           
-          {!uploaded ? (
+          {uploading ? (
+            <div className="border-2 border-primary rounded-lg p-12 text-center mb-6 bg-primary/5">
+              <Loader2 className="h-12 w-12 text-primary mx-auto mb-4 animate-spin" />
+              <p className="font-semibold text-foreground mb-2">Uploading {getFileName(documentType)}</p>
+              <p className="text-sm text-muted-foreground">Please wait...</p>
+            </div>
+          ) : !uploaded ? (
             <div className="border-2 border-dashed border-border rounded-lg p-12 text-center mb-6 hover:border-primary transition-colors">
               <Upload className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
               <p className="text-muted-foreground mb-2">Upload documents for verification</p>
@@ -93,16 +136,7 @@ const TamperProof = () => {
                 <div className="flex items-center gap-3">
                   <FileCheck className="h-8 w-8 text-success" />
                   <div className="text-left">
-                    <p className="font-semibold text-foreground">Bank_Statement_Sep_2024.pdf</p>
-                    <p className="text-sm text-muted-foreground">Document uploaded successfully</p>
-                  </div>
-                </div>
-              </div>
-              <div className="border-2 border-success rounded-lg p-6 bg-success/5">
-                <div className="flex items-center gap-3">
-                  <FileCheck className="h-8 w-8 text-success" />
-                  <div className="text-left">
-                    <p className="font-semibold text-foreground">Salary_Slip_Oct_2024.pdf</p>
+                    <p className="font-semibold text-foreground">{getFileName(documentType)}</p>
                     <p className="text-sm text-muted-foreground">Document uploaded successfully</p>
                   </div>
                 </div>
@@ -112,11 +146,11 @@ const TamperProof = () => {
           
           <Button 
             onClick={handleScan}
-            disabled={loading || uploaded}
+            disabled={loading || uploaded || uploading || !documentType}
             className="w-full"
             size="lg"
           >
-            {loading ? 'Scanning Document...' : uploaded ? 'Scanning...' : 'Upload & Scan'}
+            {loading ? 'Scanning Document...' : uploaded ? 'Scanning...' : uploading ? 'Uploading...' : 'Upload & Scan'}
           </Button>
         </Card>
 

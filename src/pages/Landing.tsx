@@ -11,6 +11,7 @@ import idProofIcon from '@/assets/products/id-proof-2.svg';
 import ocrProofIcon from '@/assets/products/ocr-proof.svg';
 import tamperProofIcon from '@/assets/products/tamper-proof-2.svg';
 import trustiifyIcon from '@/assets/products/trustiify.svg';
+import financialStatementIcon from '@/assets/products/financial-statement.svg';
 import affordplanLogo from '@/assets/clients/affordplan.svg';
 import arthanFinanceLogo from '@/assets/clients/arthan-finance.svg';
 import bajajLogo from '@/assets/clients/bajaj.svg';
@@ -141,6 +142,15 @@ const Landing = () => {
               <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent rounded-2xl opacity-50"></div>
               <img src={trustiifyIcon} alt="Trustiify" className="w-16 h-16 relative z-10" />
               <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-8 h-8 bg-primary/20 rounded-full blur-xl"></div>
+            </div>
+          </div>
+
+          {/* Bottom Left Card - Financial Statement */}
+          <div className="absolute bottom-[15%] left-[15%] hidden lg:block animate-float" style={{ animationDelay: '2.5s' }}>
+            <div className="group relative bg-background/80 backdrop-blur-xl rounded-2xl p-4 border border-primary/20 shadow-2xl hover:shadow-primary/20 transition-all duration-500 hover:scale-110 hover:border-primary/40">
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent rounded-2xl opacity-50"></div>
+              <img src={financialStatementIcon} alt="Financial Statement" className="w-16 h-16 relative z-10" />
+              <div className="absolute -top-2 -right-2 w-8 h-8 bg-primary/20 rounded-full blur-xl"></div>
             </div>
           </div>
         </div>

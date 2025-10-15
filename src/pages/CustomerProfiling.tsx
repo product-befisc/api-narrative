@@ -620,12 +620,9 @@ const CustomerProfiling = () => {
                       </div>
                       <div>
                         <p className="text-sm text-muted-foreground">Credit Score</p>
-                        <div className="space-y-1">
-                          <p className="text-2xl font-bold text-primary">{responseData.bureau_report.credit_score}</p>
-                          <Badge variant="outline" className="text-xs">
-                            {getCreditScoreBand(responseData.bureau_report.credit_score)}
-                          </Badge>
-                        </div>
+                        <p className="text-2xl font-bold text-primary">
+                          {getCreditScoreBand(responseData.bureau_report.credit_score)}
+                        </p>
                       </div>
                     </div>
                   </div>

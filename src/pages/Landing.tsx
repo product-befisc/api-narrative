@@ -188,7 +188,7 @@ const Landing = () => {
               {/* 30M+ API Calls */}
               <div className="group relative bg-background/60 backdrop-blur-sm rounded-2xl p-6 border border-border/50 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 hover:-translate-y-1">
                 <div className="flex flex-col items-center justify-center h-full min-h-[100px]">
-                  <div className="text-3xl md:text-4xl font-bold text-primary mb-2">30M+</div>
+                  <div className="text-3xl md:text-4xl font-bold text-primary mb-2">50M+</div>
                   <div className="text-xs font-medium text-muted-foreground uppercase tracking-wide text-center leading-tight">API Calls<br />/ Month</div>
                 </div>
               </div>

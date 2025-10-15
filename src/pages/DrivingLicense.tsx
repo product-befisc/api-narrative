@@ -12,6 +12,7 @@ import { maskData, maskEmail, maskPhone } from "@/lib/utils";
 const DrivingLicense = () => {
   const navigate = useNavigate();
   const [dlNumber, setDlNumber] = useState("DL-0720220123456");
+  const [dob, setDob] = useState("1990-08-25");
   const [responseData, setResponseData] = useState<any>(null);
   const [loading, setLoading] = useState(false);
   const [showData, setShowData] = useState(false);
@@ -103,19 +104,30 @@ const DrivingLicense = () => {
 
           <Card>
             <CardHeader>
-              <CardTitle>Enter DL Number</CardTitle>
+              <CardTitle>Enter DL Number & Date of Birth</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="flex gap-4">
-                <Input
-                  placeholder="Enter DL number"
-                  value={dlNumber}
-                  onChange={(e) => setDlNumber(e.target.value.toUpperCase())}
-                />
-                <Button onClick={handleFetch} disabled={loading || !consent}>
-                  {loading ? "Fetching..." : "Fetch Details"}
-                </Button>
+              <div className="grid md:grid-cols-2 gap-4">
+                <div>
+                  <label className="text-sm text-muted-foreground mb-2 block">DL Number</label>
+                  <Input
+                    placeholder="Enter DL number"
+                    value={dlNumber}
+                    onChange={(e) => setDlNumber(e.target.value.toUpperCase())}
+                  />
+                </div>
+                <div>
+                  <label className="text-sm text-muted-foreground mb-2 block">Date of Birth</label>
+                  <Input
+                    type="date"
+                    value={dob}
+                    onChange={(e) => setDob(e.target.value)}
+                  />
+                </div>
               </div>
+              <Button onClick={handleFetch} disabled={loading || !consent} className="w-full md:w-auto">
+                {loading ? "Fetching..." : "Fetch Details"}
+              </Button>
               <div className="flex items-start space-x-2">
                 <Checkbox id="consent" checked={consent} onCheckedChange={(checked) => setConsent(checked === true)} />
                 <label htmlFor="consent" className="text-sm text-muted-foreground leading-relaxed cursor-pointer">

@@ -11,7 +11,7 @@ import { maskData } from '@/lib/utils';
 
 const UANHistory = () => {
   const navigate = useNavigate();
-  const [uan, setUan] = useState('1000087654321');
+  const [mobile, setMobile] = useState('9876543210');
   const [response, setResponse] = useState<any>(null);
   const [loading, setLoading] = useState(false);
   const [showData, setShowData] = useState(false);
@@ -61,15 +61,17 @@ const UANHistory = () => {
 
           <Card className="mb-6">
             <CardHeader>
-              <CardTitle>Enter UAN Number</CardTitle>
+              <CardTitle>Enter Mobile Number</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="flex gap-4">
                 <Input
-                  value={uan}
-                  onChange={(e) => setUan(e.target.value)}
-                  placeholder="Enter UAN"
+                  type="tel"
+                  value={mobile}
+                  onChange={(e) => setMobile(e.target.value)}
+                  placeholder="Enter Mobile Number"
                   className="flex-1"
+                  autoComplete="tel"
                 />
                 <Button onClick={handleFetch} disabled={loading || !consent}>
                   {loading ? 'Fetching...' : 'Fetch History'}

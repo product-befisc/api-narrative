@@ -222,7 +222,7 @@ const CustomerProfiling = () => {
                         <p>{responseData.digital_payment_id.branch}</p>
                       </div>
                       <div>
-                        <p className="text-sm text-muted-foreground">Address</p>
+                        <p className="text-sm text-muted-foreground">Branch Address</p>
                         <p className="text-sm">{maskData(responseData.digital_payment_id.address, showData)}</p>
                       </div>
                     </div>

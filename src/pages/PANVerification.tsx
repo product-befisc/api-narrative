@@ -6,7 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Checkbox } from "@/components/ui/checkbox";
 import Navbar from "@/components/Navbar";
-import { ArrowLeft, Calendar, CheckCircle2, User, MapPin, Phone, Mail, Building, Eye, EyeOff } from "lucide-react";
+import { ArrowLeft, Calendar, CheckCircle2, User, MapPin, Phone, Mail, Building } from "lucide-react";
 import { maskData, maskEmail, maskPhone } from "@/lib/utils";
 
 const PANVerification = () => {
@@ -14,7 +14,6 @@ const PANVerification = () => {
   const [panNumber, setPanNumber] = useState("AAAPA1234A");
   const [responseData, setResponseData] = useState<any>(null);
   const [loading, setLoading] = useState(false);
-  const [showData, setShowData] = useState(false);
   const [consent, setConsent] = useState(true);
 
   const mockResponse = {
@@ -106,12 +105,6 @@ const PANVerification = () => {
 
           {responseData && (
             <div className="space-y-6 animate-fade-in">
-              <div className="flex justify-end mb-4">
-                <Button variant="outline" size="sm" onClick={() => setShowData(!showData)}>
-                  {showData ? <EyeOff className="h-4 w-4 mr-2" /> : <Eye className="h-4 w-4 mr-2" />}
-                  {showData ? 'Hide' : 'Show'} Data
-                </Button>
-              </div>
               {/* Key Highlights */}
               <Card className="border-primary/20">
                 <CardHeader>
@@ -163,18 +156,18 @@ const PANVerification = () => {
                     <div className="space-y-4">
                       <div>
                         <p className="text-sm text-muted-foreground">PAN Number</p>
-                        <p className="font-semibold text-lg">{maskData(responseData.pan, showData)}</p>
+                        <p className="font-semibold text-lg">{maskData(responseData.pan, true)}</p>
                       </div>
                       <div>
                         <p className="text-sm text-muted-foreground">Full Name</p>
-                        <p className="font-semibold">{maskData(responseData.full_name, showData)}</p>
+                        <p className="font-semibold">{maskData(responseData.full_name, true)}</p>
                         <p className="text-sm text-muted-foreground mt-1">
-                          First: {maskData(responseData.first_name, showData)} | Middle: {maskData(responseData.middle_name, showData)} | Last: {maskData(responseData.last_name, showData)}
+                          First: {maskData(responseData.first_name, true)} | Middle: {maskData(responseData.middle_name, true)} | Last: {maskData(responseData.last_name, true)}
                         </p>
                       </div>
                       <div>
                         <p className="text-sm text-muted-foreground">Masked Aadhaar</p>
-                        <p className="font-mono">{maskData(responseData.masked_aadhaar, showData)}</p>
+                        <p className="font-mono">{maskData(responseData.masked_aadhaar, true)}</p>
                       </div>
                     </div>
                     <div className="space-y-4">
@@ -214,20 +207,20 @@ const PANVerification = () => {
                   <div className="space-y-3">
                     <div>
                       <p className="text-sm text-muted-foreground">Full Address</p>
-                      <p className="font-medium">{maskData(responseData.address.full_address, showData)}</p>
+                      <p className="font-medium">{maskData(responseData.address.full_address, true)}</p>
                     </div>
                     <div className="grid md:grid-cols-3 gap-4 pt-2">
                       <div>
                         <p className="text-sm text-muted-foreground">City</p>
-                        <p>{maskData(responseData.address.city, showData)}</p>
+                        <p>{maskData(responseData.address.city, true)}</p>
                       </div>
                       <div>
                         <p className="text-sm text-muted-foreground">State</p>
-                        <p>{maskData(responseData.address.state, showData)}</p>
+                        <p>{maskData(responseData.address.state, true)}</p>
                       </div>
                       <div>
                         <p className="text-sm text-muted-foreground">ZIP Code</p>
-                        <p>{maskData(responseData.address.zip, showData)}</p>
+                        <p>{maskData(responseData.address.zip, true)}</p>
                       </div>
                     </div>
                   </div>
@@ -248,14 +241,14 @@ const PANVerification = () => {
                       <Mail className="h-4 w-4 text-muted-foreground" />
                       <div>
                         <p className="text-sm text-muted-foreground">Email</p>
-                        <p className="text-sm">{maskEmail(responseData.contact.email, showData)}</p>
+                        <p className="text-sm">{maskEmail(responseData.contact.email, false)}</p>
                       </div>
                     </div>
                     <div className="flex items-center gap-2">
                       <Phone className="h-4 w-4 text-muted-foreground" />
                       <div>
                         <p className="text-sm text-muted-foreground">Phone</p>
-                        <p className="text-sm">{maskPhone(responseData.contact.phone, showData)}</p>
+                        <p className="text-sm">{maskPhone(responseData.contact.phone, false)}</p>
                       </div>
                     </div>
                   </CardContent>
@@ -276,7 +269,7 @@ const PANVerification = () => {
                     {responseData.din && (
                       <div>
                         <p className="text-sm text-muted-foreground">DIN</p>
-                        <p className="font-mono">{maskData(responseData.din, showData)}</p>
+                        <p className="font-mono">{maskData(responseData.din, true)}</p>
                       </div>
                     )}
                     {responseData.doj && (

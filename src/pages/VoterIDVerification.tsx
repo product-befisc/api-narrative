@@ -172,11 +172,11 @@ const VoterIDVerification = () => {
                   <div className="grid md:grid-cols-2 gap-4">
                     <div>
                       <p className="text-sm text-muted-foreground">Name (English)</p>
-                      <p className="font-semibold text-lg text-foreground">{maskData(response.voter.name_english, showData)}</p>
+                      <p className="font-semibold text-lg text-foreground break-words">{maskData(response.voter.name_english, showData)}</p>
                     </div>
                     <div>
                       <p className="text-sm text-muted-foreground">Name (Vernacular)</p>
-                      <p className="font-semibold text-lg text-foreground">{maskData(response.voter.name_vernacular, showData)}</p>
+                      <p className="font-semibold text-lg text-foreground break-words">{maskData(response.voter.name_vernacular, showData)}</p>
                     </div>
                   </div>
                   <div className="grid md:grid-cols-3 gap-4">
@@ -196,7 +196,7 @@ const VoterIDVerification = () => {
                   <div className="grid md:grid-cols-2 gap-4">
                     <div>
                       <p className="text-sm text-muted-foreground">Relative Name</p>
-                      <p className="font-medium text-foreground">{maskData(response.voter.relative_name, showData)}</p>
+                      <p className="font-medium text-foreground break-words">{maskData(response.voter.relative_name, showData)}</p>
                     </div>
                     <div>
                       <p className="text-sm text-muted-foreground">Relation</p>
@@ -222,11 +222,11 @@ const VoterIDVerification = () => {
                   <div className="grid md:grid-cols-2 gap-4">
                     <div>
                       <p className="text-sm text-muted-foreground">District (English)</p>
-                      <p className="font-semibold text-foreground">{response.address.district_name_english}</p>
+                      <p className="font-semibold text-foreground break-words">{response.address.district_name_english}</p>
                     </div>
                     <div>
                       <p className="text-sm text-muted-foreground">District (Vernacular)</p>
-                      <p className="font-semibold text-foreground">{response.address.district_name_vernacular}</p>
+                      <p className="font-semibold text-foreground break-words">{response.address.district_name_vernacular}</p>
                     </div>
                   </div>
                   <div className="grid md:grid-cols-3 gap-4">
@@ -248,11 +248,11 @@ const VoterIDVerification = () => {
                     <div className="grid md:grid-cols-2 gap-4">
                       <div>
                         <p className="text-sm text-muted-foreground">Assembly Constituency (English)</p>
-                        <p className="font-semibold text-foreground">{response.address.assembly_constituency_english}</p>
+                        <p className="font-semibold text-foreground break-words">{response.address.assembly_constituency_english}</p>
                       </div>
                       <div>
                         <p className="text-sm text-muted-foreground">Assembly Constituency (Vernacular)</p>
-                        <p className="font-semibold text-foreground">{response.address.assembly_constituency_vernacular}</p>
+                        <p className="font-semibold text-foreground break-words">{response.address.assembly_constituency_vernacular}</p>
                       </div>
                     </div>
                     <div className="grid md:grid-cols-2 gap-4 mt-4">
@@ -298,11 +298,11 @@ const VoterIDVerification = () => {
                   <div className="grid md:grid-cols-2 gap-4">
                     <div>
                       <p className="text-sm text-muted-foreground">Booth Name (English)</p>
-                      <p className="font-semibold text-foreground">{response.polling_booth.booth_name_english}</p>
+                      <p className="font-semibold text-foreground break-words">{response.polling_booth.booth_name_english}</p>
                     </div>
                     <div>
                       <p className="text-sm text-muted-foreground">Booth Name (Vernacular)</p>
-                      <p className="font-semibold text-foreground">{response.polling_booth.booth_name_vernacular}</p>
+                      <p className="font-semibold text-foreground break-words">{response.polling_booth.booth_name_vernacular}</p>
                     </div>
                   </div>
                   <div>

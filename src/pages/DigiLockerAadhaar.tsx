@@ -150,10 +150,10 @@ const DigiLockerAadhaar = () => {
                     <Input id="aadhaar" value="1234 5678 9123" readOnly className="bg-muted/50" />
                   </div>
                   <div className="grid grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="udf1">Transaction ID</Label>
-                      <Input id="udf1" value="368e4d358b5f" readOnly className="bg-muted/50" />
-                    </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="udf1">Transaction ID</Label>
+                    <Input id="udf1" value="368e4d358b5f" readOnly className="bg-muted/50 font-mono" />
+                  </div>
                     <div className="space-y-2">
                       <Label htmlFor="consent">Consent</Label>
                       <Input id="consent" value="Yes" readOnly className="bg-muted/50" />

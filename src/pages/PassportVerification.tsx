@@ -166,7 +166,7 @@ const PassportVerification = () => {
                   <div className="grid md:grid-cols-2 gap-4">
                     <div>
                       <p className="text-sm text-muted-foreground">Full Name</p>
-                      <p className="font-semibold text-lg text-foreground">{maskData(response.applicant.full_name, showData)}</p>
+                      <p className="font-semibold text-lg text-foreground break-words">{maskData(response.applicant.full_name, showData)}</p>
                     </div>
                     <div>
                       <p className="text-sm text-muted-foreground">Date of Birth</p>
@@ -176,11 +176,11 @@ const PassportVerification = () => {
                   <div className="grid md:grid-cols-2 gap-4">
                     <div>
                       <p className="text-sm text-muted-foreground">Passport Number</p>
-                      <p className="font-semibold text-foreground">{maskData(response.applicant.passport_number, showData)}</p>
+                      <p className="font-semibold text-foreground break-all">{maskData(response.applicant.passport_number, showData)}</p>
                     </div>
                     <div>
                       <p className="text-sm text-muted-foreground">File Number</p>
-                      <p className="font-semibold text-foreground">{maskData(response.applicant.file_number, showData)}</p>
+                      <p className="font-semibold text-foreground break-all">{maskData(response.applicant.file_number, showData)}</p>
                     </div>
                   </div>
                   <div className="grid md:grid-cols-2 gap-4">
@@ -234,10 +234,10 @@ const PassportVerification = () => {
                       <Package className="h-4 w-4 text-primary" />
                       <p className="text-sm font-semibold text-foreground">Speed Post Tracking</p>
                     </div>
-                    <p className="font-mono text-lg font-bold text-foreground">{response.status.speed_post_tracking}</p>
+                    <p className="font-mono text-lg font-bold text-foreground break-all">{response.status.speed_post_tracking}</p>
                   </div>
                   <div className="bg-primary/10 border border-primary/20 p-4 rounded-lg">
-                    <p className="text-sm font-medium text-foreground">{response.status.status_message}</p>
+                    <p className="text-sm font-medium text-foreground break-words">{response.status.status_message}</p>
                   </div>
                 </CardContent>
               </Card>

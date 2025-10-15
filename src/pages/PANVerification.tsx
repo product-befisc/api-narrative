@@ -168,14 +168,14 @@ const PANVerification = () => {
                       </div>
                       <div>
                         <p className="text-sm text-muted-foreground">Full Name</p>
-                        <p className="font-semibold">{maskData(responseData.full_name, showData)}</p>
-                        <p className="text-sm text-muted-foreground mt-1">
+                        <p className="font-semibold break-words">{maskData(responseData.full_name, showData)}</p>
+                        <p className="text-sm text-muted-foreground mt-1 break-words">
                           First: {maskData(responseData.first_name, showData)} | Middle: {maskData(responseData.middle_name, showData)} | Last: {maskData(responseData.last_name, showData)}
                         </p>
                       </div>
                       <div>
                         <p className="text-sm text-muted-foreground">Father's Name</p>
-                        <p className="font-semibold">{maskData(responseData.father_name, showData)}</p>
+                        <p className="font-semibold break-words">{maskData(responseData.father_name, showData)}</p>
                       </div>
                       <div>
                         <p className="text-sm text-muted-foreground">Masked Aadhaar</p>
@@ -219,7 +219,7 @@ const PANVerification = () => {
                   <div className="space-y-3">
                     <div>
                       <p className="text-sm text-muted-foreground">Full Address</p>
-                      <p className="font-medium">{maskData(responseData.address.full_address, showData)}</p>
+                      <p className="font-medium break-words">{maskData(responseData.address.full_address, showData)}</p>
                     </div>
                     <div className="grid md:grid-cols-3 gap-4 pt-2">
                       <div>
@@ -250,10 +250,10 @@ const PANVerification = () => {
                   </CardHeader>
                   <CardContent className="space-y-3">
                     <div className="flex items-center gap-2">
-                      <Mail className="h-4 w-4 text-muted-foreground" />
-                      <div>
+                      <Mail className="h-4 w-4 text-muted-foreground flex-shrink-0" />
+                      <div className="min-w-0">
                         <p className="text-sm text-muted-foreground">Email</p>
-                        <p className="text-sm">{maskEmail(responseData.contact.email, false)}</p>
+                        <p className="text-sm break-all">{maskEmail(responseData.contact.email, false)}</p>
                       </div>
                     </div>
                     <div className="flex items-center gap-2">

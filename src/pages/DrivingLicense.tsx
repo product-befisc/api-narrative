@@ -159,12 +159,12 @@ const DrivingLicense = () => {
                     <div className="flex-1 space-y-4">
                       <div>
                         <p className="text-sm text-muted-foreground">Full Name</p>
-                        <p className="text-2xl font-bold">{maskData(responseData.full_name, showData)}</p>
+                        <p className="text-2xl font-bold break-words">{maskData(responseData.full_name, showData)}</p>
                       </div>
                       <div className="grid md:grid-cols-3 gap-4">
                         <div>
                           <p className="text-sm text-muted-foreground">DL Number</p>
-                          <p className="font-mono font-semibold">{maskData(responseData.dl_number, showData)}</p>
+                          <p className="font-mono font-semibold break-all">{maskData(responseData.dl_number, showData)}</p>
                         </div>
                         <div>
                           <p className="text-sm text-muted-foreground">Status</p>
@@ -196,7 +196,7 @@ const DrivingLicense = () => {
                     <div className="space-y-4">
                       <div>
                         <p className="text-sm text-muted-foreground">Father/Husband Name</p>
-                        <p className="font-medium">{maskData(responseData.father_husband_name, showData)}</p>
+                        <p className="font-medium break-words">{maskData(responseData.father_husband_name, showData)}</p>
                       </div>
                       <div>
                         <p className="text-sm text-muted-foreground">Date of Birth</p>
@@ -211,7 +211,7 @@ const DrivingLicense = () => {
                       </div>
                       <div>
                         <p className="text-sm text-muted-foreground">Endorse Number</p>
-                        <p className="font-mono text-sm">{responseData.endorse_number}</p>
+                        <p className="font-mono text-sm break-all">{responseData.endorse_number}</p>
                       </div>
                     </div>
                     <div className="space-y-4">
@@ -319,7 +319,7 @@ const DrivingLicense = () => {
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-sm leading-relaxed">{maskData(responseData.permanent_address.full_address, showData)}</p>
+                    <p className="text-sm leading-relaxed break-words">{maskData(responseData.permanent_address.full_address, showData)}</p>
                     <div className="grid grid-cols-2 gap-3 mt-4">
                       <div>
                         <p className="text-sm text-muted-foreground">City</p>
@@ -345,7 +345,7 @@ const DrivingLicense = () => {
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-sm leading-relaxed">{maskData(responseData.present_address.full_address, showData)}</p>
+                    <p className="text-sm leading-relaxed break-words">{maskData(responseData.present_address.full_address, showData)}</p>
                     <div className="grid grid-cols-2 gap-3 mt-4">
                       <div>
                         <p className="text-sm text-muted-foreground">City</p>

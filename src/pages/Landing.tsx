@@ -87,8 +87,9 @@ const Landing = () => {
 
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-hero py-32">
+        {/* Static Grid Background */}
         <div className="absolute inset-0 opacity-10">
-          <svg className="h-full w-full animate-grid-move" xmlns="http://www.w3.org/2000/svg">
+          <svg className="h-full w-full" xmlns="http://www.w3.org/2000/svg">
             <defs>
               <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
                 <path d="M 40 0 L 0 0 0 40" fill="none" stroke="currentColor" strokeWidth="1" />
@@ -96,6 +97,22 @@ const Landing = () => {
             </defs>
             <rect width="100%" height="100%" fill="url(#grid)" />
           </svg>
+        </div>
+
+        {/* Meteor Effects */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          {/* Meteor 1 */}
+          <div className="absolute top-0 left-0 w-[200px] h-[2px] animate-meteor" style={{ animationDelay: '0s' }}>
+            <div className="w-full h-full bg-gradient-to-r from-transparent via-primary to-transparent opacity-75 blur-sm"></div>
+          </div>
+          {/* Meteor 2 */}
+          <div className="absolute top-0 left-0 w-[200px] h-[2px] animate-meteor" style={{ animationDelay: '3s' }}>
+            <div className="w-full h-full bg-gradient-to-r from-transparent via-primary/60 to-transparent opacity-75 blur-sm"></div>
+          </div>
+          {/* Meteor 3 */}
+          <div className="absolute top-0 left-0 w-[200px] h-[2px] animate-meteor" style={{ animationDelay: '6s' }}>
+            <div className="w-full h-full bg-gradient-to-r from-transparent via-primary/80 to-transparent opacity-75 blur-sm"></div>
+          </div>
         </div>
 
         {/* Floating Decorative Cards */}

@@ -108,12 +108,20 @@ export default {
             transform: "translateY(-20px)"
           },
         },
-        "grid-move": {
+        "meteor": {
           "0%": {
-            transform: "translate(0, 0)"
+            transform: "translate(-100%, -100%) rotate(45deg)",
+            opacity: "0"
+          },
+          "10%": {
+            opacity: "1"
+          },
+          "90%": {
+            opacity: "1"
           },
           "100%": {
-            transform: "translate(40px, 40px)"
+            transform: "translate(100vw, 100vh) rotate(45deg)",
+            opacity: "0"
           },
         },
       },
@@ -121,7 +129,7 @@ export default {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "float": "float 6s ease-in-out infinite",
-        "grid-move": "grid-move 3s linear infinite",
+        "meteor": "meteor 8s linear infinite",
       },
     },
   },

@@ -98,9 +98,9 @@ const Landing = () => {
         </div>
 
         {/* Floating Decorative Cards */}
-        <div className="absolute inset-0 pointer-events-none">
-          {/* Top Left Card */}
-          <div className="absolute top-1/4 left-[10%] hidden lg:block animate-float" style={{ animationDelay: '0s' }}>
+        <div className="absolute inset-0 pointer-events-none z-10">
+          {/* Top Left Card - Email Bounce */}
+          <div className="absolute top-[20%] left-[8%] hidden md:block animate-float" style={{ animationDelay: '0s' }}>
             <div className="group relative bg-background/80 backdrop-blur-xl rounded-2xl p-4 border border-primary/20 shadow-2xl hover:shadow-primary/20 transition-all duration-500 hover:scale-110 hover:border-primary/40">
               <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent rounded-2xl opacity-50"></div>
               <img src={emailBounceIcon} alt="Email Bounce" className="w-16 h-16 relative z-10" />
@@ -108,8 +108,8 @@ const Landing = () => {
             </div>
           </div>
 
-          {/* Top Right Card */}
-          <div className="absolute top-1/4 right-[10%] hidden lg:block animate-float" style={{ animationDelay: '0.5s' }}>
+          {/* Top Right Card - ID Proof */}
+          <div className="absolute top-[20%] right-[8%] hidden md:block animate-float" style={{ animationDelay: '0.5s' }}>
             <div className="group relative bg-background/80 backdrop-blur-xl rounded-2xl p-4 border border-primary/20 shadow-2xl hover:shadow-primary/20 transition-all duration-500 hover:scale-110 hover:border-primary/40">
               <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent rounded-2xl opacity-50"></div>
               <img src={idProofIcon} alt="ID Proof" className="w-16 h-16 relative z-10" />
@@ -117,8 +117,8 @@ const Landing = () => {
             </div>
           </div>
 
-          {/* Middle Left Card */}
-          <div className="absolute top-1/2 left-[5%] hidden lg:block animate-float" style={{ animationDelay: '1s' }}>
+          {/* Middle Left Card - OCR Proof */}
+          <div className="absolute top-[45%] left-[3%] hidden md:block animate-float" style={{ animationDelay: '1s' }}>
             <div className="group relative bg-background/80 backdrop-blur-xl rounded-2xl p-4 border border-primary/20 shadow-2xl hover:shadow-primary/20 transition-all duration-500 hover:scale-110 hover:border-primary/40">
               <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent rounded-2xl opacity-50"></div>
               <img src={ocrProofIcon} alt="OCR Proof" className="w-16 h-16 relative z-10" />
@@ -126,8 +126,8 @@ const Landing = () => {
             </div>
           </div>
 
-          {/* Middle Right Card */}
-          <div className="absolute top-1/2 right-[5%] hidden lg:block animate-float" style={{ animationDelay: '1.5s' }}>
+          {/* Middle Right Card - Tamper Proof */}
+          <div className="absolute top-[45%] right-[3%] hidden md:block animate-float" style={{ animationDelay: '1.5s' }}>
             <div className="group relative bg-background/80 backdrop-blur-xl rounded-2xl p-4 border border-primary/20 shadow-2xl hover:shadow-primary/20 transition-all duration-500 hover:scale-110 hover:border-primary/40">
               <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent rounded-2xl opacity-50"></div>
               <img src={tamperProofIcon} alt="Tamper Proof" className="w-16 h-16 relative z-10" />
@@ -135,8 +135,8 @@ const Landing = () => {
             </div>
           </div>
 
-          {/* Bottom Center Card */}
-          <div className="absolute bottom-12 left-1/2 -translate-x-1/2 hidden md:block animate-float" style={{ animationDelay: '2s' }}>
+          {/* Bottom Center Card - Trustiify */}
+          <div className="absolute bottom-[15%] left-1/2 -translate-x-1/2 hidden sm:block animate-float" style={{ animationDelay: '2s' }}>
             <div className="group relative bg-background/80 backdrop-blur-xl rounded-2xl p-4 border border-primary/20 shadow-2xl hover:shadow-primary/20 transition-all duration-500 hover:scale-110 hover:border-primary/40">
               <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent rounded-2xl opacity-50"></div>
               <img src={trustiifyIcon} alt="Trustiify" className="w-16 h-16 relative z-10" />

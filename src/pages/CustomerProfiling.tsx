@@ -18,6 +18,14 @@ const CustomerProfiling = () => {
   const [consent, setConsent] = useState(true);
   const [showFullBureauReport, setShowFullBureauReport] = useState(false);
   const [showFullESICDetails, setShowFullESICDetails] = useState(false);
+  const [showFullAdditionalDetails, setShowFullAdditionalDetails] = useState(false);
+
+  // Helper function to get credit score band
+  const getCreditScoreBand = (score: number) => {
+    const bandStart = Math.floor(score / 10) * 10;
+    const bandEnd = bandStart + 10;
+    return `${bandStart}-${bandEnd}`;
+  };
 
   const mockResponse = {
     mobile: "+91-9876543210",
@@ -239,6 +247,60 @@ const CustomerProfiling = () => {
         SCORE: {
           FCIREXScore: 999
         }
+      }
+    },
+    additional_details: {
+      personal_information: {
+        full_name: "RAM SINGH",
+        gender: "Male",
+        age: "20",
+        date_of_birth: "1999-01-01",
+        income: "987987"
+      },
+      alternate_phone: [
+        {
+          serial_number: "1",
+          value: "00004311234"
+        },
+        {
+          serial_number: "2",
+          value: "00004311234"
+        },
+        {
+          serial_number: "3",
+          value: "9877654321"
+        },
+        {
+          serial_number: "4",
+          value: "01146534321"
+        },
+        {
+          serial_number: "5",
+          value: "1112011111111"
+        }
+      ],
+      email: [
+        {
+          serial_number: "1",
+          value: "RAM@GMAIL.COM"
+        }
+      ],
+      address: [
+        {
+          detailed_address: "11 ABC COLONY PHASE I ABC COLONY PHASE I",
+          state: "UP",
+          pincode: "202001",
+          type: "Primary",
+          date_of_reporting: "2024-07-18"
+        }
+      ],
+      document_data: {
+        pan: [
+          {
+            serial_number: "1",
+            value: "ABCPD1234D"
+          }
+        ]
       }
     },
     timestamp: new Date().toISOString()
@@ -558,7 +620,12 @@ const CustomerProfiling = () => {
                       </div>
                       <div>
                         <p className="text-sm text-muted-foreground">Credit Score</p>
-                        <p className="text-2xl font-bold text-primary">{responseData.bureau_report.credit_score}</p>
+                        <div className="space-y-1">
+                          <p className="text-2xl font-bold text-primary">{responseData.bureau_report.credit_score}</p>
+                          <Badge variant="outline" className="text-xs">
+                            {getCreditScoreBand(responseData.bureau_report.credit_score)}
+                          </Badge>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -1058,6 +1125,188 @@ const CustomerProfiling = () => {
                   </CardContent>
                 </Card>
               </div>
+
+              {/* Additional Details */}
+              <Card className="border-primary/20">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <User className="h-5 w-5" />
+                    Additional Details
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  {/* Personal Information Summary */}
+                  <div className="bg-primary/5 border border-primary/20 rounded-lg p-4">
+                    <div className="grid md:grid-cols-4 gap-4">
+                      <div>
+                        <p className="text-sm text-muted-foreground">Full Name</p>
+                        <p className="font-semibold break-words">{maskData(responseData.additional_details.personal_information.full_name, showData)}</p>
+                      </div>
+                      <div>
+                        <p className="text-sm text-muted-foreground">Gender</p>
+                        <Badge variant="outline">{responseData.additional_details.personal_information.gender}</Badge>
+                      </div>
+                      <div>
+                        <p className="text-sm text-muted-foreground">Age</p>
+                        <p className="font-semibold">{responseData.additional_details.personal_information.age} years</p>
+                      </div>
+                      <div>
+                        <p className="text-sm text-muted-foreground">Income</p>
+                        <p className="font-semibold">₹{responseData.additional_details.personal_information.income}</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Quick Summary */}
+                  <div className="space-y-3">
+                    <div className="grid md:grid-cols-3 gap-4">
+                      <div className="bg-muted/50 p-3 rounded-lg">
+                        <p className="text-xs text-muted-foreground">Alternate Phones</p>
+                        <p className="text-lg font-bold">{responseData.additional_details.alternate_phone.length}</p>
+                      </div>
+                      <div className="bg-muted/50 p-3 rounded-lg">
+                        <p className="text-xs text-muted-foreground">Email Addresses</p>
+                        <p className="text-lg font-bold">{responseData.additional_details.email.length}</p>
+                      </div>
+                      <div className="bg-muted/50 p-3 rounded-lg">
+                        <p className="text-xs text-muted-foreground">Addresses</p>
+                        <p className="text-lg font-bold">{responseData.additional_details.address.length}</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Show More Button */}
+                  <Button 
+                    variant="outline" 
+                    className="w-full"
+                    onClick={() => setShowFullAdditionalDetails(!showFullAdditionalDetails)}
+                  >
+                    {showFullAdditionalDetails ? (
+                      <>
+                        <ChevronUp className="h-4 w-4 mr-2" />
+                        Show Less
+                      </>
+                    ) : (
+                      <>
+                        <ChevronDown className="h-4 w-4 mr-2" />
+                        Show More Details
+                      </>
+                    )}
+                  </Button>
+
+                  {/* Expanded Content */}
+                  {showFullAdditionalDetails && (
+                    <div className="space-y-4 animate-fade-in">
+                      {/* Personal Information */}
+                      <div className="border-t pt-4">
+                        <h4 className="font-semibold mb-3">Personal Information</h4>
+                        <div className="grid md:grid-cols-2 gap-4 bg-muted/30 p-4 rounded-lg">
+                          <div>
+                            <p className="text-sm text-muted-foreground">Full Name</p>
+                            <p className="text-sm break-words">{maskData(responseData.additional_details.personal_information.full_name, showData)}</p>
+                          </div>
+                          <div>
+                            <p className="text-sm text-muted-foreground">Date of Birth</p>
+                            <p className="text-sm">{responseData.additional_details.personal_information.date_of_birth}</p>
+                          </div>
+                          <div>
+                            <p className="text-sm text-muted-foreground">Gender</p>
+                            <p className="text-sm">{responseData.additional_details.personal_information.gender}</p>
+                          </div>
+                          <div>
+                            <p className="text-sm text-muted-foreground">Age</p>
+                            <p className="text-sm">{responseData.additional_details.personal_information.age} years</p>
+                          </div>
+                          <div>
+                            <p className="text-sm text-muted-foreground">Income</p>
+                            <p className="text-sm font-semibold">₹{responseData.additional_details.personal_information.income}</p>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Alternate Phone Numbers */}
+                      <div>
+                        <h4 className="font-semibold mb-3">Alternate Phone Numbers</h4>
+                        <div className="space-y-2">
+                          {responseData.additional_details.alternate_phone.map((phone: any, idx: number) => (
+                            <div key={idx} className="bg-muted/30 p-3 rounded-lg flex items-center justify-between">
+                              <div className="flex items-center gap-3">
+                                <Badge variant="outline" className="text-xs">#{phone.serial_number}</Badge>
+                                <p className="text-sm font-mono break-all">{maskPhone(phone.value, showData)}</p>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Email Addresses */}
+                      <div>
+                        <h4 className="font-semibold mb-3">Email Addresses</h4>
+                        <div className="space-y-2">
+                          {responseData.additional_details.email.map((email: any, idx: number) => (
+                            <div key={idx} className="bg-muted/30 p-3 rounded-lg flex items-center justify-between">
+                              <div className="flex items-center gap-3">
+                                <Badge variant="outline" className="text-xs">#{email.serial_number}</Badge>
+                                <p className="text-sm break-all">{maskEmail(email.value, showData)}</p>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Addresses */}
+                      <div>
+                        <h4 className="font-semibold mb-3">Addresses</h4>
+                        <div className="space-y-3">
+                          {responseData.additional_details.address.map((addr: any, idx: number) => (
+                            <Card key={idx}>
+                              <CardContent className="pt-6">
+                                <div className="space-y-3">
+                                  <div className="flex items-center justify-between">
+                                    <Badge variant="default">{addr.type}</Badge>
+                                    <p className="text-xs text-muted-foreground">Reported: {addr.date_of_reporting}</p>
+                                  </div>
+                                  <div>
+                                    <p className="text-sm text-muted-foreground">Address</p>
+                                    <p className="text-sm break-words">{maskData(addr.detailed_address, showData)}</p>
+                                  </div>
+                                  <div className="grid grid-cols-2 gap-4">
+                                    <div>
+                                      <p className="text-sm text-muted-foreground">State</p>
+                                      <p className="text-sm">{addr.state}</p>
+                                    </div>
+                                    <div>
+                                      <p className="text-sm text-muted-foreground">Pincode</p>
+                                      <p className="text-sm">{maskData(addr.pincode, showData)}</p>
+                                    </div>
+                                  </div>
+                                </div>
+                              </CardContent>
+                            </Card>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Document Data */}
+                      <div>
+                        <h4 className="font-semibold mb-3">Document Data</h4>
+                        <div className="bg-muted/30 p-4 rounded-lg">
+                          <div className="space-y-2">
+                            {responseData.additional_details.document_data.pan.map((pan: any, idx: number) => (
+                              <div key={idx} className="flex items-center justify-between">
+                                <div className="flex items-center gap-3">
+                                  <Badge variant="outline" className="text-xs">PAN #{pan.serial_number}</Badge>
+                                  <p className="text-sm font-mono break-all">{maskData(pan.value, showData)}</p>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
 
               {/* Response Metadata */}
               <Card className="bg-muted/50">

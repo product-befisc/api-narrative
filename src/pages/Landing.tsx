@@ -136,8 +136,8 @@ const Landing = () => {
             </div>
           </div>
 
-          {/* Bottom Center Card - Trustiify */}
-          <div className="absolute bottom-[15%] left-1/2 -translate-x-1/2 hidden sm:block animate-float" style={{ animationDelay: '2s' }}>
+          {/* Bottom Right Card - Trustiify */}
+          <div className="absolute bottom-[15%] right-[12%] hidden md:block animate-float" style={{ animationDelay: '2s' }}>
             <div className="group relative bg-background/80 backdrop-blur-xl rounded-2xl p-4 border border-primary/20 shadow-2xl hover:shadow-primary/20 transition-all duration-500 hover:scale-110 hover:border-primary/40">
               <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent rounded-2xl opacity-50"></div>
               <img src={trustiifyIcon} alt="Trustiify" className="w-16 h-16 relative z-10" />

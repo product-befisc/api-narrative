@@ -23,6 +23,7 @@ const PANVerification = () => {
     first_name: "Rajesh",
     middle_name: "Kumar",
     last_name: "Sharma",
+    father_name: "Mohan Lal Sharma",
     masked_aadhaar: "XXXX-XXXX-5678",
     dob: "1985-06-15",
     gender: "Male",
@@ -171,6 +172,10 @@ const PANVerification = () => {
                         <p className="text-sm text-muted-foreground mt-1">
                           First: {maskData(responseData.first_name, showData)} | Middle: {maskData(responseData.middle_name, showData)} | Last: {maskData(responseData.last_name, showData)}
                         </p>
+                      </div>
+                      <div>
+                        <p className="text-sm text-muted-foreground">Father's Name</p>
+                        <p className="font-semibold">{maskData(responseData.father_name, showData)}</p>
                       </div>
                       <div>
                         <p className="text-sm text-muted-foreground">Masked Aadhaar</p>

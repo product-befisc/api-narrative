@@ -3,52 +3,52 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Shield, TrendingUp, Users, Award } from "lucide-react";
 import { EmailVerificationModal } from "@/components/EmailVerificationModal";
-import logo from '@/assets/BeFiSc_New_Logo.svg';
-import saloraCapitalLogo from '@/assets/clients/salora-capital.png';
-import founderPhoto from '@/assets/founder-photo.svg';
-import emailBounceIcon from '@/assets/products/email-bounce.svg';
-import idProofIcon from '@/assets/products/id-proof-2.svg';
-import ocrProofIcon from '@/assets/products/ocr-proof.svg';
-import tamperProofIcon from '@/assets/products/tamper-proof-2.svg';
-import trustiifyIcon from '@/assets/products/trustiify.svg';
-import financialStatementIcon from '@/assets/products/financial-statement.svg';
-import affordplanLogo from '@/assets/clients/affordplan.svg';
-import arthanFinanceLogo from '@/assets/clients/arthan-finance.svg';
-import bajajLogo from '@/assets/clients/bajaj.svg';
-import supermoneyLogo from '@/assets/clients/supermoney.png';
-import cashrichLogo from '@/assets/clients/cashrich.svg';
-import credflowLogo from '@/assets/clients/credflow.svg';
-import epaylaterLogo from '@/assets/clients/epaylater.svg';
-import eximpeLogo from '@/assets/clients/eximpe.svg';
-import freoLogo from '@/assets/clients/freo.svg';
-import godigitLogo from '@/assets/clients/godigit.svg';
-import healthcredLogo from '@/assets/clients/healthcred.svg';
-import indiamartLogo from '@/assets/clients/indiamart.svg';
-import lendboxLogo from '@/assets/clients/lendbox.svg';
-import muthootLogo from '@/assets/clients/muthoot.svg';
-import naviLogo from '@/assets/clients/navi.svg';
-import niroLogo from '@/assets/clients/niro.svg';
-import quidLogo from '@/assets/clients/quid.svg';
-import rupyaLogo from '@/assets/clients/rupya.svg';
-import sabpaisaLogo from '@/assets/clients/sabpaisa.svg';
-import snapmintLogo from '@/assets/clients/snapmint.svg';
-import varthanaLogo from '@/assets/clients/varthana.svg';
-import vibrantLogo from '@/assets/clients/vibrant.svg';
-import yaperLogo from '@/assets/clients/yaper.svg';
-import firstAdvisorsLogo from '@/assets/clients/first-advisors.svg';
-import velocityLogo from '@/assets/clients/velocity.svg';
-import amsInformLogo from '@/assets/clients/ams-inform.svg';
-import gaadiBookingLogo from '@/assets/clients/gaadi-booking.svg';
-import ongridLogo from '@/assets/clients/ongrid.svg';
-import secureSearchLogo from '@/assets/clients/securesearch.svg';
-import verificationStreetLogo from '@/assets/clients/verification-street.svg';
-import veriprobusLogo from '@/assets/clients/veriprobus.svg';
-import fourSlLogo from '@/assets/clients/4sl-background-check.svg';
-import swipeloanLogo from '@/assets/clients/swipeloan.png';
-import pjCapitalLogo from '@/assets/clients/pj-capital.png';
-import piceLogo from '@/assets/clients/pice.png';
-import loksuvidhaLogo from '@/assets/clients/loksuvidha.png';
-import vastuFinanceLogo from '@/assets/clients/vastu-finance.png';
+import logo from "@/assets/BeFiSc_New_Logo.svg";
+import saloraCapitalLogo from "@/assets/clients/salora-capital.png";
+import founderPhoto from "@/assets/founder-photo.svg";
+import emailBounceIcon from "@/assets/products/email-bounce.svg";
+import idProofIcon from "@/assets/products/id-proof-2.svg";
+import ocrProofIcon from "@/assets/products/ocr-proof.svg";
+import tamperProofIcon from "@/assets/products/tamper-proof-2.svg";
+import trustiifyIcon from "@/assets/products/trustiify.svg";
+import financialStatementIcon from "@/assets/products/financial-statement.svg";
+import affordplanLogo from "@/assets/clients/affordplan.svg";
+import arthanFinanceLogo from "@/assets/clients/arthan-finance.svg";
+import bajajLogo from "@/assets/clients/bajaj.svg";
+import supermoneyLogo from "@/assets/clients/supermoney.png";
+import cashrichLogo from "@/assets/clients/cashrich.svg";
+import credflowLogo from "@/assets/clients/credflow.svg";
+import epaylaterLogo from "@/assets/clients/epaylater.svg";
+import eximpeLogo from "@/assets/clients/eximpe.svg";
+import freoLogo from "@/assets/clients/freo.svg";
+import godigitLogo from "@/assets/clients/godigit.svg";
+import healthcredLogo from "@/assets/clients/healthcred.svg";
+import indiamartLogo from "@/assets/clients/indiamart.svg";
+import lendboxLogo from "@/assets/clients/lendbox.svg";
+import muthootLogo from "@/assets/clients/muthoot.svg";
+import naviLogo from "@/assets/clients/navi.svg";
+import niroLogo from "@/assets/clients/niro.svg";
+import quidLogo from "@/assets/clients/quid.svg";
+import rupyaLogo from "@/assets/clients/rupya.svg";
+import sabpaisaLogo from "@/assets/clients/sabpaisa.svg";
+import snapmintLogo from "@/assets/clients/snapmint.svg";
+import varthanaLogo from "@/assets/clients/varthana.svg";
+import vibrantLogo from "@/assets/clients/vibrant.svg";
+import yaperLogo from "@/assets/clients/yaper.svg";
+import firstAdvisorsLogo from "@/assets/clients/first-advisors.svg";
+import velocityLogo from "@/assets/clients/velocity.svg";
+import amsInformLogo from "@/assets/clients/ams-inform.svg";
+import gaadiBookingLogo from "@/assets/clients/gaadi-booking.svg";
+import ongridLogo from "@/assets/clients/ongrid.svg";
+import secureSearchLogo from "@/assets/clients/securesearch.svg";
+import verificationStreetLogo from "@/assets/clients/verification-street.svg";
+import veriprobusLogo from "@/assets/clients/veriprobus.svg";
+import fourSlLogo from "@/assets/clients/4sl-background-check.svg";
+import swipeloanLogo from "@/assets/clients/swipeloan.png";
+import pjCapitalLogo from "@/assets/clients/pj-capital.png";
+import piceLogo from "@/assets/clients/pice.png";
+import loksuvidhaLogo from "@/assets/clients/loksuvidha.png";
+import vastuFinanceLogo from "@/assets/clients/vastu-finance.png";
 
 const Landing = () => {
   const navigate = useNavigate();
@@ -78,9 +78,7 @@ const Landing = () => {
       <EmailVerificationModal open={showVerification} onVerified={handleVerified} />
 
       {/* Blur overlay when modal is open */}
-      {showVerification && (
-        <div className="fixed inset-0 backdrop-blur-md bg-background/40 z-40" />
-      )}
+      {showVerification && <div className="fixed inset-0 backdrop-blur-md bg-background/40 z-40" />}
       {/* Navbar */}
       <nav className="border-b border-border bg-card/95 backdrop-blur">
         <div className="container mx-auto px-4 py-4">
@@ -107,24 +105,42 @@ const Landing = () => {
         {/* Running Lights Through Grid */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           {/* Horizontal Lights */}
-          <div className="absolute left-0 h-[2px] w-full animate-grid-light-h" style={{ top: '20%', animationDelay: '0s' }}>
+          <div
+            className="absolute left-0 h-[2px] w-full animate-grid-light-h"
+            style={{ top: "20%", animationDelay: "0s" }}
+          >
             <div className="w-40 h-full bg-gradient-to-r from-transparent via-primary to-transparent shadow-[0_0_20px_rgba(var(--primary),0.8)]"></div>
           </div>
-          <div className="absolute left-0 h-[2px] w-full animate-grid-light-h" style={{ top: '45%', animationDelay: '1.5s' }}>
+          <div
+            className="absolute left-0 h-[2px] w-full animate-grid-light-h"
+            style={{ top: "45%", animationDelay: "1.5s" }}
+          >
             <div className="w-40 h-full bg-gradient-to-r from-transparent via-primary/70 to-transparent shadow-[0_0_20px_rgba(var(--primary),0.6)]"></div>
           </div>
-          <div className="absolute left-0 h-[2px] w-full animate-grid-light-h" style={{ top: '70%', animationDelay: '3s' }}>
+          <div
+            className="absolute left-0 h-[2px] w-full animate-grid-light-h"
+            style={{ top: "70%", animationDelay: "3s" }}
+          >
             <div className="w-40 h-full bg-gradient-to-r from-transparent via-primary/80 to-transparent shadow-[0_0_20px_rgba(var(--primary),0.7)]"></div>
           </div>
-          
+
           {/* Vertical Lights */}
-          <div className="absolute top-0 w-[2px] h-full animate-grid-light-v" style={{ left: '25%', animationDelay: '0.5s' }}>
+          <div
+            className="absolute top-0 w-[2px] h-full animate-grid-light-v"
+            style={{ left: "25%", animationDelay: "0.5s" }}
+          >
             <div className="h-40 w-full bg-gradient-to-b from-transparent via-primary to-transparent shadow-[0_0_20px_rgba(var(--primary),0.8)]"></div>
           </div>
-          <div className="absolute top-0 w-[2px] h-full animate-grid-light-v" style={{ left: '60%', animationDelay: '2s' }}>
+          <div
+            className="absolute top-0 w-[2px] h-full animate-grid-light-v"
+            style={{ left: "60%", animationDelay: "2s" }}
+          >
             <div className="h-40 w-full bg-gradient-to-b from-transparent via-primary/70 to-transparent shadow-[0_0_20px_rgba(var(--primary),0.6)]"></div>
           </div>
-          <div className="absolute top-0 w-[2px] h-full animate-grid-light-v" style={{ left: '80%', animationDelay: '3.5s' }}>
+          <div
+            className="absolute top-0 w-[2px] h-full animate-grid-light-v"
+            style={{ left: "80%", animationDelay: "3.5s" }}
+          >
             <div className="h-40 w-full bg-gradient-to-b from-transparent via-primary/80 to-transparent shadow-[0_0_20px_rgba(var(--primary),0.7)]"></div>
           </div>
         </div>
@@ -132,7 +148,7 @@ const Landing = () => {
         {/* Floating Decorative Cards */}
         <div className="absolute inset-0 pointer-events-none z-10">
           {/* Top Left Card - Email Bounce */}
-          <div className="absolute top-[20%] left-[8%] hidden md:block animate-float" style={{ animationDelay: '0s' }}>
+          <div className="absolute top-[20%] left-[8%] hidden md:block animate-float" style={{ animationDelay: "0s" }}>
             <div className="group relative bg-background/80 backdrop-blur-xl rounded-2xl p-4 border border-primary/20 shadow-2xl hover:shadow-primary/20 transition-all duration-500 hover:scale-110 hover:border-primary/40">
               <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent rounded-2xl opacity-50"></div>
               <img src={emailBounceIcon} alt="Email Bounce" className="w-16 h-16 relative z-10" />
@@ -141,7 +157,10 @@ const Landing = () => {
           </div>
 
           {/* Top Right Card - ID Proof */}
-          <div className="absolute top-[20%] right-[8%] hidden md:block animate-float" style={{ animationDelay: '0.5s' }}>
+          <div
+            className="absolute top-[20%] right-[8%] hidden md:block animate-float"
+            style={{ animationDelay: "0.5s" }}
+          >
             <div className="group relative bg-background/80 backdrop-blur-xl rounded-2xl p-4 border border-primary/20 shadow-2xl hover:shadow-primary/20 transition-all duration-500 hover:scale-110 hover:border-primary/40">
               <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent rounded-2xl opacity-50"></div>
               <img src={idProofIcon} alt="ID Proof" className="w-16 h-16 relative z-10" />
@@ -150,7 +169,7 @@ const Landing = () => {
           </div>
 
           {/* Middle Left Card - OCR Proof */}
-          <div className="absolute top-[45%] left-[3%] hidden md:block animate-float" style={{ animationDelay: '1s' }}>
+          <div className="absolute top-[45%] left-[3%] hidden md:block animate-float" style={{ animationDelay: "1s" }}>
             <div className="group relative bg-background/80 backdrop-blur-xl rounded-2xl p-4 border border-primary/20 shadow-2xl hover:shadow-primary/20 transition-all duration-500 hover:scale-110 hover:border-primary/40">
               <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent rounded-2xl opacity-50"></div>
               <img src={ocrProofIcon} alt="OCR Proof" className="w-16 h-16 relative z-10" />
@@ -159,7 +178,10 @@ const Landing = () => {
           </div>
 
           {/* Middle Right Card - Tamper Proof */}
-          <div className="absolute top-[45%] right-[3%] hidden md:block animate-float" style={{ animationDelay: '1.5s' }}>
+          <div
+            className="absolute top-[45%] right-[3%] hidden md:block animate-float"
+            style={{ animationDelay: "1.5s" }}
+          >
             <div className="group relative bg-background/80 backdrop-blur-xl rounded-2xl p-4 border border-primary/20 shadow-2xl hover:shadow-primary/20 transition-all duration-500 hover:scale-110 hover:border-primary/40">
               <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent rounded-2xl opacity-50"></div>
               <img src={tamperProofIcon} alt="Tamper Proof" className="w-16 h-16 relative z-10" />
@@ -168,7 +190,10 @@ const Landing = () => {
           </div>
 
           {/* Bottom Right Card - Trustiify */}
-          <div className="absolute bottom-[15%] right-[12%] hidden md:block animate-float" style={{ animationDelay: '2s' }}>
+          <div
+            className="absolute bottom-[15%] right-[12%] hidden md:block animate-float"
+            style={{ animationDelay: "2s" }}
+          >
             <div className="group relative bg-background/80 backdrop-blur-xl rounded-2xl p-4 border border-primary/20 shadow-2xl hover:shadow-primary/20 transition-all duration-500 hover:scale-110 hover:border-primary/40">
               <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent rounded-2xl opacity-50"></div>
               <img src={trustiifyIcon} alt="Trustiify" className="w-16 h-16 relative z-10" />
@@ -177,7 +202,10 @@ const Landing = () => {
           </div>
 
           {/* Bottom Left Card - Financial Statement */}
-          <div className="absolute bottom-[15%] left-[12%] hidden md:block animate-float" style={{ animationDelay: '2.5s' }}>
+          <div
+            className="absolute bottom-[15%] left-[12%] hidden md:block animate-float"
+            style={{ animationDelay: "2.5s" }}
+          >
             <div className="group relative bg-background/80 backdrop-blur-xl rounded-2xl p-4 border border-primary/20 shadow-2xl hover:shadow-primary/20 transition-all duration-500 hover:scale-110 hover:border-primary/40">
               <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent rounded-2xl opacity-50"></div>
               <img src={financialStatementIcon} alt="Financial Statement" className="w-16 h-16 relative z-10" />
@@ -204,7 +232,9 @@ const Landing = () => {
               <div className="group relative bg-background/60 backdrop-blur-sm rounded-2xl p-8 border border-border/50 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 hover:-translate-y-1">
                 <div className="flex flex-col items-center justify-center h-full min-h-[140px]">
                   <div className="text-4xl md:text-5xl font-bold text-primary mb-2">2023</div>
-                  <div className="text-sm font-medium text-muted-foreground uppercase tracking-wide text-center">Incorporated</div>
+                  <div className="text-sm font-medium text-muted-foreground uppercase tracking-wide text-center">
+                    Incorporated
+                  </div>
                 </div>
               </div>
 
@@ -212,7 +242,9 @@ const Landing = () => {
               <div className="group relative bg-background/60 backdrop-blur-sm rounded-2xl p-8 border border-border/50 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 hover:-translate-y-1">
                 <div className="flex flex-col items-center justify-center h-full min-h-[140px]">
                   <div className="text-4xl md:text-5xl font-bold text-primary mb-2">145+</div>
-                  <div className="text-sm font-medium text-muted-foreground uppercase tracking-wide text-center">Clients</div>
+                  <div className="text-sm font-medium text-muted-foreground uppercase tracking-wide text-center">
+                    Clients
+                  </div>
                 </div>
               </div>
 
@@ -220,7 +252,9 @@ const Landing = () => {
               <div className="group relative bg-background/60 backdrop-blur-sm rounded-2xl p-8 border border-border/50 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 hover:-translate-y-1">
                 <div className="flex flex-col items-center justify-center h-full min-h-[140px]">
                   <div className="text-4xl md:text-5xl font-bold text-primary mb-2">180+</div>
-                  <div className="text-sm font-medium text-muted-foreground uppercase tracking-wide text-center">Services</div>
+                  <div className="text-sm font-medium text-muted-foreground uppercase tracking-wide text-center">
+                    Services
+                  </div>
                 </div>
               </div>
 
@@ -228,7 +262,9 @@ const Landing = () => {
               <div className="group relative bg-background/60 backdrop-blur-sm rounded-2xl p-8 border border-border/50 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 hover:-translate-y-1">
                 <div className="flex flex-col items-center justify-center h-full min-h-[140px]">
                   <div className="text-4xl md:text-5xl font-bold text-primary mb-2">50M+</div>
-                  <div className="text-sm font-medium text-muted-foreground uppercase tracking-wide text-center">API Calls Monthly</div>
+                  <div className="text-sm font-medium text-muted-foreground uppercase tracking-wide text-center">
+                    API Calls Monthly
+                  </div>
                 </div>
               </div>
 
@@ -236,7 +272,9 @@ const Landing = () => {
               <div className="group relative bg-background/60 backdrop-blur-sm rounded-2xl p-8 border border-border/50 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 hover:-translate-y-1">
                 <div className="flex flex-col items-center justify-center h-full min-h-[140px]">
                   <div className="text-4xl md:text-5xl font-bold text-primary mb-2">99.99%</div>
-                  <div className="text-sm font-medium text-muted-foreground uppercase tracking-wide text-center">Uptime</div>
+                  <div className="text-sm font-medium text-muted-foreground uppercase tracking-wide text-center">
+                    Uptime
+                  </div>
                 </div>
               </div>
             </div>
@@ -248,7 +286,9 @@ const Landing = () => {
                 <div className="flex flex-col items-center justify-center h-full min-h-[100px] gap-1">
                   <div className="text-2xl md:text-3xl font-bold text-primary">ISO</div>
                   <div className="text-sm font-semibold text-primary/80">27001:2022</div>
-                  <div className="text-xs font-medium text-muted-foreground uppercase tracking-wide text-center mt-1">Certified</div>
+                  <div className="text-xs font-medium text-muted-foreground uppercase tracking-wide text-center mt-1">
+                    Certified
+                  </div>
                 </div>
               </div>
 
@@ -257,7 +297,9 @@ const Landing = () => {
                 <div className="flex flex-col items-center justify-center h-full min-h-[100px] gap-1">
                   <div className="text-2xl md:text-3xl font-bold text-primary">CISA</div>
                   <div className="text-sm font-semibold text-primary/80">2022</div>
-                  <div className="text-xs font-medium text-muted-foreground uppercase tracking-wide text-center mt-1">Certified</div>
+                  <div className="text-xs font-medium text-muted-foreground uppercase tracking-wide text-center mt-1">
+                    Certified
+                  </div>
                 </div>
               </div>
 
@@ -265,7 +307,11 @@ const Landing = () => {
               <div className="group relative bg-background/60 backdrop-blur-sm rounded-xl p-5 border border-border/50 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 hover:-translate-y-1">
                 <div className="flex flex-col items-center justify-center h-full min-h-[100px]">
                   <div className="text-3xl md:text-4xl font-bold text-primary mb-1">3s</div>
-                  <div className="text-xs font-medium text-muted-foreground uppercase tracking-wide text-center leading-tight">Avg Response<br />Time</div>
+                  <div className="text-xs font-medium text-muted-foreground uppercase tracking-wide text-center leading-tight">
+                    Avg Response
+                    <br />
+                    Time
+                  </div>
                 </div>
               </div>
 
@@ -273,7 +319,9 @@ const Landing = () => {
               <div className="group relative bg-background/60 backdrop-blur-sm rounded-xl p-5 border border-border/50 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 hover:-translate-y-1">
                 <div className="flex flex-col items-center justify-center h-full min-h-[100px]">
                   <div className="text-3xl md:text-4xl font-bold text-primary mb-1">98.2%</div>
-                  <div className="text-xs font-medium text-muted-foreground uppercase tracking-wide text-center">Accuracy</div>
+                  <div className="text-xs font-medium text-muted-foreground uppercase tracking-wide text-center">
+                    Accuracy
+                  </div>
                 </div>
               </div>
 
@@ -281,7 +329,9 @@ const Landing = () => {
               <div className="group relative bg-background/60 backdrop-blur-sm rounded-xl p-5 border border-border/50 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 hover:-translate-y-1">
                 <div className="flex flex-col items-center justify-center h-full min-h-[100px]">
                   <div className="text-xl md:text-2xl font-bold text-primary mb-1">Fintech CX</div>
-                  <div className="text-xs font-medium text-muted-foreground uppercase tracking-wide text-center">Awardee</div>
+                  <div className="text-xs font-medium text-muted-foreground uppercase tracking-wide text-center">
+                    Awardee
+                  </div>
                 </div>
               </div>
 
@@ -289,7 +339,11 @@ const Landing = () => {
               <div className="group relative bg-background/60 backdrop-blur-sm rounded-xl p-5 border border-border/50 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 hover:-translate-y-1">
                 <div className="flex flex-col items-center justify-center h-full min-h-[100px]">
                   <div className="text-xl md:text-2xl font-bold text-primary mb-1">Modular</div>
-                  <div className="text-xs font-medium text-muted-foreground uppercase tracking-wide text-center leading-tight">Product<br />Suite</div>
+                  <div className="text-xs font-medium text-muted-foreground uppercase tracking-wide text-center leading-tight">
+                    Product
+                    <br />
+                    Suite
+                  </div>
                 </div>
               </div>
             </div>
@@ -304,7 +358,7 @@ const Landing = () => {
             <h2 className="text-4xl font-bold text-foreground mb-6">About BeFiSc</h2>
             <p className="text-lg text-muted-foreground leading-relaxed">
               Founded in 2023, BeFiSc builds technology that helps companies trust what they see. We specialize in fraud
-              detection, identity verification, and document intelligence — empowering businesses to make confident
+              detection, identity verification, and document intelligence-empowering businesses to make confident
               decisions with AI-powered verification tools.
             </p>
           </div>
@@ -359,10 +413,10 @@ const Landing = () => {
                   >
                     <div className="flex flex-col items-center justify-center gap-3 h-full">
                       <div className="w-16 h-16 flex items-center justify-center">
-                        <img 
-                          src={company.logo} 
-                          alt={company.name} 
-                          className="max-w-full max-h-full object-contain group-hover:scale-110 transition-transform duration-300" 
+                        <img
+                          src={company.logo}
+                          alt={company.name}
+                          className="max-w-full max-h-full object-contain group-hover:scale-110 transition-transform duration-300"
                         />
                       </div>
                       <span className="font-semibold text-foreground text-center text-xs">{company.name}</span>
@@ -394,10 +448,10 @@ const Landing = () => {
                   >
                     <div className="flex flex-col items-center justify-center gap-3 h-full">
                       <div className="w-16 h-16 flex items-center justify-center">
-                        <img 
-                          src={company.logo} 
-                          alt={company.name} 
-                          className="max-w-full max-h-full object-contain group-hover:scale-110 transition-transform duration-300" 
+                        <img
+                          src={company.logo}
+                          alt={company.name}
+                          className="max-w-full max-h-full object-contain group-hover:scale-110 transition-transform duration-300"
                         />
                       </div>
                       <span className="font-semibold text-foreground text-center text-xs">{company.name}</span>
@@ -427,10 +481,10 @@ const Landing = () => {
                   >
                     <div className="flex flex-col items-center justify-center gap-3 h-full">
                       <div className="w-16 h-16 flex items-center justify-center">
-                        <img 
-                          src={company.logo} 
-                          alt={company.name} 
-                          className="max-w-full max-h-full object-contain group-hover:scale-110 transition-transform duration-300" 
+                        <img
+                          src={company.logo}
+                          alt={company.name}
+                          className="max-w-full max-h-full object-contain group-hover:scale-110 transition-transform duration-300"
                         />
                       </div>
                       <span className="font-semibold text-foreground text-center text-xs">{company.name}</span>
@@ -459,10 +513,10 @@ const Landing = () => {
                   >
                     <div className="flex flex-col items-center justify-center gap-3 h-full">
                       <div className="w-16 h-16 flex items-center justify-center">
-                        <img 
-                          src={company.logo} 
-                          alt={company.name} 
-                          className="max-w-full max-h-full object-contain group-hover:scale-110 transition-transform duration-300" 
+                        <img
+                          src={company.logo}
+                          alt={company.name}
+                          className="max-w-full max-h-full object-contain group-hover:scale-110 transition-transform duration-300"
                         />
                       </div>
                       <span className="font-semibold text-foreground text-center text-xs">{company.name}</span>
@@ -493,10 +547,10 @@ const Landing = () => {
                   >
                     <div className="flex flex-col items-center justify-center gap-3 h-full">
                       <div className="w-16 h-16 flex items-center justify-center">
-                        <img 
-                          src={company.logo} 
-                          alt={company.name} 
-                          className="max-w-full max-h-full object-contain group-hover:scale-110 transition-transform duration-300" 
+                        <img
+                          src={company.logo}
+                          alt={company.name}
+                          className="max-w-full max-h-full object-contain group-hover:scale-110 transition-transform duration-300"
                         />
                       </div>
                       <span className="font-semibold text-foreground text-center text-xs">{company.name}</span>
@@ -530,7 +584,6 @@ const Landing = () => {
           </div>
         </div>
       </section>
-
 
       {/* CTA Section */}
       <section className="py-20 bg-background">

@@ -6,7 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Checkbox } from "@/components/ui/checkbox";
 import Navbar from "@/components/Navbar";
-import { ArrowLeft, MapPin, Phone, Mail, User, Calendar, Package, Eye, EyeOff } from "lucide-react";
+import { ArrowLeft, MapPin, Phone, Mail, User, Eye, EyeOff } from "lucide-react";
 import { maskData, maskEmail, maskPhone } from "@/lib/utils";
 
 const AddressTracing = () => {
@@ -33,12 +33,7 @@ const AddressTracing = () => {
         country: "India",
         type: "Residential",
         is_primary: true,
-        tags: ["Home", "Delivery Address"],
-        last_delivery: {
-          date: "2024-01-15",
-          service: "Amazon",
-          status: "Delivered"
-        }
+        tags: ["Home", "Delivery Address"]
       },
       {
         id: 2,
@@ -53,12 +48,7 @@ const AddressTracing = () => {
         country: "India",
         type: "Office",
         is_primary: false,
-        tags: ["Work", "Office Address"],
-        last_delivery: {
-          date: "2024-01-20",
-          service: "Flipkart",
-          status: "Delivered"
-        }
+        tags: ["Work", "Office Address"]
       },
       {
         id: 3,
@@ -73,12 +63,7 @@ const AddressTracing = () => {
         country: "India",
         type: "Residential",
         is_primary: false,
-        tags: ["Secondary", "Weekend Home"],
-        last_delivery: {
-          date: "2023-12-10",
-          service: "Myntra",
-          status: "Delivered"
-        }
+        tags: ["Secondary", "Weekend Home"]
       }
     ],
     total_addresses: 3,
@@ -245,36 +230,6 @@ const AddressTracing = () => {
                         </CardContent>
                       </Card>
 
-                      {/* Last Delivery Info */}
-                      {address.last_delivery && (
-                        <Card className="bg-muted/50">
-                          <CardContent className="pt-6">
-                            <div className="flex items-center gap-2 mb-3">
-                              <Package className="h-4 w-4 text-muted-foreground" />
-                              <p className="text-sm font-semibold">Last Delivery</p>
-                            </div>
-                            <div className="grid md:grid-cols-3 gap-4">
-                              <div>
-                                <p className="text-sm text-muted-foreground">Service</p>
-                                <p className="text-sm font-medium">{address.last_delivery.service}</p>
-                              </div>
-                              <div>
-                                <p className="text-sm text-muted-foreground">Date</p>
-                                <p className="text-sm flex items-center gap-1">
-                                  <Calendar className="h-3 w-3" />
-                                  {new Date(address.last_delivery.date).toLocaleDateString('en-IN')}
-                                </p>
-                              </div>
-                              <div>
-                                <p className="text-sm text-muted-foreground">Status</p>
-                                <Badge variant="default" className="text-xs">
-                                  {address.last_delivery.status}
-                                </Badge>
-                              </div>
-                            </div>
-                          </CardContent>
-                        </Card>
-                      )}
                     </CardContent>
                   </Card>
                 ))}

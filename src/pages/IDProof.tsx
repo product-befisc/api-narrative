@@ -11,6 +11,7 @@ const IDProof = () => {
   const defaultTab = searchParams.get('tab') || 'products';
 
   const solutions = [
+    { name: 'Vehicle Verification', icon: Car, description: 'Complete vehicle verification with RC, Challan & Chassis', path: '/product/id-proof/vehicle-verification' },
     { name: 'PAN Profiling', icon: CreditCard, description: 'PAN card verification & profiling', path: '/product/id-proof/pan-verification' },
     { name: 'Customer Profiling', icon: User, description: 'Profile insights via mobile', path: '/product/id-proof/customer-profiling' },
     { name: 'Business Profiling', icon: Building, description: 'Company data visualization', path: '/product/id-proof/business-profiling' },
@@ -24,9 +25,6 @@ const IDProof = () => {
     { name: 'Voter ID', icon: User, description: 'Voter card verification', path: '/product/id-proof/voter-id-verification' },
     { name: 'Passport', icon: FileText, description: 'Passport verification', path: '/product/id-proof/passport-verification' },
     { name: 'LPG Verification', icon: Phone, description: 'LPG connection via mobile', path: '/product/id-proof/lpg-verification' },
-    { name: 'RC Advanced Details', icon: Car, description: 'Vehicle registration verification', path: '/product/id-proof/rc-advance' },
-    { name: 'Challan Details', icon: FileCheck, description: 'Traffic violation records', path: '/product/id-proof/challan-details' },
-    { name: 'Chassis to RC Details', icon: Scan, description: 'Vehicle chassis verification', path: '/product/id-proof/chassis-to-rc' },
     { name: 'Bank Verification - Penny Drop', icon: CreditCard, description: 'Bank account verification', path: '/product/id-proof/bank-verification-pennydrop' },
     { name: 'Bank Verification - Pennyless', icon: CreditCard, description: 'Non-monetary verification', path: '/product/id-proof/bank-verification-pennyless' },
     { name: 'UAN Details', icon: FileText, description: 'Employment history via UAN', path: '/product/id-proof/uan-history' },

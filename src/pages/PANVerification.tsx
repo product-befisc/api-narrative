@@ -51,6 +51,69 @@ const PANVerification = () => {
     gst_registered: true,
     udyam_registered: false,
     cin: ["U65432TG2010PTC098765", "U65432TG2010PTC987654"],
+    gst_data: [
+      {
+        gst_no: "01ABCPD1234E1AB",
+        aggregate_turn_over: "Slab: Rs. 0 to 40 lakhs",
+        authorized_signatory: ["RAM SINGH"],
+        business_constitution: "Private Limited Company",
+        business_details: {
+          bzgddtls: [
+            {
+              gdes: "OTHER FRUIT, FRESH",
+              hsncd: "0810"
+            },
+            {
+              gdes: "POLISHES AND CREAMS, FOR FOOTWEAR, FURNITURE, FLOORS",
+              hsncd: "34054000"
+            }
+          ]
+        },
+        business_nature: ["Retail Business"],
+        can_flag: "NA",
+        central_jurisdiction: "State - CBIC,Zone - AHMEDABAD,Commissionerate - GANDHINAGAR,Division - DIVISION KALOL,Range - RANGE I",
+        compliance_rating: "NA",
+        current_registration_status: "Active",
+        filing_status: [
+          {
+            fy: "2022-2023",
+            taxp: "January",
+            mof: "ONLINE",
+            dof: "11/02/2023",
+            rtntype: "GSTR1",
+            arn: "NA",
+            status: "Filed"
+          },
+          {
+            fy: "2022-2023",
+            taxp: "January",
+            mof: "ONLINE",
+            dof: "16/02/2023",
+            rtntype: "GSTR3B",
+            arn: "NA",
+            status: "Filed"
+          }
+        ],
+        gstin: "01ABCPD1234E1AB",
+        is_field_visit_conducted: "No",
+        legal_name: "ABC PRIVATE LIMITED",
+        mandate_e_invoice: "No",
+        other_business_address: {},
+        primary_business_address: {
+          business_nature: "Retail Business",
+          detailed_address: "NA",
+          last_updated_date: "NA",
+          registered_address: "A-112 County, Greater Noida, Gandhinagar, Gujarat, 382721"
+        },
+        register_cancellation_date: "",
+        register_date: "01/01/1999",
+        state_jurisdiction: "State - Gujarat,Division - Division - 3,Range - Range - 7,Unit - Ghatak 25 (Kalol) (Jurisdictional Office)",
+        tax_payer_type: "Regular",
+        trade_name: "ABC PRIVATE LIMITED",
+        gross_total_income: "NA",
+        gross_total_income_financial_year: "2019-2020"
+      }
+    ],
     cin_details: [
       {
         cin: "U65432TG2010PTC098765",
@@ -133,7 +196,7 @@ const PANVerification = () => {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
                     <div className="space-y-1">
                       <p className="text-sm text-muted-foreground">Tax Status</p>
                       <Badge variant={responseData.taxable_status === "Taxable" ? "default" : "secondary"}>
@@ -150,6 +213,12 @@ const PANVerification = () => {
                       <p className="text-sm text-muted-foreground">GST Registered</p>
                       <Badge variant={responseData.gst_registered ? "default" : "secondary"}>
                         {responseData.gst_registered ? "Yes" : "No"}
+                      </Badge>
+                    </div>
+                    <div className="space-y-1">
+                      <p className="text-sm text-muted-foreground">GST</p>
+                      <Badge variant={responseData.gst_data?.length > 0 ? "default" : "secondary"}>
+                        {responseData.gst_data?.length > 0 ? `${responseData.gst_data.length} Found` : "No"}
                       </Badge>
                     </div>
                     <div className="space-y-1">
@@ -310,6 +379,152 @@ const PANVerification = () => {
                   </CardContent>
                 </Card>
               </div>
+
+              {/* GST Details */}
+              {responseData.gst_data && responseData.gst_data.length > 0 && (
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                      <Building className="h-5 w-5" />
+                      GST Information
+                    </CardTitle>
+                    <CardDescription>
+                      Goods and Services Tax registration details
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-6">
+                      {responseData.gst_data.map((gst: any, index: number) => (
+                        <Card key={index} className="bg-muted/50">
+                          <CardContent className="pt-6 space-y-6">
+                            {/* Basic GST Info */}
+                            <div className="grid md:grid-cols-2 gap-4">
+                              <div>
+                                <p className="text-sm text-muted-foreground">GSTIN</p>
+                                <p className="font-mono text-sm">{maskData(gst.gstin, showData)}</p>
+                              </div>
+                              <div>
+                                <p className="text-sm text-muted-foreground">Legal Name</p>
+                                <p className="font-semibold">{maskData(gst.legal_name, showData)}</p>
+                              </div>
+                              <div>
+                                <p className="text-sm text-muted-foreground">Trade Name</p>
+                                <p>{maskData(gst.trade_name, showData)}</p>
+                              </div>
+                              <div>
+                                <p className="text-sm text-muted-foreground">Registration Status</p>
+                                <Badge variant={gst.current_registration_status === "Active" ? "default" : "secondary"}>
+                                  {gst.current_registration_status}
+                                </Badge>
+                              </div>
+                              <div>
+                                <p className="text-sm text-muted-foreground">Register Date</p>
+                                <p>{gst.register_date}</p>
+                              </div>
+                              <div>
+                                <p className="text-sm text-muted-foreground">Tax Payer Type</p>
+                                <p>{gst.tax_payer_type}</p>
+                              </div>
+                              <div>
+                                <p className="text-sm text-muted-foreground">Business Constitution</p>
+                                <p>{gst.business_constitution}</p>
+                              </div>
+                              <div>
+                                <p className="text-sm text-muted-foreground">Aggregate Turnover</p>
+                                <p>{gst.aggregate_turn_over}</p>
+                              </div>
+                            </div>
+
+                            {/* Business Address */}
+                            {gst.primary_business_address && (
+                              <div>
+                                <p className="text-sm text-muted-foreground mb-2">Registered Address</p>
+                                <p className="text-sm break-words">{maskData(gst.primary_business_address.registered_address, showData)}</p>
+                              </div>
+                            )}
+
+                            {/* Business Nature */}
+                            {gst.business_nature && gst.business_nature.length > 0 && (
+                              <div>
+                                <p className="text-sm text-muted-foreground mb-2">Business Nature</p>
+                                <div className="flex flex-wrap gap-2">
+                                  {gst.business_nature.map((nature: string, idx: number) => (
+                                    <Badge key={idx} variant="outline">{nature}</Badge>
+                                  ))}
+                                </div>
+                              </div>
+                            )}
+
+                            {/* Authorized Signatory */}
+                            {gst.authorized_signatory && gst.authorized_signatory.length > 0 && (
+                              <div>
+                                <p className="text-sm text-muted-foreground mb-2">Authorized Signatory</p>
+                                <div className="flex flex-wrap gap-2">
+                                  {gst.authorized_signatory.map((signatory: string, idx: number) => (
+                                    <Badge key={idx} variant="secondary">{maskData(signatory, showData)}</Badge>
+                                  ))}
+                                </div>
+                              </div>
+                            )}
+
+                            {/* Jurisdiction */}
+                            <div className="grid md:grid-cols-2 gap-4">
+                              <div>
+                                <p className="text-sm text-muted-foreground mb-1">Central Jurisdiction</p>
+                                <p className="text-sm">{gst.central_jurisdiction}</p>
+                              </div>
+                              <div>
+                                <p className="text-sm text-muted-foreground mb-1">State Jurisdiction</p>
+                                <p className="text-sm">{gst.state_jurisdiction}</p>
+                              </div>
+                            </div>
+
+                            {/* Filing Status */}
+                            {gst.filing_status && gst.filing_status.length > 0 && (
+                              <div>
+                                <p className="text-sm text-muted-foreground mb-3">Recent Filing Status</p>
+                                <div className="space-y-2">
+                                  {gst.filing_status.map((filing: any, idx: number) => (
+                                    <div key={idx} className="flex items-center justify-between p-3 bg-background rounded-lg border">
+                                      <div className="space-y-1">
+                                        <div className="flex items-center gap-2">
+                                          <Badge variant="outline">{filing.rtntype}</Badge>
+                                          <span className="text-sm font-medium">{filing.taxp} {filing.fy}</span>
+                                        </div>
+                                        <p className="text-xs text-muted-foreground">Filed on: {filing.dof} via {filing.mof}</p>
+                                      </div>
+                                      <Badge variant={filing.status === "Filed" ? "default" : "secondary"}>
+                                        {filing.status}
+                                      </Badge>
+                                    </div>
+                                  ))}
+                                </div>
+                              </div>
+                            )}
+
+                            {/* Business Details */}
+                            {gst.business_details?.bzgddtls && gst.business_details.bzgddtls.length > 0 && (
+                              <div>
+                                <p className="text-sm text-muted-foreground mb-3">Business Details (HSN Codes)</p>
+                                <div className="space-y-2">
+                                  {gst.business_details.bzgddtls.map((detail: any, idx: number) => (
+                                    <div key={idx} className="p-3 bg-background rounded-lg border">
+                                      <div className="flex items-start gap-2">
+                                        <Badge variant="outline" className="mt-0.5">{detail.hsncd}</Badge>
+                                        <p className="text-sm flex-1">{detail.gdes}</p>
+                                      </div>
+                                    </div>
+                                  ))}
+                                </div>
+                              </div>
+                            )}
+                          </CardContent>
+                        </Card>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              )}
 
               {/* CIN Details */}
               {responseData.cin_details && responseData.cin_details.length > 0 && (

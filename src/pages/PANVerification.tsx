@@ -50,6 +50,17 @@ const PANVerification = () => {
     aadhaar_linked: true,
     gst_registered: true,
     udyam_registered: false,
+    cin: ["U65432TG2010PTC098765", "U65432TG2010PTC987654"],
+    cin_details: [
+      {
+        cin: "U65432TG2010PTC098765",
+        entity_name: "ABC PRIVATE LIMITED"
+      },
+      {
+        cin: "U65432TG2010PTC987654",
+        entity_name: "XYZ PRIVATE LIMITED"
+      }
+    ],
     timestamp: new Date().toISOString()
   };
 
@@ -293,6 +304,41 @@ const PANVerification = () => {
                   </CardContent>
                 </Card>
               </div>
+
+              {/* CIN Details */}
+              {responseData.cin_details && responseData.cin_details.length > 0 && (
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                      <Building className="h-5 w-5" />
+                      Company Information (CIN)
+                    </CardTitle>
+                    <CardDescription>
+                      Corporate Identification Numbers linked to this PAN
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-4">
+                      {responseData.cin_details.map((company: any, index: number) => (
+                        <Card key={index} className="bg-muted/50">
+                          <CardContent className="pt-6">
+                            <div className="space-y-2">
+                              <div>
+                                <p className="text-sm text-muted-foreground">CIN</p>
+                                <p className="font-mono text-sm">{maskData(company.cin, showData)}</p>
+                              </div>
+                              <div>
+                                <p className="text-sm text-muted-foreground">Entity Name</p>
+                                <p className="font-semibold">{maskData(company.entity_name, showData)}</p>
+                              </div>
+                            </div>
+                          </CardContent>
+                        </Card>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              )}
 
               {/* Response Metadata */}
               <Card className="bg-muted/50">

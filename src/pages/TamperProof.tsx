@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeft, Upload, FileCheck, AlertTriangle, CheckCircle, XCircle, Loader2 } from 'lucide-react';
+import { ArrowLeft, Upload, FileCheck, AlertTriangle, CheckCircle, XCircle, Loader2, Download } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import Navbar from '@/components/Navbar';
 
 const TamperProof = () => {
@@ -14,6 +15,7 @@ const TamperProof = () => {
   const [uploaded, setUploaded] = useState(false);
   const [result, setResult] = useState<any>(null);
   const [documentType, setDocumentType] = useState<string>('');
+  const [showSampleDialog, setShowSampleDialog] = useState(false);
 
   const getFileName = (type: string) => {
     const fileNames: Record<string, string> = {
@@ -23,6 +25,22 @@ const TamperProof = () => {
       'Other PDF': 'Document_Sample.pdf',
     };
     return fileNames[type] || 'Document.pdf';
+  };
+
+  const handleDownloadSample = (fileType: string) => {
+    const files: Record<string, string> = {
+      'risky': '/samples/Risky.pdf',
+      'tampered': '/samples/Tampered.pdf',
+      'safe': '/samples/Safe.pdf',
+    };
+    
+    const link = document.createElement('a');
+    link.href = files[fileType];
+    link.download = `${fileType.charAt(0).toUpperCase() + fileType.slice(1)}.pdf`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    setShowSampleDialog(false);
   };
 
   const handleScan = () => {
@@ -207,6 +225,18 @@ const TamperProof = () => {
                 </Card>
               </div>
 
+              {/* Download Sample Button */}
+              <div className="flex justify-end mb-6">
+                <Button
+                  onClick={() => setShowSampleDialog(true)}
+                  variant="outline"
+                  size="sm"
+                >
+                  <Download className="mr-2 h-4 w-4" />
+                  Download Sample
+                </Button>
+              </div>
+
               {/* Checks Grid */}
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
                 {/* Metadata Check */}
@@ -299,6 +329,41 @@ const TamperProof = () => {
             </div>
           </Card>
         )}
+
+        {/* Sample Download Dialog */}
+        <Dialog open={showSampleDialog} onOpenChange={setShowSampleDialog}>
+          <DialogContent className="sm:max-w-md">
+            <DialogHeader>
+              <DialogTitle>Download Sample Report</DialogTitle>
+            </DialogHeader>
+            <div className="flex flex-col gap-3 py-4">
+              <Button
+                variant="outline"
+                className="justify-start"
+                onClick={() => handleDownloadSample('risky')}
+              >
+                <Download className="mr-2 h-4 w-4" />
+                Risky File
+              </Button>
+              <Button
+                variant="outline"
+                className="justify-start"
+                onClick={() => handleDownloadSample('tampered')}
+              >
+                <Download className="mr-2 h-4 w-4" />
+                Tampered File
+              </Button>
+              <Button
+                variant="outline"
+                className="justify-start"
+                onClick={() => handleDownloadSample('safe')}
+              >
+                <Download className="mr-2 h-4 w-4" />
+                Safe File
+              </Button>
+            </div>
+          </DialogContent>
+        </Dialog>
       </div>
     </div>
   );

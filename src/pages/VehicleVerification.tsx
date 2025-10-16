@@ -169,54 +169,34 @@ const VehicleVerification = () => {
               {/* Key Highlights Section */}
               <Card className="border-2 border-primary">
                 <CardContent className="pt-6">
-                  <div className="grid md:grid-cols-3 gap-4">
-                    <div className="flex items-center gap-3">
-                      <CheckCircle2 className="h-5 w-5 text-primary" />
-                      <div>
-                        <p className="text-xs text-muted-foreground">Status</p>
-                        <Badge className="bg-gradient-primary text-white">{rcResponse.highlights.status}</Badge>
-                      </div>
+                  <div className="flex items-center gap-2 mb-6">
+                    <CheckCircle2 className="h-6 w-6 text-primary" />
+                    <h3 className="text-2xl font-bold text-foreground">Key Highlights</h3>
+                  </div>
+                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+                    <div className="space-y-2">
+                      <p className="text-sm text-muted-foreground">Owner Info</p>
+                      <Badge className="bg-primary text-primary-foreground">Available</Badge>
                     </div>
-                    <div className="flex items-center gap-3">
-                      <Shield className="h-5 w-5 text-primary" />
-                      <div>
-                        <p className="text-xs text-muted-foreground">Insurance Valid Till</p>
-                        <p className="font-semibold text-sm">{rcResponse.highlights.insurance_valid_till}</p>
-                      </div>
+                    <div className="space-y-2">
+                      <p className="text-sm text-muted-foreground">Insurance Info</p>
+                      <Badge className="bg-primary text-primary-foreground">Valid</Badge>
                     </div>
-                    <div className="flex items-center gap-3">
-                      <Calendar className="h-5 w-5 text-primary" />
-                      <div>
-                        <p className="text-xs text-muted-foreground">Fitness Valid Till</p>
-                        <p className="font-semibold text-sm">{rcResponse.highlights.fitness_valid_till}</p>
-                      </div>
+                    <div className="space-y-2">
+                      <p className="text-sm text-muted-foreground">Registration Details</p>
+                      <Badge className="bg-primary text-primary-foreground">Active</Badge>
                     </div>
-                    <div className="flex items-center gap-3">
-                      <User className="h-5 w-5 text-primary" />
-                      <div>
-                        <p className="text-xs text-muted-foreground">Ownership</p>
-                        <p className="font-semibold text-sm">{rcResponse.highlights.ownership}</p>
-                      </div>
+                    <div className="space-y-2">
+                      <p className="text-sm text-muted-foreground">Challan Details</p>
+                      <Badge className="bg-primary text-primary-foreground">1 Found</Badge>
                     </div>
-                    <div className="flex items-center gap-3">
-                      <Building2 className="h-5 w-5 text-primary" />
-                      <div>
-                        <p className="text-xs text-muted-foreground">RTO Office</p>
-                        <p className="font-semibold text-sm">{rcResponse.highlights.office_name}</p>
-                      </div>
+                    <div className="space-y-2">
+                      <p className="text-sm text-muted-foreground">RC Details</p>
+                      <Badge className="bg-primary text-primary-foreground">Verified</Badge>
                     </div>
-                    <div className="flex items-center gap-3">
-                      {rcResponse.highlights.financed ? (
-                        <CreditCard className="h-5 w-5 text-primary" />
-                      ) : (
-                        <CheckCircle2 className="h-5 w-5 text-primary" />
-                      )}
-                      <div>
-                        <p className="text-xs text-muted-foreground">Finance Status</p>
-                        <Badge variant={rcResponse.highlights.financed ? 'default' : 'secondary'}>
-                          {rcResponse.highlights.financed ? 'FINANCED' : 'NO FINANCE'}
-                        </Badge>
-                      </div>
+                    <div className="space-y-2">
+                      <p className="text-sm text-muted-foreground">RTO Info</p>
+                      <Badge className="bg-primary text-primary-foreground">Available</Badge>
                     </div>
                   </div>
                 </CardContent>

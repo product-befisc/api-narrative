@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { Label } from '@/components/ui/label';
 import Navbar from '@/components/Navbar';
 
 const BounceProof = () => {
@@ -64,21 +65,25 @@ const BounceProof = () => {
             <h2 className="text-2xl font-bold text-foreground">Verify Email Address</h2>
           </div>
           
-          <div className="flex gap-4">
-            <Input
-              type="email"
-              placeholder="Enter email address to verify"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="flex-1"
-            />
-            <Button 
-              onClick={handleVerify}
-              disabled={loading}
-              className="px-8"
-            >
-              {loading ? 'Verifying...' : 'Verify'}
-            </Button>
+          <div className="space-y-2">
+            <Label htmlFor="email">Email Address</Label>
+            <div className="flex gap-4">
+              <Input
+                id="email"
+                type="email"
+                placeholder="e.g., john.doe@gmail.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="flex-1"
+              />
+              <Button 
+                onClick={handleVerify}
+                disabled={loading}
+                className="px-8"
+              >
+                {loading ? 'Verifying...' : 'Verify'}
+              </Button>
+            </div>
           </div>
         </Card>
 

@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Checkbox } from '@/components/ui/checkbox';
+import { Label } from '@/components/ui/label';
 import Navbar from '@/components/Navbar';
 import { maskData } from '@/lib/utils';
 
@@ -73,16 +74,20 @@ const ChassisToRC = () => {
               <CardTitle>Enter Chassis Number</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="flex gap-4">
-                <Input
-                  value={chassisNo}
-                  onChange={(e) => setChassisNo(e.target.value)}
-                  placeholder="Chassis Number"
-                  className="flex-1"
-                />
-                <Button onClick={handleFetch} disabled={loading || !consent}>
-                  {loading ? 'Fetching...' : 'Fetch Details'}
-                </Button>
+              <div className="space-y-2">
+                <Label htmlFor="chassisNo">Chassis Number</Label>
+                <div className="flex gap-4">
+                  <Input
+                    id="chassisNo"
+                    value={chassisNo}
+                    onChange={(e) => setChassisNo(e.target.value)}
+                    placeholder="e.g., MBLJAW141MHC21171"
+                    className="flex-1"
+                  />
+                  <Button onClick={handleFetch} disabled={loading || !consent}>
+                    {loading ? 'Fetching...' : 'Fetch Details'}
+                  </Button>
+                </div>
               </div>
               <div className="flex items-start space-x-2">
                 <Checkbox id="consent" checked={consent} onCheckedChange={(checked) => setConsent(checked === true)} />

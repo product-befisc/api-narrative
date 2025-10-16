@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Checkbox } from "@/components/ui/checkbox";
+import { Label } from "@/components/ui/label";
 import Navbar from "@/components/Navbar";
 import { ArrowLeft, Calendar, CheckCircle2, User, MapPin, Phone, Mail, Building, Eye, EyeOff } from "lucide-react";
 import { maskData, maskEmail, maskPhone } from "@/lib/utils";
@@ -159,16 +160,20 @@ const PANVerification = () => {
               <CardTitle>Enter PAN Number</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="flex gap-4">
-                <Input
-                  placeholder="Enter PAN number"
-                  value={panNumber}
-                  onChange={(e) => setPanNumber(e.target.value.toUpperCase())}
-                  maxLength={10}
-                />
-                <Button onClick={handleFetch} disabled={loading || !panNumber || !consent}>
-                  {loading ? "Fetching..." : "Fetch Details"}
-                </Button>
+              <div className="space-y-2">
+                <Label htmlFor="panNumber">PAN Number</Label>
+                <div className="flex gap-4">
+                  <Input
+                    id="panNumber"
+                    placeholder="e.g., AAAPA1234A"
+                    value={panNumber}
+                    onChange={(e) => setPanNumber(e.target.value.toUpperCase())}
+                    maxLength={10}
+                  />
+                  <Button onClick={handleFetch} disabled={loading || !panNumber || !consent}>
+                    {loading ? "Fetching..." : "Fetch Details"}
+                  </Button>
+                </div>
               </div>
               <div className="flex items-start space-x-2">
                 <Checkbox id="consent" checked={consent} onCheckedChange={(checked) => setConsent(checked === true)} />

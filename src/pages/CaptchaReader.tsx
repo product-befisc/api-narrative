@@ -4,6 +4,7 @@ import { ArrowLeft, Image, CheckCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import Navbar from '@/components/Navbar';
 
 const CaptchaReader = () => {
@@ -44,16 +45,20 @@ const CaptchaReader = () => {
               <CardTitle>Upload Captcha Image</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="flex gap-4">
-                <Input
-                  value={captchaImage}
-                  onChange={(e) => setCaptchaImage(e.target.value)}
-                  placeholder="captcha_sample.png"
-                  className="flex-1"
-                />
-                <Button onClick={handleFetch} disabled={loading}>
-                  {loading ? 'Reading...' : 'Read Captcha'}
-                </Button>
+              <div className="space-y-2">
+                <Label htmlFor="captchaImage">Captcha Image Name</Label>
+                <div className="flex gap-4">
+                  <Input
+                    id="captchaImage"
+                    value={captchaImage}
+                    onChange={(e) => setCaptchaImage(e.target.value)}
+                    placeholder="e.g., captcha_sample.png"
+                    className="flex-1"
+                  />
+                  <Button onClick={handleFetch} disabled={loading}>
+                    {loading ? 'Reading...' : 'Read Captcha'}
+                  </Button>
+                </div>
               </div>
             </CardContent>
           </Card>

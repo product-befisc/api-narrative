@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Checkbox } from '@/components/ui/checkbox';
+import { Label } from '@/components/ui/label';
 import Navbar from '@/components/Navbar';
 import { maskData } from '@/lib/utils';
 
@@ -67,26 +68,38 @@ const BankVerificationPennyDrop = () => {
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="space-y-4">
-                <Input
-                  value={accountNo}
-                  onChange={(e) => setAccountNo(e.target.value)}
-                  placeholder="Account Number"
-                />
-                <Input
-                  value={ifscCode}
-                  onChange={(e) => setIfscCode(e.target.value)}
-                  placeholder="IFSC Code"
-                />
-                <div className="flex gap-4">
+                <div className="space-y-2">
+                  <Label htmlFor="accountNo">Account Number</Label>
                   <Input
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    placeholder="Account Holder Name"
-                    className="flex-1"
+                    id="accountNo"
+                    value={accountNo}
+                    onChange={(e) => setAccountNo(e.target.value)}
+                    placeholder="e.g., XXXXXXXXXXXX5678"
                   />
-                  <Button onClick={handleFetch} disabled={loading || !consent}>
-                    {loading ? 'Verifying...' : 'Verify'}
-                  </Button>
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="ifscCode">IFSC Code</Label>
+                  <Input
+                    id="ifscCode"
+                    value={ifscCode}
+                    onChange={(e) => setIfscCode(e.target.value)}
+                    placeholder="e.g., FDRL1234567"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="name">Account Holder Name</Label>
+                  <div className="flex gap-4">
+                    <Input
+                      id="name"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      placeholder="e.g., RAM KUMAR"
+                      className="flex-1"
+                    />
+                    <Button onClick={handleFetch} disabled={loading || !consent}>
+                      {loading ? 'Verifying...' : 'Verify'}
+                    </Button>
+                  </div>
                 </div>
                 <div className="flex items-start space-x-2">
                   <Checkbox id="consent" checked={consent} onCheckedChange={(checked) => setConsent(checked === true)} />

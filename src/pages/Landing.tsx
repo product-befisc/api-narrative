@@ -48,6 +48,7 @@ import swipeloanLogo from '@/assets/clients/swipeloan.png';
 import pjCapitalLogo from '@/assets/clients/pj-capital.png';
 import piceLogo from '@/assets/clients/pice.png';
 import loksuvidhaLogo from '@/assets/clients/loksuvidha.png';
+import vastuFinanceLogo from '@/assets/clients/vastu-finance.png';
 
 const Landing = () => {
   const navigate = useNavigate();
@@ -196,85 +197,98 @@ const Landing = () => {
       {/* Stats Showcase Section */}
       <section className="py-24 bg-muted/30">
         <div className="container mx-auto px-4">
-          <div className="max-w-7xl mx-auto">
+          <div className="max-w-7xl mx-auto space-y-8">
+            {/* First Row - Bigger boxes */}
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6">
-              {/* 3.5 Mn ARR */}
-              <div className="group relative bg-background/60 backdrop-blur-sm rounded-2xl p-6 border border-border/50 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 hover:-translate-y-1">
-                <div className="flex flex-col items-center justify-center h-full min-h-[100px]">
-                  <div className="text-3xl md:text-4xl font-bold text-primary mb-2">$3.5 Mn</div>
-                  <div className="text-xs font-medium text-muted-foreground uppercase tracking-wide text-center">ARR</div>
+              {/* 2023 Incorporated */}
+              <div className="group relative bg-background/60 backdrop-blur-sm rounded-2xl p-8 border border-border/50 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 hover:-translate-y-1">
+                <div className="flex flex-col items-center justify-center h-full min-h-[140px]">
+                  <div className="text-4xl md:text-5xl font-bold text-primary mb-2">2023</div>
+                  <div className="text-sm font-medium text-muted-foreground uppercase tracking-wide text-center">Incorporated</div>
                 </div>
               </div>
 
-              {/* ISO Certified */}
-              <div className="group relative bg-background/60 backdrop-blur-sm rounded-2xl p-6 border border-border/50 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 hover:-translate-y-1">
-                <div className="flex flex-col items-center justify-center h-full min-h-[100px] gap-1">
-                  <div className="text-4xl md:text-5xl font-bold text-primary">ISO</div>
-                  <div className="text-lg font-semibold text-primary/80">27001:2022</div>
-                  <div className="text-xs font-medium text-muted-foreground uppercase tracking-wide text-center mt-1">Certified</div>
+              {/* 145+ Clients */}
+              <div className="group relative bg-background/60 backdrop-blur-sm rounded-2xl p-8 border border-border/50 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 hover:-translate-y-1">
+                <div className="flex flex-col items-center justify-center h-full min-h-[140px]">
+                  <div className="text-4xl md:text-5xl font-bold text-primary mb-2">145+</div>
+                  <div className="text-sm font-medium text-muted-foreground uppercase tracking-wide text-center">Clients</div>
                 </div>
               </div>
 
-              {/* 30M+ API Calls */}
-              <div className="group relative bg-background/60 backdrop-blur-sm rounded-2xl p-6 border border-border/50 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 hover:-translate-y-1">
-                <div className="flex flex-col items-center justify-center h-full min-h-[100px]">
-                  <div className="text-3xl md:text-4xl font-bold text-primary mb-2">50M+</div>
-                  <div className="text-xs font-medium text-muted-foreground uppercase tracking-wide text-center leading-tight">API Calls<br />/ Month</div>
+              {/* 180+ Services */}
+              <div className="group relative bg-background/60 backdrop-blur-sm rounded-2xl p-8 border border-border/50 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 hover:-translate-y-1">
+                <div className="flex flex-col items-center justify-center h-full min-h-[140px]">
+                  <div className="text-4xl md:text-5xl font-bold text-primary mb-2">180+</div>
+                  <div className="text-sm font-medium text-muted-foreground uppercase tracking-wide text-center">Services</div>
+                </div>
+              </div>
+
+              {/* 50M+ API Calls Monthly */}
+              <div className="group relative bg-background/60 backdrop-blur-sm rounded-2xl p-8 border border-border/50 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 hover:-translate-y-1">
+                <div className="flex flex-col items-center justify-center h-full min-h-[140px]">
+                  <div className="text-4xl md:text-5xl font-bold text-primary mb-2">50M+</div>
+                  <div className="text-sm font-medium text-muted-foreground uppercase tracking-wide text-center">API Calls Monthly</div>
                 </div>
               </div>
 
               {/* 99.99% Uptime */}
-              <div className="group relative bg-background/60 backdrop-blur-sm rounded-2xl p-6 border border-border/50 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 hover:-translate-y-1">
-                <div className="flex flex-col items-center justify-center h-full min-h-[100px]">
-                  <div className="text-3xl md:text-4xl font-bold text-primary mb-2">99.99%</div>
-                  <div className="text-xs font-medium text-muted-foreground uppercase tracking-wide text-center">Uptime</div>
+              <div className="group relative bg-background/60 backdrop-blur-sm rounded-2xl p-8 border border-border/50 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 hover:-translate-y-1">
+                <div className="flex flex-col items-center justify-center h-full min-h-[140px]">
+                  <div className="text-4xl md:text-5xl font-bold text-primary mb-2">99.99%</div>
+                  <div className="text-sm font-medium text-muted-foreground uppercase tracking-wide text-center">Uptime</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Second Row - Smaller boxes */}
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 md:gap-4">
+              {/* ISO 27001:2022 Certified */}
+              <div className="group relative bg-background/60 backdrop-blur-sm rounded-xl p-5 border border-border/50 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 hover:-translate-y-1">
+                <div className="flex flex-col items-center justify-center h-full min-h-[100px] gap-1">
+                  <div className="text-2xl md:text-3xl font-bold text-primary">ISO</div>
+                  <div className="text-sm font-semibold text-primary/80">27001:2022</div>
+                  <div className="text-xs font-medium text-muted-foreground uppercase tracking-wide text-center mt-1">Certified</div>
                 </div>
               </div>
 
-              {/* FinTech CX Awardee */}
-              <div className="group relative bg-background/60 backdrop-blur-sm rounded-2xl p-6 border border-border/50 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 hover:-translate-y-1">
-                <div className="flex flex-col items-center justify-center h-full min-h-[100px]">
-                  <div className="text-2xl md:text-3xl font-bold text-primary mb-2">FinTech</div>
-                  <div className="text-xs font-medium text-muted-foreground uppercase tracking-wide text-center leading-tight">CX<br />Awardee</div>
+              {/* CISA Certified 2022 */}
+              <div className="group relative bg-background/60 backdrop-blur-sm rounded-xl p-5 border border-border/50 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 hover:-translate-y-1">
+                <div className="flex flex-col items-center justify-center h-full min-h-[100px] gap-1">
+                  <div className="text-2xl md:text-3xl font-bold text-primary">CISA</div>
+                  <div className="text-sm font-semibold text-primary/80">2022</div>
+                  <div className="text-xs font-medium text-muted-foreground uppercase tracking-wide text-center mt-1">Certified</div>
                 </div>
               </div>
 
-              {/* 150+ Services */}
-              <div className="group relative bg-background/60 backdrop-blur-sm rounded-2xl p-6 border border-border/50 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 hover:-translate-y-1">
+              {/* 3s Avg Response Time */}
+              <div className="group relative bg-background/60 backdrop-blur-sm rounded-xl p-5 border border-border/50 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 hover:-translate-y-1">
                 <div className="flex flex-col items-center justify-center h-full min-h-[100px]">
-                  <div className="text-3xl md:text-4xl font-bold text-primary mb-2">150+</div>
-                  <div className="text-xs font-medium text-muted-foreground uppercase tracking-wide text-center">Services</div>
+                  <div className="text-3xl md:text-4xl font-bold text-primary mb-1">3s</div>
+                  <div className="text-xs font-medium text-muted-foreground uppercase tracking-wide text-center leading-tight">Avg Response<br />Time</div>
                 </div>
               </div>
 
-              {/* 140+ Clients */}
-              <div className="group relative bg-background/60 backdrop-blur-sm rounded-2xl p-6 border border-border/50 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 hover:-translate-y-1">
+              {/* 98.2% Accuracy */}
+              <div className="group relative bg-background/60 backdrop-blur-sm rounded-xl p-5 border border-border/50 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 hover:-translate-y-1">
                 <div className="flex flex-col items-center justify-center h-full min-h-[100px]">
-                  <div className="text-3xl md:text-4xl font-bold text-primary mb-2">140+</div>
-                  <div className="text-xs font-medium text-muted-foreground uppercase tracking-wide text-center">Clients</div>
+                  <div className="text-3xl md:text-4xl font-bold text-primary mb-1">98.2%</div>
+                  <div className="text-xs font-medium text-muted-foreground uppercase tracking-wide text-center">Accuracy</div>
                 </div>
               </div>
 
-              {/* 3s Avg Response */}
-              <div className="group relative bg-background/60 backdrop-blur-sm rounded-2xl p-6 border border-border/50 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 hover:-translate-y-1">
+              {/* Fintech CX Awardee */}
+              <div className="group relative bg-background/60 backdrop-blur-sm rounded-xl p-5 border border-border/50 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 hover:-translate-y-1">
                 <div className="flex flex-col items-center justify-center h-full min-h-[100px]">
-                  <div className="text-3xl md:text-4xl font-bold text-primary mb-2">3s</div>
-                  <div className="text-xs font-medium text-muted-foreground uppercase tracking-wide text-center leading-tight">Avg<br />Response</div>
-                </div>
-              </div>
-
-              {/* 98.2% OCR Accuracy */}
-              <div className="group relative bg-background/60 backdrop-blur-sm rounded-2xl p-6 border border-border/50 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 hover:-translate-y-1">
-                <div className="flex flex-col items-center justify-center h-full min-h-[100px]">
-                  <div className="text-3xl md:text-4xl font-bold text-primary mb-2">98.2%</div>
-                  <div className="text-xs font-medium text-muted-foreground uppercase tracking-wide text-center leading-tight">OCR<br />Accuracy</div>
+                  <div className="text-xl md:text-2xl font-bold text-primary mb-1">Fintech CX</div>
+                  <div className="text-xs font-medium text-muted-foreground uppercase tracking-wide text-center">Awardee</div>
                 </div>
               </div>
 
               {/* Modular Product Suite */}
-              <div className="group relative bg-background/60 backdrop-blur-sm rounded-2xl p-6 border border-border/50 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 hover:-translate-y-1">
+              <div className="group relative bg-background/60 backdrop-blur-sm rounded-xl p-5 border border-border/50 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 hover:-translate-y-1">
                 <div className="flex flex-col items-center justify-center h-full min-h-[100px]">
-                  <div className="text-2xl md:text-3xl font-bold text-primary mb-2">Modular</div>
+                  <div className="text-xl md:text-2xl font-bold text-primary mb-1">Modular</div>
                   <div className="text-xs font-medium text-muted-foreground uppercase tracking-wide text-center leading-tight">Product<br />Suite</div>
                 </div>
               </div>
@@ -333,6 +347,7 @@ const Landing = () => {
                   { name: "Salora Capital", logo: saloraCapitalLogo },
                   { name: "Swipe loan", logo: swipeloanLogo },
                   { name: "PJ Credit Capital", logo: pjCapitalLogo },
+                  { name: "Vastu Finance", logo: vastuFinanceLogo },
                 ].map((company, i) => (
                   <div
                     key={i}
@@ -433,7 +448,7 @@ const Landing = () => {
             <div className="h-px bg-gradient-to-r from-border via-primary/30 to-border max-w-5xl mx-auto"></div>
           </div>
 
-          {/* Row 4 - Marketplaces (5 companies) */}
+          {/* Row 4 - Marketplaces (3 companies) */}
           <div className="mb-12 animate-fade-in" style={{ animationDelay: "0.6s" }}>
             <div className="flex items-center justify-center gap-8 pb-6">
               <div className="text-left">
@@ -446,7 +461,6 @@ const Landing = () => {
                 {[
                   { name: "Indiamart", logo: indiamartLogo },
                   { name: "Gaadi Booking", logo: gaadiBookingLogo },
-                  { name: "Ongrid", logo: ongridLogo },
                   { name: "4SL Background Check", logo: fourSlLogo },
                 ].map((company, i) => (
                     <div
@@ -470,7 +484,7 @@ const Landing = () => {
             <div className="h-px bg-gradient-to-r from-border via-primary/30 to-border max-w-4xl mx-auto"></div>
           </div>
 
-          {/* Row 5 - Verification & HR (Narrowest - 4 companies) */}
+          {/* Row 5 - Verification & HR (Narrowest - 5 companies) */}
           <div className="animate-fade-in" style={{ animationDelay: "0.8s" }}>
             <div className="flex items-center justify-center gap-8 pb-6">
               <div className="text-left">
@@ -485,6 +499,7 @@ const Landing = () => {
                   { name: "Verification Street", logo: verificationStreetLogo },
                   { name: "SecureSearch", logo: secureSearchLogo },
                   { name: "VeriProbus", logo: veriprobusLogo },
+                  { name: "Ongrid", logo: ongridLogo },
                 ].map((company, i) => (
                   <div
                     key={i}

@@ -433,7 +433,7 @@ const CustomerProfiling = () => {
                 <CardContent>
                   <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4">
                     <div className="space-y-1">
-                      <p className="text-sm text-muted-foreground">MSME</p>
+                      <p className="text-sm text-muted-foreground">Udyog/Aadhar</p>
                       <Badge variant={responseData.msme_info.registered ? "default" : "secondary"}>
                         {responseData.msme_info.registered ? "Registered" : "Not Registered"}
                       </Badge>
@@ -451,25 +451,25 @@ const CustomerProfiling = () => {
                       </Badge>
                     </div>
                     <div className="space-y-1">
-                      <p className="text-sm text-muted-foreground">EPFO</p>
+                      <p className="text-sm text-muted-foreground">Employment</p>
                       <Badge variant={responseData.epfo.active ? "default" : "secondary"}>
                         {responseData.epfo.active ? "Active" : "Inactive"}
                       </Badge>
                     </div>
                     <div className="space-y-1">
-                      <p className="text-sm text-muted-foreground">Director</p>
+                      <p className="text-sm text-muted-foreground">DIN</p>
                       <Badge variant={responseData.director_info.is_director ? "default" : "secondary"}>
                         {responseData.director_info.is_director ? "Yes" : "No"}
                       </Badge>
                     </div>
                     <div className="space-y-1">
-                      <p className="text-sm text-muted-foreground">ESIC</p>
+                      <p className="text-sm text-muted-foreground">Blue Collar Worker Detection</p>
                       <Badge variant={responseData.esic_info.registered ? "default" : "secondary"}>
                         {responseData.esic_info.registered ? "Registered" : "Not Registered"}
                       </Badge>
                     </div>
                     <div className="space-y-1">
-                      <p className="text-sm text-muted-foreground">Bureau Data</p>
+                      <p className="text-sm text-muted-foreground">Bureau Check</p>
                       <Badge variant="default">
                         Available
                       </Badge>

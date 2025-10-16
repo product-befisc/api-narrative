@@ -133,7 +133,7 @@ const PANVerification = () => {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                  <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
                     <div className="space-y-1">
                       <p className="text-sm text-muted-foreground">Tax Status</p>
                       <Badge variant={responseData.taxable_status === "Taxable" ? "default" : "secondary"}>
@@ -156,6 +156,12 @@ const PANVerification = () => {
                       <p className="text-sm text-muted-foreground">Director</p>
                       <Badge variant={responseData.is_director ? "default" : "secondary"}>
                         {responseData.is_director ? "Yes" : "No"}
+                      </Badge>
+                    </div>
+                    <div className="space-y-1">
+                      <p className="text-sm text-muted-foreground">CIN Available</p>
+                      <Badge variant={responseData.cin_details?.length > 0 ? "default" : "secondary"}>
+                        {responseData.cin_details?.length > 0 ? `${responseData.cin_details.length} Found` : "No"}
                       </Badge>
                     </div>
                   </div>

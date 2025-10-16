@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 import { Card } from '@/components/ui/card';
 import Navbar from '@/components/Navbar';
 import bounceProofIcon from '@/assets/products/bounce-proof.svg';
@@ -8,6 +9,15 @@ import tamperProofIcon from '@/assets/products/tamper-proof.svg';
 
 const Home = () => {
   const navigate = useNavigate();
+
+  // Preload critical images
+  useEffect(() => {
+    const imagesToPreload = [idProofIcon, tamperProofIcon, bounceProofIcon, bsaIcon];
+    imagesToPreload.forEach((src) => {
+      const img = new Image();
+      img.src = src;
+    });
+  }, []);
 
   const products = [
     {
@@ -59,7 +69,15 @@ const Home = () => {
             >
               <div className="flex flex-col items-center text-center">
                 <div className="w-20 h-20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                  <img src={product.icon} alt={product.title} className="w-20 h-20" />
+                  <img 
+                    src={product.icon} 
+                    alt={product.title} 
+                    className="w-20 h-20" 
+                    loading="eager"
+                    decoding="async"
+                    width="80"
+                    height="80"
+                  />
                 </div>
                 <h3 className="text-2xl font-bold text-foreground mb-3">
                   {product.title}

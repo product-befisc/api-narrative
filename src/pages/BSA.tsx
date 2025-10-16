@@ -5,6 +5,13 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
 import Navbar from '@/components/Navbar';
 
 const BSA = () => {
@@ -13,6 +20,21 @@ const BSA = () => {
   const [uploaded, setUploaded] = useState(false);
   const [result, setResult] = useState<any>(null);
   const [showData, setShowData] = useState(false);
+  const [showSampleDialog, setShowSampleDialog] = useState(false);
+
+  const handleDownloadSample = (accountType: 'savings' | 'current') => {
+    const fileName = accountType === 'savings' 
+      ? 'BSA_Saving_Account.xlsx' 
+      : 'Current_Sample_Output.xlsx';
+    
+    const link = document.createElement('a');
+    link.href = `/samples/${fileName}`;
+    link.download = fileName;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    setShowSampleDialog(false);
+  };
 
   const maskEmail = (email: string) => {
     if (showData) return email;
@@ -172,14 +194,26 @@ const BSA = () => {
             </div>
           )}
           
-          <Button 
-            onClick={handleAnalyze}
-            disabled={loading || uploaded}
-            className="w-full"
-            size="lg"
-          >
-            {loading ? 'Analyzing Statement...' : uploaded ? 'Analyzing...' : 'Upload & Analyze'}
-          </Button>
+          <div className="space-y-3">
+            <Button 
+              onClick={handleAnalyze}
+              disabled={loading || uploaded}
+              className="w-full"
+              size="lg"
+            >
+              {loading ? 'Analyzing Statement...' : uploaded ? 'Analyzing...' : 'Upload & Analyze'}
+            </Button>
+
+            <Button
+              onClick={() => setShowSampleDialog(true)}
+              variant="outline"
+              className="w-full"
+              size="lg"
+            >
+              <Download className="mr-2 h-4 w-4" />
+              Download Sample
+            </Button>
+          </div>
 
           {loading && (
             <div className="mt-6">
@@ -188,6 +222,42 @@ const BSA = () => {
             </div>
           )}
         </Card>
+
+        {/* Download Sample Dialog */}
+        <Dialog open={showSampleDialog} onOpenChange={setShowSampleDialog}>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Download Sample Bank Statement</DialogTitle>
+              <DialogDescription>
+                Choose the type of account statement you want to download
+              </DialogDescription>
+            </DialogHeader>
+            <div className="grid grid-cols-1 gap-3 mt-4">
+              <Button
+                onClick={() => handleDownloadSample('savings')}
+                size="lg"
+                variant="outline"
+                className="h-auto py-4"
+              >
+                <div className="text-left w-full">
+                  <div className="font-semibold">Savings Account</div>
+                  <div className="text-sm text-muted-foreground">Download savings account sample</div>
+                </div>
+              </Button>
+              <Button
+                onClick={() => handleDownloadSample('current')}
+                size="lg"
+                variant="outline"
+                className="h-auto py-4"
+              >
+                <div className="text-left w-full">
+                  <div className="font-semibold">Current Account</div>
+                  <div className="text-sm text-muted-foreground">Download current account sample</div>
+                </div>
+              </Button>
+            </div>
+          </DialogContent>
+        </Dialog>
 
         {/* Results Dashboard */}
         {result && (

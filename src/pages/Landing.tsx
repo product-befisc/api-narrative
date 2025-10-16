@@ -44,6 +44,10 @@ import secureSearchLogo from '@/assets/clients/securesearch.svg';
 import verificationStreetLogo from '@/assets/clients/verification-street.svg';
 import veriprobusLogo from '@/assets/clients/veriprobus.svg';
 import fourSlLogo from '@/assets/clients/4sl-background-check.svg';
+import swipeloanLogo from '@/assets/clients/swipeloan.png';
+import pjCapitalLogo from '@/assets/clients/pj-capital.png';
+import piceLogo from '@/assets/clients/pice.png';
+import loksuvidhaLogo from '@/assets/clients/loksuvidha.png';
 
 const Landing = () => {
   const navigate = useNavigate();
@@ -327,6 +331,8 @@ const Landing = () => {
                   { name: "Lendbox", logo: lendboxLogo },
                   { name: "Varthana", logo: varthanaLogo },
                   { name: "Salora Capital", logo: saloraCapitalLogo },
+                  { name: "Swipe loan", logo: swipeloanLogo },
+                  { name: "PJ Credit Capital", logo: pjCapitalLogo },
                 ].map((company, i) => (
                   <div
                     key={i}
@@ -404,6 +410,8 @@ const Landing = () => {
                   { name: "Vibrant", logo: vibrantLogo },
                   { name: "Yaper", logo: yaperLogo },
                   { name: "EximPe", logo: eximpeLogo },
+                  { name: "Pice", logo: piceLogo },
+                  { name: "Loksuvidha", logo: loksuvidhaLogo },
                 ].map((company, i) => (
                   <div
                     key={i}

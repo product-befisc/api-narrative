@@ -19,7 +19,7 @@ const BusinessProfiling = () => {
   const [consent, setConsent] = useState(true);
 
   const mockResponse = {
-    mobile: "+91-9876543210",
+    mobile: "+91-98765432100",
     gst_registrations: [
       {
         gstin: "27ABCDE1234F1Z5",

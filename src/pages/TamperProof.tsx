@@ -190,6 +190,18 @@ const TamperProof = () => {
             </div>
 
             <div className="p-8">
+              {/* Download Sample Button */}
+              <div className="flex justify-end mb-6">
+                <Button
+                  onClick={() => setShowSampleDialog(true)}
+                  variant="outline"
+                  size="sm"
+                >
+                  <Download className="mr-2 h-4 w-4" />
+                  Download Sample
+                </Button>
+              </div>
+
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
                 {/* Document Details */}
                 <Card className="lg:col-span-2 p-6">
@@ -223,18 +235,6 @@ const TamperProof = () => {
                     <h3 className="text-4xl font-bold text-primary">{result.verdict}</h3>
                   </div>
                 </Card>
-              </div>
-
-              {/* Download Sample Button */}
-              <div className="flex justify-end mb-6">
-                <Button
-                  onClick={() => setShowSampleDialog(true)}
-                  variant="outline"
-                  size="sm"
-                >
-                  <Download className="mr-2 h-4 w-4" />
-                  Download Sample
-                </Button>
               </div>
 
               {/* Checks Grid */}

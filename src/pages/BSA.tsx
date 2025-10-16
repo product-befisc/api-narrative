@@ -194,26 +194,14 @@ const BSA = () => {
             </div>
           )}
           
-          <div className="space-y-3">
-            <Button 
-              onClick={handleAnalyze}
-              disabled={loading || uploaded}
-              className="w-full"
-              size="lg"
-            >
-              {loading ? 'Analyzing Statement...' : uploaded ? 'Analyzing...' : 'Upload & Analyze'}
-            </Button>
-
-            <Button
-              onClick={() => setShowSampleDialog(true)}
-              variant="outline"
-              className="w-full"
-              size="lg"
-            >
-              <Download className="mr-2 h-4 w-4" />
-              Download Sample
-            </Button>
-          </div>
+          <Button 
+            onClick={handleAnalyze}
+            disabled={loading || uploaded}
+            className="w-full"
+            size="lg"
+          >
+            {loading ? 'Analyzing Statement...' : uploaded ? 'Analyzing...' : 'Upload & Analyze'}
+          </Button>
 
           {loading && (
             <div className="mt-6">
@@ -266,10 +254,20 @@ const BSA = () => {
             <Card className="p-6 bg-primary text-primary-foreground">
               <div className="flex items-center justify-between">
                 <h2 className="text-3xl font-bold">BANK STATEMENT ANALYZER REPORT</h2>
-                <div className="text-right">
-                  <div className="text-3xl font-bold">{result.healthScore}/{result.maxScore}</div>
-                  <div className="text-sm opacity-90">BEFISC FINANCIAL HEALTH SCORE</div>
-                  <div className="text-xs opacity-75 mt-1">({result.abbSummary.length} pages of {result.abbSummary.length})</div>
+                <div className="flex items-center gap-4">
+                  <Button
+                    onClick={() => setShowSampleDialog(true)}
+                    variant="secondary"
+                    size="sm"
+                  >
+                    <Download className="mr-2 h-4 w-4" />
+                    Download Sample
+                  </Button>
+                  <div className="text-right">
+                    <div className="text-3xl font-bold">{result.healthScore}/{result.maxScore}</div>
+                    <div className="text-sm opacity-90">BEFISC FINANCIAL HEALTH SCORE</div>
+                    <div className="text-xs opacity-75 mt-1">({result.abbSummary.length} pages of {result.abbSummary.length})</div>
+                  </div>
                 </div>
               </div>
               <div className="mt-2 text-sm opacity-90">

@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Checkbox } from "@/components/ui/checkbox";
 import Navbar from "@/components/Navbar";
 import { ArrowLeft, User, CreditCard, Briefcase, Phone, MapPin, Building2, Fuel, CheckCircle2, Eye, EyeOff, FileText, ChevronDown, ChevronUp } from "lucide-react";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { maskData, maskEmail, maskPhone } from "@/lib/utils";
 
 const CustomerProfiling = () => {
@@ -19,6 +20,7 @@ const CustomerProfiling = () => {
   const [showFullBureauReport, setShowFullBureauReport] = useState(false);
   const [showFullESICDetails, setShowFullESICDetails] = useState(false);
   const [showFullAdditionalDetails, setShowFullAdditionalDetails] = useState(false);
+  const [showUdyamDetails, setShowUdyamDetails] = useState(false);
 
   // Helper function to get credit score band
   const getCreditScoreBand = (score: number) => {
@@ -55,8 +57,63 @@ const CustomerProfiling = () => {
     ],
     msme_info: {
       registered: true,
-      udyam_number: "UDYAM-MH-01-0012345",
-      enterprise_name: "Sharma Enterprises"
+      udyam_number: "UDYAM-WB-12-7654321",
+      enterprise_name: "ABC PRIVATE LIMITED",
+      udyam_details: {
+        enterprise_name: "ABC PRIVATE LIMITED",
+        organisation_type: "Proprietary",
+        service_type: "Services",
+        gender: "Female",
+        social_category: "General",
+        date_of_incorporation: "01/04/2024",
+        date_of_commencement: "01/06/2024",
+        address: {
+          flat_no: "FLAT NO 101",
+          building: "RAVI CLASSIC , S NO 112, 113",
+          village: "BANER ROAD",
+          block: "CONTAI III",
+          street: "SH5",
+          district: "EAST MEDINIPUR",
+          city: "CONTAI",
+          state: "WEST BENGAL",
+          pin: "721452"
+        },
+        mobile: "98*****210",
+        email: "ramsingh@gmail.com",
+        plant_details: [
+          {
+            unit_name: "LEENA BAKE",
+            flat: "FLAT NO 101",
+            building: "RAVI CLASSIC , S NO 112, 113",
+            village: "PASCHIM PARULIA",
+            block: "CONTAI III",
+            road: "SH5",
+            district: "EAST MEDINIPUR",
+            city: "CONTAI",
+            state: "WEST BENGAL",
+            pin: "721452"
+          }
+        ],
+        enterprise_type: [
+          {
+            classification_year: "2024-25",
+            enterprise_type: "Micro",
+            classification_date: "01/01/2025"
+          }
+        ],
+        nic_code: [
+          {
+            nic_2_digit: "20 - Manufacture of chemicals and chemical products",
+            nic_4_digit: "2023 - Manufacture of soap and detergents, cleaning and polishing preparations, perfumes and toilet preparations",
+            nic_5_digit: "20235 - Manufacture of preparations for oral or dental hygiene (includes manufacture of toothpastes, toothpowder, mouthwash, oral, perfumes, dental fixative pastes and powders etc.)",
+            activity: "Manufacturing",
+            date: "10/01/2025"
+          }
+        ],
+        dic: "PURBA MEDINIPUR",
+        "msme-dfo": "KOLKATA",
+        date_of_udyam_registeration: "01/01/2025"
+      }
     },
     epfo: {
       uan: "101234567890",
@@ -531,6 +588,232 @@ const CustomerProfiling = () => {
                       <div>
                         <p className="text-sm text-muted-foreground">Enterprise Name</p>
                         <p>{responseData.msme_info.enterprise_name}</p>
+                      </div>
+                    )}
+                    
+                    {responseData.msme_info.udyam_details && (
+                      <div className="pt-3">
+                        <Collapsible open={showUdyamDetails} onOpenChange={setShowUdyamDetails}>
+                          <CollapsibleTrigger asChild>
+                            <Button variant="outline" className="w-full">
+                              {showUdyamDetails ? (
+                                <>
+                                  <ChevronUp className="h-4 w-4 mr-2" />
+                                  Hide Udyam Details
+                                </>
+                              ) : (
+                                <>
+                                  <ChevronDown className="h-4 w-4 mr-2" />
+                                  Show Udyam Details
+                                </>
+                              )}
+                            </Button>
+                          </CollapsibleTrigger>
+                          <CollapsibleContent className="space-y-4 pt-4">
+                            {/* Basic Enterprise Details */}
+                            <div className="space-y-3 border-t pt-3">
+                              <h4 className="font-semibold text-sm">Enterprise Information</h4>
+                              <div className="grid md:grid-cols-2 gap-3">
+                                <div>
+                                  <p className="text-xs text-muted-foreground">Organisation Type</p>
+                                  <p className="text-sm">{responseData.msme_info.udyam_details.organisation_type}</p>
+                                </div>
+                                <div>
+                                  <p className="text-xs text-muted-foreground">Service Type</p>
+                                  <p className="text-sm">{responseData.msme_info.udyam_details.service_type}</p>
+                                </div>
+                                <div>
+                                  <p className="text-xs text-muted-foreground">Gender</p>
+                                  <p className="text-sm">{responseData.msme_info.udyam_details.gender}</p>
+                                </div>
+                                <div>
+                                  <p className="text-xs text-muted-foreground">Social Category</p>
+                                  <p className="text-sm">{responseData.msme_info.udyam_details.social_category}</p>
+                                </div>
+                                <div>
+                                  <p className="text-xs text-muted-foreground">Date of Incorporation</p>
+                                  <p className="text-sm">{responseData.msme_info.udyam_details.date_of_incorporation}</p>
+                                </div>
+                                <div>
+                                  <p className="text-xs text-muted-foreground">Date of Commencement</p>
+                                  <p className="text-sm">{responseData.msme_info.udyam_details.date_of_commencement}</p>
+                                </div>
+                                <div>
+                                  <p className="text-xs text-muted-foreground">DIC</p>
+                                  <p className="text-sm">{responseData.msme_info.udyam_details.dic}</p>
+                                </div>
+                                <div>
+                                  <p className="text-xs text-muted-foreground">MSME-DFO</p>
+                                  <p className="text-sm">{responseData.msme_info.udyam_details["msme-dfo"]}</p>
+                                </div>
+                                <div>
+                                  <p className="text-xs text-muted-foreground">Registration Date</p>
+                                  <p className="text-sm">{responseData.msme_info.udyam_details.date_of_udyam_registeration}</p>
+                                </div>
+                              </div>
+                            </div>
+
+                            {/* Contact Information */}
+                            <div className="space-y-3 border-t pt-3">
+                              <h4 className="font-semibold text-sm">Contact Information</h4>
+                              <div className="grid md:grid-cols-2 gap-3">
+                                <div>
+                                  <p className="text-xs text-muted-foreground">Mobile</p>
+                                  <p className="text-sm">{responseData.msme_info.udyam_details.mobile}</p>
+                                </div>
+                                <div>
+                                  <p className="text-xs text-muted-foreground">Email</p>
+                                  <p className="text-sm">{maskEmail(responseData.msme_info.udyam_details.email, showData)}</p>
+                                </div>
+                              </div>
+                            </div>
+
+                            {/* Address */}
+                            <div className="space-y-3 border-t pt-3">
+                              <h4 className="font-semibold text-sm">Address</h4>
+                              <div className="grid md:grid-cols-2 gap-3">
+                                <div>
+                                  <p className="text-xs text-muted-foreground">Flat No</p>
+                                  <p className="text-sm">{responseData.msme_info.udyam_details.address.flat_no}</p>
+                                </div>
+                                <div>
+                                  <p className="text-xs text-muted-foreground">Building</p>
+                                  <p className="text-sm">{responseData.msme_info.udyam_details.address.building}</p>
+                                </div>
+                                <div>
+                                  <p className="text-xs text-muted-foreground">Village</p>
+                                  <p className="text-sm">{responseData.msme_info.udyam_details.address.village}</p>
+                                </div>
+                                <div>
+                                  <p className="text-xs text-muted-foreground">Block</p>
+                                  <p className="text-sm">{responseData.msme_info.udyam_details.address.block}</p>
+                                </div>
+                                <div>
+                                  <p className="text-xs text-muted-foreground">Street</p>
+                                  <p className="text-sm">{responseData.msme_info.udyam_details.address.street}</p>
+                                </div>
+                                <div>
+                                  <p className="text-xs text-muted-foreground">District</p>
+                                  <p className="text-sm">{responseData.msme_info.udyam_details.address.district}</p>
+                                </div>
+                                <div>
+                                  <p className="text-xs text-muted-foreground">City</p>
+                                  <p className="text-sm">{responseData.msme_info.udyam_details.address.city}</p>
+                                </div>
+                                <div>
+                                  <p className="text-xs text-muted-foreground">State</p>
+                                  <p className="text-sm">{responseData.msme_info.udyam_details.address.state}</p>
+                                </div>
+                                <div>
+                                  <p className="text-xs text-muted-foreground">PIN</p>
+                                  <p className="text-sm">{responseData.msme_info.udyam_details.address.pin}</p>
+                                </div>
+                              </div>
+                            </div>
+
+                            {/* Enterprise Type */}
+                            {responseData.msme_info.udyam_details.enterprise_type && responseData.msme_info.udyam_details.enterprise_type.length > 0 && (
+                              <div className="space-y-3 border-t pt-3">
+                                <h4 className="font-semibold text-sm">Enterprise Classification</h4>
+                                {responseData.msme_info.udyam_details.enterprise_type.map((type: any, idx: number) => (
+                                  <div key={idx} className="bg-muted/50 p-3 rounded-lg">
+                                    <div className="grid md:grid-cols-3 gap-3">
+                                      <div>
+                                        <p className="text-xs text-muted-foreground">Classification Year</p>
+                                        <p className="text-sm">{type.classification_year}</p>
+                                      </div>
+                                      <div>
+                                        <p className="text-xs text-muted-foreground">Enterprise Type</p>
+                                        <Badge variant="default">{type.enterprise_type}</Badge>
+                                      </div>
+                                      <div>
+                                        <p className="text-xs text-muted-foreground">Classification Date</p>
+                                        <p className="text-sm">{type.classification_date}</p>
+                                      </div>
+                                    </div>
+                                  </div>
+                                ))}
+                              </div>
+                            )}
+
+                            {/* NIC Codes */}
+                            {responseData.msme_info.udyam_details.nic_code && responseData.msme_info.udyam_details.nic_code.length > 0 && (
+                              <div className="space-y-3 border-t pt-3">
+                                <h4 className="font-semibold text-sm">NIC Codes</h4>
+                                {responseData.msme_info.udyam_details.nic_code.map((nic: any, idx: number) => (
+                                  <div key={idx} className="bg-muted/50 p-3 rounded-lg space-y-2">
+                                    <div className="flex items-center gap-2">
+                                      <Badge variant="outline">{nic.activity}</Badge>
+                                      <span className="text-xs text-muted-foreground">Reported: {nic.date}</span>
+                                    </div>
+                                    <div className="space-y-1">
+                                      <p className="text-xs text-muted-foreground">2-Digit Code</p>
+                                      <p className="text-sm">{nic.nic_2_digit}</p>
+                                    </div>
+                                    <div className="space-y-1">
+                                      <p className="text-xs text-muted-foreground">4-Digit Code</p>
+                                      <p className="text-sm">{nic.nic_4_digit}</p>
+                                    </div>
+                                    <div className="space-y-1">
+                                      <p className="text-xs text-muted-foreground">5-Digit Code</p>
+                                      <p className="text-sm">{nic.nic_5_digit}</p>
+                                    </div>
+                                  </div>
+                                ))}
+                              </div>
+                            )}
+
+                            {/* Plant Details */}
+                            {responseData.msme_info.udyam_details.plant_details && responseData.msme_info.udyam_details.plant_details.length > 0 && (
+                              <div className="space-y-3 border-t pt-3">
+                                <h4 className="font-semibold text-sm">Plant Details</h4>
+                                {responseData.msme_info.udyam_details.plant_details.map((plant: any, idx: number) => (
+                                  <div key={idx} className="bg-muted/50 p-3 rounded-lg">
+                                    <p className="font-semibold text-sm mb-3">{plant.unit_name}</p>
+                                    <div className="grid md:grid-cols-2 gap-3">
+                                      <div>
+                                        <p className="text-xs text-muted-foreground">Flat</p>
+                                        <p className="text-sm">{plant.flat}</p>
+                                      </div>
+                                      <div>
+                                        <p className="text-xs text-muted-foreground">Building</p>
+                                        <p className="text-sm">{plant.building}</p>
+                                      </div>
+                                      <div>
+                                        <p className="text-xs text-muted-foreground">Village</p>
+                                        <p className="text-sm">{plant.village}</p>
+                                      </div>
+                                      <div>
+                                        <p className="text-xs text-muted-foreground">Block</p>
+                                        <p className="text-sm">{plant.block}</p>
+                                      </div>
+                                      <div>
+                                        <p className="text-xs text-muted-foreground">Road</p>
+                                        <p className="text-sm">{plant.road}</p>
+                                      </div>
+                                      <div>
+                                        <p className="text-xs text-muted-foreground">District</p>
+                                        <p className="text-sm">{plant.district}</p>
+                                      </div>
+                                      <div>
+                                        <p className="text-xs text-muted-foreground">City</p>
+                                        <p className="text-sm">{plant.city}</p>
+                                      </div>
+                                      <div>
+                                        <p className="text-xs text-muted-foreground">State</p>
+                                        <p className="text-sm">{plant.state}</p>
+                                      </div>
+                                      <div>
+                                        <p className="text-xs text-muted-foreground">PIN</p>
+                                        <p className="text-sm">{plant.pin}</p>
+                                      </div>
+                                    </div>
+                                  </div>
+                                ))}
+                              </div>
+                            )}
+                          </CollapsibleContent>
+                        </Collapsible>
                       </div>
                     )}
                   </CardContent>

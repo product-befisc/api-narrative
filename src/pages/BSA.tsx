@@ -254,20 +254,10 @@ const BSA = () => {
             <Card className="p-6 bg-primary text-primary-foreground">
               <div className="flex items-center justify-between">
                 <h2 className="text-3xl font-bold">BANK STATEMENT ANALYZER REPORT</h2>
-                <div className="flex items-center gap-4">
-                  <Button
-                    onClick={() => setShowSampleDialog(true)}
-                    variant="secondary"
-                    size="sm"
-                  >
-                    <Download className="mr-2 h-4 w-4" />
-                    Download Sample
-                  </Button>
-                  <div className="text-right">
-                    <div className="text-3xl font-bold">{result.healthScore}/{result.maxScore}</div>
-                    <div className="text-sm opacity-90">BEFISC FINANCIAL HEALTH SCORE</div>
-                    <div className="text-xs opacity-75 mt-1">({result.abbSummary.length} pages of {result.abbSummary.length})</div>
-                  </div>
+                <div className="text-right">
+                  <div className="text-3xl font-bold">{result.healthScore}/{result.maxScore}</div>
+                  <div className="text-sm opacity-90">BEFISC FINANCIAL HEALTH SCORE</div>
+                  <div className="text-xs opacity-75 mt-1">({result.abbSummary.length} pages of {result.abbSummary.length})</div>
                 </div>
               </div>
               <div className="mt-2 text-sm opacity-90">
@@ -276,7 +266,15 @@ const BSA = () => {
             </Card>
 
             {/* Show/Hide Data Toggle */}
-            <div className="flex justify-end">
+            <div className="flex justify-end gap-3">
+              <Button
+                onClick={() => setShowSampleDialog(true)}
+                variant="outline"
+                size="sm"
+              >
+                <Download className="mr-2 h-4 w-4" />
+                Download Sample
+              </Button>
               <Button
                 variant="outline"
                 size="sm"

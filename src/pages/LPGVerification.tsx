@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Checkbox } from '@/components/ui/checkbox';
+import { Label } from '@/components/ui/label';
 import Navbar from '@/components/Navbar';
 import { maskData, maskPhone } from '@/lib/utils';
 
@@ -88,16 +89,20 @@ const LPGVerification = () => {
               <CardTitle>Enter Mobile Number</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="flex gap-4">
-                <Input
-                  value={mobileNo}
-                  onChange={(e) => setMobileNo(e.target.value)}
-                  placeholder="Mobile Number"
-                  className="flex-1"
-                />
-                <Button onClick={handleFetch} disabled={loading || !consent}>
-                  {loading ? 'Verifying...' : 'Fetch'}
-                </Button>
+              <div className="space-y-2">
+                <Label htmlFor="mobileNo">Mobile Number</Label>
+                <div className="flex gap-4">
+                  <Input
+                    id="mobileNo"
+                    value={mobileNo}
+                    onChange={(e) => setMobileNo(e.target.value)}
+                    placeholder="e.g., 9876543210"
+                    className="flex-1"
+                  />
+                  <Button onClick={handleFetch} disabled={loading || !consent}>
+                    {loading ? 'Verifying...' : 'Fetch'}
+                  </Button>
+                </div>
               </div>
               <div className="flex items-start space-x-2">
                 <Checkbox id="consent" checked={consent} onCheckedChange={(checked) => setConsent(checked === true)} />

@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Checkbox } from '@/components/ui/checkbox';
+import { Label } from '@/components/ui/label';
 import Navbar from '@/components/Navbar';
 import { maskData } from '@/lib/utils';
 
@@ -74,27 +75,39 @@ const PassportVerification = () => {
             <CardContent className="space-y-4">
               <div className="space-y-4">
                 <div className="grid md:grid-cols-2 gap-4">
-                  <Input
-                    value={passportNo}
-                    onChange={(e) => setPassportNo(e.target.value)}
-                    placeholder="Passport Number"
-                  />
-                  <Input
-                    value={fileNo}
-                    onChange={(e) => setFileNo(e.target.value)}
-                    placeholder="File Number"
-                  />
+                  <div className="space-y-2">
+                    <Label htmlFor="passportNo">Passport Number</Label>
+                    <Input
+                      id="passportNo"
+                      value={passportNo}
+                      onChange={(e) => setPassportNo(e.target.value)}
+                      placeholder="e.g., T1234567"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="fileNo">File Number</Label>
+                    <Input
+                      id="fileNo"
+                      value={fileNo}
+                      onChange={(e) => setFileNo(e.target.value)}
+                      placeholder="e.g., UP1234567890122"
+                    />
+                  </div>
                 </div>
-                <div className="flex gap-4">
-                  <Input
-                    value={dob}
-                    onChange={(e) => setDob(e.target.value)}
-                    placeholder="Date of Birth (DD/MM/YYYY)"
-                    className="flex-1"
-                  />
-                  <Button onClick={handleFetch} disabled={loading || !consent}>
-                    {loading ? 'Verifying...' : 'Fetch'}
-                  </Button>
+                <div className="space-y-2">
+                  <Label htmlFor="dob">Date of Birth</Label>
+                  <div className="flex gap-4">
+                    <Input
+                      id="dob"
+                      value={dob}
+                      onChange={(e) => setDob(e.target.value)}
+                      placeholder="DD/MM/YYYY"
+                      className="flex-1"
+                    />
+                    <Button onClick={handleFetch} disabled={loading || !consent}>
+                      {loading ? 'Verifying...' : 'Fetch'}
+                    </Button>
+                  </div>
                 </div>
                 <div className="flex items-start space-x-2">
                   <Checkbox id="consent" checked={consent} onCheckedChange={(checked) => setConsent(checked === true)} />

@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Checkbox } from '@/components/ui/checkbox';
+import { Label } from '@/components/ui/label';
 import Navbar from '@/components/Navbar';
 import { maskData } from '@/lib/utils';
 
@@ -85,16 +86,20 @@ const VoterIDVerification = () => {
               <CardTitle>Enter Voter ID</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="flex gap-4">
-                <Input
-                  value={voterId}
-                  onChange={(e) => setVoterId(e.target.value)}
-                  placeholder="Voter ID / EPIC Number"
-                  className="flex-1"
-                />
-                <Button onClick={handleFetch} disabled={loading || !consent}>
-                  {loading ? 'Verifying...' : 'Fetch'}
-                </Button>
+              <div className="space-y-2">
+                <Label htmlFor="voterId">Voter ID / EPIC Number</Label>
+                <div className="flex gap-4">
+                  <Input
+                    id="voterId"
+                    value={voterId}
+                    onChange={(e) => setVoterId(e.target.value)}
+                    placeholder="e.g., ZTS0412345"
+                    className="flex-1"
+                  />
+                  <Button onClick={handleFetch} disabled={loading || !consent}>
+                    {loading ? 'Verifying...' : 'Fetch'}
+                  </Button>
+                </div>
               </div>
               <div className="flex items-start space-x-2">
                 <Checkbox id="consent" checked={consent} onCheckedChange={(checked) => setConsent(checked === true)} />

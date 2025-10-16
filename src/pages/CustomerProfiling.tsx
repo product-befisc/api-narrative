@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Checkbox } from "@/components/ui/checkbox";
+import { Label } from "@/components/ui/label";
 import Navbar from "@/components/Navbar";
 import { ArrowLeft, User, CreditCard, Briefcase, Phone, MapPin, Building2, Fuel, CheckCircle2, Eye, EyeOff, FileText, ChevronDown, ChevronUp } from "lucide-react";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
@@ -395,15 +396,19 @@ const CustomerProfiling = () => {
               <CardTitle>Enter Mobile Number</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="flex gap-4">
-                <Input
-                  placeholder="Enter mobile number"
-                  value={mobileNumber}
-                  onChange={(e) => setMobileNumber(e.target.value)}
-                />
-                <Button onClick={handleFetch} disabled={loading || !mobileNumber || !consent}>
-                  {loading ? "Fetching..." : "Fetch Profile"}
-                </Button>
+              <div className="space-y-2">
+                <Label htmlFor="mobileNumber">Mobile Number</Label>
+                <div className="flex gap-4">
+                  <Input
+                    id="mobileNumber"
+                    placeholder="e.g., +91-9876543210"
+                    value={mobileNumber}
+                    onChange={(e) => setMobileNumber(e.target.value)}
+                  />
+                  <Button onClick={handleFetch} disabled={loading || !mobileNumber || !consent}>
+                    {loading ? "Fetching..." : "Fetch Profile"}
+                  </Button>
+                </div>
               </div>
               <div className="flex items-start space-x-2">
                 <Checkbox id="consent" checked={consent} onCheckedChange={(checked) => setConsent(checked === true)} />

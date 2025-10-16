@@ -176,49 +176,47 @@ const VehicleVerification = () => {
                 </CardHeader>
                 <CardContent>
                   <div className="grid md:grid-cols-3 gap-6">
-                    <div className="space-y-2">
-                      <h3 className="font-semibold text-lg flex items-center gap-2">
-                        <Car className="h-5 w-5 text-primary" />
-                        RC Advance Details
-                      </h3>
-                      <ul className="text-sm space-y-1 text-muted-foreground">
-                        <li>✓ Complete Owner Information</li>
-                        <li>✓ Vehicle Registration Details</li>
-                        <li>✓ Insurance Information</li>
-                        <li>✓ Engine & Chassis Numbers</li>
-                        <li>✓ Fitness & Status Details</li>
-                        <li>✓ PAN & Aadhaar Verification</li>
-                        <li>✓ Finance Status</li>
-                      </ul>
+                    <div className="flex items-center gap-3 p-4 bg-background rounded-lg">
+                      <User className="h-8 w-8 text-primary" />
+                      <div>
+                        <h3 className="font-semibold text-lg">Owner Info</h3>
+                        <p className="text-sm text-muted-foreground">Complete owner details</p>
+                      </div>
                     </div>
-                    <div className="space-y-2">
-                      <h3 className="font-semibold text-lg flex items-center gap-2">
-                        <AlertTriangle className="h-5 w-5 text-destructive" />
-                        Challan Details
-                      </h3>
-                      <ul className="text-sm space-y-1 text-muted-foreground">
-                        <li>✓ Pending Challans</li>
-                        <li>✓ Offense Details</li>
-                        <li>✓ Challan Amounts</li>
-                        <li>✓ Court Challan Status</li>
-                        <li>✓ Challan Dates</li>
-                        <li>✓ State Information</li>
-                      </ul>
+                    <div className="flex items-center gap-3 p-4 bg-background rounded-lg">
+                      <Shield className="h-8 w-8 text-primary" />
+                      <div>
+                        <h3 className="font-semibold text-lg">Insurance Info</h3>
+                        <p className="text-sm text-muted-foreground">Policy & validity details</p>
+                      </div>
                     </div>
-                    <div className="space-y-2">
-                      <h3 className="font-semibold text-lg flex items-center gap-2">
-                        <FileText className="h-5 w-5 text-primary" />
-                        Chassis to RC Details
-                      </h3>
-                      <ul className="text-sm space-y-1 text-muted-foreground">
-                        <li>✓ RTO Information</li>
-                        <li>✓ Vehicle Category</li>
-                        <li>✓ Cubic Capacity</li>
-                        <li>✓ Seating Capacity</li>
-                        <li>✓ Insurance Expiry</li>
-                        <li>✓ Fitness Expiry</li>
-                        <li>✓ Registration Status</li>
-                      </ul>
+                    <div className="flex items-center gap-3 p-4 bg-background rounded-lg">
+                      <FileText className="h-8 w-8 text-primary" />
+                      <div>
+                        <h3 className="font-semibold text-lg">Registration Details</h3>
+                        <p className="text-sm text-muted-foreground">Vehicle registration data</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-3 p-4 bg-background rounded-lg">
+                      <AlertTriangle className="h-8 w-8 text-destructive" />
+                      <div>
+                        <h3 className="font-semibold text-lg">Challan Details</h3>
+                        <p className="text-sm text-muted-foreground">Pending offense records</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-3 p-4 bg-background rounded-lg">
+                      <Car className="h-8 w-8 text-primary" />
+                      <div>
+                        <h3 className="font-semibold text-lg">RC Details</h3>
+                        <p className="text-sm text-muted-foreground">Complete RC information</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-3 p-4 bg-background rounded-lg">
+                      <Building2 className="h-8 w-8 text-primary" />
+                      <div>
+                        <h3 className="font-semibold text-lg">RTO Info</h3>
+                        <p className="text-sm text-muted-foreground">RTO office details</p>
+                      </div>
                     </div>
                   </div>
                 </CardContent>

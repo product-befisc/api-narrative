@@ -311,214 +311,181 @@ const Landing = () => {
         </div>
       </section>
 
-      {/* Trusted By Section - Inverted Pyramid */}
-      <section className="py-20 bg-background">
+      {/* Trusted By Section - Pyramid Layout */}
+      <section className="py-20 bg-gradient-to-b from-background via-muted/20 to-background">
         <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-foreground text-center mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-foreground text-center mb-4">
             Trusted by the World's Most Dependable Businesses
           </h2>
-          <p className="text-center text-muted-foreground mb-16 max-w-3xl mx-auto">
+          <p className="text-center text-muted-foreground mb-20 max-w-3xl mx-auto text-lg">
             BeFiSc partners with leading organizations across lending, fintech, and verification ecosystems to power
             real-time trust.
           </p>
 
-          {/* Row 1 - NBFC & Lending (Widest - 8 companies) */}
-          <div className="mb-12 animate-fade-in">
-            <div className="flex items-center justify-center gap-8 pb-6">
-              <div className="text-left">
-                <h3 className="text-sm font-semibold text-primary uppercase tracking-wide whitespace-nowrap mb-2">
-                  NBFC & Lending
-                </h3>
-                <div className="h-0.5 w-24 bg-gradient-to-r from-primary to-transparent"></div>
+          <div className="max-w-7xl mx-auto space-y-16">
+            {/* Row 1 - NBFC (Top, Widest - 5 cards) */}
+            <div className="animate-fade-in" style={{ animationDelay: "0s" }}>
+              <div className="text-center mb-8">
+                <h3 className="text-2xl font-bold text-primary mb-2">NBFC & Lending</h3>
+                <div className="h-1 w-32 bg-gradient-to-r from-transparent via-primary to-transparent mx-auto"></div>
               </div>
-              <div className="flex flex-wrap justify-center gap-4 max-w-7xl">
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 max-w-7xl mx-auto">
                 {[
                   { name: "Bajaj Finserv", logo: bajajLogo },
                   { name: "Muthoot Capital", logo: muthootLogo },
                   { name: "Navi", logo: naviLogo },
-                  { name: "Affordplan", logo: affordplanLogo },
-                  { name: "Roopya", logo: rupyaLogo },
-                  { name: "SuperMoney", logo: supermoneyLogo },
-                  { name: "EPay Later", logo: epaylaterLogo },
-                  { name: "Snapmint", logo: snapmintLogo },
-                  { name: "Arthan Finance", logo: arthanFinanceLogo },
                   { name: "Lendbox", logo: lendboxLogo },
-                  { name: "Varthana", logo: varthanaLogo },
-                  { name: "Salora Capital", logo: saloraCapitalLogo },
-                  { name: "Swipe loan", logo: swipeloanLogo },
-                  { name: "PJ Credit Capital", logo: pjCapitalLogo },
                   { name: "Vastu Finance", logo: vastuFinanceLogo },
                 ].map((company, i) => (
                   <div
                     key={i}
-                    className="flex items-center gap-3 bg-card rounded-xl px-6 py-4 border border-border hover:border-primary hover:scale-105 transition-all shadow-sm hover:shadow-md"
+                    className="group bg-card rounded-2xl p-8 border border-border/50 hover:border-primary/50 transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:shadow-primary/10"
                     style={{ animationDelay: `${i * 0.1}s` }}
                   >
-                    {company.logo ? (
-                      <img src={company.logo} alt={company.name} className="w-12 h-12 object-contain flex-shrink-0" />
-                    ) : (
-                      <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center flex-shrink-0">
-                        <Users className="w-6 h-6 text-muted-foreground" />
+                    <div className="flex flex-col items-center justify-center gap-4 h-full">
+                      <div className="w-20 h-20 flex items-center justify-center">
+                        <img 
+                          src={company.logo} 
+                          alt={company.name} 
+                          className="max-w-full max-h-full object-contain group-hover:scale-110 transition-transform duration-300" 
+                        />
                       </div>
-                    )}
-                    <span className="font-medium text-foreground whitespace-nowrap">{company.name}</span>
+                      <span className="font-semibold text-foreground text-center text-sm">{company.name}</span>
+                    </div>
                   </div>
                 ))}
               </div>
             </div>
-            <div className="h-px bg-gradient-to-r from-border via-primary/30 to-border max-w-7xl mx-auto"></div>
-          </div>
 
-          {/* Row 2 - Insurance & Wealth (7 companies) */}
-          <div className="mb-12 animate-fade-in" style={{ animationDelay: "0.2s" }}>
-            <div className="flex items-center justify-center gap-8 pb-6">
-              <div className="text-left">
-                <h3 className="text-sm font-semibold text-primary uppercase tracking-wide whitespace-nowrap mb-2">
-                  Insurance & Wealth
-                </h3>
-                <div className="h-0.5 w-24 bg-gradient-to-r from-primary to-transparent"></div>
+            {/* Row 2 - Fintech (5 cards, slightly narrower) */}
+            <div className="animate-fade-in" style={{ animationDelay: "0.2s" }}>
+              <div className="text-center mb-8">
+                <h3 className="text-2xl font-bold text-primary mb-2">Fintech</h3>
+                <div className="h-1 w-32 bg-gradient-to-r from-transparent via-primary to-transparent mx-auto"></div>
               </div>
-              <div className="flex flex-wrap justify-center gap-4 max-w-6xl">
-                {[
-                  { name: "Go Digit Life Insurance", logo: godigitLogo },
-                  { name: "Go Digit General Insurance", logo: godigitLogo },
-                  { name: "First Advisors Insurance", logo: firstAdvisorsLogo },
-                  { name: "HealthCred", logo: healthcredLogo },
-                  { name: "Velocity", logo: velocityLogo },
-                  { name: "Freo", logo: freoLogo },
-                  { name: "CashRich", logo: cashrichLogo },
-                ].map((company, i) => (
-                  <div
-                    key={i}
-                    className="flex items-center gap-3 bg-card rounded-xl px-6 py-4 border border-border hover:border-primary hover:scale-105 transition-all shadow-sm hover:shadow-md"
-                    style={{ animationDelay: `${(i + 8) * 0.1}s` }}
-                  >
-                    {company.logo ? (
-                      <img src={company.logo} alt={company.name} className="w-12 h-12 object-contain flex-shrink-0" />
-                    ) : (
-                      <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center flex-shrink-0">
-                        <Shield className="w-6 h-6 text-muted-foreground" />
-                      </div>
-                    )}
-                    <span className="font-medium text-foreground whitespace-nowrap">{company.name}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="h-px bg-gradient-to-r from-border via-primary/30 to-border max-w-6xl mx-auto"></div>
-          </div>
-
-          {/* Row 3 - Fintechs (6 companies) */}
-          <div className="mb-12 animate-fade-in" style={{ animationDelay: "0.4s" }}>
-            <div className="flex items-center justify-center gap-8 pb-6">
-              <div className="text-left">
-                <h3 className="text-sm font-semibold text-primary uppercase tracking-wide whitespace-nowrap mb-2">
-                  Fintechs
-                </h3>
-                <div className="h-0.5 w-24 bg-gradient-to-r from-primary to-transparent"></div>
-              </div>
-              <div className="flex flex-wrap justify-center gap-4 max-w-5xl">
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 max-w-6xl mx-auto">
                 {[
                   { name: "CredFlow", logo: credflowLogo },
                   { name: "Quid", logo: quidLogo },
                   { name: "Sabpaisa", logo: sabpaisaLogo },
                   { name: "Vibrant", logo: vibrantLogo },
                   { name: "Yaper", logo: yaperLogo },
-                  { name: "EximPe", logo: eximpeLogo },
-                  { name: "Pice", logo: piceLogo },
-                  { name: "Loksuvidha", logo: loksuvidhaLogo },
                 ].map((company, i) => (
                   <div
                     key={i}
-                    className="flex items-center gap-3 bg-card rounded-xl px-6 py-4 border border-border hover:border-primary hover:scale-105 transition-all shadow-sm hover:shadow-md"
-                    style={{ animationDelay: `${(i + 15) * 0.1}s` }}
+                    className="group bg-card rounded-2xl p-8 border border-border/50 hover:border-primary/50 transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:shadow-primary/10"
+                    style={{ animationDelay: `${i * 0.1}s` }}
                   >
-                    {company.logo ? (
-                      <img src={company.logo} alt={company.name} className="w-12 h-12 object-contain flex-shrink-0" />
-                    ) : (
-                      <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center flex-shrink-0">
-                        <TrendingUp className="w-6 h-6 text-muted-foreground" />
+                    <div className="flex flex-col items-center justify-center gap-4 h-full">
+                      <div className="w-20 h-20 flex items-center justify-center">
+                        <img 
+                          src={company.logo} 
+                          alt={company.name} 
+                          className="max-w-full max-h-full object-contain group-hover:scale-110 transition-transform duration-300" 
+                        />
                       </div>
-                    )}
-                    <span className="font-medium text-foreground whitespace-nowrap">{company.name}</span>
+                      <span className="font-semibold text-foreground text-center text-sm">{company.name}</span>
+                    </div>
                   </div>
                 ))}
               </div>
             </div>
-            <div className="h-px bg-gradient-to-r from-border via-primary/30 to-border max-w-5xl mx-auto"></div>
-          </div>
 
-          {/* Row 4 - Marketplaces (3 companies) */}
-          <div className="mb-12 animate-fade-in" style={{ animationDelay: "0.6s" }}>
-            <div className="flex items-center justify-center gap-8 pb-6">
-              <div className="text-left">
-                <h3 className="text-sm font-semibold text-primary uppercase tracking-wide whitespace-nowrap mb-2">
-                  Marketplaces
-                </h3>
-                <div className="h-0.5 w-24 bg-gradient-to-r from-primary to-transparent"></div>
+            {/* Row 3 - Insurance & Wealth (4 cards, narrower) */}
+            <div className="animate-fade-in" style={{ animationDelay: "0.4s" }}>
+              <div className="text-center mb-8">
+                <h3 className="text-2xl font-bold text-primary mb-2">Insurance & Wealth</h3>
+                <div className="h-1 w-32 bg-gradient-to-r from-transparent via-primary to-transparent mx-auto"></div>
               </div>
-              <div className="flex flex-wrap justify-center gap-4 max-w-4xl">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-5xl mx-auto">
+                {[
+                  { name: "Go Digit", logo: godigitLogo },
+                  { name: "First Advisors", logo: firstAdvisorsLogo },
+                  { name: "HealthCred", logo: healthcredLogo },
+                  { name: "Velocity", logo: velocityLogo },
+                ].map((company, i) => (
+                  <div
+                    key={i}
+                    className="group bg-card rounded-2xl p-8 border border-border/50 hover:border-primary/50 transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:shadow-primary/10"
+                    style={{ animationDelay: `${i * 0.1}s` }}
+                  >
+                    <div className="flex flex-col items-center justify-center gap-4 h-full">
+                      <div className="w-20 h-20 flex items-center justify-center">
+                        <img 
+                          src={company.logo} 
+                          alt={company.name} 
+                          className="max-w-full max-h-full object-contain group-hover:scale-110 transition-transform duration-300" 
+                        />
+                      </div>
+                      <span className="font-semibold text-foreground text-center text-sm">{company.name}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Row 4 - Marketplaces (3 cards, narrower) */}
+            <div className="animate-fade-in" style={{ animationDelay: "0.6s" }}>
+              <div className="text-center mb-8">
+                <h3 className="text-2xl font-bold text-primary mb-2">Marketplaces</h3>
+                <div className="h-1 w-32 bg-gradient-to-r from-transparent via-primary to-transparent mx-auto"></div>
+              </div>
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
                 {[
                   { name: "Indiamart", logo: indiamartLogo },
                   { name: "Gaadi Booking", logo: gaadiBookingLogo },
-                  { name: "4SL Background Check", logo: fourSlLogo },
-                ].map((company, i) => (
-                    <div
-                      key={i}
-                      className="flex items-center gap-3 bg-card rounded-xl px-6 py-4 border border-border hover:border-primary hover:scale-105 transition-all shadow-sm hover:shadow-md"
-                      style={{ animationDelay: `${(i + 21) * 0.1}s` }}
-                    >
-                      {company.logo ? (
-                        <img src={company.logo} alt={company.name} className="w-12 h-12 object-contain flex-shrink-0" />
-                      ) : (
-                        <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center flex-shrink-0">
-                          <Users className="w-6 h-6 text-muted-foreground" />
-                        </div>
-                      )}
-                      <span className="font-medium text-foreground whitespace-nowrap">{company.name}</span>
-                    </div>
-                  ),
-                )}
-              </div>
-            </div>
-            <div className="h-px bg-gradient-to-r from-border via-primary/30 to-border max-w-4xl mx-auto"></div>
-          </div>
-
-          {/* Row 5 - Verification & HR (Narrowest - 5 companies) */}
-          <div className="animate-fade-in" style={{ animationDelay: "0.8s" }}>
-            <div className="flex items-center justify-center gap-8 pb-6">
-              <div className="text-left">
-                <h3 className="text-sm font-semibold text-primary uppercase tracking-wide whitespace-nowrap mb-2">
-                  Verification & HR
-                </h3>
-                <div className="h-0.5 w-24 bg-gradient-to-r from-primary to-transparent"></div>
-              </div>
-              <div className="flex flex-wrap justify-center gap-4 max-w-3xl">
-                {[
-                  { name: "AMS Inform", logo: amsInformLogo },
-                  { name: "Verification Street", logo: verificationStreetLogo },
-                  { name: "SecureSearch", logo: secureSearchLogo },
-                  { name: "VeriProbus", logo: veriprobusLogo },
-                  { name: "Ongrid", logo: ongridLogo },
+                  { name: "4SL", logo: fourSlLogo },
                 ].map((company, i) => (
                   <div
                     key={i}
-                    className="flex items-center gap-3 bg-card rounded-xl px-6 py-4 border border-border hover:border-primary hover:scale-105 transition-all shadow-sm hover:shadow-md"
-                    style={{ animationDelay: `${(i + 26) * 0.1}s` }}
+                    className="group bg-card rounded-2xl p-8 border border-border/50 hover:border-primary/50 transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:shadow-primary/10"
+                    style={{ animationDelay: `${i * 0.1}s` }}
                   >
-                    {company.logo ? (
-                      <img src={company.logo} alt={company.name} className="w-12 h-12 object-contain flex-shrink-0" />
-                    ) : (
-                      <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center flex-shrink-0">
-                        <Award className="w-6 h-6 text-muted-foreground" />
+                    <div className="flex flex-col items-center justify-center gap-4 h-full">
+                      <div className="w-20 h-20 flex items-center justify-center">
+                        <img 
+                          src={company.logo} 
+                          alt={company.name} 
+                          className="max-w-full max-h-full object-contain group-hover:scale-110 transition-transform duration-300" 
+                        />
                       </div>
-                    )}
-                    <span className="font-medium text-foreground whitespace-nowrap">{company.name}</span>
+                      <span className="font-semibold text-foreground text-center text-sm">{company.name}</span>
+                    </div>
                   </div>
                 ))}
               </div>
             </div>
-            <div className="h-px bg-gradient-to-r from-border via-primary/30 to-border max-w-3xl mx-auto"></div>
+
+            {/* Row 5 - Verification & HR (Bottom, Smallest - 2 cards) */}
+            <div className="animate-fade-in" style={{ animationDelay: "0.8s" }}>
+              <div className="text-center mb-8">
+                <h3 className="text-2xl font-bold text-primary mb-2">Verification & HR</h3>
+                <div className="h-1 w-32 bg-gradient-to-r from-transparent via-primary to-transparent mx-auto"></div>
+              </div>
+              <div className="grid grid-cols-2 gap-6 max-w-2xl mx-auto">
+                {[
+                  { name: "Ongrid", logo: ongridLogo },
+                  { name: "AMS Inform", logo: amsInformLogo },
+                ].map((company, i) => (
+                  <div
+                    key={i}
+                    className="group bg-card rounded-2xl p-8 border border-border/50 hover:border-primary/50 transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:shadow-primary/10"
+                    style={{ animationDelay: `${i * 0.1}s` }}
+                  >
+                    <div className="flex flex-col items-center justify-center gap-4 h-full">
+                      <div className="w-20 h-20 flex items-center justify-center">
+                        <img 
+                          src={company.logo} 
+                          alt={company.name} 
+                          className="max-w-full max-h-full object-contain group-hover:scale-110 transition-transform duration-300" 
+                        />
+                      </div>
+                      <span className="font-semibold text-foreground text-center text-sm">{company.name}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>

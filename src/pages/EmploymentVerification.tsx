@@ -82,11 +82,11 @@ const EmploymentVerification = () => {
   const handleFetch = () => {
     setLoading(true);
     setTimeout(() => {
-      // Scenario 1: Single UAN
-      const singleUAN: any = { ...baseData };
+      // Scenario 1: Single UAN - Deep clone to prevent mutation
+      const singleUAN: any = JSON.parse(JSON.stringify(baseData));
       
-      // Scenario 2: Multiple UANs
-      const multipleUANs: any = { ...baseData };
+      // Scenario 2: Multiple UANs - Deep clone and modify
+      const multipleUANs: any = JSON.parse(JSON.stringify(baseData));
       multipleUANs.document_data.uan = ["1000087654321", "1000098765432", "1000109876543"];
       multipleUANs.uan_details = {
         ...multipleUANs.uan_details,
@@ -97,8 +97,8 @@ const EmploymentVerification = () => {
         ]
       };
       
-      // Scenario 3: Flagged
-      const flaggedUAN: any = { ...baseData };
+      // Scenario 3: Flagged - Deep clone and modify
+      const flaggedUAN: any = JSON.parse(JSON.stringify(baseData));
       flaggedUAN.uan_details.employment_history = [
         { establishment_name: "ABC PRIVATE LIMITED", member_id: "MRNOI12345430000012345", date_of_joining: "2024-03-01", date_of_exit: "2025-01-01" },
         { establishment_name: "XYZ PRIVATE LIMITED", member_id: "UKDDN0123450000001230", date_of_joining: "2024-05-01", date_of_exit: "2024-12-01" }

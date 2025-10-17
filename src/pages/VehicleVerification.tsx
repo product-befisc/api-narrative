@@ -33,8 +33,6 @@ const VehicleVerification = () => {
           permanent_address: 'H NO 123, SECTOR 15, NOIDA, UTTAR PRADESH',
           mobile: '9876543210',
           email: 'rajesh.sharma@email.com',
-          pan: 'ABCDE1234F',
-          aadhaar: 'XXXX-XXXX-5678',
           state: 'UTTAR PRADESH',
         },
         vehicle: {
@@ -279,34 +277,34 @@ const VehicleVerification = () => {
                         Owner Details
                       </CardTitle>
                     </CardHeader>
-                    <CardContent className="space-y-3">
+                    <CardContent className="space-y-4">
                       <div>
-                        <p className="text-sm text-muted-foreground">Full Name</p>
-                        <p className="font-semibold text-foreground">{maskData(rcResponse.owner.name, showData)}</p>
+                        <p className="text-sm text-muted-foreground mb-1">Full Name</p>
+                        <p className="font-semibold text-foreground break-words">{maskData(rcResponse.owner.name, showData)}</p>
                       </div>
                       <div>
-                        <p className="text-sm text-muted-foreground">Father's Name</p>
-                        <p className="font-medium text-foreground">{maskData(rcResponse.owner.father_name, showData)}</p>
+                        <p className="text-sm text-muted-foreground mb-1">Father's Name</p>
+                        <p className="font-medium text-foreground break-words">{maskData(rcResponse.owner.father_name, showData)}</p>
                       </div>
                       <div>
-                        <p className="text-sm text-muted-foreground">Mobile</p>
-                        <p className="font-medium text-foreground">{maskPhone(rcResponse.owner.mobile, showData)}</p>
+                        <p className="text-sm text-muted-foreground mb-1">Mobile</p>
+                        <p className="font-medium text-foreground break-words">{maskPhone(rcResponse.owner.mobile, showData)}</p>
                       </div>
                       <div>
-                        <p className="text-sm text-muted-foreground">Email</p>
-                        <p className="font-medium text-foreground">{maskEmail(rcResponse.owner.email, showData)}</p>
+                        <p className="text-sm text-muted-foreground mb-1">Email</p>
+                        <p className="font-medium text-foreground break-words">{maskEmail(rcResponse.owner.email, showData)}</p>
                       </div>
                       <div>
-                        <p className="text-sm text-muted-foreground">State</p>
-                        <p className="font-medium text-foreground">{rcResponse.owner.state}</p>
+                        <p className="text-sm text-muted-foreground mb-1">State</p>
+                        <p className="font-medium text-foreground break-words">{rcResponse.owner.state}</p>
                       </div>
                       <div>
-                        <p className="text-sm text-muted-foreground">Present Address</p>
-                        <p className="font-medium text-foreground">{maskData(rcResponse.owner.present_address, showData)}</p>
+                        <p className="text-sm text-muted-foreground mb-1">Present Address</p>
+                        <p className="font-medium text-foreground break-words">{maskData(rcResponse.owner.present_address, showData)}</p>
                       </div>
                       <div>
-                        <p className="text-sm text-muted-foreground">Permanent Address</p>
-                        <p className="font-medium text-foreground">{maskData(rcResponse.owner.permanent_address, showData)}</p>
+                        <p className="text-sm text-muted-foreground mb-1">Permanent Address</p>
+                        <p className="font-medium text-foreground break-words">{maskData(rcResponse.owner.permanent_address, showData)}</p>
                       </div>
                     </CardContent>
                   </Card>
@@ -318,76 +316,76 @@ const VehicleVerification = () => {
                         Vehicle Details
                       </CardTitle>
                     </CardHeader>
-                    <CardContent className="space-y-3">
+                    <CardContent className="space-y-4">
                       <div>
-                        <p className="text-sm text-muted-foreground">Registration Number</p>
-                        <p className="font-semibold text-lg text-foreground">{rcResponse.vehicle.registration_no}</p>
-                      </div>
-                      <div>
-                        <p className="text-sm text-muted-foreground">Registration Date</p>
-                        <p className="font-medium text-foreground">{rcResponse.vehicle.registration_date}</p>
+                        <p className="text-sm text-muted-foreground mb-1">Registration Number</p>
+                        <p className="font-semibold text-lg text-foreground break-words">{rcResponse.vehicle.registration_no}</p>
                       </div>
                       <div>
-                        <p className="text-sm text-muted-foreground">Make & Model</p>
-                        <p className="font-medium text-foreground">{rcResponse.vehicle.maker} {rcResponse.vehicle.model}</p>
+                        <p className="text-sm text-muted-foreground mb-1">Registration Date</p>
+                        <p className="font-medium text-foreground break-words">{rcResponse.vehicle.registration_date}</p>
                       </div>
                       <div>
-                        <p className="text-sm text-muted-foreground">Class</p>
-                        <p className="font-medium text-foreground">{rcResponse.vehicle.class}</p>
+                        <p className="text-sm text-muted-foreground mb-1">Make & Model</p>
+                        <p className="font-medium text-foreground break-words">{rcResponse.vehicle.maker} {rcResponse.vehicle.model}</p>
                       </div>
-                      <div className="grid grid-cols-2 gap-3">
-                        <div>
-                          <p className="text-sm text-muted-foreground">Engine No</p>
-                          <p className="font-medium text-foreground">{maskData(rcResponse.vehicle.engine_no, showData)}</p>
-                        </div>
-                        <div>
-                          <p className="text-sm text-muted-foreground">Chassis No</p>
-                          <p className="font-medium text-foreground">{maskData(rcResponse.vehicle.chassis_no, showData)}</p>
-                        </div>
+                      <div>
+                        <p className="text-sm text-muted-foreground mb-1">Class</p>
+                        <p className="font-medium text-foreground break-words">{rcResponse.vehicle.class}</p>
                       </div>
-                      <div className="grid grid-cols-2 gap-3">
+                      <div className="grid grid-cols-2 gap-4">
                         <div>
-                          <p className="text-sm text-muted-foreground">Fuel Type</p>
-                          <p className="font-medium text-foreground">{rcResponse.vehicle.fuel_type}</p>
+                          <p className="text-sm text-muted-foreground mb-1">Engine No</p>
+                          <p className="font-medium text-foreground break-all">{maskData(rcResponse.vehicle.engine_no, showData)}</p>
                         </div>
                         <div>
-                          <p className="text-sm text-muted-foreground">Color</p>
-                          <p className="font-medium text-foreground">{rcResponse.vehicle.color}</p>
+                          <p className="text-sm text-muted-foreground mb-1">Chassis No</p>
+                          <p className="font-medium text-foreground break-all">{maskData(rcResponse.vehicle.chassis_no, showData)}</p>
                         </div>
                       </div>
-                      <div className="grid grid-cols-2 gap-3">
+                      <div className="grid grid-cols-2 gap-4">
                         <div>
-                          <p className="text-sm text-muted-foreground">Seating Capacity</p>
-                          <p className="font-medium text-foreground">{rcResponse.vehicle.seating_capacity}</p>
+                          <p className="text-sm text-muted-foreground mb-1">Fuel Type</p>
+                          <p className="font-medium text-foreground break-words">{rcResponse.vehicle.fuel_type}</p>
                         </div>
                         <div>
-                          <p className="text-sm text-muted-foreground">Body Type</p>
-                          <p className="font-medium text-foreground">{rcResponse.vehicle.body_type}</p>
-                        </div>
-                      </div>
-                      <div className="grid grid-cols-2 gap-3">
-                        <div>
-                          <p className="text-sm text-muted-foreground">Vehicle Type</p>
-                          <p className="font-medium text-foreground">{rcResponse.vehicle.vehicle_type}</p>
-                        </div>
-                        <div>
-                          <p className="text-sm text-muted-foreground">Norms</p>
-                          <p className="font-medium text-foreground">{rcResponse.vehicle.norms}</p>
+                          <p className="text-sm text-muted-foreground mb-1">Color</p>
+                          <p className="font-medium text-foreground break-words">{rcResponse.vehicle.color}</p>
                         </div>
                       </div>
-                      <div className="grid grid-cols-2 gap-3">
+                      <div className="grid grid-cols-2 gap-4">
                         <div>
-                          <p className="text-sm text-muted-foreground">Fit Up To</p>
-                          <p className="font-medium text-foreground">{rcResponse.vehicle.fit_upto}</p>
+                          <p className="text-sm text-muted-foreground mb-1">Seating Capacity</p>
+                          <p className="font-medium text-foreground break-words">{rcResponse.vehicle.seating_capacity}</p>
                         </div>
                         <div>
-                          <p className="text-sm text-muted-foreground">Status</p>
+                          <p className="text-sm text-muted-foreground mb-1">Body Type</p>
+                          <p className="font-medium text-foreground break-words">{rcResponse.vehicle.body_type}</p>
+                        </div>
+                      </div>
+                      <div className="grid grid-cols-2 gap-4">
+                        <div>
+                          <p className="text-sm text-muted-foreground mb-1">Vehicle Type</p>
+                          <p className="font-medium text-foreground break-words">{rcResponse.vehicle.vehicle_type}</p>
+                        </div>
+                        <div>
+                          <p className="text-sm text-muted-foreground mb-1">Norms</p>
+                          <p className="font-medium text-foreground break-words">{rcResponse.vehicle.norms}</p>
+                        </div>
+                      </div>
+                      <div className="grid grid-cols-2 gap-4">
+                        <div>
+                          <p className="text-sm text-muted-foreground mb-1">Fit Up To</p>
+                          <p className="font-medium text-foreground break-words">{rcResponse.vehicle.fit_upto}</p>
+                        </div>
+                        <div>
+                          <p className="text-sm text-muted-foreground mb-1">Status</p>
                           <Badge className="bg-gradient-primary text-white">{rcResponse.vehicle.status}</Badge>
                         </div>
                       </div>
                       <div>
-                        <p className="text-sm text-muted-foreground">Vehicle Age</p>
-                        <p className="font-medium text-foreground">{rcResponse.vehicle.vehicle_age}</p>
+                        <p className="text-sm text-muted-foreground mb-1">Vehicle Age</p>
+                        <p className="font-medium text-foreground break-words">{rcResponse.vehicle.vehicle_age}</p>
                       </div>
                     </CardContent>
                   </Card>
@@ -401,23 +399,23 @@ const VehicleVerification = () => {
                       Insurance Details
                     </CardTitle>
                   </CardHeader>
-                  <CardContent>
-                    <div className="grid md:grid-cols-4 gap-4">
+                   <CardContent>
+                    <div className="grid md:grid-cols-4 gap-6">
                       <div>
-                        <p className="text-sm text-muted-foreground">Insurance Company</p>
-                        <p className="font-medium text-foreground">{rcResponse.insurance.company}</p>
+                        <p className="text-sm text-muted-foreground mb-1">Insurance Company</p>
+                        <p className="font-medium text-foreground break-words">{rcResponse.insurance.company}</p>
                       </div>
                       <div>
-                        <p className="text-sm text-muted-foreground">Policy Number</p>
-                        <p className="font-medium text-foreground">{maskData(rcResponse.insurance.policy_no, showData)}</p>
+                        <p className="text-sm text-muted-foreground mb-1">Policy Number</p>
+                        <p className="font-medium text-foreground break-all">{maskData(rcResponse.insurance.policy_no, showData)}</p>
                       </div>
                       <div>
-                        <p className="text-sm text-muted-foreground">Valid From</p>
-                        <p className="font-medium text-foreground">{rcResponse.insurance.valid_from}</p>
+                        <p className="text-sm text-muted-foreground mb-1">Valid From</p>
+                        <p className="font-medium text-foreground break-words">{rcResponse.insurance.valid_from}</p>
                       </div>
                       <div>
-                        <p className="text-sm text-muted-foreground">Valid Till</p>
-                        <p className="font-medium text-foreground">{rcResponse.insurance.valid_till}</p>
+                        <p className="text-sm text-muted-foreground mb-1">Valid Till</p>
+                        <p className="font-medium text-foreground break-words">{rcResponse.insurance.valid_till}</p>
                       </div>
                     </div>
                   </CardContent>
@@ -463,10 +461,10 @@ const VehicleVerification = () => {
                       Offense Details
                     </CardTitle>
                   </CardHeader>
-                  <CardContent className="space-y-3">
+                   <CardContent className="space-y-4">
                     <div>
                       <p className="text-sm text-muted-foreground mb-1">Offense Description</p>
-                      <p className="font-semibold text-foreground">{challanResponse.offense_details}</p>
+                      <p className="font-semibold text-foreground break-words">{challanResponse.offense_details}</p>
                     </div>
                     <div className="grid md:grid-cols-3 gap-4">
                       <div className="flex items-center gap-2">
@@ -516,29 +514,29 @@ const VehicleVerification = () => {
                         Vehicle Information
                       </CardTitle>
                     </CardHeader>
-                    <CardContent className="space-y-3">
+                    <CardContent className="space-y-4">
                       <div>
-                        <p className="text-sm text-muted-foreground">Make & Model</p>
-                        <p className="font-semibold text-foreground">{chassisResponse.vehicle_details.make} {chassisResponse.vehicle_details.model}</p>
+                        <p className="text-sm text-muted-foreground mb-1">Make & Model</p>
+                        <p className="font-semibold text-foreground break-words">{chassisResponse.vehicle_details.make} {chassisResponse.vehicle_details.model}</p>
                       </div>
-                      <div className="grid grid-cols-2 gap-3">
+                      <div className="grid grid-cols-2 gap-4">
                         <div>
-                          <p className="text-sm text-muted-foreground">Fuel Type</p>
-                          <p className="font-medium text-foreground">{chassisResponse.vehicle_details.fuel_type}</p>
+                          <p className="text-sm text-muted-foreground mb-1">Fuel Type</p>
+                          <p className="font-medium text-foreground break-words">{chassisResponse.vehicle_details.fuel_type}</p>
                         </div>
                         <div>
-                          <p className="text-sm text-muted-foreground">Color</p>
-                          <p className="font-medium text-foreground">{chassisResponse.vehicle_details.color}</p>
+                          <p className="text-sm text-muted-foreground mb-1">Color</p>
+                          <p className="font-medium text-foreground break-words">{chassisResponse.vehicle_details.color}</p>
                         </div>
                       </div>
-                      <div className="grid grid-cols-2 gap-3">
+                      <div className="grid grid-cols-2 gap-4">
                         <div>
-                          <p className="text-sm text-muted-foreground">Cubic Capacity</p>
-                          <p className="font-medium text-foreground">{chassisResponse.vehicle_details.cubic_capacity} CC</p>
+                          <p className="text-sm text-muted-foreground mb-1">Cubic Capacity</p>
+                          <p className="font-medium text-foreground break-words">{chassisResponse.vehicle_details.cubic_capacity} CC</p>
                         </div>
                         <div>
-                          <p className="text-sm text-muted-foreground">Seating</p>
-                          <p className="font-medium text-foreground">{chassisResponse.vehicle_details.seating_capacity} Seats</p>
+                          <p className="text-sm text-muted-foreground mb-1">Seating</p>
+                          <p className="font-medium text-foreground break-words">{chassisResponse.vehicle_details.seating_capacity} Seats</p>
                         </div>
                       </div>
                     </CardContent>
@@ -551,34 +549,34 @@ const VehicleVerification = () => {
                         Registration Information
                       </CardTitle>
                     </CardHeader>
-                    <CardContent className="space-y-3">
+                    <CardContent className="space-y-4">
                       <div>
-                        <p className="text-sm text-muted-foreground">Owner Name</p>
-                        <p className="font-medium text-foreground">{maskData(chassisResponse.owner_name, showData)}</p>
+                        <p className="text-sm text-muted-foreground mb-1">Owner Name</p>
+                        <p className="font-medium text-foreground break-words">{maskData(chassisResponse.owner_name, showData)}</p>
                       </div>
                       <div>
-                        <p className="text-sm text-muted-foreground">Father's Name</p>
-                        <p className="font-medium text-foreground">{maskData(chassisResponse.father_name, showData)}</p>
+                        <p className="text-sm text-muted-foreground mb-1">Father's Name</p>
+                        <p className="font-medium text-foreground break-words">{maskData(chassisResponse.father_name, showData)}</p>
                       </div>
                       <div>
-                        <p className="text-sm text-muted-foreground">Vehicle Number</p>
-                        <p className="font-medium text-foreground">{chassisResponse.vehicle_number}</p>
+                        <p className="text-sm text-muted-foreground mb-1">Vehicle Number</p>
+                        <p className="font-medium text-foreground break-words">{chassisResponse.vehicle_number}</p>
                       </div>
                       <div>
-                        <p className="text-sm text-muted-foreground">Registration Date</p>
-                        <p className="font-medium text-foreground">{chassisResponse.registration_date}</p>
+                        <p className="text-sm text-muted-foreground mb-1">Registration Date</p>
+                        <p className="font-medium text-foreground break-words">{chassisResponse.registration_date}</p>
                       </div>
                       <div>
-                        <p className="text-sm text-muted-foreground">Status</p>
+                        <p className="text-sm text-muted-foreground mb-1">Status</p>
                         <Badge className="bg-gradient-primary text-white">{chassisResponse.status}</Badge>
                       </div>
                       <div>
-                        <p className="text-sm text-muted-foreground">RTO</p>
-                        <p className="font-medium text-foreground">{chassisResponse.registration_details.rto}</p>
+                        <p className="text-sm text-muted-foreground mb-1">RTO</p>
+                        <p className="font-medium text-foreground break-words">{chassisResponse.registration_details.rto}</p>
                       </div>
                       <div>
-                        <p className="text-sm text-muted-foreground">State Code</p>
-                        <p className="font-medium text-foreground">{chassisResponse.registration_details.state_code}</p>
+                        <p className="text-sm text-muted-foreground mb-1">State Code</p>
+                        <p className="font-medium text-foreground break-words">{chassisResponse.registration_details.state_code}</p>
                       </div>
                       <div className="flex items-center gap-2">
                         <Calendar className="h-4 w-4 text-muted-foreground" />
@@ -604,18 +602,18 @@ const VehicleVerification = () => {
                         Insurance Information
                       </CardTitle>
                     </CardHeader>
-                    <CardContent className="space-y-3">
+                    <CardContent className="space-y-4">
                       <div>
-                        <p className="text-sm text-muted-foreground">Provider</p>
-                        <p className="font-medium text-foreground">{chassisResponse.insurance.provider}</p>
+                        <p className="text-sm text-muted-foreground mb-1">Provider</p>
+                        <p className="font-medium text-foreground break-words">{chassisResponse.insurance.provider}</p>
                       </div>
                       <div>
-                        <p className="text-sm text-muted-foreground">Policy Number</p>
-                        <p className="font-medium text-foreground">{maskData(chassisResponse.insurance.policy_number, showData)}</p>
+                        <p className="text-sm text-muted-foreground mb-1">Policy Number</p>
+                        <p className="font-medium text-foreground break-all">{maskData(chassisResponse.insurance.policy_number, showData)}</p>
                       </div>
                       <div>
-                        <p className="text-sm text-muted-foreground">Valid Till</p>
-                        <p className="font-medium text-foreground">{chassisResponse.insurance.valid_till}</p>
+                        <p className="text-sm text-muted-foreground mb-1">Valid Till</p>
+                        <p className="font-medium text-foreground break-words">{chassisResponse.insurance.valid_till}</p>
                       </div>
                     </CardContent>
                   </Card>

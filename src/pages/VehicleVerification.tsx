@@ -387,6 +387,14 @@ const VehicleVerification = () => {
                         <p className="text-sm text-muted-foreground mb-1">Vehicle Age</p>
                         <p className="font-medium text-foreground break-words">{rcResponse.vehicle.vehicle_age}</p>
                       </div>
+                      <div>
+                        <p className="text-sm text-muted-foreground mb-1">Cubic Capacity</p>
+                        <p className="font-medium text-foreground break-words">{chassisResponse.vehicle_details.cubic_capacity} CC</p>
+                      </div>
+                      <div>
+                        <p className="text-sm text-muted-foreground mb-1">RTO Office</p>
+                        <p className="font-medium text-foreground break-words">{chassisResponse.registration_details.rto}</p>
+                      </div>
                     </CardContent>
                   </Card>
                 </div>
@@ -497,127 +505,6 @@ const VehicleVerification = () => {
                     </div>
                   </CardContent>
                 </Card>
-              </div>
-
-              {/* RC Details (Chassis to RC) Section */}
-              <div className="space-y-4">
-                <h2 className="text-2xl font-bold text-foreground flex items-center gap-2">
-                  <FileText className="h-6 w-6 text-primary" />
-                  RC Details
-                </h2>
-
-                <div className="grid md:grid-cols-2 gap-4">
-                  <Card>
-                    <CardHeader>
-                      <CardTitle className="flex items-center gap-2 text-lg">
-                        <Car className="h-5 w-5 text-primary" />
-                        Vehicle Information
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent className="space-y-4">
-                      <div>
-                        <p className="text-sm text-muted-foreground mb-1">Make & Model</p>
-                        <p className="font-semibold text-foreground break-words">{chassisResponse.vehicle_details.make} {chassisResponse.vehicle_details.model}</p>
-                      </div>
-                      <div className="grid grid-cols-2 gap-4">
-                        <div>
-                          <p className="text-sm text-muted-foreground mb-1">Fuel Type</p>
-                          <p className="font-medium text-foreground break-words">{chassisResponse.vehicle_details.fuel_type}</p>
-                        </div>
-                        <div>
-                          <p className="text-sm text-muted-foreground mb-1">Color</p>
-                          <p className="font-medium text-foreground break-words">{chassisResponse.vehicle_details.color}</p>
-                        </div>
-                      </div>
-                      <div className="grid grid-cols-2 gap-4">
-                        <div>
-                          <p className="text-sm text-muted-foreground mb-1">Cubic Capacity</p>
-                          <p className="font-medium text-foreground break-words">{chassisResponse.vehicle_details.cubic_capacity} CC</p>
-                        </div>
-                        <div>
-                          <p className="text-sm text-muted-foreground mb-1">Seating</p>
-                          <p className="font-medium text-foreground break-words">{chassisResponse.vehicle_details.seating_capacity} Seats</p>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-
-                  <Card>
-                    <CardHeader>
-                      <CardTitle className="flex items-center gap-2 text-lg">
-                        <FileText className="h-5 w-5 text-primary" />
-                        Registration Information
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent className="space-y-4">
-                      <div>
-                        <p className="text-sm text-muted-foreground mb-1">Owner Name</p>
-                        <p className="font-medium text-foreground break-words">{maskData(chassisResponse.owner_name, showData)}</p>
-                      </div>
-                      <div>
-                        <p className="text-sm text-muted-foreground mb-1">Father's Name</p>
-                        <p className="font-medium text-foreground break-words">{maskData(chassisResponse.father_name, showData)}</p>
-                      </div>
-                      <div>
-                        <p className="text-sm text-muted-foreground mb-1">Vehicle Number</p>
-                        <p className="font-medium text-foreground break-words">{chassisResponse.vehicle_number}</p>
-                      </div>
-                      <div>
-                        <p className="text-sm text-muted-foreground mb-1">Registration Date</p>
-                        <p className="font-medium text-foreground break-words">{chassisResponse.registration_date}</p>
-                      </div>
-                      <div>
-                        <p className="text-sm text-muted-foreground mb-1">Status</p>
-                        <Badge className="bg-gradient-primary text-white">{chassisResponse.status}</Badge>
-                      </div>
-                      <div>
-                        <p className="text-sm text-muted-foreground mb-1">RTO</p>
-                        <p className="font-medium text-foreground break-words">{chassisResponse.registration_details.rto}</p>
-                      </div>
-                      <div>
-                        <p className="text-sm text-muted-foreground mb-1">State Code</p>
-                        <p className="font-medium text-foreground break-words">{chassisResponse.registration_details.state_code}</p>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <Calendar className="h-4 w-4 text-muted-foreground" />
-                        <div>
-                          <p className="text-xs text-muted-foreground">Insurance Expiry</p>
-                          <p className="text-sm font-medium">{chassisResponse.registration_details.insurance_expiry}</p>
-                        </div>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <Calendar className="h-4 w-4 text-muted-foreground" />
-                        <div>
-                          <p className="text-xs text-muted-foreground">Fitness Expiry</p>
-                          <p className="text-sm font-medium">{chassisResponse.registration_details.fitness_expiry}</p>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-
-                  <Card>
-                    <CardHeader>
-                      <CardTitle className="flex items-center gap-2 text-lg">
-                        <Shield className="h-5 w-5 text-primary" />
-                        Insurance Information
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent className="space-y-4">
-                      <div>
-                        <p className="text-sm text-muted-foreground mb-1">Provider</p>
-                        <p className="font-medium text-foreground break-words">{chassisResponse.insurance.provider}</p>
-                      </div>
-                      <div>
-                        <p className="text-sm text-muted-foreground mb-1">Policy Number</p>
-                        <p className="font-medium text-foreground break-all">{maskData(chassisResponse.insurance.policy_number, showData)}</p>
-                      </div>
-                      <div>
-                        <p className="text-sm text-muted-foreground mb-1">Valid Till</p>
-                        <p className="font-medium text-foreground break-words">{chassisResponse.insurance.valid_till}</p>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </div>
               </div>
             </div>
           )}

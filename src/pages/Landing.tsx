@@ -234,7 +234,7 @@ const Landing = () => {
                 <div className="flex flex-col items-center justify-center h-full min-h-[140px]">
                   <div className="text-4xl md:text-5xl font-bold text-primary mb-2">2023</div>
                   <div className="text-sm font-medium text-muted-foreground uppercase tracking-wide text-center">
-                    Incorporated
+                    Launched
                   </div>
                 </div>
               </div>

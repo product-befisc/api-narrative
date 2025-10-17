@@ -15,11 +15,11 @@ import { maskData, maskPhone, maskEmail } from '@/lib/utils';
 const EmploymentVerification = () => {
   const navigate = useNavigate();
   const [mobile, setMobile] = useState('9876543210');
-  const [response, setResponse] = useState<any>(null);
+  const [allScenarios, setAllScenarios] = useState<any>(null);
   const [loading, setLoading] = useState(false);
   const [showData, setShowData] = useState(false);
   const [consent, setConsent] = useState(true);
-  const [scenario, setScenario] = useState<'single' | 'multiple' | 'flagged'>('single');
+  const [activeScenario, setActiveScenario] = useState<'single' | 'multiple' | 'flagged'>('single');
 
   const baseData = {
     personal_information: {
@@ -82,31 +82,38 @@ const EmploymentVerification = () => {
   const handleFetch = () => {
     setLoading(true);
     setTimeout(() => {
-      let data: any = { ...baseData };
+      // Scenario 1: Single UAN
+      const singleUAN: any = { ...baseData };
       
-      if (scenario === 'multiple') {
-        data.document_data.uan = ["1000087654321", "1000098765432", "1000109876543"];
-        data.uan_details = {
-          ...data.uan_details,
-          multiple_uans: [
-            { uan: "1000087654321", establishment: "ABC PRIVATE LIMITED", joining_date: "2025-01-01", exit_date: "Present" },
-            { uan: "1000098765432", establishment: "XYZ PRIVATE LIMITED", joining_date: "2024-01-01", exit_date: "2024-12-01" },
-            { uan: "1000109876543", establishment: "DEF INDUSTRIES LTD", joining_date: "2022-03-01", exit_date: "2023-02-01" }
-          ]
-        };
-      } else if (scenario === 'flagged') {
-        data.uan_details.employment_history = [
-          { establishment_name: "ABC PRIVATE LIMITED", member_id: "MRNOI12345430000012345", date_of_joining: "2024-03-01", date_of_exit: "2025-01-01" },
-          { establishment_name: "XYZ PRIVATE LIMITED", member_id: "UKDDN0123450000001230", date_of_joining: "2024-05-01", date_of_exit: "2024-12-01" }
-        ];
-        data.flagged = {
-          reason: "Overlapping employment dates detected",
-          overlap_period: "May 2024 to Dec 2024",
-          details: "Employee appears to have worked at two companies during overlapping months."
-        };
-      }
+      // Scenario 2: Multiple UANs
+      const multipleUANs: any = { ...baseData };
+      multipleUANs.document_data.uan = ["1000087654321", "1000098765432", "1000109876543"];
+      multipleUANs.uan_details = {
+        ...multipleUANs.uan_details,
+        multiple_uans: [
+          { uan: "1000087654321", establishment: "ABC PRIVATE LIMITED", joining_date: "2025-01-01", exit_date: "Present" },
+          { uan: "1000098765432", establishment: "XYZ PRIVATE LIMITED", joining_date: "2024-01-01", exit_date: "2024-12-01" },
+          { uan: "1000109876543", establishment: "DEF INDUSTRIES LTD", joining_date: "2022-03-01", exit_date: "2023-02-01" }
+        ]
+      };
       
-      setResponse(data);
+      // Scenario 3: Flagged
+      const flaggedUAN: any = { ...baseData };
+      flaggedUAN.uan_details.employment_history = [
+        { establishment_name: "ABC PRIVATE LIMITED", member_id: "MRNOI12345430000012345", date_of_joining: "2024-03-01", date_of_exit: "2025-01-01" },
+        { establishment_name: "XYZ PRIVATE LIMITED", member_id: "UKDDN0123450000001230", date_of_joining: "2024-05-01", date_of_exit: "2024-12-01" }
+      ];
+      flaggedUAN.flagged = {
+        reason: "Overlapping employment dates detected",
+        overlap_period: "May 2024 to Dec 2024",
+        details: "Employee appears to have worked at two companies during overlapping months."
+      };
+      
+      setAllScenarios({
+        single: singleUAN,
+        multiple: multipleUANs,
+        flagged: flaggedUAN
+      });
       setLoading(false);
     }, 800);
   };
@@ -157,34 +164,23 @@ const EmploymentVerification = () => {
             </CardContent>
           </Card>
 
-          {!response && (
-            <Card className="mb-6">
-              <CardHeader>
-                <CardTitle>Select Scenario to Test</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <Tabs value={scenario} onValueChange={(v) => setScenario(v as any)}>
-                  <TabsList className="grid w-full grid-cols-3">
-                    <TabsTrigger value="single">Single UAN</TabsTrigger>
-                    <TabsTrigger value="multiple">Multiple UANs</TabsTrigger>
-                    <TabsTrigger value="flagged">Flagged</TabsTrigger>
-                  </TabsList>
-                  <TabsContent value="single" className="mt-4">
-                    <p className="text-sm text-muted-foreground">✅ Verified – Single UAN Found with clean employment record</p>
-                  </TabsContent>
-                  <TabsContent value="multiple" className="mt-4">
-                    <p className="text-sm text-muted-foreground">⚠️ Multiple UANs Found – Cross-check Required</p>
-                  </TabsContent>
-                  <TabsContent value="flagged" className="mt-4">
-                    <p className="text-sm text-muted-foreground">🚩 Flagged Employment Record – Overlapping Dates Detected</p>
-                  </TabsContent>
-                </Tabs>
-              </CardContent>
-            </Card>
-          )}
-
-          {response && (
+          {allScenarios && (
             <div className="space-y-6 animate-fade-in">
+              <Card className="mb-6">
+                <CardHeader>
+                  <CardTitle>Switch Between Scenarios</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <Tabs value={activeScenario} onValueChange={(v) => setActiveScenario(v as any)}>
+                    <TabsList className="grid w-full grid-cols-3">
+                      <TabsTrigger value="single">✅ Single UAN</TabsTrigger>
+                      <TabsTrigger value="multiple">⚠️ Multiple UANs</TabsTrigger>
+                      <TabsTrigger value="flagged">🚩 Flagged</TabsTrigger>
+                    </TabsList>
+                  </Tabs>
+                </CardContent>
+              </Card>
+
               <div className="flex justify-end mb-4">
                 <Button variant="outline" size="sm" onClick={() => setShowData(!showData)}>
                   {showData ? <EyeOff className="h-4 w-4 mr-2" /> : <Eye className="h-4 w-4 mr-2" />}
@@ -193,7 +189,7 @@ const EmploymentVerification = () => {
               </div>
 
               {/* Status Banner */}
-              {scenario === 'single' && (
+              {activeScenario === 'single' && (
                 <Card className="border-2 border-green-500 bg-green-50 dark:bg-green-950">
                   <CardContent className="pt-6">
                     <div className="flex items-center gap-3">
@@ -207,7 +203,7 @@ const EmploymentVerification = () => {
                 </Card>
               )}
 
-              {scenario === 'multiple' && (
+              {activeScenario === 'multiple' && (
                 <Card className="border-2 border-yellow-500 bg-yellow-50 dark:bg-yellow-950">
                   <CardContent className="pt-6">
                     <div className="flex items-center gap-3">
@@ -221,16 +217,16 @@ const EmploymentVerification = () => {
                 </Card>
               )}
 
-              {scenario === 'flagged' && response.flagged && (
+              {activeScenario === 'flagged' && allScenarios.flagged.flagged && (
                 <Card className="border-2 border-red-500 bg-red-50 dark:bg-red-950">
                   <CardContent className="pt-6">
                     <div className="flex items-center gap-3">
                       <XCircle className="h-6 w-6 text-red-600" />
                       <div>
                         <h3 className="font-semibold text-red-900 dark:text-red-100">🚩 Flagged Employment Record</h3>
-                        <p className="text-sm text-red-700 dark:text-red-300">{response.flagged.reason}</p>
+                        <p className="text-sm text-red-700 dark:text-red-300">{allScenarios.flagged.flagged.reason}</p>
                         <p className="text-xs text-red-600 dark:text-red-400 mt-1">
-                          Overlap: {response.flagged.overlap_period} - {response.flagged.details}
+                          Overlap: {allScenarios.flagged.flagged.overlap_period} - {allScenarios.flagged.flagged.details}
                         </p>
                       </div>
                     </div>
@@ -250,23 +246,23 @@ const EmploymentVerification = () => {
                   <div className="grid md:grid-cols-2 gap-4">
                     <div>
                       <p className="text-sm text-muted-foreground">Full Name</p>
-                      <p className="font-semibold">{maskData(response.personal_information.full_name, showData)}</p>
+                      <p className="font-semibold">{maskData(allScenarios[activeScenario].personal_information.full_name, showData)}</p>
                     </div>
                     <div>
                       <p className="text-sm text-muted-foreground">Gender</p>
-                      <p className="font-semibold">{response.personal_information.gender}</p>
+                      <p className="font-semibold">{allScenarios[activeScenario].personal_information.gender}</p>
                     </div>
                     <div>
                       <p className="text-sm text-muted-foreground">Age</p>
-                      <p className="font-semibold">{response.personal_information.age}</p>
+                      <p className="font-semibold">{allScenarios[activeScenario].personal_information.age}</p>
                     </div>
                     <div>
                       <p className="text-sm text-muted-foreground">Date of Birth</p>
-                      <p className="font-semibold">{response.personal_information.date_of_birth}</p>
+                      <p className="font-semibold">{allScenarios[activeScenario].personal_information.date_of_birth}</p>
                     </div>
                     <div>
                       <p className="text-sm text-muted-foreground">Income</p>
-                      <p className="font-semibold">₹{response.personal_information.income}</p>
+                      <p className="font-semibold">₹{allScenarios[activeScenario].personal_information.income}</p>
                     </div>
                   </div>
                 </CardContent>
@@ -284,7 +280,7 @@ const EmploymentVerification = () => {
                   <div>
                     <p className="text-sm text-muted-foreground mb-2">📞 Alternate Phone Numbers</p>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                      {response.alternate_phone.map((phone: any) => (
+                      {allScenarios[activeScenario].alternate_phone.map((phone: any) => (
                         <div key={phone.serial_number} className="text-sm">
                           {maskPhone(phone.value, showData)}
                         </div>
@@ -293,7 +289,7 @@ const EmploymentVerification = () => {
                   </div>
                   <div>
                     <p className="text-sm text-muted-foreground mb-2">📧 Email</p>
-                    {response.email.map((email: any) => (
+                    {allScenarios[activeScenario].email.map((email: any) => (
                       <div key={email.serial_number} className="text-sm">
                         {maskEmail(email.value, showData)}
                       </div>
@@ -311,7 +307,7 @@ const EmploymentVerification = () => {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  {response.address.map((addr: any, idx: number) => (
+                  {allScenarios[activeScenario].address.map((addr: any, idx: number) => (
                     <div key={idx} className="space-y-2">
                       <div>
                         <Badge>{addr.type}</Badge>
@@ -338,25 +334,25 @@ const EmploymentVerification = () => {
                 <CardContent className="space-y-3">
                   <div>
                     <p className="text-sm text-muted-foreground">💳 PAN</p>
-                    {response.document_data.pan.map((pan: any) => (
+                    {allScenarios[activeScenario].document_data.pan.map((pan: any) => (
                       <p key={pan.serial_number} className="font-semibold">{maskData(pan.value, showData)}</p>
                     ))}
                   </div>
                   <div>
                     <p className="text-sm text-muted-foreground">🧾 UAN</p>
-                    {Array.isArray(response.document_data.uan) ? (
-                      response.document_data.uan.map((uan: string, idx: number) => (
+                    {Array.isArray(allScenarios[activeScenario].document_data.uan) ? (
+                      allScenarios[activeScenario].document_data.uan.map((uan: string, idx: number) => (
                         <p key={idx} className="font-semibold">{maskData(uan, showData)}</p>
                       ))
                     ) : (
-                      <p className="font-semibold">{maskData(response.document_data.uan, showData)}</p>
+                      <p className="font-semibold">{maskData(allScenarios[activeScenario].document_data.uan, showData)}</p>
                     )}
                   </div>
                 </CardContent>
               </Card>
 
               {/* Multiple UANs Details */}
-              {scenario === 'multiple' && response.uan_details.multiple_uans && (
+              {activeScenario === 'multiple' && allScenarios.multiple.uan_details.multiple_uans && (
                 <Card>
                   <CardHeader>
                     <CardTitle>Multiple UAN Records</CardTitle>
@@ -373,7 +369,7 @@ const EmploymentVerification = () => {
                           </tr>
                         </thead>
                         <tbody>
-                          {response.uan_details.multiple_uans.map((uan: any, idx: number) => (
+                          {allScenarios.multiple.uan_details.multiple_uans.map((uan: any, idx: number) => (
                             <tr key={idx} className="border-b">
                               <td className="p-3">{maskData(uan.uan, showData)}</td>
                               <td className="p-3">{uan.establishment}</td>
@@ -392,7 +388,7 @@ const EmploymentVerification = () => {
               )}
 
               {/* Employment History */}
-              <Card className={scenario === 'flagged' ? 'border-2 border-red-500' : ''}>
+              <Card className={activeScenario === 'flagged' ? 'border-2 border-red-500' : ''}>
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <Briefcase className="h-5 w-5 text-primary" />
@@ -401,7 +397,7 @@ const EmploymentVerification = () => {
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">
-                    {response.uan_details.employment_history.map((job: any, index: number) => (
+                    {allScenarios[activeScenario].uan_details.employment_history.map((job: any, index: number) => (
                       <Card key={index} className="border-2">
                         <CardContent className="pt-6">
                           <div className="flex items-start justify-between mb-4">
@@ -431,9 +427,9 @@ const EmploymentVerification = () => {
                           </div>
                         </CardContent>
                       </Card>
-                    ))}
+                      ))}
                   </div>
-                  {scenario === 'flagged' && (
+                  {activeScenario === 'flagged' && (
                     <Button variant="destructive" className="w-full mt-4">
                       View Risk Details
                     </Button>
@@ -463,7 +459,7 @@ const EmploymentVerification = () => {
                         </tr>
                       </thead>
                       <tbody>
-                        {response.uan_details.passbook.map((entry: any, idx: number) => (
+                        {allScenarios[activeScenario].uan_details.passbook.map((entry: any, idx: number) => (
                           <tr key={idx} className="border-b hover:bg-muted/50">
                             <td className="p-3">{entry.month}/{entry.year}</td>
                             <td className="p-3">
@@ -484,7 +480,7 @@ const EmploymentVerification = () => {
               </Card>
 
               <div className="text-xs text-muted-foreground text-right">
-                Response Time: {new Date(response.timestamp).toLocaleString()}
+                Response Time: {new Date(allScenarios[activeScenario].timestamp).toLocaleString()}
               </div>
             </div>
           )}

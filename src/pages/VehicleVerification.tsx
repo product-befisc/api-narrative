@@ -297,14 +297,6 @@ const VehicleVerification = () => {
                         <p className="font-medium text-foreground">{maskEmail(rcResponse.owner.email, showData)}</p>
                       </div>
                       <div>
-                        <p className="text-sm text-muted-foreground">PAN</p>
-                        <p className="font-medium text-foreground">{maskData(rcResponse.owner.pan, showData)}</p>
-                      </div>
-                      <div>
-                        <p className="text-sm text-muted-foreground">Aadhaar</p>
-                        <p className="font-medium text-foreground">{rcResponse.owner.aadhaar}</p>
-                      </div>
-                      <div>
                         <p className="text-sm text-muted-foreground">State</p>
                         <p className="font-medium text-foreground">{rcResponse.owner.state}</p>
                       </div>

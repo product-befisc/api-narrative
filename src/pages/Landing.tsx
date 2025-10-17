@@ -570,8 +570,8 @@ const Landing = () => {
           <div className="max-w-4xl mx-auto">
             <div className="bg-card rounded-2xl shadow-lg overflow-hidden border border-border">
               {/* Banner */}
-              <div className="h-48 md:h-64 w-full overflow-hidden">
-                <img src={linkedinBanner} alt="BeFiSc Banner" className="w-full h-full object-cover" />
+              <div className="h-48 md:h-64 w-full overflow-hidden bg-muted">
+                <img src={linkedinBanner} alt="BeFiSc Banner" className="w-full h-full object-contain" />
               </div>
               
               {/* Profile Section */}

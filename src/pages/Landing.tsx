@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Shield, TrendingUp, Users, Award } from "lucide-react";
+import { ArrowRight, Shield, TrendingUp, Users, Award, Linkedin, Newspaper } from "lucide-react";
 import { EmailVerificationModal } from "@/components/EmailVerificationModal";
 import logo from "@/assets/BeFiSc_New_Logo.svg";
 import saloraCapitalLogo from "@/assets/clients/salora-capital.png";
 import founderPhoto from "@/assets/founder-photo.svg";
+import linkedinBanner from "@/assets/linkedin-banner.png";
 import emailBounceIcon from "@/assets/products/email-bounce.svg";
 import idProofIcon from "@/assets/products/id-proof-2.svg";
 import ocrProofIcon from "@/assets/products/ocr-proof.svg";
@@ -567,17 +568,54 @@ const Landing = () => {
       <section className="py-20 bg-muted">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
-            <div className="bg-card rounded-2xl shadow-lg p-8 md:p-12 border border-border">
-              <div className="flex flex-col md:flex-row gap-8 items-center">
-                <div className="w-48 h-48 rounded-full overflow-hidden flex-shrink-0 bg-muted">
-                  <img src={founderPhoto} alt="Shobhit Goyal" className="w-full h-full object-cover" />
+            <div className="bg-card rounded-2xl shadow-lg overflow-hidden border border-border">
+              {/* Banner */}
+              <div className="h-48 md:h-64 w-full overflow-hidden">
+                <img src={linkedinBanner} alt="BeFiSc Banner" className="w-full h-full object-cover" />
+              </div>
+              
+              {/* Profile Section */}
+              <div className="px-8 pb-8">
+                {/* Profile Image - Overlapping Banner */}
+                <div className="relative -mt-16 md:-mt-20 mb-6">
+                  <div className="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden border-4 border-card bg-muted">
+                    <img src={founderPhoto} alt="Shobhit Goyal" className="w-full h-full object-cover" />
+                  </div>
                 </div>
-                <div className="flex-1 text-center md:text-left">
-                  <h3 className="text-3xl font-bold text-foreground mb-2">Shobhit Goyal</h3>
-                  <p className="text-primary font-semibold mb-4">Founder & CEO</p>
-                  <blockquote className="text-2xl font-semibold text-foreground italic">
-                    "Fraud will evolve. So will we; faster."
-                  </blockquote>
+                
+                {/* Name and Title */}
+                <div className="mb-4">
+                  <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-1">Shobhit Goyal</h3>
+                  <p className="text-muted-foreground font-medium mb-2">Founder & CEO, BeFiSc (Beyond Financial Score)</p>
+                </div>
+                
+                {/* Quote */}
+                <blockquote className="text-lg md:text-xl text-foreground italic mb-6">
+                  "Making digital trust effortless, one verification at a time."
+                </blockquote>
+                
+                {/* Action Buttons */}
+                <div className="flex flex-wrap gap-4">
+                  <Button 
+                    variant="outline" 
+                    className="gap-2"
+                    asChild
+                  >
+                    <a href="https://www.linkedin.com/in/shobhitgoyal07/" target="_blank" rel="noopener noreferrer">
+                      <Linkedin className="w-5 h-5" />
+                      LinkedIn
+                    </a>
+                  </Button>
+                  <Button 
+                    variant="outline" 
+                    className="gap-2"
+                    asChild
+                  >
+                    <a href="https://takh7ucwgg0.typeform.com/to/kG2iZbDL?typeform-source=www.linkedin.com" target="_blank" rel="noopener noreferrer">
+                      <Newspaper className="w-5 h-5" />
+                      Newsletter
+                    </a>
+                  </Button>
                 </div>
               </div>
             </div>

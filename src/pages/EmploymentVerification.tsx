@@ -173,7 +173,7 @@ const EmploymentVerification = () => {
                 <CardContent>
                   <Tabs value={activeScenario} onValueChange={(v) => setActiveScenario(v as any)}>
                     <TabsList className="grid w-full grid-cols-3">
-                      <TabsTrigger value="single">✅ Single UAN</TabsTrigger>
+                      <TabsTrigger value="single">✅ Employment Data</TabsTrigger>
                       <TabsTrigger value="multiple">⚠️ Multiple UANs</TabsTrigger>
                       <TabsTrigger value="flagged">🚩 Flagged</TabsTrigger>
                     </TabsList>
@@ -426,11 +426,6 @@ const EmploymentVerification = () => {
                       </Card>
                       ))}
                   </div>
-                  {activeScenario === 'flagged' && (
-                    <Button variant="destructive" className="w-full mt-4">
-                      View Risk Details
-                    </Button>
-                  )}
                 </CardContent>
               </Card>
 

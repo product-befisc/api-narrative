@@ -204,13 +204,13 @@ const EmploymentVerification = () => {
               )}
 
               {activeScenario === 'multiple' && (
-                <Card className="border-2 border-yellow-500 bg-yellow-50 dark:bg-yellow-950">
+                <Card className="border-2 border-green-500 bg-green-50 dark:bg-green-950">
                   <CardContent className="pt-6">
                     <div className="flex items-center gap-3">
-                      <AlertTriangle className="h-6 w-6 text-yellow-600" />
+                      <CheckCircle className="h-6 w-6 text-green-600" />
                       <div>
-                        <h3 className="font-semibold text-yellow-900 dark:text-yellow-100">⚠️ Multiple UANs Found</h3>
-                        <p className="text-sm text-yellow-700 dark:text-yellow-300">Cross-check Required</p>
+                        <h3 className="font-semibold text-green-900 dark:text-green-100">✅ Verified – Multiple UANs Found</h3>
+                        <p className="text-sm text-green-700 dark:text-green-300">Clean Employment Records</p>
                       </div>
                     </div>
                   </CardContent>
@@ -380,9 +380,6 @@ const EmploymentVerification = () => {
                         </tbody>
                       </table>
                     </div>
-                    <p className="text-sm text-muted-foreground mt-4">
-                      ⚠️ Please verify the correct UAN before proceeding.
-                    </p>
                   </CardContent>
                 </Card>
               )}

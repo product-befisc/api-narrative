@@ -31,6 +31,7 @@ import PassportVerification from "./pages/PassportVerification";
 import VoterIDVerification from "./pages/VoterIDVerification";
 import DigiLockerAadhaar from "./pages/DigiLockerAadhaar";
 import VehicleVerification from "./pages/VehicleVerification";
+import EmploymentVerification from "./pages/EmploymentVerification";
 
 const queryClient = new QueryClient();
 
@@ -65,6 +66,7 @@ const App = () => (
           <Route path="/product/id-proof/lpg-verification" element={<LPGVerification />} />
           <Route path="/product/id-proof/passport-verification" element={<PassportVerification />} />
           <Route path="/product/id-proof/voter-id-verification" element={<VoterIDVerification />} />
+          <Route path="/product/id-proof/employment-verification" element={<EmploymentVerification />} />
           <Route path="/product/:productId" element={<ProductPage />} />
           <Route path="/category/:categoryId" element={<CategoryPage />} />
           <Route path="/api/:apiId" element={<APIDetailPage />} />

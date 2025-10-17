@@ -1,5 +1,5 @@
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { ArrowLeft, Shield, FileText, Car, CreditCard, User, Building, MapPin, FileCheck, Phone, Scan } from 'lucide-react';
+import { ArrowLeft, Shield, FileText, Car, CreditCard, User, Building, MapPin, FileCheck, Phone, Scan, Briefcase } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -16,6 +16,7 @@ const IDProof = () => {
     { name: 'Customer Profiling', icon: User, description: 'Profile insights via mobile', path: '/product/id-proof/customer-profiling' },
     { name: 'Business Profiling', icon: Building, description: 'Company data visualization', path: '/product/id-proof/business-profiling' },
     { name: 'Address Tracing', icon: MapPin, description: 'Address mapping via mobile', path: '/product/id-proof/address-tracing' },
+    { name: 'Employment Verification', icon: Briefcase, description: 'UAN & employment history verification', path: '/product/id-proof/employment-verification' },
   ];
 
   const products = [

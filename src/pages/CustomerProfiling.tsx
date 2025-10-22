@@ -1023,8 +1023,8 @@ const CustomerProfiling = () => {
                         <p className="font-semibold text-sm">Active</p>
                       </div>
                       <div className="bg-background/50 p-3 rounded-lg">
-                        <p className="text-xs text-muted-foreground mb-1">Credit Score Range</p>
-                        <p className="font-semibold text-sm text-primary">{getCreditScoreBand(responseData.bureau_report.credit_score)}</p>
+                        <p className="text-xs text-muted-foreground mb-1">EPFO Status</p>
+                        <p className="font-semibold text-sm">{responseData.epfo.active ? "Active" : "Inactive"}</p>
                       </div>
                       <div className="bg-background/50 p-3 rounded-lg">
                         <p className="text-xs text-muted-foreground mb-1">Digital Payment</p>
@@ -1059,12 +1059,12 @@ const CustomerProfiling = () => {
                         <p className="font-semibold text-sm">{responseData.esic_info.registered ? "Registered" : "Not Registered"}</p>
                       </div>
                       <div className="bg-background/50 p-3 rounded-lg">
-                        <p className="text-xs text-muted-foreground mb-1">Credit Score Range</p>
-                        <p className="font-semibold text-sm text-primary">{getCreditScoreBand(responseData.bureau_report.credit_score)}</p>
+                        <p className="text-xs text-muted-foreground mb-1">Bureau Check</p>
+                        <p className="font-semibold text-sm">Yes</p>
                       </div>
                       <div className="bg-background/50 p-3 rounded-lg">
-                        <p className="text-xs text-muted-foreground mb-1">EPFO Status</p>
-                        <p className="font-semibold text-sm">{responseData.epfo.active ? "Active" : "Inactive"}</p>
+                        <p className="text-xs text-muted-foreground mb-1">LPG Connection</p>
+                        <p className="font-semibold text-sm">Found</p>
                       </div>
                     </div>
                   </CardContent>
@@ -1100,8 +1100,8 @@ const CustomerProfiling = () => {
                           <p className="font-semibold text-sm">{responseData.gst_info.registered ? "Registered" : "Not Registered"}</p>
                         </div>
                         <div className="bg-background/50 p-3 rounded-lg">
-                          <p className="text-xs text-muted-foreground mb-1">Credit Score Range</p>
-                          <p className="font-semibold text-sm text-primary">{getCreditScoreBand(responseData.bureau_report.credit_score)}</p>
+                          <p className="text-xs text-muted-foreground mb-1">MSME</p>
+                          <p className="font-semibold text-sm">Found</p>
                         </div>
                       </div>
                     </CardContent>

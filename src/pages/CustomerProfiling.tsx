@@ -496,7 +496,7 @@ const CustomerProfiling = () => {
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <FileText className="h-5 w-5" />
-          Bureau
+          Bureau Check
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
@@ -514,10 +514,9 @@ const CustomerProfiling = () => {
             <p className="font-mono text-sm break-all">{maskData(responseData.bureau_report.pan, showData)}</p>
           </div>
           <div>
-            <p className="text-sm text-muted-foreground mb-1">Credit Score</p>
+            <p className="text-sm text-muted-foreground mb-1">Credit Score Range</p>
             <div className="flex items-center gap-2">
-              <p className="text-2xl font-bold text-primary">{responseData.bureau_report.credit_score}</p>
-              <Badge variant="outline">{getCreditScoreBand(responseData.bureau_report.credit_score)}</Badge>
+              <p className="text-2xl font-bold text-primary">{getCreditScoreBand(responseData.bureau_report.credit_score)}</p>
             </div>
           </div>
         </div>
@@ -1008,28 +1007,106 @@ const CustomerProfiling = () => {
                 </TabsList>
 
                 {/* Salaried Tab */}
-                <TabsContent value="salaried" className="space-y-6 mt-6">
-                  {renderDigitalPaymentCard()}
-                  {renderLPGCard()}
-                  {renderEPFOCard()}
-                  {renderBureauCard()}
-                  {renderTelcoCard()}
-                  {renderAdditionalDetailsCard()}
-                </TabsContent>
+              <TabsContent value="salaried" className="space-y-6 mt-6">
+                {/* Key Highlights */}
+                <Card className="bg-gradient-to-br from-primary/5 to-primary/10 border-primary/20">
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2 text-lg">
+                      <CheckCircle2 className="h-5 w-5 text-primary" />
+                      Key Highlights - Salaried
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="grid md:grid-cols-3 gap-4">
+                      <div className="bg-background/50 p-3 rounded-lg">
+                        <p className="text-xs text-muted-foreground mb-1">Employment Status</p>
+                        <p className="font-semibold text-sm">Active</p>
+                      </div>
+                      <div className="bg-background/50 p-3 rounded-lg">
+                        <p className="text-xs text-muted-foreground mb-1">Credit Score Range</p>
+                        <p className="font-semibold text-sm text-primary">{getCreditScoreBand(responseData.bureau_report.credit_score)}</p>
+                      </div>
+                      <div className="bg-background/50 p-3 rounded-lg">
+                        <p className="text-xs text-muted-foreground mb-1">Digital Payment</p>
+                        <p className="font-semibold text-sm">Verified</p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {renderDigitalPaymentCard()}
+                {renderLPGCard()}
+                {renderEPFOCard()}
+                {renderBureauCard()}
+                {renderTelcoCard()}
+                {renderAdditionalDetailsCard()}
+              </TabsContent>
 
                 {/* Blue Collar Tab */}
-                <TabsContent value="blue-collar" className="space-y-6 mt-6">
-                  {renderDigitalPaymentCard()}
-                  {renderLPGCard()}
-                  {renderBureauCard()}
-                  {renderESICCard()}
-                  {renderEPFOCard()}
-                  {renderTelcoCard()}
-                  {renderAdditionalDetailsCard()}
-                </TabsContent>
+              <TabsContent value="blue-collar" className="space-y-6 mt-6">
+                {/* Key Highlights */}
+                <Card className="bg-gradient-to-br from-primary/5 to-primary/10 border-primary/20">
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2 text-lg">
+                      <CheckCircle2 className="h-5 w-5 text-primary" />
+                      Key Highlights - Blue Collar
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="grid md:grid-cols-3 gap-4">
+                      <div className="bg-background/50 p-3 rounded-lg">
+                        <p className="text-xs text-muted-foreground mb-1">ESIC Status</p>
+                        <p className="font-semibold text-sm">{responseData.esic_info.registered ? "Registered" : "Not Registered"}</p>
+                      </div>
+                      <div className="bg-background/50 p-3 rounded-lg">
+                        <p className="text-xs text-muted-foreground mb-1">Credit Score Range</p>
+                        <p className="font-semibold text-sm text-primary">{getCreditScoreBand(responseData.bureau_report.credit_score)}</p>
+                      </div>
+                      <div className="bg-background/50 p-3 rounded-lg">
+                        <p className="text-xs text-muted-foreground mb-1">EPFO Status</p>
+                        <p className="font-semibold text-sm">{responseData.epfo.active ? "Active" : "Inactive"}</p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {renderDigitalPaymentCard()}
+                {renderLPGCard()}
+                {renderBureauCard()}
+                {renderESICCard()}
+                {renderEPFOCard()}
+                {renderTelcoCard()}
+                {renderAdditionalDetailsCard()}
+              </TabsContent>
 
                 {/* Business/Salaried Tab */}
                 <TabsContent value="business" className="space-y-6 mt-6">
+                  {/* Key Highlights */}
+                  <Card className="bg-gradient-to-br from-primary/5 to-primary/10 border-primary/20">
+                    <CardHeader>
+                      <CardTitle className="flex items-center gap-2 text-lg">
+                        <CheckCircle2 className="h-5 w-5 text-primary" />
+                        Key Highlights - Business/Salaried
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="grid md:grid-cols-3 gap-4">
+                        <div className="bg-background/50 p-3 rounded-lg">
+                          <p className="text-xs text-muted-foreground mb-1">Director Status</p>
+                          <p className="font-semibold text-sm">{responseData.director_info.is_director ? "Yes" : "No"}</p>
+                        </div>
+                        <div className="bg-background/50 p-3 rounded-lg">
+                          <p className="text-xs text-muted-foreground mb-1">GST Status</p>
+                          <p className="font-semibold text-sm">{responseData.gst_info.registered ? "Registered" : "Not Registered"}</p>
+                        </div>
+                        <div className="bg-background/50 p-3 rounded-lg">
+                          <p className="text-xs text-muted-foreground mb-1">Credit Score Range</p>
+                          <p className="font-semibold text-sm text-primary">{getCreditScoreBand(responseData.bureau_report.credit_score)}</p>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+
                   {renderDigitalPaymentCard()}
                   {renderLPGCard()}
                   {renderBureauCard()}

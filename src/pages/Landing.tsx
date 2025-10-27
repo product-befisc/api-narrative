@@ -5,7 +5,7 @@ import { ArrowRight, Shield, TrendingUp, Users, Award, Linkedin, Newspaper } fro
 import { EmailVerificationModal } from "@/components/EmailVerificationModal";
 import logo from "@/assets/BeFiSc_New_Logo.svg";
 import saloraCapitalLogo from "@/assets/clients/salora-capital.png";
-import founderPhoto from "@/assets/founder-photo.svg";
+import founderPhoto from "@/assets/founder-photo.png";
 import linkedinBanner from "@/assets/linkedin-banner.png";
 import emailBounceIcon from "@/assets/products/email-bounce.svg";
 import idProofIcon from "@/assets/products/id-proof-2.svg";

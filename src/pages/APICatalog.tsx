@@ -73,22 +73,22 @@ const APICatalog = () => {
   return (
     <div className="flex h-screen w-full bg-background">
       {/* Sidebar */}
-      <aside className="w-80 border-r border-border bg-slate-950 flex flex-col">
+      <aside className="w-80 border-r border-border bg-card flex flex-col shadow-lg">
         {/* Header */}
-        <div className="p-6 border-b border-slate-800">
-          <h1 className="text-2xl font-bold text-blue-500">Explore APIs</h1>
+        <div className="p-6 border-b border-border bg-gradient-to-r from-primary/5 to-secondary/5">
+          <h1 className="text-2xl font-bold text-primary">Explore APIs</h1>
         </div>
         
         {/* Search Box */}
-        <div className="p-4 border-b border-slate-800">
+        <div className="p-4 border-b border-border">
           <div className="relative">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
             <Input
               type="text"
               placeholder="Search API..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-9 bg-slate-900 border-slate-700 text-white placeholder:text-slate-500"
+              className="pl-9 bg-background border-input"
             />
           </div>
         </div>
@@ -97,7 +97,7 @@ const APICatalog = () => {
         <ScrollArea className="flex-1">
           <div className="p-3">
             {filteredData.length === 0 ? (
-              <div className="text-center py-8 text-slate-400 text-sm">
+              <div className="text-center py-8 text-muted-foreground text-sm">
                 No APIs found matching "{searchQuery}"
               </div>
             ) : (
@@ -108,16 +108,16 @@ const APICatalog = () => {
                     {/* Category Header */}
                     <button
                       onClick={() => toggleCategory(category.id)}
-                      className="w-full flex items-center gap-3 p-2.5 rounded-md hover:bg-slate-800 transition-colors group text-left"
+                      className="w-full flex items-center gap-3 p-2.5 rounded-md hover:bg-muted transition-colors group text-left"
                     >
-                      <IconComponent className="h-4 w-4 text-slate-400 flex-shrink-0" />
-                      <span className="font-medium text-sm text-white flex-1">
+                      <IconComponent className="h-4 w-4 text-primary flex-shrink-0" />
+                      <span className="font-medium text-sm text-foreground flex-1">
                         {category.name}
                       </span>
                       {expandedCategories.has(category.id) ? (
-                        <ChevronDown className="h-4 w-4 text-slate-400" />
+                        <ChevronDown className="h-4 w-4 text-muted-foreground" />
                       ) : (
-                        <ChevronRight className="h-4 w-4 text-slate-400" />
+                        <ChevronRight className="h-4 w-4 text-muted-foreground" />
                       )}
                     </button>
 
@@ -131,8 +131,8 @@ const APICatalog = () => {
                             className={cn(
                               "w-full text-left px-3 py-2 rounded-md text-sm transition-colors",
                               selectedAPI?.id === api.id
-                                ? "bg-slate-800 text-white font-medium"
-                                : "text-slate-300 hover:bg-slate-800 hover:text-white"
+                                ? "bg-primary text-primary-foreground font-medium"
+                                : "text-foreground hover:bg-muted"
                             )}
                           >
                             {api.name}
@@ -166,10 +166,10 @@ const APICatalog = () => {
               {/* Header */}
               <div className="space-y-4">
                 <div className="flex items-center gap-3">
-                  <h1 className="text-4xl font-bold text-blue-500">
+                  <h1 className="text-4xl font-bold text-primary">
                     {selectedAPI.name}
                   </h1>
-                  <Badge variant="secondary" className="bg-green-500/10 text-green-600 border-green-500/20">
+                  <Badge className="bg-secondary/10 text-secondary-foreground border-secondary/20">
                     ✓ Billable
                   </Badge>
                 </div>
@@ -187,10 +187,10 @@ const APICatalog = () => {
               </div>
 
               {/* Request Data Section */}
-              <Card className="p-6 bg-card border-border">
+              <Card className="p-6 bg-gradient-to-br from-card to-muted border-border shadow-md">
                 <div className="flex items-center gap-3 mb-6">
-                  <div className="p-2 bg-blue-500/10 rounded-lg">
-                    <svg className="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="p-2 bg-primary/10 rounded-lg">
+                    <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                     </svg>
                   </div>
@@ -198,12 +198,12 @@ const APICatalog = () => {
                 </div>
                 
                 <div className="space-y-4">
-                  <div className="p-4 bg-blue-500/5 rounded-lg border border-blue-500/20">
+                  <div className="p-4 bg-background rounded-lg border border-primary/20 hover:border-primary/40 transition-colors">
                     <div className="flex items-center gap-3 mb-2">
-                      <svg className="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
                       </svg>
-                      <span className="text-sm font-medium text-muted-foreground">Aadhaar</span>
+                      <span className="text-sm font-medium text-foreground">Aadhaar</span>
                     </div>
                     <p className="text-sm text-muted-foreground ml-8">• • • • • • • •</p>
                   </div>
@@ -211,42 +211,42 @@ const APICatalog = () => {
               </Card>
 
               {/* Response Data Section */}
-              <Card className="p-6 bg-card border-border">
+              <Card className="p-6 bg-gradient-to-br from-card to-muted border-border shadow-md">
                 <div className="flex items-center justify-between mb-6">
                   <div className="flex items-center gap-3">
-                    <div className="p-2 bg-blue-500/10 rounded-lg">
-                      <svg className="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div className="p-2 bg-secondary/10 rounded-lg">
+                      <svg className="w-6 h-6 text-secondary-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                       </svg>
                     </div>
                     <h2 className="text-2xl font-bold text-foreground">Response Data</h2>
                   </div>
-                  <button className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-foreground hover:bg-accent rounded-lg transition-colors">
+                  <Button variant="outline" className="gap-2">
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                     </svg>
                     Show Data
-                  </button>
+                  </Button>
                 </div>
                 
                 <div className="grid grid-cols-2 gap-4">
-                  <div className="p-4 bg-blue-500/5 rounded-lg border border-blue-500/20">
+                  <div className="p-4 bg-background rounded-lg border border-primary/20 hover:border-primary/40 transition-colors">
                     <div className="flex items-center gap-3 mb-2">
-                      <svg className="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
                       </svg>
-                      <span className="text-sm font-medium text-muted-foreground">Aadhaar</span>
+                      <span className="text-sm font-medium text-foreground">Aadhaar</span>
                     </div>
                     <p className="text-sm text-muted-foreground ml-8">• • • • • • • •</p>
                   </div>
                   
-                  <div className="p-4 bg-blue-500/5 rounded-lg border border-blue-500/20">
+                  <div className="p-4 bg-background rounded-lg border border-primary/20 hover:border-primary/40 transition-colors">
                     <div className="flex items-center gap-3 mb-2">
-                      <svg className="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                       </svg>
-                      <span className="text-sm font-medium text-muted-foreground">Pan</span>
+                      <span className="text-sm font-medium text-foreground">Pan</span>
                     </div>
                     <p className="text-sm text-muted-foreground ml-8">• • • • • • • •</p>
                   </div>

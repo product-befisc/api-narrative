@@ -864,57 +864,1082 @@ export const apiCatalogData: CategoryData[] = [
     id: "kyb",
     name: "KYB",
     apis: [
-      { id: "gst-verification-mobile-otp", name: "GST Verification with Mobile OTP", category: "kyb" },
-      { id: "gst-basic", name: "GST (Basic)", category: "kyb" },
-      { id: "gst-advance", name: "GST (Advance)", category: "kyb" },
-      { id: "gst-advance-v2", name: "GST (Advance) V2", category: "kyb" },
-      { id: "turnover", name: "Turnover", category: "kyb" },
-      { id: "gst-to-business-contact-v1", name: "GST to Business Contact V1", category: "kyb" },
-      { id: "gst-to-business-contact-v2", name: "GST to Business Contact V2", category: "kyb" },
-      { id: "company-name-to-gst", name: "Company Name to GST Lookup", category: "kyb" },
-      { id: "mobile-to-gst-check", name: "Mobile to GST Check", category: "kyb" },
-      { id: "mobile-to-gst", name: "Mobile to GST", category: "kyb" },
-      { id: "email-to-gst-lookup", name: "Email to GST Lookup", category: "kyb" },
-      { id: "gst-to-pan", name: "GST to PAN", category: "kyb" },
-      { id: "pan-to-gst-number-lookup", name: "PAN to GST Number Lookup", category: "kyb" },
-      { id: "gst-to-cin", name: "GST to CIN", category: "kyb" },
-      { id: "gst-to-cin-details", name: "GST to CIN Details", category: "kyb" },
-      { id: "gst-to-mcc", name: "GST To MCC", category: "kyb" },
-      { id: "hsn-to-mcc", name: "HSN To MCC", category: "kyb" },
-      { id: "pan-to-din", name: "PAN to DIN", category: "kyb" },
-      { id: "pan-to-din-details", name: "PAN to DIN Details", category: "kyb" },
-      { id: "pan-to-cin", name: "PAN to CIN", category: "kyb" },
-      { id: "din-mobile-lookup", name: "DIN Mobile Lookup", category: "kyb" },
-      { id: "din-contact-lookup", name: "Din Contact Lookup", category: "kyb" },
-      { id: "din-to-pan", name: "DIN to PAN", category: "kyb" },
-      { id: "cin-to-pan", name: "CIN to PAN", category: "kyb" },
-      { id: "cin-to-gst", name: "CIN to GST", category: "kyb" },
-      { id: "cin-to-gst-details", name: "CIN to GST Details", category: "kyb" },
-      { id: "cin-number-lookup", name: "CIN Number Lookup", category: "kyb" },
-      { id: "entity-name-to-cin-lookup", name: "Entity Name to CIN lookup", category: "kyb" },
-      { id: "udyam-registration", name: "Udyam Registration", category: "kyb" },
-      { id: "udyam-certificate-advance", name: "Udyam Certificate Advance", category: "kyb" },
-      { id: "verify-udyam", name: "Verify Udyam", category: "kyb" },
-      { id: "udyam-detail-v2", name: "Udyam Detail V2", category: "kyb" },
-      { id: "mobile-to-udyam", name: "Mobile to Udyam", category: "kyb" },
-      { id: "mobile-to-udyam-details", name: "Mobile to Udyam Details", category: "kyb" },
-      { id: "pan-to-udyam", name: "PAN to Udyam", category: "kyb" },
-      { id: "pan-to-udyam-details", name: "PAN to Udyam Details", category: "kyb" },
-      { id: "mobile-udyam-to-pan", name: "Mobile & Udyam to PAN", category: "kyb" },
-      { id: "udyam-certificate-download", name: "Udyam Certificate Download", category: "kyb" },
-      { id: "udyam-assist-details", name: "Udyam Assist Details", category: "kyb" },
-      { id: "business-pan", name: "Business PAN", category: "kyb" },
-      { id: "tan-details", name: "TAN Details", category: "kyb" },
-      { id: "fssai-verification", name: "FSSAI Verification", category: "kyb" },
-      { id: "pan-to-iec", name: "PAN to IEC", category: "kyb" },
-      { id: "mobile-to-iec", name: "Mobile to IEC", category: "kyb" },
-      { id: "pan-to-tan", name: "PAN to TAN", category: "kyb" },
-      { id: "pan-to-tan-v2", name: "PAN to TAN V2", category: "kyb" },
-      { id: "tan-to-pan", name: "TAN to PAN", category: "kyb" },
-      { id: "name-to-tan", name: "Name to TAN", category: "kyb" },
-      { id: "tds-certificate-verification", name: "TDS Certificate Verification", category: "kyb" },
-      { id: "iec-to-ie-details", name: "IEC to IE Details", category: "kyb" },
-      { id: "iec-to-ie-details-advance", name: "IEC to IE Details Advance", category: "kyb" },
+      { 
+        id: "gst-basic", 
+        name: "GST (Basic)", 
+        category: "kyb",
+        requestSample: {
+          gst_number: "05AAALI0033XXXX"
+        },
+        responseSample: {
+          api_category: "Know Your Business (KYB)",
+          api_name: "GST Verification (Basic)",
+          billable: true,
+          txn_id: "d858084f-28a4-498d-bd12-bca8c8ae1514",
+          message: "Success",
+          status: 1,
+          result: {
+            taxpayer_type: "Regular",
+            state_jurisdiction: "CHEMBUR-EAST_702",
+            legal_name_of_business: "ABCD INDIA PRIVATE LIMITED",
+            nature_of_business: ["Supplier of Services", "Export"],
+            gst_number: "27AAJCB1234N1ZS",
+            last_updated: "11/11/2022",
+            constitution_of_business: "Private Limited Company",
+            date_of_registration: "11/08/2020",
+            primary_business_address: {
+              floor_number: "12th FLOOR",
+              city: "",
+              pin: "400071",
+              distric: "Mumbai",
+              state: "Maharashtra",
+              latitude: "",
+              longitude: "",
+              location: "NEXT TO RAM MARKET, CHEMBUR",
+              building_number: "FLAT NO. 1002",
+              building_name: "SAFAL HEIGHTS",
+              business_nature: "Supplier of Services, Export"
+            },
+            trade_name: "ABCD INDIA PRIVATE LIMITED",
+            state_jurisdiction_code: "MHCG0680",
+            status: "Active"
+          },
+          datetime: "2024-04-03 12:21:29.951879"
+        }
+      },
+      { 
+        id: "gst-advance", 
+        name: "GST (Advance)", 
+        category: "kyb",
+        requestSample: {
+          gst_no: "XXXXXXXXXX"
+        },
+        responseSample: {
+          api_category: "KYB",
+          api_name: "GST Verification (Advance)",
+          billable: true,
+          txn_id: "a62dff46-e93d-4ddc-b8b3-acdeeac1695c",
+          message: "Success",
+          status: 1,
+          result: {
+            aggregate_turn_over: "NA",
+            authorized_signatory: ["XXXXXXXX", "XXXXXXXXX", "XXXXXXXXX"],
+            business_constitution: "Private Limited Company",
+            business_details: [
+              {
+                saccd: "998313",
+                sdes: "Information technology (IT) consulting and support services"
+              },
+              {
+                saccd: "998599",
+                sdes: "Other support services n.e.c."
+              },
+              {
+                saccd: "998598",
+                sdes: "Other information services n.e.c."
+              }
+            ],
+            business_nature: ["Supplier of Services", "Recipient of Goods or Services"],
+            can_flag: "NA",
+            central_jurisdiction: "Commissionerate - GAUTAM BUDDHA NAGAR,Division - DIVISION I GAUTAM BUDH NAGAR,Range - RANGE - 1",
+            compliance_rating: "NA",
+            current_registration_status: "Active",
+            filing_status: [[
+              {
+                fy: "2022-2023",
+                taxp: "January",
+                mof: "ONLINE",
+                dof: "11/02/2023",
+                rtntype: "GSTR1",
+                arn: "NA",
+                status: "Filed"
+              },
+              {
+                fy: "2022-2023",
+                taxp: "January",
+                mof: "ONLINE",
+                dof: "16/02/2023",
+                rtntype: "GSTR3B",
+                arn: "NA",
+                status: "Filed"
+              }
+            ]],
+            gstin: "XXXXXXXXXX",
+            is_field_visit_conducted: "No",
+            legal_name: "XXXXXXX PRIVATE LIMITED",
+            mandate_e_invoice: "NA",
+            other_business_address: {},
+            primary_business_address: {
+              business_nature: "Supplier of Services, Recipient of Goods or Services",
+              detailed_address: "NA",
+              last_updated_date: "NA",
+              registered_address: "XXXXXXXX County, GREATER NOIDA, Greater Noida, Gautam Buddha Nagar, Uttar Pradesh, 201306"
+            },
+            register_cancellation_date: "",
+            register_date: "31/01/XXXX",
+            state_jurisdiction: "State - Uttar Pradesh,Zone - Gautambudha Nagar,Range - Gautambudha Nagar(B),Sector - Sector-1,Gautambudha Nagar (Jurisdictional Office)",
+            tax_payer_type: "Regular",
+            trade_name: "XXXXX PRIVATE LIMITED",
+            gross_total_income: "NA",
+            gross_total_income_financial_year: ""
+          },
+          datetime: "2023-02-24 10:45:38.430386"
+        }
+      },
+      { 
+        id: "gst-advance-v2", 
+        name: "GST (Advance) V2", 
+        category: "kyb",
+        requestSample: {
+          gst_no: "XXXXXXXXXXXX",
+          consent_text: "We confirm that we have obtained the consent of the respective customer to fetch their details from authorized sources using their GST",
+          consent: "Y"
+        },
+        responseSample: {
+          api_category: "KYB",
+          api_name: "GST Verification (Advance)",
+          billable: true,
+          txn_id: "a62dff46-e93d-4ddc-b8b3-acdeeac1695c",
+          message: "Success",
+          status: 1,
+          result: {
+            aggregate_turn_over: "NA",
+            authorized_signatory: ["XXXXXXXX", "XXXXXXXXX", "XXXXXXXXX"],
+            business_constitution: "Private Limited Company",
+            business_details: [
+              {
+                saccd: "998313",
+                sdes: "Information technology (IT) consulting and support services"
+              },
+              {
+                saccd: "998599",
+                sdes: "Other support services n.e.c."
+              },
+              {
+                saccd: "998598",
+                sdes: "Other information services n.e.c."
+              }
+            ],
+            business_nature: ["Supplier of Services", "Recipient of Goods or Services"],
+            can_flag: "NA",
+            central_jurisdiction: "Commissionerate - GAUTAM BUDDHA NAGAR,Division - DIVISION I GAUTAM BUDH NAGAR,Range - RANGE - 1",
+            compliance_rating: "NA",
+            current_registration_status: "Active",
+            filing_status: [[
+              {
+                fy: "2022-2023",
+                taxp: "January",
+                mof: "ONLINE",
+                dof: "11/02/2023",
+                rtntype: "GSTR1",
+                arn: "NA",
+                status: "Filed"
+              },
+              {
+                fy: "2022-2023",
+                taxp: "January",
+                mof: "ONLINE",
+                dof: "16/02/2023",
+                rtntype: "GSTR3B",
+                arn: "NA",
+                status: "Filed"
+              }
+            ]],
+            gstin: "XXXXXXXXXX",
+            is_field_visit_conducted: "No",
+            legal_name: "XXXXXXX PRIVATE LIMITED",
+            mandate_e_invoice: "NA",
+            other_business_address: {},
+            primary_business_address: {
+              business_nature: "Supplier of Services, Recipient of Goods or Services",
+              detailed_address: "NA",
+              last_updated_date: "NA",
+              registered_address: "XXXXXXXX County, GREATER NOIDA, Greater Noida, Gautam Buddha Nagar, Uttar Pradesh, 201306"
+            },
+            register_cancellation_date: "",
+            register_date: "31/01/XXXX",
+            state_jurisdiction: "State - Uttar Pradesh,Zone - Gautambudha Nagar,Range - Gautambudha Nagar(B),Sector - Sector-1,Gautambudha Nagar (Jurisdictional Office)",
+            tax_payer_type: "Regular",
+            trade_name: "XXXXX PRIVATE LIMITED",
+            gross_total_income: "NA",
+            gross_total_income_financial_year: "",
+            business_email: "XYZ@gmail.com",
+            business_mobile: "0987654432"
+          },
+          datetime: "2023-02-24 10:45:38.430386"
+        }
+      },
+      { 
+        id: "turnover", 
+        name: "Turnover", 
+        category: "kyb",
+        requestSample: {
+          gst_no: "37ABCPD1234E1ZI",
+          year: "2024-25",
+          consent: "Y",
+          consent_text: "We confirm obtaining valid customer consent to access/process their GST data. Consent remains valid, informed, and unwithdrawn."
+        },
+        responseSample: {
+          api_category: "Know Your Business (KYB)",
+          api_name: "Turnover",
+          billable: true,
+          txn_id: "172452fe-8587-4665-8a8e-95b1f7da5b62",
+          message: "Success",
+          status: 1,
+          result: {
+            estimated_turnover: 1000,
+            turnover: 1000,
+            year: "2025-26",
+            till_date: "10/10/2025",
+            total_estimated_turnover: 1000,
+            total_turnover: 1000,
+            gst_status: "Active",
+            legal_name: "RAM SINGH",
+            trade_name: "ABC TECH",
+            register_date: "01/01/2020",
+            tax_payer_type: "Regular",
+            authorized_signatory: ["RAM SINGH"],
+            business_nature: ["Supplier of Services"]
+          },
+          datetime: "2025-08-06 06:18:55.353720"
+        }
+      },
+      { 
+        id: "gst-to-business-contact-v1", 
+        name: "GST to Business Contact V1", 
+        category: "kyb",
+        requestSample: {
+          gst_no: "XXXXXXXXXX",
+          consent: "Y",
+          consent_text: "I give my consent to gst contact api to get my gst contact info"
+        },
+        responseSample: {
+          api_category: "Know Your Business (KYB)",
+          api_name: "GST Contact",
+          billable: true,
+          txn_id: "13177a1d-ad18-44af-b283-8af7ea40ac35",
+          message: "Success",
+          status: 1,
+          result: {
+            business_email: "mail@mail.com",
+            business_mobile: "1234567890"
+          },
+          datetime: "2024-03-28 05:52:27.090851"
+        }
+      },
+      { 
+        id: "gst-to-business-contact-v2", 
+        name: "GST to Business Contact V2", 
+        category: "kyb",
+        requestSample: {
+          gst_no: "12ABCPD1234E1Z1",
+          consent: "Y",
+          consent_text: "We confirm obtaining valid customer consent to access/process their GST Number. Consent remains valid, informed, and unwithdrawn."
+        },
+        responseSample: {
+          txn_id: "19cee83a-e517-4ed8-9d9a-b3b13b14ab3a",
+          api_category: "Know Your Business (KYB)",
+          api_name: "GST to Business Contact",
+          billable: true,
+          message: "Success",
+          status: 1,
+          result: {
+            business_email: "RAM@EMAIL.COM",
+            business_mobile: "9876543210"
+          },
+          datetime: "2025-07-18 10:44:10.509562"
+        }
+      },
+      { 
+        id: "company-name-to-gst", 
+        name: "Company Name to GST Lookup", 
+        category: "kyb",
+        requestSample: {
+          company_name: "abc private limited",
+          consent: "Y",
+          consent_text: "We confirm obtaining valid customer consent to access/process their company data. Consent remains valid, informed, and unwithdrawn."
+        },
+        responseSample: {
+          txn_id: "9856ef72-cd62-4018-950f-4880db0b094f",
+          api_category: "Business API",
+          api_name: "Company Name to GST Lookup",
+          billable: true,
+          message: "Success",
+          status: 1,
+          result: {
+            company_name: "abc private limited",
+            gst_no: ["09ABCCD1234Q1AZ"]
+          },
+          datetime: "2025-06-19 14:38:43.673256"
+        }
+      },
+      { 
+        id: "mobile-to-gst-check", 
+        name: "Mobile to GST Check", 
+        category: "kyb",
+        requestSample: {
+          mobile: "9876543210",
+          consent: "Y",
+          consent_text: "We confirm obtaining valid customer consent to access/process their mobile data. Consent remains valid, informed, and unwithdrawn."
+        },
+        responseSample: {
+          txn_id: "e93a5518-080e-4d00-bfe0-9087314f6085",
+          api_category: "Business API",
+          api_name: "Mobile to GST Check",
+          billable: true,
+          message: "Success",
+          status: 1,
+          result: {
+            exists: true
+          },
+          datetime: "2025-05-22 09:41:34.630565"
+        }
+      },
+      { 
+        id: "mobile-to-gst", 
+        name: "Mobile to GST", 
+        category: "kyb",
+        requestSample: {
+          mobile: "9876543210",
+          consent: "Y",
+          consent_text: "I give my consent to mobile to gst api to get my gst number info"
+        },
+        responseSample: {
+          txn_id: "a385774b-66fc-49ee-b5fb-000e5fabbc0f",
+          api_category: "Know Your Business (KYB)",
+          api_name: "Mobile to GST",
+          billable: true,
+          message: "Success",
+          status: 1,
+          result: {
+            gst_numbers: ["09ABCCD1234Q1AZ"]
+          },
+          datetime: "2025-05-22 09:41:34.630565"
+        }
+      },
+      { 
+        id: "verify-udyam", 
+        name: "Verify Udyam", 
+        category: "kyb",
+        requestSample: {
+          registration_no: "<Registration No.>"
+        },
+        responseSample: {
+          api_category: "Know Your Business (KYB)",
+          api_name: "Udyam",
+          billable: true,
+          txn_id: "e7a9b1b6-1aaa-4682-9cf8-dd3b361fa50e",
+          message: "Record Found Successfully",
+          status: 1,
+          result: {
+            enterprise_name: "LEENA BAKE",
+            organisation_type: "Proprietary",
+            service_type: "Services",
+            gender: "Female",
+            social_category: "OBC",
+            date_of_incorporation: "25/12/2014",
+            date_of_commencement: "25/12/2014",
+            address: {
+              flat_no: "FLAT NO 101",
+              building: "RAVI CLASSIC , S NO 112, 113",
+              village: "BANER ROAD",
+              block: "NEAR D MART",
+              street: "BANER",
+              district: "PUNE",
+              city: "PUNE",
+              state: "MAHARASHTRA",
+              pin: "411046"
+            },
+            mobile: "90*****902",
+            email: "leen123@gmail.com",
+            plant_details: [
+              {
+                unit_name: "LEENA BAKE",
+                flat: "FLAT NO 101",
+                building: "RAVI CLASSIC , S NO 112, 113",
+                village: "BANER",
+                block: " ",
+                road: "BANER ROAD , NEAR D MART",
+                district: "PUNE",
+                city: "PUNE",
+                state: "MAHARASHTRA",
+                pin: "411046"
+              }
+            ],
+            enterprise_type: [
+              {
+                classification_year: "2022-23",
+                enterprise_type: "Micro",
+                classification_date: "01/02/2022"
+              }
+            ],
+            nic_code: [
+              {
+                nic_2_digit: "10 - Manufacture of food products",
+                nic_4_digit: "1071 - Manufacture of bakery products",
+                nic_5_digit: "10711 - Manufacture of bread",
+                activity: "Manufacturing",
+                date: "07/12/2022"
+              }
+            ],
+            dic: "PUNE",
+            "msme-dfo": "MUMBAI",
+            date_of_udyam_registeration: "01/02/2022"
+          },
+          datetime: "2023-08-04 06:05:07.348376"
+        }
+      },
+      { 
+        id: "udyam-detail-v2", 
+        name: "Udyam Detail V2", 
+        category: "kyb",
+        requestSample: {
+          udyam_number: "UDYAM-UP-12-1234567",
+          consent: "Y",
+          consent_text: "We confirm obtaining valid customer consent to access/process their udyam data. Consent remains valid, informed, and unwithdrawn."
+        },
+        responseSample: {
+          txn_id: "f986300f-cb98-4e6c-8c78-51f751c16d9f",
+          api_category: "Know Your Business (KYB)",
+          api_name: "Udyam Details V2",
+          billable: true,
+          message: "Success",
+          status: 1,
+          result: {
+            udyam_number: "UDYAM-UP-12-1234567",
+            type_of_enterprise: "MICRO",
+            major_activity: "Services",
+            type_of_organisation: "Hindu Undivided Family",
+            name_of_enterprise: "ABC Enterprise",
+            owner_name: "Ram Singh",
+            pan: "ABCPD1234D",
+            do_you_have_gstin: "",
+            mobile_no: "9876543210",
+            email_id: "ram@email.com",
+            social_category: "General",
+            gender: "Male",
+            specially_abled_divyang: "No",
+            date_of_incorporation: "29/02/2024",
+            date_of_commencement_of_production_business: "",
+            male: "4",
+            female: "0",
+            other: "0",
+            total: "4",
+            dic: "Delhi",
+            msme_di: "Delhi",
+            date_of_udyam_registration: "10/06/2025"
+          },
+          datetime: "2025-07-15 12:45:44.317138"
+        }
+      },
+      { 
+        id: "mobile-to-udyam-details", 
+        name: "Mobile to Udyam Details", 
+        category: "kyb",
+        requestSample: {
+          mobile: "9876543210",
+          consent: "Y",
+          consent_text: "We confirm obtaining valid customer consent to access/process their mobile data. Consent remains valid, informed, and unwithdrawn."
+        },
+        responseSample: {
+          txn_id: "5dcf2199-77f4-459a-b777-60fd8c38e843",
+          api_category: "Know Your Business (KYB)",
+          api_name: "Mobile to Udyam Details",
+          billable: true,
+          message: "Success",
+          status: 1,
+          result: {
+            mobile: "9876543210",
+            udyam_list: [
+              {
+                udyam_number: "UDYAM-WB-12-7654321",
+                enterprise_name: "ABC PRIVATE LIMITED",
+                udyam_details: {
+                  enterprise_name: "ABC PRIVATE LIMITED",
+                  organisation_type: "Proprietary",
+                  service_type: "Services",
+                  gender: "Female",
+                  social_category: "General",
+                  date_of_incorporation: "01/04/2024",
+                  date_of_commencement: "01/06/2024",
+                  address: {
+                    flat_no: "FLAT NO 101",
+                    building: "RAVI CLASSIC , S NO 112, 113",
+                    village: "BANER ROAD",
+                    block: "CONTAI III",
+                    street: "SH5",
+                    district: "EAST MEDINIPUR",
+                    city: "CONTAI",
+                    state: "WEST BENGAL",
+                    pin: "721452"
+                  },
+                  mobile: "98*****210",
+                  email: "ramsingh@gmail.com",
+                  dic: "PURBA MEDINIPUR",
+                  "msme-dfo": "KOLKATA",
+                  date_of_udyam_registeration: "01/01/2025",
+                  status: "Success"
+                }
+              }
+            ]
+          },
+          datetime: "2025-03-05 05:05:59.736667"
+        }
+      },
+      { 
+        id: "pan-to-udyam", 
+        name: "PAN to Udyam", 
+        category: "kyb",
+        requestSample: {
+          pan: "ABCPD1234E",
+          consent: "Y",
+          consent_text: "We confirm obtaining valid customer consent to access/process their pan data. Consent remains valid, informed, and unwithdrawn."
+        },
+        responseSample: {
+          txn_id: "4d164a28-1c84-4966-ab49-16ecdfd1fd3d",
+          api_category: "Know Your Business (KYB)",
+          api_name: "PAN to Udyam",
+          billable: true,
+          message: "Success",
+          status: 1,
+          result: {
+            pan: "ABCPD1234E",
+            udyam_list: [
+              {
+                udyam_number: "UDYAM-UP-01-0123456",
+                enterprise_name: "ABC PRIVATE LIMITED"
+              }
+            ]
+          },
+          datetime: "2025-03-03 09:17:12.316022"
+        }
+      },
+      { 
+        id: "pan-to-udyam-details", 
+        name: "PAN to Udyam Details", 
+        category: "kyb",
+        requestSample: {
+          pan: "ABCPD1234E",
+          consent: "Y",
+          consent_text: "We confirm obtaining valid customer consent to access/process their pan data. Consent remains valid, informed, and unwithdrawn."
+        },
+        responseSample: {
+          txn_id: "5360e8e5-a413-4957-b3d6-a8d92f2f14b7",
+          api_category: "Know Your Business (KYB)",
+          api_name: "PAN to Udyam Details",
+          billable: true,
+          message: "Success",
+          status: 1,
+          result: {
+            udyam_number: "UDYAM-AB-12-1234567",
+            enterprise_name: "ABC COMPANY",
+            organisation_type: "Proprietary",
+            service_type: "TRADING",
+            gender: "Male",
+            social_category: "General",
+            date_of_incorporation: "30/08/2006",
+            date_of_commencement: "30/08/2006",
+            address: {
+              flat_no: "123",
+              building: "abc building",
+              village: "abc village",
+              block: "abc block",
+              street: "abc street",
+              district: "abc district",
+              city: "DELHI",
+              state: "DELHI",
+              pin: "101010"
+            },
+            mobile: "98*****321",
+            email: "ram@email.com",
+            dic: "DAVANGERE",
+            "msme-dfo": "DELHI",
+            date_of_udyam_registeration: "01/01/2022"
+          },
+          datetime: "2025-07-18 15:55:06.097306"
+        }
+      },
+      { 
+        id: "mobile-udyam-to-pan", 
+        name: "Mobile & Udyam to PAN", 
+        category: "kyb",
+        requestSample: {
+          mobile: "9000012345",
+          udyam_registration_number: "UDYAM-DL-05-1234567",
+          consent: "Y",
+          consent_text: "We confirm obtaining valid customer consent to access/process their mobile number and udyam registration number. Consent remains valid, informed, and unwithdrawn."
+        },
+        responseSample: {
+          message: "No sample response available"
+        }
+      },
+      { 
+        id: "udyam-certificate-download", 
+        name: "Udyam Certificate Download", 
+        category: "kyb",
+        requestSample: {
+          registration_no: "UDYAM-MP-49-123456",
+          consent: "Y",
+          consent_text: "We confirm obtaining valid customer consent to access/process their Udyam Number. Consent remains valid, informed, and unwithdrawn."
+        },
+        responseSample: {
+          txn_id: "dc7b80a6-0146-4413-b6bb-0b51d12c733d",
+          api_category: "Know Your Business (KYB)",
+          api_name: "Udyam Certificate Download",
+          billable: true,
+          message: "Success",
+          status: 1,
+          result: {
+            pdf_url: "<presign url of pdf file>"
+          },
+          datetime: "2025-04-23 14:16:50.232421"
+        }
+      },
+      { 
+        id: "udyam-assist-details", 
+        name: "Udyam Assist Details", 
+        category: "kyb",
+        requestSample: {
+          udyam_assist_number: "UDYAM-I-Cg-19-1234567",
+          consent: "Y",
+          consent_text: "We confirm obtaining valid customer consent to access/process their Udyam Assist Number. Consent remains valid, informed, and unwithdrawn."
+        },
+        responseSample: {
+          txn_id: "1bc2236b-c2a6-4de9-a667-3ed834ec5f01",
+          api_category: "Know Your Business (KYB)",
+          api_name: "Udyam Assist Details",
+          billable: true,
+          message: "Success",
+          status: 1,
+          result: {
+            udyam_assist_number: "UDYAM-I-Cg-19-1234567",
+            customer_identification_no: "CW-AWC-32654321",
+            formatted_file_number: "CW-AWC-56789",
+            dob: "01/01/1970",
+            aadhar_reference_no: "1133422296123456789",
+            entrepreneur_name: "RAM SINGH",
+            organisation_type: "Proprietory",
+            social_category: "General",
+            gender: "Female",
+            mobile: "9876543210",
+            is_business_commercial: true,
+            created_date: "01/03/2024"
+          },
+          datetime: "2025-04-23 13:21:01.098805"
+        }
+      },
+      { 
+        id: "business-pan", 
+        name: "Business PAN", 
+        category: "kyb",
+        requestSample: {
+          pan: "AAACU1234K"
+        },
+        responseSample: {
+          api_category: "Know Your Business (KYB)",
+          api_name: "Business PAN",
+          billable: true,
+          txn_id: "dc04795e-99eb-41d1-974a-b4c1d67b3ab5",
+          message: "success",
+          status: "1",
+          result: {
+            pan: "AAACU1234K",
+            organisation_name: "AXIS BANK LIMITED",
+            cin: "L65110GJ1993PLC12345",
+            organisation_incorporate_date: "03-Dec-1900",
+            director_din: "00531234",
+            director_pan: "ABYPC1234D",
+            organisation_email: "ram.kuriyal@axisbank.com",
+            organisation_mobile: "9930541234",
+            organisation_address: {
+              address_line_1: "3RD FLOOR, Trishul,",
+              address_line_2: "Opp Samrtheswar temple",
+              address_line_3: "Ellisbridge S.O",
+              address_line_4: "Ahmadabad City",
+              address_line_5: "AHMEDABAD",
+              pin_code: "380006",
+              state: "Gujarat"
+            },
+            director_or_sole_proprietor_details: {
+              pan_type: "director",
+              pan: "ABYPC1234D",
+              first_name: "RAM",
+              middle_name: "",
+              last_name: "CHAUDHRY",
+              full_name: "RAM  CHAUDHRY",
+              gender: "M",
+              dob: "02-07-1900",
+              email: "ram.chaudhry@yahoo.com",
+              mobile: "9619011234",
+              aadhaar: "XXXXXXXX4958",
+              address: {
+                address_line_1: "Flat No.1234",
+                address_line_2: "Tower 4,Planet Godrej, KK Marg",
+                address_line_3: "Mumbai",
+                address_line_4: "MUMBAI",
+                address_line_5: "Jacob Circle S.O",
+                pin_code: "400011",
+                state: "Maharashtra"
+              }
+            }
+          },
+          datetime: "2023-06-28 06:29:05.187669"
+        }
+      },
+      { 
+        id: "tan-details", 
+        name: "TAN Details", 
+        category: "kyb",
+        requestSample: {
+          tan: "MRTA01234D",
+          consent_text: "I give my consent to TAN Details API to fetch my info",
+          consent: "Y"
+        },
+        responseSample: {
+          txn_id: "478bb209-9234-4c30-9831-fe783998352e",
+          api_category: "Know Your Business (KYB)",
+          api_name: "TAN Details",
+          billable: true,
+          message: "Success",
+          status: 1,
+          result: {
+            tan: "MRTA01234D",
+            company_name: "ABCD PRIVATE LIMITED",
+            address: {
+              add_line_1: "ABC-024",
+              add_line_2: "XYZ",
+              add_line_3: "APPARTMENTS",
+              add_line_4: "GHAZIABAD",
+              add_line_5: "GHAZIABAD",
+              state: "Uttar Pradesh",
+              pincode: "201001",
+              full: "ABC-024 XYZ APPARTMENTS GHAZIABAD GHAZIABAD Uttar Pradesh 201001"
+            },
+            mobile: "0123456789",
+            tan_allotment_date: "06-06-2020",
+            email: ["ABCD@GMAIL.COM", "XYZ@GMAIL.COM"]
+          },
+          datetime: "2024-06-10 13:26:09.568780"
+        }
+      },
+      { 
+        id: "fssai-verification", 
+        name: "FSSAI Verification", 
+        category: "kyb",
+        requestSample: {
+          food_license_number: "12345678XXXXX45",
+          consent: "Y",
+          consent_text: "I give my consent to fssai varification api to check my food licence number info"
+        },
+        responseSample: {
+          api_category: "Know Your Business (KYB)",
+          api_name: "FSSAI Verification",
+          billable: true,
+          txn_id: "e415702d-3ec7-48bb-8f02-8f142f3b3b4b",
+          message: "Success",
+          status: 1,
+          result: {
+            license_number: "12349015001234",
+            company_name: "RAM ENTERPRISE",
+            license_active_flag: false,
+            license_category_name: "Registration",
+            premise_address: "ABC BUILDING, MANGUSHREE COMPLEX, POST-KHANJANCHAK",
+            premise_pincode: "721605",
+            village_name: "WARD NO-10",
+            taluka_name: "HALDIA MUNICIPALITY",
+            district_name: "Purba Medinipur",
+            state_name: "West Bengal",
+            status_desc: "License Issued",
+            uuid: "73061234"
+          },
+          datetime: "2024-03-12 09:48:29.258869"
+        }
+      },
+      { 
+        id: "pan-to-iec", 
+        name: "PAN to IEC", 
+        category: "kyb",
+        requestSample: {
+          pan: "CLCPK1234A",
+          consent: "Y",
+          consent_text: "We confirm that we have obtained the consent of the respective customer to fetch their details by using their PAN and the customer is aware of the purpose for which their data is sought for being processed and have given their consent for the same and such consent is currently valid and not withdrawn."
+        },
+        responseSample: {
+          txn_id: "5c8a56d4-17e1-4e14-8ba8-033ce32f3f2e",
+          api_category: "Know Your Business (KYB)",
+          api_name: "PAN to IEC",
+          billable: true,
+          message: "Success",
+          status: 1,
+          result: {
+            iec_id: "CLCPK1234APIE000",
+            iec_role: "IEC Holders",
+            registration_date: "27-08-2024",
+            filing_services: "IMPORTS, EXPORTS, GR",
+            ie_code: "CLCPK1234AFT001",
+            name: "RAM EXPORT SERVICES",
+            address: "123 COLONY XYZ",
+            iec_status_code: "9",
+            iec_status: "Amendment",
+            number_of_branches: "1",
+            branches: [
+              {
+                branch_number: "1",
+                address: "123 COLONY XYZ"
+              }
+            ]
+          },
+          datetime: "2024-10-01 11:00:15.962715"
+        }
+      },
+      { 
+        id: "mobile-to-iec", 
+        name: "Mobile to IEC", 
+        category: "kyb",
+        requestSample: {
+          mobile: "9876543210",
+          consent: "Y",
+          consent_text: "We confirm obtaining valid customer consent to access/process their mobile data. Consent remains valid, informed, and unwithdrawn."
+        },
+        responseSample: {
+          txn_id: "11ee7d3b-a8f3-4d71-992b-f24f81f172f5",
+          api_category: "Know Your Business (KYB)",
+          api_name: "Mobile To IEC",
+          billable: true,
+          message: "Success",
+          status: 1,
+          result: ["0123456789"],
+          datetime: "2024-12-21 10:43:22.660984"
+        }
+      },
+      { 
+        id: "pan-to-tan", 
+        name: "PAN to TAN", 
+        category: "kyb",
+        requestSample: {
+          pan: "ABCPD1234D",
+          consent: "Y",
+          consent_text: "We confirm that we have obtained the consent of the respective customer to fetch their details by using their PAN and the customer is aware of the purpose for which their data is sought for being processed and have given their consent for the same and such consent is currently valid and not withdrawn."
+        },
+        responseSample: {
+          txn_id: "d2383cd6-b0a7-43c7-a34f-4061a0de3250",
+          api_category: "Know Your Business (KYB)",
+          api_name: "PAN to TAN",
+          billable: true,
+          message: "Success",
+          status: 1,
+          result: {
+            tan: "MRTB1234A"
+          },
+          datetime: "2024-10-08 07:17:57.647069"
+        }
+      },
+      { 
+        id: "pan-to-tan-v2", 
+        name: "PAN to TAN V2", 
+        category: "kyb",
+        requestSample: {
+          pan: "ABCPD1234D",
+          consent: "Y",
+          consent_text: "We confirm that we have obtained the consent of the respective customer to fetch their details by using their PAN and the customer is aware of the purpose for which their data is sought for being processed and have given their consent for the same and such consent is currently valid and not withdrawn."
+        },
+        responseSample: {
+          txn_id: "687801fa-bdee-498d-8cd0-e2c7a1de1b0b",
+          api_category: "Know Your Business (KYB)",
+          api_name: "PAN to TAN V2",
+          billable: true,
+          message: "Success",
+          status: 1,
+          result: {
+            pan: "ABCPD1234D",
+            tan_numbers: [
+              {
+                tan: "ABCD00001E",
+                name: "ABC PRIVATE LIMITED"
+              },
+              {
+                tan: "ABCD00002E",
+                name: "ABC PRIVATE LIMITED"
+              }
+            ]
+          },
+          datetime: "2024-12-26 08:16:00.420495"
+        }
+      },
+      { 
+        id: "tan-to-pan", 
+        name: "TAN to PAN", 
+        category: "kyb",
+        requestSample: {
+          tan: "ABCD12345B",
+          consent: "Y",
+          consent_text: "We confirm obtaining valid customer consent to access/process their tan data. Consent remains valid, informed, and unwithdrawn."
+        },
+        responseSample: {
+          txn_id: "b8f8a119-4a91-4695-bd3e-32e8c92093a5",
+          api_category: "Know Your Business (KYB)",
+          api_name: "TAN to PAN",
+          billable: true,
+          message: "Record Found Successfully",
+          status: 1,
+          result: {
+            tan: "ABCD12345B",
+            company_name: "ABCD PRIVATE LIMITED",
+            pan: ["ABCCN4321A"]
+          },
+          datetime: "2024-12-06 07:33:06.838501"
+        }
+      },
+      { 
+        id: "name-to-tan", 
+        name: "Name to TAN", 
+        category: "kyb",
+        requestSample: {
+          name: "ABC PRIVATE LIMITED",
+          consent: "Y",
+          consent_text: "We confirm obtaining valid customer consent to access/process their Name. Consent remains valid, informed, and unwithdrawn."
+        },
+        responseSample: {
+          txn_id: "c3376f9f-c508-4163-8deb-523ea87dbfbb",
+          api_category: "Know Your Business (KYB)",
+          api_name: "NAME to TAN",
+          billable: true,
+          message: "Success",
+          status: 1,
+          result: {
+            name: "ABC PRIVATE LIMITED",
+            tan_numbers: [
+              {
+                tan: "ABCD12345E"
+              }
+            ]
+          },
+          datetime: "2025-02-27 17:06:54.798371"
+        }
+      },
+      { 
+        id: "tds-certificate-verification", 
+        name: "TDS Certificate Verification", 
+        category: "kyb",
+        requestSample: {
+          tan: "ABCD12345C",
+          pan: "ABCDP1234D",
+          financial_year: "2023-24",
+          tds_certificate_no: "ABCDEFG",
+          tds_amount: "100",
+          consent: "Y",
+          consent_text: "We confirm that we have obtained the consent of the respective customer to fetch their details by using their PAN and TAN Numbers and the customer is aware of the purpose for which their data is sought for being processed and have given their consent for the same and such consent is currently valid and not withdrawn."
+        },
+        responseSample: {
+          txn_id: "9261217d-d3b7-411d-9c47-11cca1a3f8cc",
+          api_category: "Know Your Business (KYB)",
+          api_name: "TDS Certificate Verification",
+          billable: true,
+          message: "Success",
+          status: 1,
+          result: {
+            tan: "ABCD12345C",
+            pan: "ABCDP1234D",
+            financial_year: "2023-24",
+            tds_certificate_no: "ABCDEFG",
+            tds_amount_deducted: "100",
+            is_valid: true
+          },
+          datetime: "2024-12-12 15:37:45.065208"
+        }
+      },
+      { 
+        id: "iec-to-ie-details", 
+        name: "IEC to IE Details", 
+        category: "kyb",
+        requestSample: {
+          ie_code: "0011223344",
+          consent: "Y",
+          consent_text: "We confirm that we have obtained the consent of the respective customer to fetch their details by using their IE Code and the customer is aware of the purpose for which their data is sought for being processed and have given their consent for the same and such consent is currently valid and not withdrawn."
+        },
+        responseSample: {
+          txn_id: "5c8a56d4-17e1-4e14-8ba8-033ce32f3f2e",
+          api_category: "Know Your Business (KYB)",
+          api_name: "IEC to IE Details",
+          billable: true,
+          message: "Success",
+          status: 1,
+          result: {
+            ie_code: "0011223344",
+            name: "RAM EXPORT SERVICES",
+            address: "123 COLONY XYZ",
+            iec_status_code: "9",
+            iec_status: "Amendment",
+            number_of_branches: "1",
+            branches: [
+              {
+                branch_number: "1",
+                address: "123 COLONY XYZ"
+              }
+            ],
+            iec_id: "CLCPK1234APIE000",
+            iec_role: "IEC Holders",
+            registration_date: "27-08-2024",
+            filing_services: "IMPORTS, EXPORTS, GR"
+          },
+          datetime: "2024-10-01 11:00:15.962715"
+        }
+      },
+      { 
+        id: "iec-to-ie-details-advance", 
+        name: "IEC to IE Details Advance", 
+        category: "kyb",
+        requestSample: {
+          ie_code: "0011223344",
+          consent: "Y",
+          consent_text: "We confirm obtaining valid customer consent to access/process their IE number. Consent remains valid, informed, and unwithdrawn."
+        },
+        responseSample: {
+          txn_id: "4fa0787c-7e1a-4cf0-87a0-27c4f5400dd2",
+          api_category: "Know Your Business (KYB)",
+          api_name: "IEC To IE Details Advance",
+          billable: true,
+          message: "Success",
+          status: 1,
+          result: {
+            iec_details: {
+              iec_number: "0011223344",
+              pan_number: "ABCDPE1234E",
+              date_of_incorporation: "14/02/2019",
+              iec_issuance_date: "06/08/2019",
+              iec_status: "Valid",
+              del_status: "N",
+              iec_cancelled_date: "",
+              iec_suspended_date: "",
+              file_number: "HYDQAZWSXCDF00123456AM12",
+              file_date: "Thu Jun 27 05:30:00 IST 2024",
+              dgft_ra_office: "RA HYDERABAD",
+              nature_of_firm: "Private Limited",
+              category_of_exporters: "Manufacturer Exporter",
+              firm_name: "ABC PRIVATE LIMITED",
+              address: "ROAD NO.60,HYDERABAD, TELANGANA,500033",
+              firm_mobile: "9876543210",
+              firm_email: "email@mail.com"
+            },
+            branch_details: [
+              {
+                branch_code: "1",
+                gstin: "12ABCDPE1234E1ZS",
+                branch_address: "BACHUPALLY- VILLAGE, HYDERABAD,TELANGANA,500090"
+              }
+            ],
+            proprietor_partner_director_details: [
+              {
+                name: "RAM SINGH",
+                father_name: "SHAM SINGH",
+                pan_number: "ABCPD1234H",
+                address: "JUBILEEHILLS,HYDERABAD"
+              }
+            ]
+          },
+          datetime: "2025-01-18 05:25:54.628497"
+        }
+      },
     ],
   },
   {

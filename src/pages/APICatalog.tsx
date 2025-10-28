@@ -1,9 +1,10 @@
 import { useState, useMemo } from "react";
-import { ChevronDown, ChevronRight, Search, User, Building2, Smartphone, DollarSign, Car, Briefcase, MoreHorizontal, Workflow } from "lucide-react";
+import { ChevronDown, ChevronRight, Search, User, Building2, Smartphone, DollarSign, Car, Briefcase, MoreHorizontal, Workflow, ArrowLeft } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { apiCatalogData, CategoryData, APIItem } from "@/data/comprehensiveApiData";
 import { cn } from "@/lib/utils";
 import { useNavigate } from "react-router-dom";
@@ -160,6 +161,16 @@ const APICatalog = () => {
       {/* Main Content Area */}
       <main className="flex-1 overflow-auto bg-background">
         <div className="max-w-6xl mx-auto p-8">
+          {/* Back Button */}
+          <Button
+            variant="ghost"
+            onClick={() => navigate(-1)}
+            className="mb-6 text-muted-foreground hover:text-foreground"
+          >
+            <ArrowLeft className="h-4 w-4 mr-2" />
+            Back
+          </Button>
+          
           {selectedAPI ? (
             <div className="space-y-6">
               {/* Header */}

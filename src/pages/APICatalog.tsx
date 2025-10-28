@@ -1,14 +1,14 @@
 import { useState, useMemo } from "react";
-import { ChevronDown, ChevronRight, Search, User, Building2, Smartphone, DollarSign, Car, Briefcase, MoreHorizontal, ArrowLeft, Send, CheckCircle2, AlertCircle } from "lucide-react";
+import { ChevronDown, ChevronRight, Search, User, Building2, Smartphone, DollarSign, Car, Briefcase, MoreHorizontal, ArrowLeft, Eye, EyeOff } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
+import { Checkbox } from "@/components/ui/checkbox";
 import { apiCatalogData, CategoryData, APIItem } from "@/data/comprehensiveApiData";
-import { cn } from "@/lib/utils";
+import { cn, maskData } from "@/lib/utils";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 
@@ -33,6 +33,8 @@ const APICatalog = () => {
   const [formData, setFormData] = useState<Record<string, any>>({});
   const [responseData, setResponseData] = useState<any>(null);
   const [isFetching, setIsFetching] = useState(false);
+  const [showData, setShowData] = useState(false);
+  const [consent, setConsent] = useState(true);
 
   // Filter APIs based on search query
   const filteredData = useMemo(() => {
@@ -77,6 +79,7 @@ const APICatalog = () => {
     setSelectedAPI(api);
     setFormData({});
     setResponseData(null);
+    setShowData(false);
     
     // Initialize form data with sample values
     if (api.requestSample) {
@@ -98,6 +101,15 @@ const APICatalog = () => {
   const handleFetch = () => {
     if (!selectedAPI) return;
     
+    if (!consent) {
+      toast({
+        title: "Consent Required",
+        description: "Please provide consent to proceed",
+        variant: "destructive",
+      });
+      return;
+    }
+    
     setIsFetching(true);
     
     // Simulate API call
@@ -112,44 +124,126 @@ const APICatalog = () => {
     }, 800);
   };
 
+  const shouldMaskField = (fieldName: string): boolean => {
+    const sensitiveFields = [
+      'name', 'pan', 'aadhaar', 'mobile', 'phone', 'email', 'dl', 
+      'voter', 'passport', 'epic', 'father', 'address', 'din', 'card_number'
+    ];
+    return sensitiveFields.some(field => fieldName.toLowerCase().includes(field));
+  };
+
   const renderInputField = (key: string, value: any) => {
-    const isTextarea = typeof value === 'string' && value.length > 50;
-    const isNumber = typeof value === 'number' || key.toLowerCase().includes('it');
+    // Skip consent fields as they're handled separately
+    if (key === 'consent' || key === 'consent_text') return null;
+
+    const label = key.replace(/_/g, ' ').split(' ').map(word => 
+      word.charAt(0).toUpperCase() + word.slice(1)
+    ).join(' ');
     
     return (
       <div key={key} className="space-y-2">
-        <Label htmlFor={key} className="text-sm font-medium text-foreground capitalize">
-          {key.replace(/_/g, ' ')}
-        </Label>
-        {isTextarea ? (
-          <Textarea
-            id={key}
-            value={formData[key] || ''}
-            onChange={(e) => handleInputChange(key, e.target.value)}
-            className="min-h-[80px] bg-background border-input"
-            placeholder={`Enter ${key.replace(/_/g, ' ')}`}
-          />
-        ) : (
-          <Input
-            id={key}
-            type={isNumber ? 'number' : 'text'}
-            value={formData[key] || ''}
-            onChange={(e) => handleInputChange(key, isNumber ? Number(e.target.value) : e.target.value)}
-            className="bg-background border-input"
-            placeholder={`Enter ${key.replace(/_/g, ' ')}`}
-          />
-        )}
+        <Label htmlFor={key}>{label}</Label>
+        <Input
+          id={key}
+          value={formData[key] || ''}
+          onChange={(e) => handleInputChange(key, e.target.value)}
+          placeholder={`Enter ${label}`}
+          className="bg-background"
+        />
       </div>
     );
   };
 
-  const renderResponseValue = (value: any): string => {
-    if (typeof value === 'boolean') return value ? 'Yes' : 'No';
-    if (Array.isArray(value)) return value.join(', ');
-    if (typeof value === 'object' && value !== null) {
-      return JSON.stringify(value, null, 2);
+  const renderResponseSection = (title: string, data: any) => {
+    if (!data || (typeof data === 'object' && Object.keys(data).length === 0)) return null;
+
+    // Handle simple values
+    if (typeof data !== 'object' || data === null) {
+      return (
+        <div>
+          <p className="text-sm text-muted-foreground">{title}</p>
+          <p className="font-semibold text-foreground break-words">
+            {shouldMaskField(title) ? maskData(String(data), showData) : String(data)}
+          </p>
+        </div>
+      );
     }
-    return String(value);
+
+    // Handle arrays
+    if (Array.isArray(data)) {
+      return (
+        <div className="space-y-2">
+          <p className="text-sm font-semibold text-foreground">{title}</p>
+          {data.map((item, idx) => (
+            <div key={idx} className="p-3 bg-muted rounded-lg">
+              {typeof item === 'object' ? (
+                <div className="grid grid-cols-2 gap-2">
+                  {Object.entries(item).map(([itemKey, itemValue]) => (
+                    <div key={itemKey}>
+                      <p className="text-xs text-muted-foreground">
+                        {itemKey.replace(/_/g, ' ').toUpperCase()}
+                      </p>
+                      <p className="font-medium text-sm">{String(itemValue)}</p>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <p className="font-medium">{String(item)}</p>
+              )}
+            </div>
+          ))}
+        </div>
+      );
+    }
+
+    // Handle nested objects
+    return (
+      <div className="grid md:grid-cols-2 gap-4">
+        {Object.entries(data).map(([key, value]) => {
+          const label = key.replace(/_/g, ' ').split(' ').map(word => 
+            word.charAt(0).toUpperCase() + word.slice(1)
+          ).join(' ');
+
+          // Nested object
+          if (typeof value === 'object' && value !== null && !Array.isArray(value)) {
+            return (
+              <div key={key} className="col-span-full border-t pt-4 first:border-t-0 first:pt-0">
+                <p className="text-sm font-semibold text-foreground mb-3">{label}</p>
+                <div className="grid md:grid-cols-2 gap-4">
+                  {Object.entries(value as Record<string, any>).map(([subKey, subValue]) => (
+                    <div key={subKey}>
+                      <p className="text-sm text-muted-foreground">
+                        {subKey.replace(/_/g, ' ').split(' ').map(word => 
+                          word.charAt(0).toUpperCase() + word.slice(1)
+                        ).join(' ')}
+                      </p>
+                      <p className="font-semibold text-foreground break-words">
+                        {shouldMaskField(subKey) ? maskData(String(subValue), showData) : String(subValue)}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            );
+          }
+
+          // Array
+          if (Array.isArray(value)) {
+            return renderResponseSection(label, value);
+          }
+
+          // Simple value
+          return (
+            <div key={key}>
+              <p className="text-sm text-muted-foreground">{label}</p>
+              <p className="font-semibold text-foreground break-words">
+                {shouldMaskField(key) ? maskData(String(value), showData) : String(value)}
+              </p>
+            </div>
+          );
+        })}
+      </div>
+    );
   };
 
   return (
@@ -246,212 +340,118 @@ const APICatalog = () => {
           {selectedAPI ? (
             <div className="space-y-6">
               {/* Header */}
-              <div className="space-y-4">
-                <div className="flex items-center gap-3">
-                  <h1 className="text-4xl font-bold text-primary">
-                    {selectedAPI.name}
-                  </h1>
-                  <Badge className="bg-secondary/10 text-secondary-foreground border-secondary/20">
-                    ✓ Billable
-                  </Badge>
-                </div>
-                
-                <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                  <div className="flex items-center gap-2">
-                    <span className="text-muted-foreground">🏷️</span>
-                    <span>{apiCatalogData.find(cat => cat.id === selectedAPI.category)?.name || selectedAPI.category}</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-muted-foreground">📅</span>
-                    <span>Last Updated: 2024-02-17</span>
-                  </div>
-                </div>
+              <div className="text-center">
+                <h1 className="text-4xl font-bold text-foreground mb-3">
+                  {selectedAPI.name}
+                </h1>
+                <p className="text-muted-foreground">
+                  {apiCatalogData.find(cat => cat.apis.some(api => api.id === selectedAPI.id))?.name || 'API Verification'}
+                </p>
               </div>
 
-              {/* Request Input Section */}
-              {selectedAPI.requestSample ? (
-                <Card className="border-border shadow-md">
-                  <CardHeader className="bg-gradient-to-r from-primary/5 to-secondary/5">
-                    <div className="flex items-center gap-3">
-                      <div className="p-2 bg-primary/10 rounded-lg">
-                        <Send className="w-6 h-6 text-primary" />
+              {/* Input Section */}
+              <Card>
+                <CardHeader>
+                  <CardTitle>Enter {selectedAPI.name} Details</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  {selectedAPI.requestSample && Object.keys(selectedAPI.requestSample).length > 0 ? (
+                    <>
+                      <div className="space-y-4">
+                        {Object.entries(selectedAPI.requestSample).map(([key, value]) => 
+                          renderInputField(key, value)
+                        )}
                       </div>
-                      <CardTitle className="text-2xl">API Request</CardTitle>
-                    </div>
-                  </CardHeader>
-                  <CardContent className="p-6 space-y-4">
-                    <div className="grid gap-4 md:grid-cols-2">
-                      {Object.entries(selectedAPI.requestSample).map(([key, value]) => 
-                        renderInputField(key, value)
-                      )}
-                    </div>
-                    
-                    <Button 
-                      onClick={handleFetch} 
-                      disabled={isFetching}
-                      className="w-full mt-6 gap-2"
-                      size="lg"
-                    >
-                      {isFetching ? (
-                        <>
-                          <div className="h-4 w-4 border-2 border-current border-t-transparent rounded-full animate-spin" />
-                          Fetching...
-                        </>
-                      ) : (
-                        <>
-                          <Send className="h-4 w-4" />
-                          Fetch Response
-                        </>
-                      )}
-                    </Button>
-                  </CardContent>
-                </Card>
-              ) : (
-                <Card className="p-6 border-border shadow-md">
-                  <div className="text-center text-muted-foreground py-8">
-                    No input parameters available for this API
-                  </div>
-                </Card>
-              )}
+                      
+                      <div className="flex gap-4 items-center pt-4">
+                        <Button 
+                          onClick={handleFetch} 
+                          disabled={isFetching || !consent}
+                          className="flex-shrink-0"
+                        >
+                          {isFetching ? 'Fetching...' : 'Fetch'}
+                        </Button>
+                      </div>
 
-              {/* Response Data Section */}
+                      <div className="flex items-start space-x-2 pt-2">
+                        <Checkbox 
+                          id="consent" 
+                          checked={consent} 
+                          onCheckedChange={(checked) => setConsent(checked === true)} 
+                        />
+                        <label htmlFor="consent" className="text-sm text-muted-foreground leading-relaxed cursor-pointer">
+                          I authorize BeFiSc to verify and fetch details linked to the information I've provided from authorized data sources for compliance and risk checks, in line with the DPDP Act, 2023.
+                        </label>
+                      </div>
+                    </>
+                  ) : (
+                    <p className="text-muted-foreground">No sample input available for this API</p>
+                  )}
+                </CardContent>
+              </Card>
+
+              {/* Response Section */}
               {responseData && (
-                <Card className="border-border shadow-md">
-                  <CardHeader className="bg-gradient-to-r from-secondary/5 to-primary/5">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-3">
-                        <div className="p-2 bg-secondary/10 rounded-lg">
-                          <CheckCircle2 className="w-6 h-6 text-primary" />
+                <div className="space-y-6 animate-fade-in">
+                  <div className="flex justify-end">
+                    <Button variant="outline" size="sm" onClick={() => setShowData(!showData)}>
+                      {showData ? <EyeOff className="h-4 w-4 mr-2" /> : <Eye className="h-4 w-4 mr-2" />}
+                      {showData ? 'Hide' : 'Show'} Data
+                    </Button>
+                  </div>
+
+                  {/* Status Card */}
+                  <Card className="border-2 border-primary">
+                    <CardContent className="pt-6">
+                      <div className="grid md:grid-cols-2 gap-4">
+                        <div>
+                          <p className="text-sm text-muted-foreground">Status</p>
+                          <Badge className={responseData.status === 1 ? "bg-gradient-primary text-white text-base" : "bg-destructive text-white text-base"}>
+                            {responseData.message}
+                          </Badge>
                         </div>
-                        <CardTitle className="text-2xl">API Response</CardTitle>
-                      </div>
-                      <Badge className="bg-success/10 text-success border-success/20">
-                        Status: {responseData.status}
-                      </Badge>
-                    </div>
-                  </CardHeader>
-                  <CardContent className="p-6">
-                    {/* Response Metadata */}
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-                      <div className="p-3 rounded-lg bg-background border border-border">
-                        <p className="text-xs text-muted-foreground mb-1">API Category</p>
-                        <p className="text-sm font-semibold text-foreground">{responseData.api_category}</p>
-                      </div>
-                      <div className="p-3 rounded-lg bg-background border border-border">
-                        <p className="text-xs text-muted-foreground mb-1">API Name</p>
-                        <p className="text-sm font-semibold text-foreground">{responseData.api_name}</p>
-                      </div>
-                      <div className="p-3 rounded-lg bg-background border border-border">
-                        <p className="text-xs text-muted-foreground mb-1">Transaction ID</p>
-                        <p className="text-sm font-semibold text-foreground truncate">{responseData.txn_id}</p>
-                      </div>
-                      <div className="p-3 rounded-lg bg-background border border-border">
-                        <p className="text-xs text-muted-foreground mb-1">Message</p>
-                        <p className="text-sm font-semibold text-foreground">{responseData.message}</p>
-                      </div>
-                    </div>
-
-                    {/* Result Data */}
-                    {responseData.result && (
-                      <div>
-                        <h3 className="text-lg font-bold text-foreground mb-4 flex items-center gap-2">
-                          <div className="h-1 w-8 bg-gradient-primary rounded" />
-                          Result Data
-                        </h3>
-                        <div className="grid gap-4 md:grid-cols-2">
-                          {Object.entries(responseData.result).map(([key, value]) => {
-                            // Handle nested objects
-                            if (typeof value === 'object' && value !== null && !Array.isArray(value)) {
-                              return (
-                                <div key={key} className="col-span-full">
-                                  <Card className="p-4 bg-background border-border">
-                                    <h4 className="text-sm font-semibold text-foreground mb-3 capitalize">
-                                      {key.replace(/_/g, ' ')}
-                                    </h4>
-                                    <div className="grid gap-2 md:grid-cols-2">
-                                      {Object.entries(value as object).map(([nestedKey, nestedValue]) => (
-                                        <div key={nestedKey} className="p-2 rounded bg-muted/50">
-                                          <p className="text-xs text-muted-foreground mb-1 capitalize">
-                                            {nestedKey.replace(/_/g, ' ')}
-                                          </p>
-                                          <p className="text-sm font-medium text-foreground">
-                                            {renderResponseValue(nestedValue)}
-                                          </p>
-                                        </div>
-                                      ))}
-                                    </div>
-                                  </Card>
-                                </div>
-                              );
-                            }
-
-                            // Handle arrays
-                            if (Array.isArray(value)) {
-                              return (
-                                <div key={key} className="col-span-full">
-                                  <Card className="p-4 bg-background border-border">
-                                    <div className="flex items-center gap-2 mb-3">
-                                      <h4 className="text-sm font-semibold text-foreground capitalize">
-                                        {key.replace(/_/g, ' ')}
-                                      </h4>
-                                      <Badge variant="secondary">{value.length} items</Badge>
-                                    </div>
-                                    <div className="space-y-2">
-                                      {value.map((item, idx) => (
-                                        <div key={idx} className="p-3 rounded bg-muted/50">
-                                          <pre className="text-xs text-foreground whitespace-pre-wrap">
-                                            {typeof item === 'object' ? JSON.stringify(item, null, 2) : String(item)}
-                                          </pre>
-                                        </div>
-                                      ))}
-                                    </div>
-                                  </Card>
-                                </div>
-                              );
-                            }
-
-                            // Handle simple values
-                            return (
-                              <div key={key} className="p-3 rounded-lg bg-background border border-border">
-                                <p className="text-xs text-muted-foreground mb-1 capitalize">
-                                  {key.replace(/_/g, ' ')}
-                                </p>
-                                <p className="text-sm font-semibold text-foreground break-words">
-                                  {renderResponseValue(value)}
-                                </p>
-                              </div>
-                            );
-                          })}
+                        <div>
+                          <p className="text-sm text-muted-foreground">Transaction ID</p>
+                          <p className="font-mono text-sm font-semibold break-all">{responseData.txn_id}</p>
+                        </div>
+                        <div>
+                          <p className="text-sm text-muted-foreground">API Name</p>
+                          <p className="font-semibold text-sm">{responseData.api_name}</p>
+                        </div>
+                        <div>
+                          <p className="text-sm text-muted-foreground">Billable</p>
+                          <Badge variant="outline">
+                            {responseData.billable ? 'Yes' : 'No'}
+                          </Badge>
                         </div>
                       </div>
-                    )}
+                    </CardContent>
+                  </Card>
 
-                    {/* Footer with timestamp */}
-                    <div className="mt-6 pt-4 border-t border-border">
-                      <div className="flex items-center justify-between text-xs text-muted-foreground">
-                        <span>Response Time: <span className="font-semibold text-foreground">145ms</span></span>
-                        <span>Timestamp: <span className="font-semibold text-foreground">{responseData.datetime}</span></span>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
+                  {/* Result Data */}
+                  {responseData.result && (
+                    <Card>
+                      <CardHeader>
+                        <CardTitle>Result Details</CardTitle>
+                      </CardHeader>
+                      <CardContent className="space-y-4">
+                        {renderResponseSection('', responseData.result)}
+                      </CardContent>
+                    </Card>
+                  )}
+
+                  {/* Timestamp */}
+                  <div className="text-xs text-muted-foreground text-right">
+                    Response Time: {responseData.datetime}
+                  </div>
+                </div>
               )}
             </div>
           ) : (
-            <div className="flex items-center justify-center h-[calc(100vh-4rem)]">
-              <div className="text-center space-y-4">
-                <div className="w-16 h-16 mx-auto bg-muted rounded-full flex items-center justify-center">
-                  <Search className="h-8 w-8 text-muted-foreground" />
-                </div>
-                <div>
-                  <h2 className="text-2xl font-bold text-foreground mb-2">
-                    Select an API
-                  </h2>
-                  <p className="text-muted-foreground">
-                    Choose an API from the sidebar to view its documentation and details
-                  </p>
-                </div>
-              </div>
+            <div className="text-center py-16">
+              <p className="text-muted-foreground text-lg">
+                Select an API from the sidebar to get started
+              </p>
             </div>
           )}
         </div>

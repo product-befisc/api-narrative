@@ -187,71 +187,56 @@ const APICatalog = () => {
               </div>
 
               {/* Request Data Section */}
-              <Card className="p-6 bg-gradient-to-br from-card to-muted border-border shadow-md">
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="p-2 bg-primary/10 rounded-lg">
-                    <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                    </svg>
-                  </div>
-                  <h2 className="text-2xl font-bold text-foreground">Request Data</h2>
-                </div>
-                
-                <div className="space-y-4">
-                  <div className="p-4 bg-background rounded-lg border border-primary/20 hover:border-primary/40 transition-colors">
-                    <div className="flex items-center gap-3 mb-2">
-                      <svg className="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+              {selectedAPI.requestSample ? (
+                <Card className="p-6 bg-gradient-to-br from-card to-muted border-border shadow-md">
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className="p-2 bg-primary/10 rounded-lg">
+                      <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                       </svg>
-                      <span className="text-sm font-medium text-foreground">Aadhaar</span>
                     </div>
-                    <p className="text-sm text-muted-foreground ml-8">• • • • • • • •</p>
+                    <h2 className="text-2xl font-bold text-foreground">Sample Input</h2>
                   </div>
-                </div>
-              </Card>
+                  
+                  <div className="bg-background rounded-lg p-4 border border-border">
+                    <pre className="text-sm text-foreground overflow-x-auto">
+                      <code>{JSON.stringify(selectedAPI.requestSample, null, 2)}</code>
+                    </pre>
+                  </div>
+                </Card>
+              ) : (
+                <Card className="p-6 bg-gradient-to-br from-card to-muted border-border shadow-md">
+                  <div className="text-center text-muted-foreground py-8">
+                    No sample input available for this API
+                  </div>
+                </Card>
+              )}
 
               {/* Response Data Section */}
-              <Card className="p-6 bg-gradient-to-br from-card to-muted border-border shadow-md">
-                <div className="flex items-center justify-between mb-6">
-                  <div className="flex items-center gap-3">
+              {selectedAPI.responseSample ? (
+                <Card className="p-6 bg-gradient-to-br from-card to-muted border-border shadow-md">
+                  <div className="flex items-center gap-3 mb-6">
                     <div className="p-2 bg-secondary/10 rounded-lg">
-                      <svg className="w-6 h-6 text-secondary-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                       </svg>
                     </div>
-                    <h2 className="text-2xl font-bold text-foreground">Response Data</h2>
-                  </div>
-                  <Button variant="outline" className="gap-2">
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                    </svg>
-                    Show Data
-                  </Button>
-                </div>
-                
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="p-4 bg-background rounded-lg border border-primary/20 hover:border-primary/40 transition-colors">
-                    <div className="flex items-center gap-3 mb-2">
-                      <svg className="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
-                      </svg>
-                      <span className="text-sm font-medium text-foreground">Aadhaar</span>
-                    </div>
-                    <p className="text-sm text-muted-foreground ml-8">• • • • • • • •</p>
+                    <h2 className="text-2xl font-bold text-foreground">Sample Response</h2>
                   </div>
                   
-                  <div className="p-4 bg-background rounded-lg border border-primary/20 hover:border-primary/40 transition-colors">
-                    <div className="flex items-center gap-3 mb-2">
-                      <svg className="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                      </svg>
-                      <span className="text-sm font-medium text-foreground">Pan</span>
-                    </div>
-                    <p className="text-sm text-muted-foreground ml-8">• • • • • • • •</p>
+                  <div className="bg-background rounded-lg p-4 border border-border">
+                    <pre className="text-sm text-foreground overflow-x-auto">
+                      <code>{JSON.stringify(selectedAPI.responseSample, null, 2)}</code>
+                    </pre>
                   </div>
-                </div>
-              </Card>
+                </Card>
+              ) : (
+                <Card className="p-6 bg-gradient-to-br from-card to-muted border-border shadow-md">
+                  <div className="text-center text-muted-foreground py-8">
+                    No sample response available for this API
+                  </div>
+                </Card>
+              )}
             </div>
           ) : (
             <div className="flex items-center justify-center h-[calc(100vh-4rem)]">

@@ -22,7 +22,7 @@ export const apiCatalogData: CategoryData[] = [
         name: "Validate PAN", 
         category: "kyc",
         requestSample: {
-          pan: "XXXXXXXXX",
+          pan: "ABCDE1234F",
           it: 1 // optional
         },
         responseSample: {
@@ -44,7 +44,7 @@ export const apiCatalogData: CategoryData[] = [
         name: "PAN (Basic)", 
         category: "kyc",
         requestSample: {
-          pan: "XXXXXXXXX"
+          pan: "ABCDE1234F"
         },
         responseSample: {
           api_category: "KYC",
@@ -54,7 +54,7 @@ export const apiCatalogData: CategoryData[] = [
           message: "Success",
           status: 1,
           result: {
-            pan_number: "XXXXXXX",
+            pan_number: "ABCDE1234F",
             pan_status: "VALID",
             user_full_name: "XXXXX XXXXX",
             pan_type: "Person"
@@ -170,7 +170,7 @@ export const apiCatalogData: CategoryData[] = [
         name: "PAN (Premium)", 
         category: "kyc",
         requestSample: {
-          pan: "XXXXXXXXX"
+          pan: "ABCDE1234F"
         },
         responseSample: {
           api_category: "Know Your Customer (KYC)",
@@ -180,7 +180,7 @@ export const apiCatalogData: CategoryData[] = [
           message: "Success",
           status: 1,
           result: {
-            pan_number: "DKYPK5XXXX",
+            pan_number: "ABCDE1234F",
             full_name: "XXXX SINGH",
             full_name_split: ["XXXXX", "", "SINGH"],
             masked_aadhaar: "XXXXXXXX2610",
@@ -219,7 +219,7 @@ export const apiCatalogData: CategoryData[] = [
         name: "PAN All in One", 
         category: "kyc",
         requestSample: {
-          pan: "XXXXXXXXX"
+          pan: "ABCDE1234F"
         },
         responseSample: {
           api_category: "Know Your Customer (KYC)",

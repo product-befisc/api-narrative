@@ -32,6 +32,7 @@ import VoterIDVerification from "./pages/VoterIDVerification";
 import DigiLockerAadhaar from "./pages/DigiLockerAadhaar";
 import VehicleVerification from "./pages/VehicleVerification";
 import EmploymentVerification from "./pages/EmploymentVerification";
+import APICatalog from "./pages/APICatalog";
 
 const queryClient = new QueryClient();
 
@@ -45,6 +46,7 @@ const App = () => (
           <Route path="/" element={<Landing />} />
           <Route path="/home" element={<Home />} />
           <Route path="/product/id-proof" element={<IDProof />} />
+          <Route path="/product/id-proof/api-catalog" element={<APICatalog />} />
           <Route path="/product/id-proof/vehicle-verification" element={<VehicleVerification />} />
           <Route path="/product/id-proof/digilocker-aadhaar" element={<DigiLockerAadhaar />} />
           <Route path="/id-verification-workflow" element={<IDVerificationWorkflow />} />

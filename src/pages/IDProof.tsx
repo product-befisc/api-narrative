@@ -1,5 +1,5 @@
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { ArrowLeft, Shield, FileText, Car, CreditCard, User, Building, MapPin, FileCheck, Phone, Scan, Briefcase } from 'lucide-react';
+import { ArrowLeft, Shield, FileText, Car, CreditCard, User, Building, MapPin, FileCheck, Phone, Scan, Briefcase, BookOpen } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -51,9 +51,17 @@ const IDProof = () => {
           <h1 className="text-5xl font-bold text-foreground mb-4">
             Digital identity verification made instant.
           </h1>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-6">
             Verify IDs, faces, and liveliness in seconds. Confirm real users before fraud enters your system.
           </p>
+          <Button
+            size="lg"
+            onClick={() => navigate('/product/id-proof/api-catalog')}
+            className="gap-2"
+          >
+            <BookOpen className="h-5 w-5" />
+            Browse All APIs
+          </Button>
         </div>
 
         {/* Tabs Section */}

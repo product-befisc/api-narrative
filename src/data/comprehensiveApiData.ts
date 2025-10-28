@@ -12,14 +12,6 @@ export interface CategoryData {
 
 export const apiCatalogData: CategoryData[] = [
   {
-    id: "workflow",
-    name: "Workflow",
-    apis: [
-      { id: "digilocker", name: "Digilocker", category: "workflow" },
-      { id: "id-verification-workflow", name: "ID Verification Workflow", category: "workflow" },
-    ],
-  },
-  {
     id: "kyc",
     name: "KYC",
     apis: [

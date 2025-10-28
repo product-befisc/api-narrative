@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import { ChevronDown, ChevronRight, Search, User, Building2, Smartphone, DollarSign, Car, Briefcase, MoreHorizontal, Workflow, ArrowLeft } from "lucide-react";
+import { ChevronDown, ChevronRight, Search, User, Building2, Smartphone, DollarSign, Car, Briefcase, MoreHorizontal, ArrowLeft } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Card } from "@/components/ui/card";
@@ -11,7 +11,6 @@ import { useNavigate } from "react-router-dom";
 
 // Category icon mapping
 const categoryIcons: Record<string, any> = {
-  workflow: Workflow,
   kyc: User,
   kyb: Building2,
   "mobile-360": Smartphone,
@@ -68,15 +67,6 @@ const APICatalog = () => {
   };
 
   const handleAPIClick = (api: APIItem) => {
-    // Check if it's a workflow API that should navigate to existing page
-    if (api.id === "id-verification-workflow") {
-      navigate("/id-verification-workflow");
-      return;
-    }
-    if (api.id === "digilocker") {
-      navigate("/digilocker-aadhaar");
-      return;
-    }
     setSelectedAPI(api);
   };
 

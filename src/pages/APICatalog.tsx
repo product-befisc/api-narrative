@@ -1,13 +1,16 @@
 import { useState, useMemo } from "react";
-import { ChevronDown, ChevronRight, Search, User, Building2, Smartphone, DollarSign, Car, Briefcase, MoreHorizontal, ArrowLeft } from "lucide-react";
+import { ChevronDown, ChevronRight, Search, User, Building2, Smartphone, DollarSign, Car, Briefcase, MoreHorizontal, ArrowLeft, Send, CheckCircle2, AlertCircle } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Card } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 import { apiCatalogData, CategoryData, APIItem } from "@/data/comprehensiveApiData";
 import { cn } from "@/lib/utils";
 import { useNavigate } from "react-router-dom";
+import { useToast } from "@/hooks/use-toast";
 
 // Category icon mapping
 const categoryIcons: Record<string, any> = {
@@ -23,9 +26,13 @@ const categoryIcons: Record<string, any> = {
 
 const APICatalog = () => {
   const navigate = useNavigate();
+  const { toast } = useToast();
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedAPI, setSelectedAPI] = useState<APIItem | null>(null);
   const [expandedCategories, setExpandedCategories] = useState<Set<string>>(new Set());
+  const [formData, setFormData] = useState<Record<string, any>>({});
+  const [responseData, setResponseData] = useState<any>(null);
+  const [isFetching, setIsFetching] = useState(false);
 
   // Filter APIs based on search query
   const filteredData = useMemo(() => {
@@ -68,6 +75,81 @@ const APICatalog = () => {
 
   const handleAPIClick = (api: APIItem) => {
     setSelectedAPI(api);
+    setFormData({});
+    setResponseData(null);
+    
+    // Initialize form data with sample values
+    if (api.requestSample) {
+      const initialData: Record<string, any> = {};
+      Object.keys(api.requestSample).forEach(key => {
+        initialData[key] = api.requestSample[key];
+      });
+      setFormData(initialData);
+    }
+  };
+
+  const handleInputChange = (key: string, value: any) => {
+    setFormData(prev => ({
+      ...prev,
+      [key]: value
+    }));
+  };
+
+  const handleFetch = () => {
+    if (!selectedAPI) return;
+    
+    setIsFetching(true);
+    
+    // Simulate API call
+    setTimeout(() => {
+      setResponseData(selectedAPI.responseSample);
+      setIsFetching(false);
+      
+      toast({
+        title: "Success",
+        description: "API response received successfully",
+      });
+    }, 800);
+  };
+
+  const renderInputField = (key: string, value: any) => {
+    const isTextarea = typeof value === 'string' && value.length > 50;
+    const isNumber = typeof value === 'number' || key.toLowerCase().includes('it');
+    
+    return (
+      <div key={key} className="space-y-2">
+        <Label htmlFor={key} className="text-sm font-medium text-foreground capitalize">
+          {key.replace(/_/g, ' ')}
+        </Label>
+        {isTextarea ? (
+          <Textarea
+            id={key}
+            value={formData[key] || ''}
+            onChange={(e) => handleInputChange(key, e.target.value)}
+            className="min-h-[80px] bg-background border-input"
+            placeholder={`Enter ${key.replace(/_/g, ' ')}`}
+          />
+        ) : (
+          <Input
+            id={key}
+            type={isNumber ? 'number' : 'text'}
+            value={formData[key] || ''}
+            onChange={(e) => handleInputChange(key, isNumber ? Number(e.target.value) : e.target.value)}
+            className="bg-background border-input"
+            placeholder={`Enter ${key.replace(/_/g, ' ')}`}
+          />
+        )}
+      </div>
+    );
+  };
+
+  const renderResponseValue = (value: any): string => {
+    if (typeof value === 'boolean') return value ? 'Yes' : 'No';
+    if (Array.isArray(value)) return value.join(', ');
+    if (typeof value === 'object' && value !== null) {
+      return JSON.stringify(value, null, 2);
+    }
+    return String(value);
   };
 
   return (
@@ -186,55 +268,172 @@ const APICatalog = () => {
                 </div>
               </div>
 
-              {/* Request Data Section */}
+              {/* Request Input Section */}
               {selectedAPI.requestSample ? (
-                <Card className="p-6 bg-gradient-to-br from-card to-muted border-border shadow-md">
-                  <div className="flex items-center gap-3 mb-6">
-                    <div className="p-2 bg-primary/10 rounded-lg">
-                      <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                      </svg>
+                <Card className="border-border shadow-md">
+                  <CardHeader className="bg-gradient-to-r from-primary/5 to-secondary/5">
+                    <div className="flex items-center gap-3">
+                      <div className="p-2 bg-primary/10 rounded-lg">
+                        <Send className="w-6 h-6 text-primary" />
+                      </div>
+                      <CardTitle className="text-2xl">API Request</CardTitle>
                     </div>
-                    <h2 className="text-2xl font-bold text-foreground">Sample Input</h2>
-                  </div>
-                  
-                  <div className="bg-background rounded-lg p-4 border border-border">
-                    <pre className="text-sm text-foreground overflow-x-auto">
-                      <code>{JSON.stringify(selectedAPI.requestSample, null, 2)}</code>
-                    </pre>
-                  </div>
+                  </CardHeader>
+                  <CardContent className="p-6 space-y-4">
+                    <div className="grid gap-4 md:grid-cols-2">
+                      {Object.entries(selectedAPI.requestSample).map(([key, value]) => 
+                        renderInputField(key, value)
+                      )}
+                    </div>
+                    
+                    <Button 
+                      onClick={handleFetch} 
+                      disabled={isFetching}
+                      className="w-full mt-6 gap-2"
+                      size="lg"
+                    >
+                      {isFetching ? (
+                        <>
+                          <div className="h-4 w-4 border-2 border-current border-t-transparent rounded-full animate-spin" />
+                          Fetching...
+                        </>
+                      ) : (
+                        <>
+                          <Send className="h-4 w-4" />
+                          Fetch Response
+                        </>
+                      )}
+                    </Button>
+                  </CardContent>
                 </Card>
               ) : (
-                <Card className="p-6 bg-gradient-to-br from-card to-muted border-border shadow-md">
+                <Card className="p-6 border-border shadow-md">
                   <div className="text-center text-muted-foreground py-8">
-                    No sample input available for this API
+                    No input parameters available for this API
                   </div>
                 </Card>
               )}
 
               {/* Response Data Section */}
-              {selectedAPI.responseSample ? (
-                <Card className="p-6 bg-gradient-to-br from-card to-muted border-border shadow-md">
-                  <div className="flex items-center gap-3 mb-6">
-                    <div className="p-2 bg-secondary/10 rounded-lg">
-                      <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                      </svg>
+              {responseData && (
+                <Card className="border-border shadow-md">
+                  <CardHeader className="bg-gradient-to-r from-secondary/5 to-primary/5">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <div className="p-2 bg-secondary/10 rounded-lg">
+                          <CheckCircle2 className="w-6 h-6 text-primary" />
+                        </div>
+                        <CardTitle className="text-2xl">API Response</CardTitle>
+                      </div>
+                      <Badge className="bg-success/10 text-success border-success/20">
+                        Status: {responseData.status}
+                      </Badge>
                     </div>
-                    <h2 className="text-2xl font-bold text-foreground">Sample Response</h2>
-                  </div>
-                  
-                  <div className="bg-background rounded-lg p-4 border border-border">
-                    <pre className="text-sm text-foreground overflow-x-auto">
-                      <code>{JSON.stringify(selectedAPI.responseSample, null, 2)}</code>
-                    </pre>
-                  </div>
-                </Card>
-              ) : (
-                <Card className="p-6 bg-gradient-to-br from-card to-muted border-border shadow-md">
-                  <div className="text-center text-muted-foreground py-8">
-                    No sample response available for this API
-                  </div>
+                  </CardHeader>
+                  <CardContent className="p-6">
+                    {/* Response Metadata */}
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                      <div className="p-3 rounded-lg bg-background border border-border">
+                        <p className="text-xs text-muted-foreground mb-1">API Category</p>
+                        <p className="text-sm font-semibold text-foreground">{responseData.api_category}</p>
+                      </div>
+                      <div className="p-3 rounded-lg bg-background border border-border">
+                        <p className="text-xs text-muted-foreground mb-1">API Name</p>
+                        <p className="text-sm font-semibold text-foreground">{responseData.api_name}</p>
+                      </div>
+                      <div className="p-3 rounded-lg bg-background border border-border">
+                        <p className="text-xs text-muted-foreground mb-1">Transaction ID</p>
+                        <p className="text-sm font-semibold text-foreground truncate">{responseData.txn_id}</p>
+                      </div>
+                      <div className="p-3 rounded-lg bg-background border border-border">
+                        <p className="text-xs text-muted-foreground mb-1">Message</p>
+                        <p className="text-sm font-semibold text-foreground">{responseData.message}</p>
+                      </div>
+                    </div>
+
+                    {/* Result Data */}
+                    {responseData.result && (
+                      <div>
+                        <h3 className="text-lg font-bold text-foreground mb-4 flex items-center gap-2">
+                          <div className="h-1 w-8 bg-gradient-primary rounded" />
+                          Result Data
+                        </h3>
+                        <div className="grid gap-4 md:grid-cols-2">
+                          {Object.entries(responseData.result).map(([key, value]) => {
+                            // Handle nested objects
+                            if (typeof value === 'object' && value !== null && !Array.isArray(value)) {
+                              return (
+                                <div key={key} className="col-span-full">
+                                  <Card className="p-4 bg-background border-border">
+                                    <h4 className="text-sm font-semibold text-foreground mb-3 capitalize">
+                                      {key.replace(/_/g, ' ')}
+                                    </h4>
+                                    <div className="grid gap-2 md:grid-cols-2">
+                                      {Object.entries(value as object).map(([nestedKey, nestedValue]) => (
+                                        <div key={nestedKey} className="p-2 rounded bg-muted/50">
+                                          <p className="text-xs text-muted-foreground mb-1 capitalize">
+                                            {nestedKey.replace(/_/g, ' ')}
+                                          </p>
+                                          <p className="text-sm font-medium text-foreground">
+                                            {renderResponseValue(nestedValue)}
+                                          </p>
+                                        </div>
+                                      ))}
+                                    </div>
+                                  </Card>
+                                </div>
+                              );
+                            }
+
+                            // Handle arrays
+                            if (Array.isArray(value)) {
+                              return (
+                                <div key={key} className="col-span-full">
+                                  <Card className="p-4 bg-background border-border">
+                                    <div className="flex items-center gap-2 mb-3">
+                                      <h4 className="text-sm font-semibold text-foreground capitalize">
+                                        {key.replace(/_/g, ' ')}
+                                      </h4>
+                                      <Badge variant="secondary">{value.length} items</Badge>
+                                    </div>
+                                    <div className="space-y-2">
+                                      {value.map((item, idx) => (
+                                        <div key={idx} className="p-3 rounded bg-muted/50">
+                                          <pre className="text-xs text-foreground whitespace-pre-wrap">
+                                            {typeof item === 'object' ? JSON.stringify(item, null, 2) : String(item)}
+                                          </pre>
+                                        </div>
+                                      ))}
+                                    </div>
+                                  </Card>
+                                </div>
+                              );
+                            }
+
+                            // Handle simple values
+                            return (
+                              <div key={key} className="p-3 rounded-lg bg-background border border-border">
+                                <p className="text-xs text-muted-foreground mb-1 capitalize">
+                                  {key.replace(/_/g, ' ')}
+                                </p>
+                                <p className="text-sm font-semibold text-foreground break-words">
+                                  {renderResponseValue(value)}
+                                </p>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Footer with timestamp */}
+                    <div className="mt-6 pt-4 border-t border-border">
+                      <div className="flex items-center justify-between text-xs text-muted-foreground">
+                        <span>Response Time: <span className="font-semibold text-foreground">145ms</span></span>
+                        <span>Timestamp: <span className="font-semibold text-foreground">{responseData.datetime}</span></span>
+                      </div>
+                    </div>
+                  </CardContent>
                 </Card>
               )}
             </div>

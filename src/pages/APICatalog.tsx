@@ -21,7 +21,7 @@ const categoryIcons: Record<string, any> = {
   "financial-check": DollarSign,
   "vehicle-verification": Car,
   "profession-check": Briefcase,
-  miscellaneous: MoreHorizontal,
+  "fraud-check": MoreHorizontal,
 };
 
 const APICatalog = () => {
@@ -385,7 +385,10 @@ const APICatalog = () => {
                       </div>
                     </>
                   ) : (
-                    <p className="text-muted-foreground">No sample input available for this API</p>
+                    <div className="text-center py-8">
+                      <p className="text-lg text-muted-foreground">Sample data updating soon...</p>
+                      <p className="text-sm text-muted-foreground mt-2">This API documentation is currently being prepared.</p>
+                    </div>
                   )}
                 </CardContent>
               </Card>

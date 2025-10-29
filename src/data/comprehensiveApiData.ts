@@ -4361,14 +4361,4 @@ export const apiCatalogData: CategoryData[] = [
       },
     ],
   },
-  {
-    id: "miscellaneous",
-    name: "Miscellaneous",
-    apis: [
-      { id: "captcha-reader", name: "Captcha Reader", category: "miscellaneous" },
-      { id: "tampering-check-misc", name: "Tampering Check", category: "miscellaneous" },
-      { id: "pdf-tampering-basic", name: "PDF Tampering Check Basic", category: "miscellaneous" },
-      { id: "pdf-tampering-advance", name: "PDF Tampering Check Advance", category: "miscellaneous" },
-    ],
-  },
 ];

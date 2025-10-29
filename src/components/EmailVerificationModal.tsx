@@ -17,6 +17,7 @@ export const EmailVerificationModal = ({ open, onVerified }: EmailVerificationMo
   const { toast } = useToast();
 
   const ALLOWED_PASSWORD = "portal@Befisc34";
+  const WHITELISTED_EMAIL_PASSWORD = "access@Befisc23";
 
   const handleVerify = () => {
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
@@ -51,7 +52,9 @@ export const EmailVerificationModal = ({ open, onVerified }: EmailVerificationMo
       return;
     }
 
-    if (password !== ALLOWED_PASSWORD) {
+    // Validate password based on email
+    const correctPassword = isWhitelisted ? WHITELISTED_EMAIL_PASSWORD : ALLOWED_PASSWORD;
+    if (password !== correctPassword) {
       toast({
         title: "Invalid Password",
         description: "Incorrect password. Please try again.",

@@ -3836,24 +3836,529 @@ export const apiCatalogData: CategoryData[] = [
     name: "Profession Check",
     apis: [
       { id: "uan-passbook", name: "UAN Passbook", category: "profession-check" },
-      { id: "uan-validation", name: "UAN Validation", category: "profession-check" },
-      { id: "mobile-to-uan-lookup", name: "Mobile to UAN Lookup", category: "profession-check" },
-      { id: "pan-to-uan-lookup", name: "PAN to UAN Lookup", category: "profession-check" },
-      { id: "aadhaar-to-uan-lookup", name: "Aadhaar to UAN Lookup", category: "profession-check" },
-      { id: "uan-history", name: "UAN History", category: "profession-check" },
-      { id: "uan-history-v2", name: "UAN History - V2", category: "profession-check" },
-      { id: "uan-history-v3", name: "UAN History - V3", category: "profession-check" },
-      { id: "uan-history-latest", name: "UAN History Latest", category: "profession-check" },
-      { id: "uan-history-latest-v2", name: "UAN History Latest V2", category: "profession-check" },
+      { 
+        id: "uan-validation", 
+        name: "UAN Validation", 
+        category: "profession-check",
+        requestSample: {
+          uan: "123456789012",
+          consent: "Y",
+          consent_text: "We confirm obtaining valid customer consent to access/process their UAN data. Consent remains valid, informed, and unwithdrawn."
+        },
+        responseSample: {
+          api_category: "Employment",
+          api_name: "UAN Validation",
+          billable: true,
+          txn_id: "c31099b7-c7d4-436c-9d84-5f06c58a71aa",
+          message: "Success",
+          status: 1,
+          result: {
+            uan: "123456789012",
+            is_valid: true
+          },
+          datetime: "2024-12-11 14:57:04.278763"
+        }
+      },
+      { 
+        id: "mobile-to-uan-lookup", 
+        name: "Mobile to UAN Lookup", 
+        category: "profession-check",
+        requestSample: {
+          mobile: "98016146XXX"
+        },
+        responseSample: {
+          api_category: "UAN",
+          api_name: "Mobile to UAN",
+          billable: true,
+          txn_id: "e843b87b-2bc1-47e8-ae63-05c9e4c4cc77",
+          message: "Success",
+          status: 1,
+          result: {
+            uan: "100004314123"
+          },
+          datetime: "2023-05-18 03:38:14.169701"
+        }
+      },
+      { 
+        id: "pan-to-uan-lookup", 
+        name: "PAN to UAN Lookup", 
+        category: "profession-check",
+        requestSample: {
+          pan: "ABCDEF1234G"
+        },
+        responseSample: {
+          api_category: "UAN",
+          api_name: "PAN to UAN",
+          billable: true,
+          txn_id: "aad8d1d4-de48-4b6e-8d96-6d68bd82e298",
+          message: "Success",
+          status: "1",
+          result: {
+            pan: "ABCDEF1234G",
+            uan: "100415012345"
+          },
+          datetime: "2024-02-28 10:16:29.575878"
+        }
+      },
+      { 
+        id: "aadhaar-to-uan-lookup", 
+        name: "Aadhaar to UAN Lookup", 
+        category: "profession-check",
+        requestSample: {
+          aadhaar: "346987654321"
+        },
+        responseSample: {
+          api_category: "UAN",
+          api_name: "Aadhaar to UAN",
+          billable: true,
+          txn_id: "c0c699fc-949a-4882-8171-ba1943910985",
+          message: "Success",
+          status: 1,
+          result: {
+            aadhaar: "346987654321",
+            uan: "102012345678"
+          },
+          datetime: "2024-04-26 09:25:19.971378"
+        }
+      },
+      { 
+        id: "uan-history", 
+        name: "UAN History", 
+        category: "profession-check",
+        requestSample: {
+          uan: "10000431XXXX"
+        },
+        responseSample: {
+          txn_id: "16ed1938-a85c-43a8-aa26-db68010b4e7e",
+          api_category: "Employment history",
+          api_name: "UAN",
+          billable: true,
+          message: "Record found successfully",
+          status: 1,
+          result: {
+            name: "RAMESH KUMAR",
+            dob: "01/01/1900",
+            employment_history: [
+              {
+                company_name: "THOMSON DIGITAL",
+                company_address: "129, NSEZ, NOIDA, GAUTAM BUDDHA NAGAR, NOIDA, UTTAR PRADESH, 201305"
+              },
+              {
+                company_name: "CREDENC WEB TECHNOLOGIES PRIVATE LIMITED",
+                company_address: "2ND FLOOR, DLF CENTRE, SANSAD MARG, CENTRAL, DELHI, DELHI, 110001"
+              },
+              {
+                company_name: "GLOBAL CONTENT TRANSFORMATION (PVT) LTD.",
+                company_address: "2310 DOON EXPRESS BUSINESS PARK, BUILDING 2000 SAHARANPUR ROAD, DEHRADUN, OPP. TRANSPORT NAGAR DEHRADUN, UTTARAKHAND, 248001"
+              }
+            ]
+          },
+          datetime: "2023-11-17 04:07:25.614332"
+        }
+      },
+      { 
+        id: "uan-history-v2", 
+        name: "UAN History - V2", 
+        category: "profession-check",
+        requestSample: {
+          uan: "111XXXXXXXXX",
+          consent: "Y",
+          consent_text: "I give my consent to employment-history(v2) api to check my employment history"
+        }
+      },
+      { 
+        id: "uan-history-v3", 
+        name: "UAN History - V3", 
+        category: "profession-check",
+        requestSample: {
+          uan: "1000087654321",
+          consent: "Y",
+          consent_text: "We confirm obtaining valid customer consent to access/process their uan data. Consent remains valid, informed, and unwithdrawn."
+        },
+        responseSample: {
+          txn_id: "99957975-f95f-4beb-ba96-74c1e763c310",
+          api_category: "Employment",
+          api_name: "Employment History V3",
+          billable: true,
+          message: "Success",
+          status: 1,
+          result: {
+            uan: "1000087654321",
+            name: "RAM SINGH",
+            guardian_name: "SHAM SINGH",
+            employment_history: [
+              {
+                establishment_name: "ABC PRIVATE LIMITED",
+                member_id: "MRNOI12345430000012345",
+                date_of_joining: "2025-01-01",
+                date_of_exit: ""
+              },
+              {
+                establishment_name: "XYZ PRIVATE LIMITED",
+                member_id: "UKDDN0123450000001230",
+                date_of_joining: "2024-01-01",
+                date_of_exit: "2024-12-01"
+              }
+            ]
+          },
+          datetime: "2025-03-31 11:32:45.544294"
+        }
+      },
+      { 
+        id: "uan-history-latest", 
+        name: "UAN History Latest", 
+        category: "profession-check",
+        requestSample: {
+          uan: "100987654321",
+          consent: "Y",
+          consent_text: "We confirm that we have obtained the consent of the respective customer to fetch their details by using their UAN Number and the customer is aware of the purpose for which their data is sought for being processed and have given their consent for the same and such consent is currently valid and not withdrawn."
+        },
+        responseSample: {
+          txn_id: "14ca6d0b-960a-42d8-8915-74f6a823a0ee",
+          api_category: "Employment",
+          api_name: "Employment History Latest",
+          billable: true,
+          message: "Success",
+          status: 1,
+          result: {
+            uan: "100987654321",
+            name: "RAM SINGH",
+            dob: "01/01/1999",
+            member_id: "DLPCM20142350000010000",
+            company_name: "ABC PRIVATE LIMITED",
+            company_address: "1ST FLOOR, ABC CENTRE, DELHI, DELHI, 110001",
+            date_of_exit: "01/01/2023",
+            date_of_joining: "01/01/2021"
+          },
+          datetime: "2024-08-09 10:02:49.043676"
+        }
+      },
+      { 
+        id: "uan-history-latest-v2", 
+        name: "UAN History Latest V2", 
+        category: "profession-check",
+        requestSample: {
+          uan: "100987654321",
+          consent: "Y",
+          consent_text: "We confirm obtaining valid customer consent to access/process their UAN data. Consent remains valid, informed, and unwithdrawn."
+        },
+        responseSample: {
+          txn_id: "bb09e7be-cb19-48fa-93ad-4d4c0b174396",
+          api_category: "Employment",
+          api_name: "Employment History Latest V2",
+          billable: true,
+          message: "Success",
+          status: 1,
+          result: {
+            uan: "100987654321",
+            name: "RAM SINGH",
+            dob: "1999/01/01",
+            guardian_name: "SHAM SINGH",
+            company_name: "ABC PRIVATE LIMITED",
+            member_id: "DLPCM20142350000010000",
+            date_of_joining: "2020/01/01",
+            last_pf_submitted: "2025/01/01"
+          },
+          datetime: "2025-03-06 12:53:19.107105"
+        }
+      },
       { id: "uan-history-latest-fathers-name", name: "UAN History Latest (with father's name)", category: "profession-check" },
-      { id: "uan-profile-lookup-advance", name: "UAN profile lookup (Advance)", category: "profession-check" },
-      { id: "establishment-name-to-details", name: "Establishment Name to Establishment Details", category: "profession-check" },
-      { id: "establishment-code-to-details", name: "Establishment Code to Establishment Details", category: "profession-check" },
-      { id: "mobile-to-esic-number", name: "Mobile to ESIC Number", category: "profession-check" },
-      { id: "mobile-to-esic-details", name: "Mobile to ESIC Details", category: "profession-check" },
-      { id: "mobile-to-esic-details-v2", name: "Mobile to ESIC Details V2", category: "profession-check" },
-      { id: "esic-number-to-details", name: "ESIC Number to ESIC Details", category: "profession-check" },
-      { id: "esic-number-to-details-v2", name: "ESIC Number to ESIC Details V2", category: "profession-check" },
+      { 
+        id: "uan-profile-lookup-advance", 
+        name: "UAN profile lookup (Advance)", 
+        category: "profession-check",
+        requestSample: {
+          uan: "111XXXXXXXXX"
+        }
+      },
+      { 
+        id: "establishment-name-to-details", 
+        name: "Establishment Name to Establishment Details", 
+        category: "profession-check",
+        requestSample: {
+          establishment_name: "ABC PRIVATE LTD",
+          consent: "Y",
+          consent_text: "We confirm that we have obtained the consent of the respective customer to fetch their details by using Establishment Name and the customer is aware of the purpose for which their data is sought for being processed and have given their consent for the same and such consent is currently valid and not withdrawn."
+        }
+      },
+      { 
+        id: "establishment-code-to-details", 
+        name: "Establishment Code to Establishment Details", 
+        category: "profession-check",
+        requestSample: {
+          establishment_code: "0123456"
+        },
+        responseSample: {
+          txn_id: "b9a46aa8-b6a5-41e8-97d8-79e1bc084c09",
+          api_category: "Know Your Business (KYB)",
+          api_name: "Establishment Details",
+          billable: true,
+          message: "Record Found Successfully",
+          status: 1,
+          result: {
+            validity_status: {
+              establishment_code: "CAABE0123456789",
+              establishment_name: "ABC TECHNOLOGIES PRIVATE LIMITED",
+              establishment_status: "CODE NO ALLOTTED WAS BEFORE ONLINE REGISTRATION STARTED.",
+              registration_status: "PERMANENT LOGIN CREATED BY OWNER ON ECR PORTAL",
+              post_coverage: "--"
+            },
+            establishment_details: {
+              establishment_name: "ABC TECHNOLOGIES PRIVATE LIMITED",
+              establishment_code: "CAABE0123456789",
+              pan_status: "VERIFIED",
+              "section-applicable": "INDUSTRIES SPECIFIED IN SCH.1 AND 20 OR MORE PERSONS ARE EMPLOYED",
+              primary_business_activity: "TEXTILES",
+              esic_code: "09700656460000088",
+              ownership_type: "Partnership Firm",
+              date_of_setup: "23-SEP-1998",
+              address: "2ND FLOOR, SAFDARJUNG MARG",
+              pincode: "112233",
+              city: "DELHI",
+              district: "DELHI",
+              state: "DELHI",
+              country: "India",
+              epfo_office_name: "DELHI (NORTH)",
+              zone: "DELHI AND UTTARAKHAND",
+              region: "DL - DELHI (NORTH)"
+            },
+            director_details: [
+              {
+                name: "RAM SHARMA",
+                designation: "PARTNER",
+                dob: "11-JUN-1978",
+                f_name: "SHAM SHARMA",
+                residential_address: "FIRST FLOOR, SC-22/53-GF, SANSAD AREA, DELHI -110236",
+                date_of_position: "20-SEP-1999"
+              }
+            ],
+            payment_details: [
+              {
+                month: "JAN-24",
+                number_of_employees: "19",
+                amount: "115503"
+              },
+              {
+                month: "FEB-24",
+                number_of_employees: "19",
+                amount: "134446"
+              },
+              {
+                month: "MAR-24",
+                number_of_employees: "19",
+                amount: "112399"
+              }
+            ]
+          },
+          datetime: "2024-04-24 16:12:12.315720"
+        }
+      },
+      { 
+        id: "mobile-to-esic-number", 
+        name: "Mobile to ESIC Number", 
+        category: "profession-check",
+        requestSample: {
+          mobile: "9876543210",
+          consent: "Y",
+          consent_text: "We confirm obtaining valid customer consent to access/process their mobile data. Consent remains valid, informed, and unwithdrawn."
+        },
+        responseSample: {
+          txn_id: "26992143-50f7-47ab-b095-34498e2bc125",
+          api_category: "Employment",
+          api_name: "Mobile to ESIC",
+          billable: true,
+          message: "Success",
+          status: 1,
+          result: {
+            mobile: "9876543210",
+            esic_numbers: [
+              "6987654321",
+              "9987654321"
+            ]
+          },
+          datetime: "2025-03-18 15:23:54.955807"
+        }
+      },
+      { 
+        id: "mobile-to-esic-details", 
+        name: "Mobile to ESIC Details", 
+        category: "profession-check",
+        requestSample: {
+          mobile: "8802812345",
+          consent: "Y",
+          consent_text: "We confirm obtaining valid customer consent to access/process their mobile data. Consent remains valid, informed, and unwithdrawn."
+        },
+        responseSample: {
+          txn_id: "c2ae9396-e5c1-421d-bd62-7ffd9e951e31",
+          api_category: "Employment",
+          api_name: "Mobile to ESIC Details",
+          billable: true,
+          message: "Success",
+          status: 1,
+          result: [
+            {
+              esic_number: "0000001234",
+              name: "Ram Kumar",
+              employer_code: "11009997412345678",
+              employer_name: "Leather factory",
+              mobile: "8802812345",
+              uan_number: "",
+              bank_name: "IDBI BANK",
+              branch_name: "DHENKANAL",
+              bank_account_status: "Not Verified"
+            },
+            {
+              esic_number: "1000000004",
+              name: "manas kumar naik",
+              employer_code: "13009990012345678",
+              employer_name: "Namah Pvt. Ltd.",
+              mobile: "8802812345",
+              uan_number: "",
+              bank_name: "IDBI BANK",
+              branch_name: "DHENKANAL",
+              bank_account_status: "Not Verified"
+            }
+          ],
+          datetime: "2024-11-28 14:51:24.173762"
+        }
+      },
+      { 
+        id: "mobile-to-esic-details-v2", 
+        name: "Mobile to ESIC Details V2", 
+        category: "profession-check",
+        requestSample: {
+          mobile: "9876543210",
+          consent: "Y",
+          consent_text: "We confirm obtaining valid customer consent to access/process their mobile data. Consent remains valid, informed, and unwithdrawn."
+        },
+        responseSample: {
+          txn_id: "3f20b6cc-f598-4d36-9077-6c2d8a9d2b6c",
+          api_category: "Employment",
+          api_name: "Mobile to ESIC Details V2",
+          billable: true,
+          message: "Success",
+          status: 1,
+          result: {
+            mobile_no: "9876543210",
+            esic_details: [
+              {
+                esic_number: "6543214933",
+                name: "RAM SINGH",
+                employer_code: "28000540987654321",
+                employer_name: "ABC ENGINEERING",
+                mobile: "9876543210",
+                uan_number: "1021987654321",
+                bank_name: "HDFC BANK",
+                branch_name: "KOLKATA - STEPHEN HOUSE (BBD BAG)",
+                bank_account_status: "Not Verified",
+                uhid_number: "",
+                date_of_birth: "01/01/1999",
+                registration_date: "04/11/2024",
+                dispensary_name: "Renukoot, Sonbhadra, UP (ESIS Disp.)",
+                employer_details: {
+                  employer_code: "12345678987654321",
+                  employer_name: "ABC Private Limited",
+                  address: "Nirayan Sales&Marketing,Mehmoorgaj Varanasi",
+                  state: "Uttar Pradesh",
+                  district: "Varanasi",
+                  pincode: "221001",
+                  email: "abc@email.com"
+                },
+                address: "SHIV MANDIR RENUSAGAR Sonbhadra Uttar Pradesh 231218",
+                age: "26",
+                gender: "Male"
+              }
+            ]
+          },
+          datetime: "2025-03-18 16:01:41.244487"
+        }
+      },
+      { 
+        id: "esic-number-to-details", 
+        name: "ESIC Number to ESIC Details", 
+        category: "profession-check",
+        requestSample: {
+          esic_number: "987654321",
+          consent: "Y",
+          consent_text: "We confirm obtaining valid customer consent to access/process their esic data. Consent remains valid, informed, and unwithdrawn."
+        },
+        responseSample: {
+          txn_id: "38e40499-f811-4a85-87b5-e03d092897f2",
+          api_category: "Employment",
+          api_name: "ESIC Number to ESIC Details",
+          billable: true,
+          message: "Success",
+          status: 1,
+          result: {
+            esic_number: "987654321",
+            esic_details: [
+              {
+                esic_number: "987654321",
+                name: "RAM SINGH",
+                employer_code: "12345678987654321",
+                employer_name: "ABC Private Limited",
+                mobile: "987654321",
+                uan_number: "",
+                bank_name: "ABC BANK OF INDIA",
+                branch_name: "Delhi",
+                bank_account_status: "Not Verified"
+              }
+            ]
+          },
+          datetime: "2025-03-19 12:35:13.634254"
+        }
+      },
+      { 
+        id: "esic-number-to-details-v2", 
+        name: "ESIC Number to ESIC Details V2", 
+        category: "profession-check",
+        requestSample: {
+          esic_number: "987654321",
+          consent: "Y",
+          consent_text: "We confirm obtaining valid customer consent to access/process their esic data. Consent remains valid, informed, and unwithdrawn."
+        },
+        responseSample: {
+          txn_id: "27f0198c-0cf5-427a-afc3-331ea1ce42f9",
+          api_category: "Employment",
+          api_name: "ESIC Number to ESIC Details V2",
+          billable: true,
+          message: "Success",
+          status: 1,
+          result: {
+            esic_number: "987654321",
+            esic_details: [
+              {
+                esic_number: "987654321",
+                name: "RAM SINGH",
+                employer_code: "12345678987654321",
+                employer_name: "ABC Private Limited",
+                mobile: "987654321",
+                uan_number: "",
+                bank_name: "ABC BANK OF INDIA",
+                branch_name: "Delhi",
+                bank_account_status: "Not Verified",
+                uhid_number: "",
+                date_of_birth: "01/01/1999",
+                registration_date: "28/10/2024",
+                dispensary_name: "Lahuravir, Varanasi, UP (ESIS Disp.)",
+                employer_details: {
+                  employer_code: "12345678987654321",
+                  employer_name: "ABC Private Limited",
+                  address: "Nirayan Sales&Marketing,Mehmoorgaj Varanasi",
+                  state: "Uttar Pradesh",
+                  district: "Varanasi",
+                  pincode: "221001",
+                  email: "abc@email.com"
+                },
+                address: "House No 123, Chandauli, Mughalsarai, Uttar Pradesh Varanasi Uttar Pradesh",
+                age: "24",
+                gender: "Male"
+              }
+            ]
+          },
+          datetime: "2025-03-19 14:42:19.209970"
+        }
+      },
     ],
   },
   {

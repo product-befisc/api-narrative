@@ -2745,17 +2745,328 @@ export const apiCatalogData: CategoryData[] = [
     id: "fraud-check",
     name: "Fraud Check",
     apis: [
-      { id: "pan-to-masked-aadhaar", name: "PAN to Masked Aadhaar", category: "fraud-check" },
-      { id: "aadhaar-to-pan", name: "Aadhaar to PAN", category: "fraud-check" },
+      { 
+        id: "pan-to-masked-aadhaar", 
+        name: "PAN to Masked Aadhaar", 
+        category: "fraud-check",
+        requestSample: {
+          pan_number: "ABCPD0809B"
+        },
+        responseSample: {
+          api_category: "KYC",
+          api_name: "PAN to Aadhaar",
+          billable: true,
+          txn_id: "4037f3a0-71c1-4c6f-b03c-14b2e7efc7fc",
+          message: "Record Found",
+          status: 1,
+          result: {
+            aadhaar_number: "XXXXXXXX0809",
+            pan: "ABCPD0809B"
+          },
+          datetime: "2024-04-15 06:27:36.294713"
+        }
+      },
+      { 
+        id: "aadhaar-to-pan", 
+        name: "Aadhaar to PAN", 
+        category: "fraud-check",
+        requestSample: {
+          aadhaar: "68685669XXXX"
+        },
+        responseSample: {
+          api_category: "KYC",
+          api_name: "Aadhaar to PAN",
+          billable: true,
+          txn_id: "c31637f9-611d-448c-bd71-3446b5aa81fc",
+          message: "Record Found",
+          status: 1,
+          result: {
+            aadhaar: "42346856691234",
+            pan: "DKYPK1234G"
+          },
+          datetime: "2024-02-17 06:43:52.710286"
+        }
+      },
       { id: "aadhaar-validation-lite", name: "Aadhaar Validation Lite", category: "fraud-check" },
       { id: "mobile-age", name: "MobileAge", category: "fraud-check" },
       { id: "mobile-revoke", name: "Mobile Revoke", category: "fraud-check" },
-      { id: "mobile-revoke-v2", name: "Mobile Revoke V2", category: "fraud-check" },
-      { id: "mobile-360-util", name: "Mobile 360", category: "fraud-check" },
-      { id: "e-stamp-certificate", name: "E-stamp Certificate Verification", category: "fraud-check" },
+      { 
+        id: "mobile-revoke-v2", 
+        name: "Mobile Revoke V2", 
+        category: "fraud-check",
+        requestSample: {
+          mobile: "9876543210",
+          consent: "Y",
+          consent_text: "We confirm obtaining valid customer consent to access/process their Mobile Number. Consent remains valid, informed, and unwithdrawn."
+        },
+        responseSample: {
+          txn_id: "e3d8bccb-7043-4152-b944-1a28db633a01",
+          api_category: "Fraud Check",
+          api_name: "Mobile Revoke V2",
+          billable: true,
+          message: "Success",
+          status: 1,
+          result: {
+            revoke_status: "Yes",
+            revoke_history: [
+              {
+                revoke_date: "08/2020"
+              },
+              {
+                revoke_date: "10/2021"
+              }
+            ],
+            revoke_history_count: 2
+          },
+          datetime: "2025-03-07 10:19:23.180321"
+        }
+      },
+      { 
+        id: "mobile-360-util", 
+        name: "Mobile 360", 
+        category: "fraud-check",
+        requestSample: {
+          mobile: "7060123456",
+          consent: "Y",
+          consent_text: "We confirm obtaining valid customer consent to access/process their mobile data. Consent remains valid, informed, and unwithdrawn."
+        },
+        responseSample: {
+          txn_id: "77d89227-0dbd-4778-8cfb-e224df2a80a6",
+          api_category: "Fraud Check",
+          api_name: "Mobile 360",
+          billable: true,
+          message: "Success",
+          status: 1,
+          result: {
+            digital_payment_id_info: {
+              code: "SUC",
+              data: {
+                name: "Ramesh Kumar",
+                branch: "Noida Branch",
+                address: "B-121, Sector-5,Noida-201301",
+                state: "UTTAR PRADESH",
+                contact: "+911133996699",
+                city: "NOIDA",
+                centre: "Gautam Buddh Nagar",
+                district: "Gautam Buddh Nagar",
+                bank: "Paytm Payments Bank"
+              }
+            },
+            lpg_info: {
+              code: "SUC",
+              data: [
+                {
+                  gas_provider: "Indane Gas",
+                  name: "RAM KUMAR",
+                  consumer_details: {
+                    consumer_mobile: "6789999999",
+                    consumer_id: "7500000001234567",
+                    consumer_status: "ACTIVE",
+                    consumer_type: "Single Bottle Connection"
+                  },
+                  address: "123 ABC Colony XYZ",
+                  distributor_details: {
+                    distributor_code: "000987654",
+                    distributor_name: "GAYATRI INDANE SERVICE",
+                    distributor_contact: "1800987654",
+                    distributor_address: "456 MNOP Marg XYZ"
+                  }
+                }
+              ]
+            },
+            msme_info: {
+              code: "SUC",
+              data: [
+                {
+                  udyam_number: "UDYAM-MH-11-12345678",
+                  enterprise_name: "M/S Ramesh Electronics"
+                }
+              ]
+            },
+            epfo_info: {
+              code: "SUC",
+              data: [
+                "100004314123"
+              ]
+            },
+            director_pan_info: {
+              code: "SUC",
+              data: [
+                "ABCPD1234E"
+              ]
+            },
+            telco_info: {
+              code: "SUC",
+              data: {
+                is_valid: true,
+                subscriber_status: "CONNECTED",
+                connection_status: {
+                  status_code: "DELIVERED",
+                  error_code_id: ""
+                },
+                connection_type: "prepaid"
+              }
+            },
+            mobile_age_info: {
+              code: "SUC",
+              data: {
+                is_ported: "Yes",
+                mobile_age: "15 to 16 Years",
+                number_active: "Yes",
+                number_valid: "Yes",
+                ported_region: " Delhi",
+                ported_telecom: "Airtel ",
+                region: " Delhi",
+                roaming: "No",
+                telecom: "Vodafone "
+              }
+            },
+            gst_list: {
+              code: "SUC",
+              data: [
+                "27ABCPD1234E1ZN"
+              ]
+            },
+            whatsapp_info: {
+              code: "SUC",
+              data: {
+                status: "Account Found",
+                is_business: "0"
+              }
+            },
+            revoke_info: {
+              code: "SUC",
+              data: {
+                revoke_date: "",
+                revoke_status: "No"
+              }
+            },
+            key_highlights: {
+              digital_payment_id_name: "Ramesh Kumar",
+              gas_connection_found: "Yes",
+              udyam_numbers: [
+                "UDYAM-MH-11-12345678"
+              ],
+              gst_numbers: [
+                "27ABCPD1234E1ZN"
+              ],
+              connection_type: "prepaid",
+              whatsapp_business_account_status: "Non-business",
+              age_of_mobile: "15 to 16 Years",
+              active_status: "Yes",
+              revoke_date: ""
+            }
+          },
+          datetime: "2024-12-24 07:15:53.410807"
+        }
+      },
+      { 
+        id: "e-stamp-certificate", 
+        name: "E-stamp Certificate Verification", 
+        category: "fraud-check",
+        requestSample: {
+          state: "Uttar Pradesh",
+          certificate_no: "IN-UP54321123456789W",
+          stamp_duty_type: "Agreement or Memorandum of an agreement",
+          issued_date: "25-Nov-2024",
+          consent: "Y",
+          consent_text: "We confirm obtaining valid customer consent to access/process their E-Stamping data. Consent remains valid, informed, and unwithdrawn."
+        },
+        responseSample: {
+          txn_id: "d68f77d7-5624-45a6-9535-e85c694200af",
+          api_category: "Fraud Check",
+          api_name: "E-stamp Certificate Verification",
+          billable: true,
+          message: "Success",
+          status: 1,
+          result: {
+            type: "This is a base certificate.",
+            note: "This certificate has been generated 21 days ago.",
+            status: "Not Locked"
+          },
+          datetime: "2024-12-16 09:32:58.101356"
+        }
+      },
       { id: "tampering-check", name: "Tampering Check", category: "fraud-check" },
-      { id: "address-tracing", name: "Address Tracing", category: "fraud-check" },
-      { id: "buying-capacity", name: "Buying Capacity", category: "fraud-check" },
+      { 
+        id: "address-tracing", 
+        name: "Address Tracing", 
+        category: "fraud-check",
+        requestSample: {
+          mobile: "98876543210",
+          consent: "Y",
+          consent_text: "We confirm obtaining valid customer consent to access/process their Mobile Number. Consent remains valid, informed, and unwithdrawn."
+        },
+        responseSample: {
+          txn_id: "9633fa4a-0080-492d-a166-98f616b19980",
+          api_category: "Fraud Check",
+          api_name: "Address Tracing",
+          billable: true,
+          message: "Success",
+          status: 1,
+          result: {
+            mobile: "98876543210",
+            addresses: [
+              {
+                address1: "1-ABC",
+                address2: "1st Floot",
+                email: "ram@email.com",
+                fname: "RAM",
+                lname: "SINGH",
+                mobile: "98876543210",
+                city: "Delhi",
+                state: "Delhi",
+                pincode: "101010",
+                country: "India",
+                country_code: "IN",
+                state_code: "DL",
+                isd_code: "+91",
+                is_primary: 1,
+                last_delivery_at: null,
+                type: "home",
+                tags: "home",
+                created_at: "2025-01-01T12:38:17.487Z",
+                updated_at: "2025-01-01T12:38:17.487Z"
+              }
+            ]
+          },
+          datetime: "2025-07-18 16:01:17.486133"
+        }
+      },
+      { 
+        id: "buying-capacity", 
+        name: "Buying Capacity", 
+        category: "fraud-check",
+        requestSample: {
+          mobile: "9876543210",
+          consent: "Y",
+          consent_text: "We confirm obtaining valid customer consent to access/process their mobile number. Consent remains valid, informed, and unwithdrawn."
+        },
+        responseSample: {
+          txn_id: "c20711ba-5108-47d8-bfc4-a283125bdab8",
+          api_category: "Fraud Check",
+          api_name: "Buying Capacity",
+          billable: true,
+          message: "Success",
+          status: 1,
+          result: {
+            total_orders: "2",
+            average_order_value: "999",
+            total_order_value: "1998",
+            cod_percentage: "100",
+            prepaid_percentage: "0",
+            delivery_success_rate: "0",
+            order_categories_12_mon: {
+              clothing_and_accessories: {
+                orders: 2
+              }
+            },
+            total_order_value_12_mon: "1998",
+            total_orders_12_mon: "2"
+          },
+          datetime: "2025-08-18 06:59:31.459096"
+        }
+      },
       { id: "bank-statement-analysis-v2", name: "Bank Statement Analysis V2", category: "fraud-check" },
     ],
   },

@@ -242,8 +242,8 @@ const TamperProof = () => {
                 {/* Metadata Check */}
                 <Card className="p-6">
                   <div className="flex items-start justify-between mb-4">
-                    <h4 className="text-lg font-bold text-destructive">Metadata Check</h4>
-                    <div className="w-3 h-3 rounded-full bg-destructive"></div>
+                    <h4 className={`text-lg font-bold ${result.verdict === 'SAFE' ? 'text-primary' : 'text-destructive'}`}>Metadata Check</h4>
+                    <div className={`w-3 h-3 rounded-full ${result.verdict === 'SAFE' ? 'bg-primary' : 'bg-destructive'}`}></div>
                   </div>
                   <p className="text-sm text-muted-foreground mb-4">
                     Document timestamps and creation metadata analyzed for authenticity
@@ -285,8 +285,8 @@ const TamperProof = () => {
                 {/* Digital Signature */}
                 <Card className="p-6">
                   <div className="flex items-start justify-between mb-4">
-                    <h4 className="text-lg font-bold text-destructive">Digital Signature Validation</h4>
-                    <div className="w-3 h-3 rounded-full bg-destructive"></div>
+                    <h4 className={`text-lg font-bold ${result.verdict === 'SAFE' ? 'text-primary' : 'text-destructive'}`}>Digital Signature Validation</h4>
+                    <div className={`w-3 h-3 rounded-full ${result.verdict === 'SAFE' ? 'bg-primary' : 'bg-destructive'}`}></div>
                   </div>
                   <p className="text-sm text-muted-foreground mb-4">
                     Check digital signatures to ensure the document is trusted.

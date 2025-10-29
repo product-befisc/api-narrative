@@ -2458,7 +2458,6 @@ export const apiCatalogData: CategoryData[] = [
       { id: "hpgas-verification", name: "HPGas Verification", category: "utility" },
       { id: "bharatgas-verification", name: "BharatGas Verification", category: "utility" },
       { id: "details-check", name: "Details Check", category: "utility" },
-      { id: "fraud-check", name: "Fraud Check", category: "utility" },
     ],
   },
   {

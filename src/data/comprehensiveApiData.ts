@@ -1944,24 +1944,508 @@ export const apiCatalogData: CategoryData[] = [
   },
   {
     id: "mobile-360",
-    name: "Mobile 360",
+    name: "Mobile lookup & digital footprint",
     apis: [
-      { id: "mobile-number-lookup", name: "Mobile Number Lookup", category: "mobile-360" },
-      { id: "mobile-lookup-basic-new", name: "Mobile Lookup (Basic) New", category: "mobile-360" },
-      { id: "mobile-lookup-supreme-new", name: "Mobile Lookup (Supreme) New", category: "mobile-360" },
-      { id: "profile-basic", name: "Profile Basic", category: "mobile-360" },
-      { id: "profile-advance", name: "Profile Advance", category: "mobile-360" },
-      { id: "mobile-to-dl-number", name: "Mobile to DL Number", category: "mobile-360" },
-      { id: "mobile-to-director-pan", name: "Mobile to Director PAN", category: "mobile-360" },
-      { id: "telco-basic", name: "Telco (Basic)", category: "mobile-360" },
-      { id: "telco-advance", name: "Telco (Advance)", category: "mobile-360" },
-      { id: "telco-advance-otp", name: "Telco Advance (OTP Based)", category: "mobile-360" },
-      { id: "digital-footprint", name: "Digital Footprint", category: "mobile-360" },
-      { id: "email-verification", name: "Email Verification", category: "mobile-360" },
-      { id: "validate-whatsapp", name: "Validate WhatsApp", category: "mobile-360" },
-      { id: "geo-location", name: "Geo Location", category: "mobile-360" },
-      { id: "geo-distance-pincode", name: "Geo Distance (Pincode)", category: "mobile-360" },
-      { id: "geo-distance", name: "Geo Distance", category: "mobile-360" },
+      { 
+        id: "mobile-lookup-basic-new", 
+        name: "Mobile Lookup (Basic) New", 
+        category: "mobile-360",
+        requestSample: {
+          mobile: "9876543210",
+          consent: "Y",
+          consent_text: "We confirm obtaining valid customer consent to access/process their mobile data. Consent remains valid, informed, and unwithdrawn."
+        },
+        responseSample: {
+          txn_id: "82cc8857-1d8f-4758-a330-bc9845b44c27",
+          api_category: "Mobile Number Lookup",
+          api_name: "Mobile Lookup (Basic)",
+          billable: true,
+          message: "Success",
+          status: 1,
+          result: {
+            name: "RAM SINGH"
+          },
+          datetime: "2024-11-08 18:10:47.998798"
+        }
+      },
+      { 
+        id: "mobile-lookup-supreme-new", 
+        name: "Mobile Lookup (Supreme) New", 
+        category: "mobile-360",
+        requestSample: {
+          mobile: "9876543210",
+          consent: "Y",
+          consent_text: "We confirm obtaining valid customer consent to access/process their mobile data. Consent remains valid, informed, and unwithdrawn."
+        },
+        responseSample: {
+          txn_id: "1d382462-5e1c-4464-b9b5-555860fae2ec",
+          api_category: "Mobile Number Lookup",
+          api_name: "Mobile Lookup (Supreme)",
+          billable: true,
+          message: "Success",
+          status: 1,
+          result: {
+            name: "RAM SINGH",
+            bank: "Bank of India",
+            branch: "MAYURVIHAR-1-NEW DELHI",
+            centre: "DELHI",
+            district: "DELHI",
+            state: "DELHI",
+            address: "MAYUR VIHAR PH-I, DELHI-91",
+            contact: "+911987654321",
+            imps: "TRUE",
+            rtgs: "TRUE",
+            city: "DELHI",
+            iso3166: "IN-DL",
+            neft: "TRUE",
+            micr: "111234567",
+            swift: ""
+          },
+          datetime: "2024-11-08 18:11:34.106221"
+        }
+      },
+      { 
+        id: "profile-basic", 
+        name: "Profile Basic", 
+        category: "mobile-360",
+        requestSample: {
+          mobile: "9877654321",
+          first_name: "RAM",
+          consent: "Y",
+          consent_text: "We confirm obtaining valid customer consent to access/process their mobile data. Consent remains valid, informed, and unwithdrawn."
+        },
+        responseSample: {
+          txn_id: "3eb3e2a1-5d3b-4891-ab1c-1ace91f5fd59",
+          api_category: "Mobile Number Lookup",
+          api_name: "Profile Basic",
+          billable: true,
+          message: "Record Found Successfully",
+          status: 1,
+          result: {
+            personal_information: {
+              full_name: "RAM SINGH",
+              gender: "Male",
+              age: "20",
+              date_of_birth: "1999-01-01",
+              income: "987987"
+            },
+            alternate_phone: [
+              {
+                serial_number: "1",
+                value: "00004311234"
+              },
+              {
+                serial_number: "2",
+                value: "00004311234"
+              },
+              {
+                serial_number: "3",
+                value: "9877654321"
+              },
+              {
+                serial_number: "4",
+                value: "01146534321"
+              },
+              {
+                serial_number: "5",
+                value: "1112011111111"
+              }
+            ],
+            email: [
+              {
+                serial_number: "1",
+                value: "RAM@GMAIL.COM"
+              }
+            ],
+            address: [
+              {
+                detailed_address: "11 ABC COLONY  PHASE I ABC COLONY  PHASE I",
+                state: "UP",
+                pincode: "202001",
+                type: "Primary",
+                date_of_reporting: "2024-07-18"
+              }
+            ],
+            document_data: {
+              pan: [
+                {
+                  serial_number: "1",
+                  value: "ABCPD1234D"
+                }
+              ]
+            }
+          },
+          datetime: "2024-11-28 13:23:32.994616"
+        }
+      },
+      { 
+        id: "profile-advance", 
+        name: "Profile Advance", 
+        category: "mobile-360",
+        requestSample: {
+          mobile: "9876543210",
+          consent: "Y",
+          consent_text: "We confirm obtaining valid customer consent to access/process their mobile data. Consent remains valid, informed, and unwithdrawn."
+        },
+        responseSample: {
+          txn_id: "3eb3e2a1-5d3b-4891-ab1c-1ace91f5fd59",
+          api_category: "Mobile Number Lookup",
+          api_name: "Profile Advance",
+          billable: true,
+          message: "Record Found Successfully",
+          status: 1,
+          result: {
+            personal_information: {
+              full_name: "RAM SINGH",
+              gender: "Male",
+              age: "20",
+              date_of_birth: "1999-01-01",
+              income: "987987"
+            },
+            alternate_phone: [
+              {
+                serial_number: "1",
+                value: "00004311234"
+              },
+              {
+                serial_number: "2",
+                value: "00004311234"
+              },
+              {
+                serial_number: "3",
+                value: "9877654321"
+              },
+              {
+                serial_number: "4",
+                value: "01146534321"
+              },
+              {
+                serial_number: "5",
+                value: "1112011111111"
+              }
+            ],
+            email: [
+              {
+                serial_number: "1",
+                value: "RAM@GMAIL.COM"
+              }
+            ],
+            address: [
+              {
+                detailed_address: "11 ABC COLONY  PHASE I ABC COLONY  PHASE I",
+                state: "UP",
+                pincode: "202001",
+                type: "Primary",
+                date_of_reporting: "2024-07-18"
+              }
+            ],
+            document_data: {
+              pan: [
+                {
+                  serial_number: "1",
+                  value: "ABCPD1234D"
+                }
+              ]
+            }
+          },
+          datetime: "2024-11-28 13:23:32.994616"
+        }
+      },
+      { 
+        id: "mobile-to-dl-number", 
+        name: "Mobile to DL Number", 
+        category: "mobile-360",
+        requestSample: {
+          mobile: "9876543210",
+          dob: "01-01-1999",
+          consent: "Y",
+          consent_text: "We confirm obtaining valid customer consent to access/process their mobile data. Consent remains valid, informed, and unwithdrawn."
+        },
+        responseSample: {
+          txn_id: "74784bd4-88ae-4217-a701-49998edb4e6a",
+          api_category: "Know Your Customer (KYC)",
+          api_name: "Mobile to DL Number",
+          billable: true,
+          message: "Success",
+          status: 1,
+          result: {
+            dl: "DL01 98765432129",
+            dob: "01-01-1999",
+            name: "RAM SINGH",
+            father_name: "SHAM SINGH"
+          },
+          datetime: "2025-07-01 17:36:04.566216"
+        }
+      },
+      { 
+        id: "mobile-to-director-pan", 
+        name: "Mobile to Director PAN", 
+        category: "mobile-360",
+        requestSample: {
+          mobile: "9845XXXXXX",
+          consent: "Y",
+          consent_text: "I give my consent to mobile to pan api to get my pan numbers"
+        },
+        responseSample: {
+          txn_id: "9b436b5b-44b4-4ffa-a3c2-d48c59cc3dd6",
+          api_category: "Mobile Number Lookup",
+          api_name: "Mobile to PAN",
+          billable: true,
+          message: "Success",
+          status: 1,
+          result: "CTUPGXXXXX",
+          datetime: "2024-06-04 13:37:52.528069"
+        }
+      },
+      { 
+        id: "telco-basic", 
+        name: "Telco (Basic)", 
+        category: "mobile-360",
+        requestSample: {
+          mobile: "980161XXXX"
+        },
+        responseSample: {
+          txn_id: "a7285dc5-c00a-4c96-b42a-ca125a24fd6a",
+          status: 1,
+          result: {
+            postpaid: false,
+            Operator: "Airtel",
+            Circle: "Bihar Jharkhand"
+          },
+          datetime: 1671245657.24426
+        }
+      },
+      { 
+        id: "telco-advance", 
+        name: "Telco (Advance)", 
+        category: "mobile-360",
+        requestSample: {
+          mobile: "800640XXXX"
+        },
+        responseSample: {
+          txn_id: "89c9a938-45bc-4781-8900-0242f1b98204",
+          api_category: "Mobile Number Lookup",
+          api_name: "Telco Lookup(Advance)",
+          billable: true,
+          message: "Record Found Successfully",
+          status: 1,
+          result: {
+            is_valid: true,
+            subscriber_status: "CONNECTED",
+            connection_status: {
+              status_code: "DELIVERED",
+              error_code_id: ""
+            },
+            connection_type: "postpaid",
+            msisdn: {
+              msisdn_country_code: "IN",
+              msisdn: "+918006401234",
+              type: "MOBILE",
+              mnc: "97",
+              imsi: "404978006401234",
+              mcc: "404",
+              mcc_mnc: "40497"
+            },
+            current_service_provider: {
+              network_prefix: "99973",
+              network_name: "Airtel",
+              network_region: "UP-West",
+              mcc: "404",
+              mnc: "97",
+              country_prefix: "+91",
+              country_code: "IN",
+              country_name: "India"
+            },
+            original_service_provider: {
+              network_prefix: "80064",
+              network_name: "Vodafone",
+              network_region: "UP-West",
+              mcc: "",
+              mnc: "",
+              country_prefix: "+91",
+              country_code: "IN",
+              country_name: "India"
+            },
+            is_roaming: false,
+            roaming_service_provider: {
+              network_prefix: "",
+              network_name: "",
+              network_region: "",
+              mcc: "",
+              mnc: "",
+              country_prefix: "",
+              country_code: "",
+              country_name: ""
+            },
+            is_ported: true,
+            last_ported_date: null,
+            porting_history: []
+          },
+          datetime: "2023-08-24 17:50:16.849541"
+        }
+      },
+      { 
+        id: "telco-advance-otp", 
+        name: "Telco Advance (OTP Based)", 
+        category: "mobile-360",
+        requestSample: {
+          mobile: "800640XXXX"
+        },
+        responseSample: {
+          api_category: "Mobile Number Lookup",
+          api_name: "Mobile OTP Info(Advance) - Verify OTP & Get Info",
+          billable: true,
+          txn_id: "ee9dcc18-ac60-4f42-a2cd-3dc0473d69ba",
+          message: "Success",
+          status: 1,
+          result: {
+            client_id: "telecom_acNgnzzbzFlbidkpuAmb",
+            mobile_number: "8285231234",
+            address: "C-302 Sharda Puri,Ramesh Nagar,Ramesh Nagar H O,West Delhi,Delhi,110012",
+            city: "West",
+            state: "Delhi",
+            pin_code: "110012",
+            full_name: "Ramesh",
+            dob: "01-01-1992",
+            user_email: "ramesh@gmail.com",
+            operator: "airtel",
+            billing_type: "prepaid",
+            alternate_phone: "8447371234",
+            is_enterprise: false,
+            message: "Success"
+          },
+          datetime: "2023-11-09 12:28:56.412956"
+        }
+      },
+      { 
+        id: "email-verification", 
+        name: "Email Verification", 
+        category: "mobile-360",
+        requestSample: {
+          email: "abc@xyz.com",
+          consent: "Y",
+          consent_text: "We confirm obtaining valid customer consent to access/process their Email and Domain data. Consent remains valid, informed, and unwithdrawn."
+        },
+        responseSample: {
+          txn_id: "94ff9649-da89-449e-8f50-7f67d433406e",
+          api_category: "Digital Footprint Lookup",
+          api_name: "Email Verification",
+          billable: true,
+          message: "Success",
+          status: 1,
+          result: {
+            email: {
+              valid_format: true,
+              mx_found: true,
+              deliverable: true
+            },
+            domain_registration_date: "19-10-2022",
+            domain: "valid"
+          },
+          datetime: "2025-04-23 20:14:11.263170"
+        }
+      },
+      { 
+        id: "validate-whatsapp", 
+        name: "Validate WhatsApp", 
+        category: "mobile-360",
+        requestSample: {
+          mobile: "98016112XX"
+        },
+        responseSample: {
+          txn_id: "be28f3d3-773b-42a3-b7b5-e582fed32bf7",
+          api_category: "Digital Footprint Lookup",
+          api_name: "Whatsapp Number Lookup",
+          billable: true,
+          message: "Record Found Successfully",
+          status: 1,
+          result: {
+            status: "Account Found",
+            is_business: "0"
+          },
+          datetime: "2023-09-18 17:51:58.057192"
+        }
+      },
+      { 
+        id: "geo-location", 
+        name: "Geo Location", 
+        category: "mobile-360",
+        requestSample: {
+          ip_address: "122.170.124.0"
+        },
+        responseSample: {
+          api_category: "Digital Footprint Lookup",
+          api_name: "Geo Location",
+          billable: true,
+          txn_id: "d4e81a40-bc34-4fa1-a6a0-0cbdd8ffcc43",
+          message: "Success",
+          status: 1,
+          result: {
+            range: [
+              2057383936,
+              2057385983
+            ],
+            country: "IN",
+            region: "DL",
+            eu: "0",
+            timezone: "Asia/Kolkata",
+            city: "Delhi",
+            ll: [
+              77.2373,
+              82.6542
+            ],
+            metro: 0,
+            area: 20
+          },
+          datetime: "2024-04-01 13:46:16.212268"
+        }
+      },
+      { 
+        id: "geo-distance-pincode", 
+        name: "Geo Distance (Pincode)", 
+        category: "mobile-360",
+        requestSample: {
+          start_point: "101010",
+          end_point: "101011"
+        },
+        responseSample: {
+          api_category: "Digital Footprint Lookup",
+          api_name: "Geo Distance(Pincode)",
+          billable: true,
+          txn_id: "507bb417-2189-45f4-a22a-ba4f455f86e3",
+          message: "Success",
+          status: 1,
+          result: {
+            approximate_start_address: "ABCD, 101010, India",
+            approximate_end_address: "XYZ, 101011s, India",
+            distance: "6.5 km"
+          },
+          datetime: "2025-09-25 11:05:38.059453"
+        }
+      },
+      { 
+        id: "geo-distance", 
+        name: "Geo Distance", 
+        category: "mobile-360",
+        requestSample: {
+          start_point: "28.672741, 77.359831",
+          end_point: "28.626900, 77.374078"
+        },
+        responseSample: {
+          api_category: "Digital Footprint Lookup",
+          api_name: "Geo Distance",
+          billable: true,
+          txn_id: "034315d7-59aa-4231-a5d6-8c95bf4e6934",
+          message: "Success",
+          status: 1,
+          result: {
+            approximate_start_address: "Sahibabad Industrial Area Site 4, Rajendra Nagar, Ghaziabad, Uttar Pradesh 201005, India",
+            approximate_end_address: "Block A, Industrial Area, Sector 62, Noida, Uttar Pradesh 201301, India",
+            distance: "7.9 km"
+          },
+          datetime: "2024-05-13 13:39:31.289326"
+        }
+      },
     ],
   },
   {

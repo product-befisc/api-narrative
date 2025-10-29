@@ -2452,12 +2452,293 @@ export const apiCatalogData: CategoryData[] = [
     id: "utility",
     name: "Utility",
     apis: [
-      { id: "lpg-verification", name: "LPG Verification", category: "utility" },
-      { id: "lpg-verification-mobile", name: "LPG Verification (Mobile)", category: "utility" },
-      { id: "indanegas-verification", name: "IndaneGas Verification", category: "utility" },
-      { id: "hpgas-verification", name: "HPGas Verification", category: "utility" },
-      { id: "bharatgas-verification", name: "BharatGas Verification", category: "utility" },
-      { id: "details-check", name: "Details Check", category: "utility" },
+      { 
+        id: "lpg-verification", 
+        name: "LPG Verification", 
+        category: "utility",
+        requestSample: {
+          consumer_id: "10000000034221234"
+        },
+        responseSample: {
+          txn_id: "d4c34e98-344d-47c1-9d02-ac424c9acc92",
+          api_category: "Utility Verification",
+          api_name: "Verify LPG",
+          billable: true,
+          message: "Success",
+          status: 1,
+          result: {
+            name: "Ramesh singh",
+            consumer_details: {
+              ConsumerRelType: "LPG",
+              ConsumerCategory: "Domestic",
+              MIDueDate: "02/25/2005 00:00:00",
+              RelationshipUCMId: "RL000000036391234",
+              ConsumerMobile: "9994451234",
+              ConsumerId: "75000000512345",
+              ConsumerStatus: "ACTIVE",
+              TubeChangeDate: "02/25/2000 00:00:00",
+              ConsumerSubStatus: "ACTIVE",
+              ConsumerType: "Double Bottle Connection",
+              ConsumerNo: "03197",
+              TubeChangeDueDate: "02/25/2005 00:00:00"
+            },
+            address: {
+              AddressLine3: ".",
+              AddressLine2: "SURESH COLONY",
+              AddressLine1: "2/1 PURUSOTHAMAN NAGAR",
+              State: "Tamil Nadu",
+              StateCode: "TN",
+              Country: null,
+              City: "KARAMADAI",
+              District: "COIMBATORE",
+              Pincode: "641104",
+              DistrictCode: "TN002"
+            },
+            distributor_details: {
+              DistributorCode: "0000198964",
+              DistributorBacklogDays: "1",
+              DistributorName: "SHREE RANGA GAS SERVICE",
+              DistributorContact: "9842274096, 04254274069, 8454955555",
+              DistributorAddress: {
+                AddressLine3: "COIMBATORE DT.- 641104",
+                AddressLine2: "KARAMADAI",
+                AddressLine1: "\"188, KNP ROAD\"",
+                State: null,
+                StateCode: "TN",
+                Country: "India",
+                City: "COIMBATORE",
+                District: "COIMBATORE",
+                Pincode: null,
+                DistrictCode: "TN002"
+              }
+            }
+          },
+          datetime: "2023-08-06 17:12:54.730613"
+        }
+      },
+      { 
+        id: "lpg-verification-mobile", 
+        name: "LPG Verification (Mobile)", 
+        category: "utility",
+        requestSample: {
+          mobile: "987687XXXX",
+          consent: "Y",
+          consent_text: "We confirm that we have obtained the consent of the respective customer to fetch their details by using their Mobile Number and the customer is aware of the purpose for which their data is sought for being processed and have given their consent for the same and such consent is currently valid and not withdrawn."
+        },
+        responseSample: {
+          txn_id: "62fcbc80-adb4-41cd-9561-90dffab49cdd",
+          api_category: "Utility Verification",
+          api_name: "LPG Verification (Mobile)",
+          billable: true,
+          message: "Success",
+          status: 1,
+          result: [
+            {
+              gas_provider: "Indane Gas",
+              name: "RAM KUMAR",
+              consumer_details: {
+                consumer_mobile: "6789999999",
+                consumer_id: "7500000001234567",
+                consumer_status: "ACTIVE",
+                consumer_type: "Single Bottle Connection"
+              },
+              address: "123 ABC Colony XYZ",
+              distributor_details: {
+                distributor_code: "000987654",
+                distributor_name: "GAYATRI INDANE SERVICE",
+                distributor_contact: "1800987654",
+                distributor_address: "456 MNOP Marg XYZ"
+              }
+            },
+            {
+              gas_provider: "Bharat Gas",
+              name: "Sham Kumar",
+              consumer_details: {
+                consumer_mobile: "",
+                consumer_id: "1234567890",
+                consumer_status: "",
+                consumer_type: ""
+              },
+              address: "123 ABC Colony XYZ",
+              distributor_details: {
+                distributor_code: "1234567",
+                distributor_name: "CHANDAN GAS SERVICE",
+                distributor_contact: "",
+                distributor_address: ""
+              }
+            },
+            {
+              gas_provider: "HP Gas",
+              name: "Sham Kumar",
+              consumer_details: {
+                consumer_mobile: "",
+                consumer_id: "",
+                consumer_status: "",
+                consumer_type: ""
+              },
+              address: "1XX ABC Colony GXXXX 123456",
+              distributor_details: {
+                distributor_code: "1234567",
+                distributor_name: "CHITRA GAS SERVICE",
+                distributor_contact: "",
+                distributor_address: ""
+              }
+            }
+          ],
+          datetime: "2024-07-19 14:31:57.759051"
+        }
+      },
+      { 
+        id: "indanegas-verification", 
+        name: "IndaneGas Verification", 
+        category: "utility",
+        requestSample: {
+          consumer_id: "75000000512345",
+          mobile: "9994451234" // optional
+        },
+        responseSample: {
+          txn_id: "d4c34e98-344d-47c1-9d02-ac424c9acc92",
+          api_category: "Utility Verification",
+          api_name: "Indane GAS",
+          billable: true,
+          message: "Success",
+          status: 1,
+          result: {
+            name: "Ramesh singh",
+            consumer_details: {
+              ConsumerRelType: "LPG",
+              ConsumerCategory: "Domestic",
+              MIDueDate: "02/25/2005 00:00:00",
+              RelationshipUCMId: "RL000000036391234",
+              ConsumerMobile: "9994451234",
+              ConsumerId: "75000000512345",
+              ConsumerStatus: "ACTIVE",
+              TubeChangeDate: "02/25/2000 00:00:00",
+              ConsumerSubStatus: "ACTIVE",
+              ConsumerType: "Double Bottle Connection",
+              ConsumerNo: "03197",
+              TubeChangeDueDate: "02/25/2005 00:00:00"
+            },
+            address: {
+              AddressLine3: ".",
+              AddressLine2: "SURESH COLONY",
+              AddressLine1: "2/1 PURUSOTHAMAN NAGAR",
+              State: "Tamil Nadu",
+              StateCode: "TN",
+              Country: null,
+              City: "KARAMADAI",
+              District: "COIMBATORE",
+              Pincode: "641104",
+              DistrictCode: "TN002"
+            },
+            distributor_details: {
+              DistributorCode: "0000198964",
+              DistributorBacklogDays: "1",
+              DistributorName: "SHREE RANGA GAS SERVICE",
+              DistributorContact: "9842274096, 04254274069, 8454955555",
+              DistributorAddress: {
+                AddressLine3: "COIMBATORE DT.- 641104",
+                AddressLine2: "KARAMADAI",
+                AddressLine1: "\"188, KNP ROAD\"",
+                State: null,
+                StateCode: "TN",
+                Country: "India",
+                City: "COIMBATORE",
+                District: "COIMBATORE",
+                Pincode: null,
+                DistrictCode: "TN002"
+              }
+            }
+          },
+          datetime: "2023-08-06 17:12:54.730613"
+        }
+      },
+      { 
+        id: "hpgas-verification", 
+        name: "HPGas Verification", 
+        category: "utility",
+        requestSample: {
+          consumer_id: "29110XXXXXXXXXXXX",
+          mobile: "90527XXXXX", // optional
+          consent: "Y",
+          consent_text: "I give my consent to HP Gas API to fetch my info"
+        },
+        responseSample: {
+          txn_id: "84b14440-7a5e-4729-bb86-4e31b0f1e27e",
+          api_category: "Utility Verification",
+          api_name: "HP Gas",
+          status: 1,
+          result: {
+            name: "XXXXXXXXX Kumar",
+            address: "26******* NE***** 52**04"
+          },
+          datetime: 1672920469.393581
+        }
+      },
+      { 
+        id: "bharatgas-verification", 
+        name: "BharatGas Verification", 
+        category: "utility",
+        requestSample: {
+          consumer_id: "100000000XXXXXXXX",
+          mobile: "8006XXXXXX", // optional
+          consent: "Y",
+          consent_text: "I give my consent to Bharat Gas API to fetch my info"
+        },
+        responseSample: {
+          txn_id: "a6461dc0-7f0d-4ff4-9743-793649e08b52",
+          api_category: "Utility Verification",
+          api_name: "Bharat GAS",
+          billable: true,
+          message: "Success",
+          status: 1,
+          result: {
+            name: "KRXXXX",
+            consumer_details: {
+              ConsumerNo: "XXXX",
+              ConsumerId: "10000XXXXXXXXXX"
+            },
+            address: "1/61X SAXXXXX NXXX, CHXXXXX",
+            distributor_details: {
+              DistributorCode: "XXXXX",
+              DistributorName: " SRI VEXXXX SXXXX GAS AGENCIES "
+            }
+          },
+          datetime: "2024-06-07 14:57:48.086824"
+        }
+      },
+      { 
+        id: "details-check", 
+        name: "Details Check", 
+        category: "utility",
+        requestSample: {
+          reference_parameter: "30a713cf-c2d1-4a7f-8232-b884b130sxd3",
+          api_code: "8UQaz1",
+          consent: "Y",
+          consent_text: "We confirm obtaining valid customer consent to access/process their reference parameter value. Consent remains valid, informed, and unwithdrawn."
+        },
+        responseSample: {
+          txn_id: "cb473a59-837f-4d03-9d88-6da19993c355",
+          api_category: "Utility",
+          api_name: "Details Check",
+          billable: true,
+          message: "Success",
+          status: 1,
+          result: {
+            api_category: "KYC",
+            api_name: "Face Match",
+            billable: true,
+            txn_id: "30a713cf-c2d1-4a7f-8232-b884b130sxd3",
+            message: "Success",
+            status: 1,
+            result: {
+              similarrity: "100"
+            },
+            datetime: "2025-03-06 07:37:47.582480"
+          },
+          datetime: "2025-03-06 07:37:55.390821"
+        }
+      },
     ],
   },
   {

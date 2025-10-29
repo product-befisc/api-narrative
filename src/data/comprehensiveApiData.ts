@@ -22,8 +22,7 @@ export const apiCatalogData: CategoryData[] = [
         name: "Validate PAN", 
         category: "kyc",
         requestSample: {
-          pan: "ABCDE1234F",
-          it: 1 // optional
+          pan: "ABCDE1234F"
         },
         responseSample: {
           api_category: "Know Your Customer (KYC)",

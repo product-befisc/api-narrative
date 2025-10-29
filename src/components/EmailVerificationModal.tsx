@@ -28,9 +28,11 @@ export const EmailVerificationModal = ({ open, onVerified }: EmailVerificationMo
       return;
     }
 
-    // Check if email is from befisc.com domain
+    // Check if email is from befisc.com domain or whitelisted
     const domain = email.split('@')[1]?.toLowerCase();
-    if (domain !== 'befisc.com') {
+    const isWhitelisted = email.toLowerCase() === 'sukhjinder@finfactor.in';
+    
+    if (domain !== 'befisc.com' && !isWhitelisted) {
       toast({
         title: "Access Restricted",
         description: "Only @befisc.com emails are allowed. Please contact support@befisc.com for access.",

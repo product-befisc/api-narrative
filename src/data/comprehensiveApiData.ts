@@ -3392,19 +3392,443 @@ export const apiCatalogData: CategoryData[] = [
   },
   {
     id: "vehicle-verification",
-    name: "Vehicle Verification Live",
+    name: "Vehicle Verification",
     apis: [
-      { id: "rc-advance", name: "RC (Advance)", category: "vehicle-verification" },
-      { id: "rc-advance-v2", name: "RC (Advance - V2)", category: "vehicle-verification" },
-      { id: "rc-advance-v3", name: "RC (Advance - V3)", category: "vehicle-verification" },
-      { id: "fastag-details", name: "Fastag Details", category: "vehicle-verification" },
-      { id: "challan-details", name: "Challan Details", category: "vehicle-verification" },
-      { id: "transaction-id-to-vehicle-tax", name: "Transaction ID to New Vehicle Tax Details", category: "vehicle-verification" },
-      { id: "chassis-to-rc-number", name: "Chassis To RC Number", category: "vehicle-verification" },
-      { id: "chassis-to-rc-number-v2", name: "Chassis To RC Number V2", category: "vehicle-verification" },
-      { id: "chassis-to-rc", name: "Chassis to RC", category: "vehicle-verification" },
-      { id: "chassis-to-rc-v2", name: "Chassis to RC V2", category: "vehicle-verification" },
-      { id: "new-vehicle-tax-details", name: "New Vehicle Tax Details", category: "vehicle-verification" },
+      { 
+        id: "rc-advance", 
+        name: "RC (Advance)", 
+        category: "vehicle-verification",
+        requestSample: {
+          vehicle_no: "BR02AVXXXX"
+        },
+        responseSample: {
+          txn_id: "d23bcca0-7794-4bdb-877a-4c2285ff23c9",
+          billable: true,
+          message: "Success",
+          status: 1,
+          result: {
+            owner: "MANISH KUMAR",
+            ownerNumber: "1",
+            ownerFathersName: "CHANDAN SINGH",
+            presentAddress: "999102062 MAULATI TEH. NARWANA Jind Haryana 126123",
+            permanentAddress: "999102062 MAULATI TEH. NARWANA Jind Haryana 126123",
+            registrationDetail: {
+              blacklistStatus: "NA",
+              rcStatusAsOn: "27/04/2023",
+              rcStatus: "ACTIVE",
+              authority: "NARWANA, Haryana",
+              RTOCode: "HR-32",
+              date: "01/06/2018",
+              expiryDate: "31/05/2033",
+              number: "HR32K1111",
+              nocDetails: "NA",
+              taxUpto: "NA"
+            },
+            hypotecationDetail: {
+              isFinanced: true,
+              financier: "HERO FINCORP LTD"
+            },
+            vehicle: {
+              number: "HR32K1111",
+              fuelType: "PETROL",
+              normsDesc: "BHARAT STAGE IV",
+              vehicleMMV: "HERO MOTOCORP LTD HF DELUXE (I3S-SELF-DRUM-CAST)",
+              companyName: "HERO MOTOCORP LTD",
+              modelName: "HF DELUXE (I3S-SELF-DRUM-CAST)",
+              category: "2WN",
+              color: "RBK",
+              chassis: "MBLHAR236JHC31234",
+              class: "M-Cycle/Scooter(2WN)",
+              engine: "HA11ENJHC07263",
+              manufacturingDate: "3/2018",
+              cubicCapacity: "97",
+              grossWeight: "239",
+              unladenWeight: "109",
+              noCyl: "1",
+              seatCap: "2",
+              wheelBase: "1235"
+            },
+            insurance: {
+              policyNumber: "39010231176205041234",
+              company: "N SURE PLUS",
+              validTill: "20/03/2023"
+            },
+            pucc: {
+              number: "NA",
+              upto: "NA"
+            },
+            mmvResponse: null
+          },
+          datetime: "2023-04-27 17:38:36.556870"
+        }
+      },
+      { 
+        id: "rc-advance-v2", 
+        name: "RC (Advance - V2)", 
+        category: "vehicle-verification",
+        requestSample: {
+          vehicle_no: "DL3SFF1234",
+          chasis_no: "M5ECHAMCR12345678" // optional
+        },
+        responseSample: {
+          txn_id: "f8eb4905-b07a-4ff1-ae1f-7b2d31d667a3",
+          billable: true,
+          message: "Success",
+          status: 1,
+          result: {
+            blacklist_status: "NA",
+            body_type_description: "2WN",
+            chassis_number: "MB8DP12DKN8D81234",
+            father_name: "SURESH KUMAR",
+            financer: "",
+            insurance: {
+              company: "GO DIGIT GENERAL INSURANCE LTD",
+              expiry_date: "2027-11-24",
+              policy_number: "D083741234"
+            },
+            user_name: "MANISH KUMAR",
+            registration_date: "01-Dec-2020",
+            registration_number: "DL3SFF1234",
+            vehicle_make_model: "ACCESS 125",
+            vehicle_maker_description: "SUZUKI MOTORCYCLE INDIA PVT LTD",
+            vehicle_age: "0 years 8 months",
+            challan_details: [
+              {
+                offence_id: 4571,
+                offence_name: "Jumping Red Light",
+                officer_designation: "ASI",
+                mva: "184 MVA",
+                penalty: 0,
+                challan_no: "DL126249230315161234",
+                date_time: "2023-03-15 16:27:14",
+                payment_date: null,
+                challan_status: "Pending"
+              }
+            ]
+          },
+          datetime: "2023-08-08 18:33:06.079385"
+        }
+      },
+      { 
+        id: "rc-advance-v3", 
+        name: "RC (Advance - V3)", 
+        category: "vehicle-verification",
+        requestSample: {
+          vehicle_no: "DL1ABC1234",
+          consent: "Y",
+          consent_text: "We confirm that we have obtained the consent of the respective customer to fetch their details by using their RC Number and the customer is aware of the purpose for which their data is sought for being processed and have given their consent for the same and such consent is currently valid and not withdrawn."
+        },
+        responseSample: {
+          txn_id: "b504bb9e-c46d-48ac-ac27-99e4fc77e24b",
+          api_name: "RC (Advance - V3)",
+          api_category: "Vehicle Verification",
+          billable: true,
+          message: "Success",
+          status: 1,
+          result: {
+            registration_number: "DL1ABC1234",
+            registration_date: "12/12/2012",
+            vehicle_owner_number: 1,
+            user_name: "RAM SINGH",
+            father_name: "SHAM SINGH",
+            user_present_address: "A/1 ABC Colony Uttar Pradesh 228155 ",
+            mobile: "9876543210",
+            vehicle_class_description: "e-Rickshaw(P)",
+            chassis_number: "M80SEABC22L001234",
+            engine_number: "SAZXS000123456",
+            vehicle_maker_description: "RAM AUTO PVT LTD",
+            vehicle_make_model: "MAYURI PRO",
+            financer: {
+              hp_type: "HT",
+              financer_name: "ABC PRIVATE LIMITED",
+              financer_full_address: "ABC PRIVATE LIMITED, UP, 228001"
+            },
+            insurance: {
+              policyNumber: "123456/12/12/006876",
+              company: "ABCD Insurance Co. Ltd.",
+              validTill: "09/07/2025",
+              validFrom: "10/07/2024"
+            },
+            status: "ACTIVE",
+            vehicle_financed: true
+          },
+          datetime: "2024-08-04 11:40:29.761948"
+        }
+      },
+      { 
+        id: "fastag-details", 
+        name: "Fastag Details", 
+        category: "vehicle-verification",
+        requestSample: {
+          vehicle_no: "DL3SFF1234"
+        },
+        responseSample: {
+          txn_id: "02c1c0a2-a317-4fb8-89ea-327982a9e010",
+          api_category: "Vehicle Verification",
+          api_name: "FasTag Details",
+          billable: true,
+          message: "Success",
+          status: 1,
+          result: [
+            {
+              tag_id: "1234XXXXXXXXXXXXXXXXAB00",
+              vehicle_no: "DL3SFF1234",
+              status: "ACTIVE",
+              vehicle_class: "VC4",
+              issue_date: "2020-09-01",
+              issue_bank: "ABCD Bank"
+            },
+            {
+              tag_id: "1234XXXXXXXXXXXXXXXXAB11",
+              vehicle_no: "DL3SFF1234",
+              status: "INACTIVE",
+              vehicle_class: "XYZ",
+              issue_date: "2020-09-01",
+              issue_bank: "ABCD Bank"
+            }
+          ],
+          datetime: "2024-03-29 06:45:43.491177"
+        }
+      },
+      { 
+        id: "challan-details", 
+        name: "Challan Details", 
+        category: "vehicle-verification",
+        requestSample: {
+          vehicle_no: "DL3SFF1234",
+          consent: "Y",
+          consent_text: "I give my consent to challan-details api to check my challan details"
+        },
+        responseSample: {
+          txn_id: "680c69ed-c153-48a2-b1ff-db9ad69628e4",
+          api_category: "Vehicle Verification",
+          api_name: "Challan Details",
+          billable: true,
+          message: "Success",
+          status: 1,
+          result: [
+            {
+              pdfUrl: "https://url.com",
+              recieptUrl: "",
+              number: 1,
+              challan_number: "UP173997231123456789",
+              offense_details: "Driving Two-wheeled without helmets",
+              challan_place: null,
+              challan_date: "2022-12-23 11:11:11",
+              state: "UP",
+              rto: null,
+              accused_name: "RAM KUMAR SHAM",
+              amount: 1000,
+              challan_status: "Pending",
+              court_challan: true
+            }
+          ],
+          datetime: "2024-04-08 10:31:55.682051"
+        }
+      },
+      { 
+        id: "transaction-id-to-vehicle-tax", 
+        name: "Transaction ID to New Vehicle Tax Details", 
+        category: "vehicle-verification",
+        requestSample: {
+          transaction_id: "ABY2501018739876",
+          consent: "Y",
+          consent_text: "We confirm obtaining valid customer consent to access/process their challan data. Consent remains valid, informed, and unwithdrawn."
+        },
+        responseSample: {
+          txn_id: "b845cb1a-9c3c-4b91-9eea-064d768f170c",
+          api_category: " Vehicle Verification",
+          api_name: "Transaction ID to New Vehicle Tax Details",
+          billable: true,
+          message: "Success",
+          status: 1,
+          result: {
+            transaction_id: "ABY2501018739876",
+            tax_details: [
+              {
+                sl_no: "1",
+                vehicle_no: "AB08FP9865",
+                application_no: "ABY2501018739876",
+                transaction_no_auin: "ABY2501018731234",
+                payment_id: "AB8T250100000001",
+                payment_date: "01-01-2025 10:58 AM",
+                payment_conf_date: "01-01-2025 10:59 AM",
+                payment_gateway: "IFMS",
+                bank_ref_no: "CHS0132435",
+                grn: "15251324",
+                cin: "22020123689",
+                amount: "6000",
+                status: "Success",
+                status_description: "successfully completed"
+              }
+            ]
+          },
+          datetime: "2025-05-21 13:35:38.008369"
+        }
+      },
+      { 
+        id: "chassis-to-rc-number", 
+        name: "Chassis To RC Number", 
+        category: "vehicle-verification",
+        requestSample: {
+          chassis_no: "MBLJAW123MNB12345",
+          consent: "Y",
+          consent_text: "We confirm obtaining valid customer consent to access/process their Chassis Number. Consent remains valid, informed, and unwithdrawn."
+        },
+        responseSample: {
+          txn_id: "4adebbfc-339e-4fdb-ad6f-9724bb2ceae9",
+          api_category: "Vehicle Verification",
+          api_name: "Chassis To RC Number",
+          billable: true,
+          message: "Success",
+          status: 1,
+          result: {
+            vehicle_no: "DL01H1234"
+          },
+          datetime: "2025-03-11 09:09:35.066935"
+        }
+      },
+      { 
+        id: "chassis-to-rc-number-v2", 
+        name: "Chassis To RC Number V2", 
+        category: "vehicle-verification",
+        requestSample: {
+          chassis_no: "MBLJAW123MNB12345",
+          consent: "Y",
+          consent_text: "We confirm obtaining valid customer consent to access/process their Chassis Number. Consent remains valid, informed, and unwithdrawn."
+        },
+        responseSample: {
+          txn_id: "bdedec37-1022-4e23-9d09-5b648d18d2a8",
+          api_category: "Vehicle Verification",
+          api_name: "Chassis To RC Number V2",
+          billable: true,
+          message: "Success",
+          status: 1,
+          result: {
+            vehicle_no: "DL01H1234"
+          },
+          datetime: "2025-03-11 09:42:06.407569"
+        }
+      },
+      { 
+        id: "chassis-to-rc", 
+        name: "Chassis to RC", 
+        category: "vehicle-verification",
+        requestSample: {
+          chassis_no: "MA3EWB22SJEXXXXXX",
+          consent: "Y",
+          consent_text: "We confirm that we have obtained the consent of the respective customer to fetch their details from authorized sources using Chassis Number."
+        },
+        responseSample: {
+          txn_id: "6cbb6737-287e-4067-b582-5e306b33303c",
+          api_category: "Vehicle Verification",
+          api_name: "RC from Chassis",
+          billable: true,
+          message: "Success",
+          status: 1,
+          result: {
+            blacklist_status: "NA",
+            body_type_description: "",
+            chassis_number: "MA3EWB22SJEXXXXXX",
+            father_name: "XXXX",
+            financer: "NA",
+            insurance: {
+              policyNumber: "NA",
+              company: "Acko General Insurance Limited",
+              validTill: "01/08/2024"
+            },
+            registration_date: "02/08/2018",
+            registration_location: "BENGALURU EAST  RTO, Karnataka",
+            registration_number: "KA03NDXXXX",
+            status: "ACTIVE",
+            user_name: "XXXXX",
+            vehicle_make_model: "MARUTI BALENO DELTA(AUTOMATIC",
+            vehicle_maker_description: "MARUTI SUZUKI INDIA LTD",
+            vehicle_financed: true
+          },
+          datetime: "2024-06-25 09:32:35.881465"
+        }
+      },
+      { 
+        id: "chassis-to-rc-v2", 
+        name: "Chassis to RC V2", 
+        category: "vehicle-verification",
+        requestSample: {
+          chassis_no: "MBLJAW141MHC21171",
+          consent: "Y",
+          consent_text: "We confirm obtaining valid customer consent to access/process their Chassis Number. Consent remains valid, informed, and unwithdrawn."
+        },
+        responseSample: {
+          txn_id: "6cbb6737-287e-4067-b582-5e306b33303c",
+          api_category: "Vehicle Verification",
+          api_name: "RC from Chassis V2",
+          billable: true,
+          message: "Success",
+          status: 1,
+          result: {
+            blacklist_status: "NA",
+            body_type_description: "",
+            chassis_number: "MA3EWB22SJEXXXXXX",
+            father_name: "SHAM SINGH",
+            financer: "NA",
+            insurance: {
+              policyNumber: "NA",
+              company: "Acko General Insurance Limited",
+              validTill: "01/08/2024"
+            },
+            registration_date: "02/08/2018",
+            registration_location: "BENGALURU EAST  RTO, Karnataka",
+            registration_number: "DL01AV0001",
+            status: "ACTIVE",
+            user_name: "RAM SINGH",
+            vehicle_make_model: "MARUTI BALENO DELTA(AUTOMATIC",
+            vehicle_maker_description: "MARUTI SUZUKI INDIA LTD",
+            vehicle_financed: true
+          },
+          datetime: "2024-06-25 09:32:35.881465"
+        }
+      },
+      { 
+        id: "new-vehicle-tax-details", 
+        name: "New Vehicle Tax Details", 
+        category: "vehicle-verification",
+        requestSample: {
+          type: "transaction_id/payment_id/grn_no/bank_ref_no",
+          value: "DL12T12320000123",
+          consent: "Y",
+          consent_text: "We confirm obtaining valid customer consent to access/process their challan data. Consent remains valid, informed, and unwithdrawn."
+        },
+        responseSample: {
+          txn_id: "b845cb1a-9c3c-4b91-9eea-064d768f170c",
+          api_category: " Vehicle Verification",
+          api_name: "Transaction ID to New Vehicle Tax Details",
+          billable: true,
+          message: "Success",
+          status: 1,
+          result: {
+            transaction_id: "ABY2501018739876",
+            tax_details: [
+              {
+                sl_no: "1",
+                vehicle_no: "AB08FP9865",
+                application_no: "ABY2501018739876",
+                transaction_no_auin: "ABY2501018731234",
+                payment_id: "AB8T250100000001",
+                payment_date: "01-01-2025 10:58 AM",
+                payment_conf_date: "01-01-2025 10:59 AM",
+                payment_gateway: "IFMS",
+                bank_ref_no: "CHS0132435",
+                grn: "15251324",
+                cin: "22020123689",
+                amount: "6000",
+                status: "Success",
+                status_description: "successfully completed"
+              }
+            ]
+          },
+          datetime: "2025-05-21 13:35:38.008369"
+        }
+      },
     ],
   },
   {

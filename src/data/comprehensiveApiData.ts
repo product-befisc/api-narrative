@@ -3074,15 +3074,320 @@ export const apiCatalogData: CategoryData[] = [
     id: "financial-check",
     name: "Financial Check",
     apis: [
-      { id: "bank-account-penny-drop", name: "Bank Account Verification (Penny Drop)", category: "financial-check" },
-      { id: "bank-account-penny-less", name: "Bank Account Verification (Penny Less)", category: "financial-check" },
-      { id: "experian", name: "Experian", category: "financial-check" },
-      { id: "digital-payment-id-analyser", name: "Digital Payment ID Analyser", category: "financial-check" },
-      { id: "mobile-to-account-number", name: "Mobile to Account Number", category: "financial-check" },
-      { id: "digital-payment-to-account", name: "Digital Payment ID to Account Number", category: "financial-check" },
-      { id: "pan-to-account-linkage", name: "PAN to Account Linkage Check", category: "financial-check" },
-      { id: "digital-payment-id-verification", name: "Digital Payment ID Verification (Basic)", category: "financial-check" },
-      { id: "ifsc-to-branch-details", name: "IFSC to Branch Details", category: "financial-check" },
+      { 
+        id: "bank-account-penny-drop", 
+        name: "Bank Account Verification (Penny Drop)", 
+        category: "financial-check",
+        requestSample: {
+          account_number: "XXXXXXXXXXXX",
+          ifsc: "FDRL0001001",
+          name: "RAM"
+        },
+        responseSample: {
+          result: {
+            bank_ref_no: "308317961234",
+            beneficiary_name: "RAM KUMAR",
+            transaction_remark: "Transaction Successful",
+            verification_status: "VERIFIED",
+            name_match: {
+              name_match_status: "yes",
+              name_match_score: "86"
+            },
+            ifsc_info: {
+              MICR: "682041234",
+              BRANCH: "ALUVA BANK JUNCTION",
+              STATE: "KERALA",
+              CONTACT: "+914842612345",
+              UPI: true,
+              RTGS: true,
+              CITY: "ERNAKULAM",
+              CENTRE: "ALUVA",
+              DISTRICT: "ALUVA",
+              NEFT: true,
+              IMPS: true,
+              SWIFT: null,
+              ISO3166: "IN-KL",
+              BANK: "Federal Bank",
+              BANKCODE: "FDRL",
+              IFSC: "FDRL1234567",
+              pincode: ""
+            }
+          },
+          datetime: "2023-03-24 12:27:33.076357"
+        }
+      },
+      { 
+        id: "bank-account-penny-less", 
+        name: "Bank Account Verification (Penny Less)", 
+        category: "financial-check",
+        requestSample: {
+          account_no: "XXXXXXXXXXXX",
+          ifsc_code: "XXXXXXXX",
+          name: "XXX XXX", // optional
+          consent: "Y",
+          consent_text: "I give my consent to Bank Account Verification (Penny Less) api to check my bank details"
+        },
+        responseSample: {
+          txn_id: "4cacdd41-982a-4f22-bf24-039a7847fd60",
+          api_category: "Financial Check",
+          api_name: "Bank Account Verification (Penny Less)",
+          billable: true,
+          message: "Success",
+          status: 1,
+          result: {
+            account_status: "SUCCESS",
+            details: {
+              bank_reference: "XXXXXXXX",
+              ifsc: "XXXXXXX",
+              registered_name: "XXX XXX"
+            },
+            name_match: {
+              match_result: "yes",
+              nameMatchScore: "100.00"
+            }
+          },
+          datetime: "2024-04-08 11:22:34.718812"
+        }
+      },
+      { 
+        id: "experian", 
+        name: "Experian", 
+        category: "financial-check",
+        requestSample: {
+          name: "RAM SINGH",
+          mobile: "9876543210",
+          pan: "ABCPD1234E",
+          consent_text: "We confirm obtaining valid customer consent to access/process their credit report. Consent remains valid, informed, and unwithdrawn.",
+          consent: "Y"
+        },
+        responseSample: {
+          txn_id: "3eb6af77-0f0b-4732-b804-e158de128471",
+          api_category: "Financial Checks",
+          api_name: "Experian",
+          billable: true,
+          message: "Success",
+          status: 1,
+          result: {
+            name: "RAM SINGH",
+            mobile: "9876543210",
+            pan: "ABCPD1234E",
+            credit_score: 759,
+            credit_report: {
+              CreditProfileHeader: {
+                ReportDate: 20250520,
+                ReportTime: 150911,
+                Version: "V2.4",
+                ReportNumber: 1747733876789
+              },
+              CAIS_Account: {
+                CAIS_Summary: {
+                  Credit_Account: {
+                    CreditAccountTotal: "2",
+                    CreditAccountActive: "1",
+                    CreditAccountDefault: "0",
+                    CreditAccountClosed: "1"
+                  },
+                  Total_Outstanding_Balance: {
+                    Outstanding_Balance_Secured: "21234",
+                    Outstanding_Balance_All: "21234"
+                  }
+                }
+              },
+              SCORE: {
+                FCIREXScore: 999
+              }
+            }
+          },
+          datetime: "2025-05-20 09:39:09.895971"
+        }
+      },
+      { 
+        id: "digital-payment-id-analyser", 
+        name: "Digital Payment ID Analyser", 
+        category: "financial-check",
+        requestSample: {
+          digital_payment_id: "9876543210@ybl",
+          consent: "Y",
+          consent_text: "We confirm obtaining valid customer consent to access/process their digital payment id data. Consent remains valid, informed, and unwithdrawn."
+        },
+        responseSample: {
+          txn_id: "7cddc1ef-bb88-41b8-84b6-a1d4c43ebf20",
+          api_category: "Financial Checks",
+          api_name: "Digital Payment ID Analyser",
+          billable: true,
+          message: "Success",
+          status: 1,
+          result: {
+            name: "RAM SINGH",
+            bank: "Bank of India",
+            branch: "MAYURVIHAR-1-NEW DELHI",
+            centre: "DELHI",
+            district: "DELHI",
+            state: "DELHI",
+            address: "MAYUR VIHAR PH-I, DELHI-91",
+            contact: "+911987654321",
+            imps: "TRUE",
+            rtgs: "TRUE",
+            city: "DELHI",
+            iso3166: "IN-DL",
+            neft: "TRUE",
+            micr: "111234567",
+            swift: ""
+          },
+          datetime: "2024-11-08 18:18:21.319667"
+        }
+      },
+      { 
+        id: "mobile-to-account-number", 
+        name: "Mobile to Account Number", 
+        category: "financial-check",
+        requestSample: {
+          mobile: "987654321",
+          consent: "Y",
+          consent_text: "We confirm obtaining valid customer consent to access/process their mobile data. Consent remains valid, informed, and unwithdrawn."
+        },
+        responseSample: {
+          txn_id: "3fc93293-97ed-42e8-8320-3c7ebb1e57de",
+          api_category: "Financial Check",
+          api_name: "Mobile to Account Number",
+          billable: true,
+          message: "Success",
+          status: 1,
+          result: {
+            account_details: {
+              account_ifsc: "BARB0AZSXDC",
+              account_number: "27520987654321",
+              amount_deposited: "1.00"
+            },
+            vpa_details: {
+              account_holder_name: "RAM SINGH",
+              name_match: "",
+              name_match_score: "",
+              vpa: "ramsingh@paypay"
+            }
+          },
+          datetime: "2025-02-05 13:35:43.959524"
+        }
+      },
+      { 
+        id: "digital-payment-to-account", 
+        name: "Digital Payment ID to Account Number", 
+        category: "financial-check",
+        requestSample: {
+          digital_payment_id: "name@payment",
+          consent: "Y",
+          consent_text: "We confirm obtaining valid customer consent to access/process their Payment ID data. Consent remains valid, informed, and unwithdrawn."
+        },
+        responseSample: {
+          txn_id: "5c4c91ad-35f5-4a69-af8a-04e73dcfc84f",
+          api_category: "Financial Check",
+          api_name: "Digital Payment ID to Account Number",
+          billable: true,
+          message: "Success",
+          status: 1,
+          result: {
+            account_details: {
+              account_ifsc: "ABCD0000123",
+              account_number: "12345678901234",
+              amount_deposited: "1.00"
+            },
+            digital_payment_details: {
+              account_holder_name: "RAM SINGH",
+              digital_payment_id: "name@payment"
+            }
+          },
+          datetime: "2025-03-03 16:10:05.576428"
+        }
+      },
+      { 
+        id: "pan-to-account-linkage", 
+        name: "PAN to Account Linkage Check", 
+        category: "financial-check",
+        requestSample: {
+          account_number: "12345670098765",
+          ifsc: "AZXS0MQASW",
+          pan: "ABCPD1234E",
+          consent: "Y",
+          consent_text: "We confirm obtaining valid customer consent to access/process their PAN IFSC and Account data. Consent remains valid, informed, and unwithdrawn."
+        },
+        responseSample: {
+          txn_id: "e55b3b10-7671-460c-a6da-b4179de8ed66",
+          api_category: "Financial Check",
+          api_name: "PAN to Account Linkage Check",
+          billable: true,
+          message: "Success",
+          status: 1,
+          result: {
+            linked_status: true,
+            message: "PAN and Account number are linked",
+            pan: "ABCPD1234E",
+            account_number: "12345670098765",
+            ifsc_code: "AZXS0MQASW",
+            account_holder: "PRIMARY",
+            account_type: "SAVINGS",
+            account_nature: "SINGLE"
+          },
+          datetime: "2025-04-30 18:02:10.500377"
+        }
+      },
+      { 
+        id: "digital-payment-id-verification", 
+        name: "Digital Payment ID Verification (Basic)", 
+        category: "financial-check",
+        requestSample: {
+          digital_payment_id: "9876543210@ybl",
+          consent: "Y",
+          consent_text: "We confirm obtaining valid customer consent to access/process their digital payment id data. Consent remains valid, informed, and unwithdrawn."
+        },
+        responseSample: {
+          txn_id: "9eb5eb1a-94de-4916-addb-dca456c636e8",
+          api_category: "Financial Checks",
+          api_name: "Digital Payment ID Verification (Basic)",
+          billable: true,
+          message: "Success",
+          status: 1,
+          result: {
+            name: "RAM SINGH"
+          },
+          datetime: "2024-11-08 23:02:45.108561"
+        }
+      },
+      { 
+        id: "ifsc-to-branch-details", 
+        name: "IFSC to Branch Details", 
+        category: "financial-check",
+        requestSample: {
+          ifsc: "BANK0000001",
+          consent: "Y",
+          consent_text: "We confirm obtaining valid customer consent to access/process their IFSC. Consent remains valid, informed, and unwithdrawn."
+        },
+        responseSample: {
+          txn_id: "3e980a4a-083f-4495-81ac-781db8913efd",
+          api_category: "Financial Check",
+          api_name: "IFSC to Branch Details",
+          billable: true,
+          message: "Success",
+          status: 1,
+          result: {
+            bank: "Bank",
+            ifsc: "BANK0000001",
+            branch: "DIST W GODAVARI",
+            centre: "WEST GODAVARI",
+            district: "WEST GODAVARI",
+            state: "ANDHRA PRADESH",
+            address: "DEVARAPALLI MANDAL,DUDDUKURU, DIST-W.GODAVARI, A.P.534313",
+            contact: "+910221800123456",
+            imps: "TRUE",
+            rtgs: "TRUE",
+            city: "DUDDUKURU",
+            iso3166: "IN-AP",
+            neft: "TRUE",
+            micr: "987654321",
+            upi: "TRUE"
+          },
+          datetime: "2025-08-12 06:39:22.662822"
+        }
+      },
     ],
   },
   {

@@ -6,8 +6,9 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import Navbar from "@/components/Navbar";
-import { ArrowLeft, Building2, MapPin, Phone, Mail, Calendar, CheckCircle2, Factory, Eye, EyeOff } from "lucide-react";
+import { ArrowLeft, Building2, MapPin, Phone, Mail, Calendar, CheckCircle2, Factory, Eye, EyeOff, ChevronDown, ChevronUp } from "lucide-react";
 import { maskData, maskEmail, maskPhone } from "@/lib/utils";
 
 const BusinessProfiling = () => {
@@ -17,6 +18,7 @@ const BusinessProfiling = () => {
   const [loading, setLoading] = useState(false);
   const [showData, setShowData] = useState(false);
   const [consent, setConsent] = useState(true);
+  const [expandedGst, setExpandedGst] = useState<{ [key: number]: boolean }>({});
 
   const mockResponse = {
     mobile: "+91-9876543210",
@@ -26,20 +28,119 @@ const BusinessProfiling = () => {
         trade_name: "Tech Innovations Pvt Ltd",
         legal_name: "Tech Innovations Private Limited",
         registration_date: "2018-07-15",
+        register_date: "15/07/2018",
         status: "Active",
+        current_registration_status: "Active",
         taxpayer_type: "Regular",
+        tax_payer_type: "Regular",
         state: "Maharashtra",
-        address: "Plot 45, MIDC Industrial Area, Andheri East, Mumbai - 400093"
+        address: "Plot 45, MIDC Industrial Area, Andheri East, Mumbai - 400093",
+        aggregate_turn_over: "Slab: Rs. 40 lakhs to 1.5 crores",
+        authorized_signatory: ["Rajesh Kumar", "Priya Sharma", "Amit Singh"],
+        business_constitution: "Private Limited Company",
+        business_details: [
+          {
+            saccd: "998313",
+            sdes: "Information technology (IT) consulting and support services"
+          },
+          {
+            saccd: "998599",
+            sdes: "Other support services n.e.c."
+          },
+          {
+            saccd: "998598",
+            sdes: "Other information services n.e.c."
+          }
+        ],
+        business_nature: ["Supplier of Services", "Recipient of Goods or Services"],
+        can_flag: "NA",
+        central_jurisdiction: "Commissionerate - MUMBAI,Division - DIVISION ANDHERI,Range - RANGE - 2",
+        compliance_rating: "NA",
+        filing_status: [
+          {
+            fy: "2022-2023",
+            taxp: "January",
+            mof: "ONLINE",
+            dof: "11/02/2023",
+            rtntype: "GSTR1",
+            arn: "NA",
+            status: "Filed"
+          },
+          {
+            fy: "2022-2023",
+            taxp: "January",
+            mof: "ONLINE",
+            dof: "16/02/2023",
+            rtntype: "GSTR3B",
+            arn: "NA",
+            status: "Filed"
+          }
+        ],
+        is_field_visit_conducted: "No",
+        mandate_e_invoice: "No",
+        primary_business_address: {
+          business_nature: "Supplier of Services, Recipient of Goods or Services",
+          detailed_address: "NA",
+          last_updated_date: "NA",
+          registered_address: "Plot 45, MIDC Industrial Area, Andheri East, Mumbai, Maharashtra, 400093"
+        },
+        register_cancellation_date: "",
+        state_jurisdiction: "State - Maharashtra,Division - Division - 3,Range - Range - 7",
+        gross_total_income: "NA",
+        gross_total_income_financial_year: "2019-2020",
+        business_email: "contact@techinnovations.com",
+        business_mobile: "9876543210"
       },
       {
         gstin: "09ABCDE1234F1Z8",
         trade_name: "Digital Solutions LLP",
         legal_name: "Digital Solutions Limited Liability Partnership",
         registration_date: "2020-03-22",
+        register_date: "22/03/2020",
         status: "Active",
+        current_registration_status: "Active",
         taxpayer_type: "Regular",
+        tax_payer_type: "Regular",
         state: "Uttar Pradesh",
-        address: "Sector 62, Noida - 201301"
+        address: "Sector 62, Noida - 201301",
+        aggregate_turn_over: "Slab: Rs. 20 lakhs to 40 lakhs",
+        authorized_signatory: ["Neha Verma", "Suresh Patel"],
+        business_constitution: "Limited Liability Partnership",
+        business_details: [
+          {
+            saccd: "998314",
+            sdes: "Software development and programming services"
+          }
+        ],
+        business_nature: ["Supplier of Services"],
+        can_flag: "NA",
+        central_jurisdiction: "Commissionerate - GAUTAM BUDDHA NAGAR,Division - DIVISION I GAUTAM BUDH NAGAR,Range - RANGE - 1",
+        compliance_rating: "NA",
+        filing_status: [
+          {
+            fy: "2022-2023",
+            taxp: "February",
+            mof: "ONLINE",
+            dof: "12/03/2023",
+            rtntype: "GSTR1",
+            arn: "NA",
+            status: "Filed"
+          }
+        ],
+        is_field_visit_conducted: "No",
+        mandate_e_invoice: "No",
+        primary_business_address: {
+          business_nature: "Supplier of Services",
+          detailed_address: "NA",
+          last_updated_date: "NA",
+          registered_address: "Sector 62, Noida, Gautam Buddha Nagar, Uttar Pradesh, 201301"
+        },
+        register_cancellation_date: "",
+        state_jurisdiction: "State - Uttar Pradesh,Zone - Gautambudha Nagar,Range - Gautambudha Nagar(A)",
+        gross_total_income: "NA",
+        gross_total_income_financial_year: "2019-2020",
+        business_email: "info@digitalsolutions.com",
+        business_mobile: "9012345678"
       }
     ],
     iec_codes: [
@@ -207,16 +308,19 @@ const BusinessProfiling = () => {
                     {responseData.gst_registrations.map((gst: any, idx: number) => (
                       <Card key={idx}>
                         <CardContent className="pt-6">
-                          <div className="space-y-4">
+                          <div className="space-y-6">
+                            {/* Header */}
                             <div className="flex items-start justify-between">
                               <div>
                                 <p className="font-semibold text-lg">{gst.trade_name}</p>
                                 <p className="text-sm text-muted-foreground">{gst.legal_name}</p>
                               </div>
-                              <Badge variant={gst.status === "Active" ? "default" : "secondary"}>
-                                {gst.status}
+                              <Badge variant={gst.current_registration_status === "Active" ? "default" : "secondary"}>
+                                {gst.current_registration_status}
                               </Badge>
                             </div>
+
+                            {/* Basic Info - Always Visible */}
                             <div className="grid md:grid-cols-3 gap-4">
                               <div>
                                 <p className="text-sm text-muted-foreground">GSTIN</p>
@@ -224,21 +328,199 @@ const BusinessProfiling = () => {
                               </div>
                               <div>
                                 <p className="text-sm text-muted-foreground">Registration Date</p>
-                                <p className="text-sm">{new Date(gst.registration_date).toLocaleDateString('en-IN')}</p>
+                                <p className="text-sm">{gst.register_date}</p>
                               </div>
                               <div>
                                 <p className="text-sm text-muted-foreground">Taxpayer Type</p>
-                                <p className="text-sm">{gst.taxpayer_type}</p>
+                                <p className="text-sm">{gst.tax_payer_type}</p>
+                              </div>
+                              <div>
+                                <p className="text-sm text-muted-foreground">Business Constitution</p>
+                                <p className="text-sm">{gst.business_constitution}</p>
+                              </div>
+                              <div>
+                                <p className="text-sm text-muted-foreground">Aggregate Turnover</p>
+                                <p className="text-sm">{gst.aggregate_turn_over}</p>
                               </div>
                               <div>
                                 <p className="text-sm text-muted-foreground">State</p>
                                 <p className="text-sm">{gst.state}</p>
                               </div>
-                              <div className="md:col-span-2">
-                                <p className="text-sm text-muted-foreground">Address</p>
-                                <p className="text-sm">{gst.address}</p>
+                            </div>
+
+                            {/* Contact Info */}
+                            <div className="grid md:grid-cols-2 gap-4">
+                              <div className="flex items-center gap-2">
+                                <Mail className="h-4 w-4 text-muted-foreground" />
+                                <div>
+                                  <p className="text-sm text-muted-foreground">Business Email</p>
+                                  <p className="text-sm break-all">{maskEmail(gst.business_email, showData)}</p>
+                                </div>
+                              </div>
+                              <div className="flex items-center gap-2">
+                                <Phone className="h-4 w-4 text-muted-foreground" />
+                                <div>
+                                  <p className="text-sm text-muted-foreground">Business Mobile</p>
+                                  <p className="text-sm">{maskPhone(gst.business_mobile, showData)}</p>
+                                </div>
                               </div>
                             </div>
+
+                            {/* Business Nature */}
+                            <div>
+                              <p className="text-sm text-muted-foreground mb-2">Business Nature</p>
+                              <div className="flex flex-wrap gap-2">
+                                {gst.business_nature.map((nature: string, nIdx: number) => (
+                                  <Badge key={nIdx} variant="secondary">{nature}</Badge>
+                                ))}
+                              </div>
+                            </div>
+
+                            {/* Authorized Signatories */}
+                            <div>
+                              <p className="text-sm text-muted-foreground mb-2">Authorized Signatories</p>
+                              <div className="flex flex-wrap gap-2">
+                                {gst.authorized_signatory.map((signatory: string, sIdx: number) => (
+                                  <Badge key={sIdx} variant="outline">{maskData(signatory, showData)}</Badge>
+                                ))}
+                              </div>
+                            </div>
+
+                            {/* Collapsible Section - Show More */}
+                            <Collapsible open={expandedGst[idx]} onOpenChange={(open) => setExpandedGst({ ...expandedGst, [idx]: open })}>
+                              <CollapsibleTrigger asChild>
+                                <Button variant="outline" className="w-full">
+                                  {expandedGst[idx] ? (
+                                    <>
+                                      <ChevronUp className="h-4 w-4 mr-2" />
+                                      Show Less Details
+                                    </>
+                                  ) : (
+                                    <>
+                                      <ChevronDown className="h-4 w-4 mr-2" />
+                                      Show More Details
+                                    </>
+                                  )}
+                                </Button>
+                              </CollapsibleTrigger>
+                              <CollapsibleContent className="space-y-6 mt-6">
+                                {/* Business Details/Services */}
+                                <Card className="bg-muted/50">
+                                  <CardHeader>
+                                    <CardTitle className="text-base">Business Details & Services</CardTitle>
+                                  </CardHeader>
+                                  <CardContent className="space-y-3">
+                                    {gst.business_details.map((detail: any, dIdx: number) => (
+                                      <div key={dIdx} className="flex gap-3">
+                                        <Badge variant="outline" className="font-mono">{detail.saccd}</Badge>
+                                        <p className="text-sm">{detail.sdes}</p>
+                                      </div>
+                                    ))}
+                                  </CardContent>
+                                </Card>
+
+                                {/* Jurisdiction Info */}
+                                <div className="grid md:grid-cols-2 gap-4">
+                                  <Card className="bg-muted/50">
+                                    <CardHeader>
+                                      <CardTitle className="text-base">Central Jurisdiction</CardTitle>
+                                    </CardHeader>
+                                    <CardContent>
+                                      <p className="text-sm">{gst.central_jurisdiction}</p>
+                                    </CardContent>
+                                  </Card>
+                                  <Card className="bg-muted/50">
+                                    <CardHeader>
+                                      <CardTitle className="text-base">State Jurisdiction</CardTitle>
+                                    </CardHeader>
+                                    <CardContent>
+                                      <p className="text-sm">{gst.state_jurisdiction}</p>
+                                    </CardContent>
+                                  </Card>
+                                </div>
+
+                                {/* Primary Business Address */}
+                                <Card className="bg-muted/50">
+                                  <CardHeader>
+                                    <CardTitle className="text-base flex items-center gap-2">
+                                      <MapPin className="h-4 w-4" />
+                                      Primary Business Address
+                                    </CardTitle>
+                                  </CardHeader>
+                                  <CardContent className="space-y-3">
+                                    <div>
+                                      <p className="text-sm text-muted-foreground">Registered Address</p>
+                                      <p className="text-sm">{gst.primary_business_address.registered_address}</p>
+                                    </div>
+                                    <div>
+                                      <p className="text-sm text-muted-foreground">Business Nature</p>
+                                      <p className="text-sm">{gst.primary_business_address.business_nature}</p>
+                                    </div>
+                                  </CardContent>
+                                </Card>
+
+                                {/* Filing Status */}
+                                <Card className="bg-muted/50">
+                                  <CardHeader>
+                                    <CardTitle className="text-base">Filing Status</CardTitle>
+                                  </CardHeader>
+                                  <CardContent>
+                                    <div className="space-y-3">
+                                      {gst.filing_status.map((filing: any, fIdx: number) => (
+                                        <div key={fIdx} className="grid grid-cols-2 md:grid-cols-5 gap-3 text-sm p-3 border rounded-lg">
+                                          <div>
+                                            <p className="text-muted-foreground">FY</p>
+                                            <p className="font-medium">{filing.fy}</p>
+                                          </div>
+                                          <div>
+                                            <p className="text-muted-foreground">Tax Period</p>
+                                            <p className="font-medium">{filing.taxp}</p>
+                                          </div>
+                                          <div>
+                                            <p className="text-muted-foreground">Return Type</p>
+                                            <p className="font-medium">{filing.rtntype}</p>
+                                          </div>
+                                          <div>
+                                            <p className="text-muted-foreground">Date of Filing</p>
+                                            <p className="font-medium">{filing.dof}</p>
+                                          </div>
+                                          <div>
+                                            <p className="text-muted-foreground">Status</p>
+                                            <Badge variant={filing.status === "Filed" ? "default" : "secondary"}>
+                                              {filing.status}
+                                            </Badge>
+                                          </div>
+                                        </div>
+                                      ))}
+                                    </div>
+                                  </CardContent>
+                                </Card>
+
+                                {/* Additional Details */}
+                                <div className="grid md:grid-cols-3 gap-4">
+                                  <div>
+                                    <p className="text-sm text-muted-foreground">Field Visit Conducted</p>
+                                    <p className="text-sm font-medium">{gst.is_field_visit_conducted}</p>
+                                  </div>
+                                  <div>
+                                    <p className="text-sm text-muted-foreground">E-Invoice Mandate</p>
+                                    <p className="text-sm font-medium">{gst.mandate_e_invoice}</p>
+                                  </div>
+                                  <div>
+                                    <p className="text-sm text-muted-foreground">Compliance Rating</p>
+                                    <p className="text-sm font-medium">{gst.compliance_rating}</p>
+                                  </div>
+                                  <div>
+                                    <p className="text-sm text-muted-foreground">CAN Flag</p>
+                                    <p className="text-sm font-medium">{gst.can_flag}</p>
+                                  </div>
+                                  <div>
+                                    <p className="text-sm text-muted-foreground">Gross Total Income (FY)</p>
+                                    <p className="text-sm font-medium">{gst.gross_total_income} ({gst.gross_total_income_financial_year})</p>
+                                  </div>
+                                </div>
+                              </CollapsibleContent>
+                            </Collapsible>
                           </div>
                         </CardContent>
                       </Card>

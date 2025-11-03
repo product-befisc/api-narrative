@@ -396,7 +396,6 @@ const Landing = () => {
                   { name: "Freo", logo: freoLogo },
                   { name: "Varthana", logo: varthanaLogo },
                   { name: "Roopya", logo: rupyaLogo },
-                  { name: "Niro", logo: niroLogo },
                   { name: "Cashrich", logo: cashrichLogo },
                   { name: "Epaylater", logo: epaylaterLogo },
                   { name: "Eximpe", logo: eximpeLogo },

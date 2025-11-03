@@ -3,7 +3,6 @@ import { ArrowLeft, Shield, FileText, Car, CreditCard, User, Building, MapPin, F
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Badge } from '@/components/ui/badge';
 import Navbar from '@/components/Navbar';
 
 const IDProof = () => {
@@ -16,43 +15,37 @@ const IDProof = () => {
       name: 'Vehicle Verification', 
       icon: Car, 
       description: 'Complete vehicle verification with RC, Challan & Chassis', 
-      path: '/product/id-proof/vehicle-verification',
-      apis: ['RC Advance', 'Challan Details', 'Chassis to RC']
+      path: '/product/id-proof/vehicle-verification'
     },
     { 
       name: 'PAN Profiling', 
       icon: CreditCard, 
       description: 'PAN card verification & profiling', 
-      path: '/product/id-proof/pan-verification',
-      apis: ['PAN Verification', 'PAN to GST']
+      path: '/product/id-proof/pan-verification'
     },
     { 
       name: 'Customer Profiling', 
       icon: User, 
       description: 'Profile insights via mobile', 
-      path: '/product/id-proof/customer-profiling',
-      apis: ['Mobile Number', 'Email Verification', 'Address Lookup']
+      path: '/product/id-proof/customer-profiling'
     },
     { 
       name: 'Business Profiling', 
       icon: Building, 
       description: 'Company data visualization', 
-      path: '/product/id-proof/business-profiling',
-      apis: ['GST Details', 'CIN Lookup', 'Company Master Data']
+      path: '/product/id-proof/business-profiling'
     },
     { 
       name: 'Address Tracing', 
       icon: MapPin, 
       description: 'Address mapping via mobile', 
-      path: '/product/id-proof/address-tracing',
-      apis: ['Mobile to Address', 'Geolocation', 'Address Verification']
+      path: '/product/id-proof/address-tracing'
     },
     { 
       name: 'Employment Verification', 
       icon: Briefcase, 
       description: 'UAN & employment history verification', 
-      path: '/product/id-proof/employment-verification',
-      apis: ['UAN History', 'EPFO Verification', 'Employment Records']
+      path: '/product/id-proof/employment-verification'
     },
   ];
 
@@ -147,33 +140,13 @@ const IDProof = () => {
                       className="p-6 hover:shadow-lg transition-all hover:scale-[1.02] cursor-pointer border-2 hover:border-primary group"
                       onClick={() => solution.path && navigate(solution.path)}
                     >
-                      <div className="flex items-start justify-between gap-6">
-                        {/* Left Section - Icon and Description */}
-                        <div className="flex items-start gap-4 flex-1">
-                          <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
-                            <Icon className="h-6 w-6 text-primary" />
-                          </div>
-                          <div className="flex-1">
-                            <h3 className="font-semibold text-foreground mb-1">{solution.name}</h3>
-                            <p className="text-sm text-muted-foreground">{solution.description}</p>
-                          </div>
+                      <div className="flex items-start gap-4">
+                        <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                          <Icon className="h-6 w-6 text-primary" />
                         </div>
-                        
-                        {/* Right Section - APIs Included */}
-                        <div className="flex flex-col items-end gap-2 min-w-[180px]">
-                          <h4 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-                            APIs Included
-                          </h4>
-                          <div className="flex flex-col items-end gap-1.5">
-                            {solution.apis.map((api, apiIndex) => (
-                              <span 
-                                key={apiIndex}
-                                className="text-xs font-medium text-foreground/80 hover:text-primary transition-colors"
-                              >
-                                {api}
-                              </span>
-                            ))}
-                          </div>
+                        <div>
+                          <h3 className="font-semibold text-foreground mb-1">{solution.name}</h3>
+                          <p className="text-sm text-muted-foreground">{solution.description}</p>
                         </div>
                       </div>
                     </Card>

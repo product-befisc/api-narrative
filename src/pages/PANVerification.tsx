@@ -150,9 +150,22 @@ const PANVerification = () => {
         </Button>
 
         <div className="max-w-4xl mx-auto space-y-6">
-          <div className="text-center space-y-2">
-            <h1 className="text-4xl font-bold">PAN Profiling</h1>
-            <p className="text-muted-foreground">Verify PAN details and get comprehensive profile information</p>
+          <div className="mb-8">
+            <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6">
+              <div className="flex-1">
+                <h1 className="text-4xl font-bold">PAN Profiling</h1>
+                <p className="text-muted-foreground">Verify PAN details and get comprehensive profile information</p>
+              </div>
+              <div className="flex flex-col items-end gap-2 min-w-[200px]">
+                <h4 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                  APIs Included
+                </h4>
+                <div className="flex flex-col items-end gap-1.5">
+                  <span className="text-sm font-medium text-foreground/80">PAN Verification</span>
+                  <span className="text-sm font-medium text-foreground/80">PAN to GST</span>
+                </div>
+              </div>
+            </div>
           </div>
 
           <Card>

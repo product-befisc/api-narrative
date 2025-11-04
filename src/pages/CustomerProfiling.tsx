@@ -8,8 +8,9 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Navbar from "@/components/Navbar";
-import { ArrowLeft, User, CreditCard, Briefcase, Phone, MapPin, Building2, Fuel, CheckCircle2, Eye, EyeOff, FileText, ChevronDown, ChevronUp } from "lucide-react";
+import { ArrowLeft, User, CreditCard, Briefcase, Phone, MapPin, Building2, Fuel, CheckCircle2, Eye, EyeOff, FileText, ChevronDown, ChevronUp, AlertTriangle, Info, Shield } from "lucide-react";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { maskData, maskEmail, maskPhone } from "@/lib/utils";
 
 const CustomerProfiling = () => {
@@ -19,929 +20,500 @@ const CustomerProfiling = () => {
   const [loading, setLoading] = useState(false);
   const [showData, setShowData] = useState(false);
   const [consent, setConsent] = useState(true);
-  const [showFullBureauReport, setShowFullBureauReport] = useState(false);
-  const [showFullESICDetails, setShowFullESICDetails] = useState(false);
-  const [showFullAdditionalDetails, setShowFullAdditionalDetails] = useState(false);
-  const [showUdyamDetails, setShowUdyamDetails] = useState(false);
   const [activeTab, setActiveTab] = useState("salaried");
+  const [statsDialogOpen, setStatsDialogOpen] = useState(false);
+  const [selectedStat, setSelectedStat] = useState<string>("");
+  const [expandedGst, setExpandedGst] = useState<{ [key: number]: boolean }>({});
+  const [expandedMsme, setExpandedMsme] = useState(false);
+  const [expandedIec, setExpandedIec] = useState(false);
+  const [expandedEsic, setExpandedEsic] = useState<{ [key: number]: boolean }>({});
 
-  // Helper function to get credit score band
-  const getCreditScoreBand = (score: number) => {
-    const bandStart = Math.floor(score / 10) * 10;
-    const bandEnd = bandStart + 10;
-    return `${bandStart}-${bandEnd}`;
-  };
-
-  const mockResponse = {
+  // Comprehensive mock response generator
+  const getMockResponse = (profileType: string) => ({
     mobile: "+91-9876543210",
-    digital_payment_id: {
-      name: "Priya Sharma",
-      upi_id: "priya.sharma@okaxis",
-      bank: "Axis Bank",
-      branch: "Mumbai Central",
-      contact: "+91-9876543210",
-      address: "456 Marine Drive, Mumbai, Maharashtra - 400020"
-    },
-    lpg_connections: [
-      {
-        provider: "Bharat Gas",
-        consumer_id: "BG12345678",
-        distributor: "Mumbai Gas Agency",
-        distributor_contact: "022-12345678",
-        address: "456 Marine Drive, Mumbai"
-      },
-      {
-        provider: "HP Gas",
-        consumer_id: "HP87654321",
-        distributor: "HP Distributor Mumbai",
-        distributor_contact: "022-87654321",
-        address: "456 Marine Drive, Mumbai"
+    digital_payment_id_info: {
+      code: "SUC",
+      data: {
+        name: "Ramesh Kumar",
+        branch: "Noida Branch",
+        address: "B-121, Sector-5, Noida-201301",
+        state: "UTTAR PRADESH",
+        contact: "+911133996699",
+        city: "NOIDA",
+        centre: "Gautam Buddh Nagar",
+        district: "Gautam Buddh Nagar",
+        bank: "Paytm Payments Bank"
       }
-    ],
-    msme_info: {
-      registered: true,
-      udyam_number: "UDYAM-WB-12-7654321",
-      enterprise_name: "ABC PRIVATE LIMITED",
-      udyam_details: {
-        enterprise_name: "ABC PRIVATE LIMITED",
-        organisation_type: "Proprietary",
-        service_type: "Services",
-        gender: "Female",
-        social_category: "General",
-        date_of_incorporation: "01/04/2024",
-        date_of_commencement: "01/06/2024",
-        address: {
-          flat_no: "FLAT NO 101",
-          building: "RAVI CLASSIC , S NO 112, 113",
-          village: "BANER ROAD",
-          block: "CONTAI III",
-          street: "SH5",
-          district: "EAST MEDINIPUR",
-          city: "CONTAI",
-          state: "WEST BENGAL",
-          pin: "721452"
+    },
+    lpg_info: {
+      code: "SUC",
+      data: [
+        {
+          gas_provider: "Indane Gas",
+          name: "RAM KUMAR",
+          consumer_details: {
+            consumer_mobile: "6789999999",
+            consumer_id: "7500000901234567",
+            consumer_status: "ACTIVE",
+            consumer_type: "Single Bottle Connection"
+          },
+          address: "123 ABC Colony XYZ",
+          distributor_details: {
+            distributor_code: "000987654",
+            distributor_name: "GAYATRI INDANE SERVICE",
+            distributor_contact: "1800987654",
+            distributor_address: "456 MNOP Marg XYZ"
+          }
         },
-        mobile: "98*****210",
-        email: "ramsingh@gmail.com",
-        plant_details: [
-          {
-            unit_name: "LEENA BAKE",
-            flat: "FLAT NO 101",
-            building: "RAVI CLASSIC , S NO 112, 113",
-            village: "PASCHIM PARULIA",
-            block: "CONTAI III",
-            road: "SH5",
-            district: "EAST MEDINIPUR",
-            city: "CONTAI",
-            state: "WEST BENGAL",
-            pin: "721452"
+        {
+          gas_provider: "Bharat Gas",
+          name: "Sham Kumar",
+          consumer_details: {
+            consumer_mobile: "",
+            consumer_id: "1234567890",
+            consumer_status: "",
+            consumer_type: ""
+          },
+          address: "123 ABC Colony XYZ",
+          distributor_details: {
+            distributor_code: "1234567",
+            distributor_name: "CHANDAN GAS SERVICE",
+            distributor_contact: "",
+            distributor_address: ""
           }
-        ],
-        enterprise_type: [
-          {
-            classification_year: "2024-25",
-            enterprise_type: "Micro",
-            classification_date: "01/01/2025"
+        },
+        {
+          gas_provider: "HP Gas",
+          name: "Sham Kumar",
+          consumer_details: {
+            consumer_mobile: "",
+            consumer_id: "",
+            consumer_status: "",
+            consumer_type: ""
+          },
+          address: "1XX ABC Colony GXXXX 123456",
+          distributor_details: {
+            distributor_code: "1234567",
+            distributor_name: "CHITRA GAS SERVICE",
+            distributor_contact: "",
+            distributor_address: ""
           }
-        ],
-        nic_code: [
-          {
-            nic_2_digit: "20 - Manufacture of chemicals and chemical products",
-            nic_4_digit: "2023 - Manufacture of soap and detergents, cleaning and polishing preparations, perfumes and toilet preparations",
-            nic_5_digit: "20235 - Manufacture of preparations for oral or dental hygiene (includes manufacture of toothpastes, toothpowder, mouthwash, oral, perfumes, dental fixative pastes and powders etc.)",
-            activity: "Manufacturing",
-            date: "10/01/2025"
-          }
-        ],
-        dic: "PURBA MEDINIPUR",
-        "msme-dfo": "KOLKATA",
-        date_of_udyam_registeration: "01/01/2025"
-      }
+        }
+      ]
     },
-    epfo: {
-      uan: "101234567890",
-      name: "Priya Sharma",
-      active: true
+    msme_info: {
+      code: profileType === "business" ? "SUC" : "NRF",
+      data: profileType === "business" ? [
+        {
+          udyam_number: "UDYAM-MH-11-12345678",
+          type_of_enterprise: "MICRO",
+          major_activity: "Services",
+          type_of_organisation: "Hindu Undivided Family",
+          name_of_enterprise: "ABC Enterprise",
+          owner_name: "Ram Singh",
+          pan: "ABCPD1234D",
+          do_you_have_gstin: "",
+          mobile_no: "9876543210",
+          email_id: "ram@email.com",
+          social_category: "General",
+          gender: "Male",
+          specially_abled_divyang: "No",
+          date_of_incorporation: "29/02/2024",
+          date_of_commencement_of_production_business: "",
+          male: "4",
+          female: "0",
+          other: "0",
+          total: "4",
+          unit_sn: "1",
+          unit_unit_name: "ABC Unit",
+          unit_flat: "123",
+          unit_building: "ABC colony",
+          "unit_village/town": "ABC",
+          unit_block: "ABC",
+          unit_road: "ABC colony",
+          unit_city: "ABC",
+          unit_pin: "121212",
+          unit_state: "Delhi",
+          unit_district: "ABC",
+          flat_door_block_no: "123",
+          name_of_premises_building: "ABC colony",
+          village_town: "ABC Village",
+          block: "ABC Block",
+          road_street_lane: "ABC colony",
+          city: "ABC",
+          state: "TELANGANA",
+          district: "Delhi",
+          pin: "121212",
+          mobile: "9876543210",
+          email: "ram@email.com",
+          "sno.": "",
+          nic_2_digit: "10 - Manufacture of food products",
+          nic_4_digit: "1079 - Manufacture of other food products n.e.c.",
+          nic_5_digit: "10796 - Manufacture of papads, appalam and similar food products",
+          activity: "Manufacturing",
+          gem_interest: "No",
+          treds_interest: "No",
+          ncs_interest: "No",
+          dic: "Delhi",
+          msme_di: "Delhi",
+          date_of_udyam_registration: "10/06/2025"
+        }
+      ] : []
     },
-    director_info: {
-      is_director: true,
-      pan: "ABCDE1234F",
-      din: "01234567",
-      companies: ["Tech Solutions Pvt Ltd", "Digital Innovations LLP"]
+    epfo_info: {
+      code: profileType !== "business" ? "SUC" : "NRF",
+      data: profileType !== "business" ? [
+        {
+          uan: "111XXXXXXXXX",
+          name: "RAM RAM",
+          guardian_name: "SHIV RAM",
+          establishment_name: "ABCD PVT LTD.",
+          member_id: "ABCDE98765430000012345",
+          date_of_joining: "08/01/2019",
+          date_of_exit: "",
+          last_pf_submitted: "08/01/2019"
+        },
+        {
+          uan: "111XXXXXXXXX",
+          name: "RAM RAM",
+          guardian_name: "SHIV RAM",
+          establishment_name: "TEST FOUNDATION OF INDIA",
+          member_id: "EDCBA09876543210012345",
+          date_of_joining: "04/03/2018",
+          date_of_exit: "",
+          last_pf_submitted: "01/01/2019"
+        }
+      ] : []
+    },
+    director_pan_info: {
+      code: profileType === "business" ? "SUC" : "NRF",
+      data: profileType === "business" ? ["ABCPD1234E"] : []
+    },
+    din_info: {
+      code: profileType === "business" ? "SUC" : "NRF",
+      data: profileType === "business" ? [
+        {
+          pan: "ABCPD1234E",
+          data: {
+            pan: "ABCPD1234D",
+            din: "87654321",
+            name: "RAM SINGH",
+            mobile: "987654321",
+            email: "ABC@GMAIL.COM"
+          }
+        }
+      ] : []
     },
     telco_info: {
-      operator: "Airtel",
-      circle: "Maharashtra",
-      mobile_age_months: 84,
-      status: "Active"
-    },
-    gst_info: {
-      registered: true,
-      gstin: "27ABCDE1234F1Z5",
-      trade_name: "Sharma Enterprises"
-    },
-    iec_info: {
-      registered: true,
-      iec_code: "0512345678"
-    },
-    whatsapp_info: {
-      registered: true,
-      business_account: false
-    },
-    esic_info: {
-      registered: true,
-      insurance_number: "1234567890123456"
-    },
-    esic_details: [
-      {
-        esic_number: "6543214933",
-        name: "RAM SINGH",
-        employer_code: "28000540987654321",
-        employer_name: "ABC ENGINEERING",
-        mobile: "9876543210",
-        uan_number: "1021987654321",
-        bank_name: "HDFC BANK",
-        branch_name: "KOLKATA - STEPHEN HOUSE (BBD BAG)",
-        bank_account_status: "Not Verified",
-        uhid_number: "",
-        date_of_birth: "01/01/1999",
-        registration_date: "04/11/2024",
-        dispensary_name: "Renukoot, Sonbhadra, UP (ESIS Disp.)",
-        disability_type: "",
-        first_date_of_appointment: "26/10/2024",
-        employer_details: {
-          employer_code: "12345678987654321",
-          employer_name: "ABC Private Limited",
-          address: "Nirayan Sales&Marketing,Mehmoorgaj Varanasi",
-          state: "Uttar Pradesh",
-          district: "Varanasi",
-          pincode: "221001",
-          email: "abc@email.com",
-          mobile: ""
+      code: "SUC",
+      data: {
+        is_valid: true,
+        subscriber_status: "CONNECTED",
+        connection_status: {
+          status_code: "DELIVERED",
+          error_code_id: ""
         },
-        address: "SHIV MANDIR RENUSAGAR Sonbhadra Uttar Pradesh 231218",
-        age: "26",
-        gender: "Male"
-      },
-      {
-        esic_number: "1234567833",
-        name: "RAM SINGH",
-        employer_code: "43210540987654321",
-        employer_name: "ABC Private Limited",
-        mobile: "9876543210",
-        uan_number: "102145654321",
-        bank_name: "HDFC BANK",
-        branch_name: "KOLKATA - STEPHEN HOUSE (BBD BAG)",
-        bank_account_status: "Not Verified",
-        uhid_number: "",
-        date_of_birth: "01/01/1999",
-        registration_date: "04/11/2024",
-        dispensary_name: "Renukoot, Sonbhadra, UP (ESIS Disp.)",
-        disability_type: "",
-        first_date_of_appointment: "26/10/2024",
-        employer_details: {
-          employer_code: "12345678987654321",
-          employer_name: "ABC Private Limited",
-          address: "Nirayan Sales&Marketing,Mehmoorgaj Varanasi",
-          state: "Uttar Pradesh",
-          district: "Varanasi",
-          pincode: "221001",
-          email: "abc@email.com",
-          mobile: ""
+        connection_type: "prepaid",
+        msisdn: {
+          msisdn_country_code: "IN",
+          msisdn: "+919582773885",
+          type: "MOBILE",
+          mnc: "109",
+          imsi: "404109582773885",
+          mcc: "404",
+          mcc_mnc: "40410"
         },
-        address: "SHIV MANDIR RENUSAGAR Sonbhadra Uttar Pradesh 231218",
-        age: "26",
-        gender: "Male"
+        current_service_provider: {
+          network_prefix: "81302",
+          network_name: "Airtel",
+          network_region: "Delhi",
+          mcc: "404",
+          mnc: "109",
+          country_prefix: "+91",
+          country_code: "IN",
+          country_name: "India"
+        },
+        original_service_provider: {
+          network_prefix: "95827",
+          network_name: "Vodafone",
+          network_region: "Delhi",
+          mcc: "404",
+          mnc: "109",
+          country_prefix: "+91",
+          country_code: "IN",
+          country_name: "India"
+        },
+        is_roaming: false
       }
-    ],
-    bureau_report: {
-      name: "RAM SINGH",
-      mobile: "9876543210",
-      pan: "ABCPD1234E",
-      credit_score: 759,
-      credit_report: {
-        CreditProfileHeader: {
-          ReportDate: 20250520,
-          ReportTime: 150911,
-          Version: "V2.4",
-          ReportNumber: 1747733876789
-        },
-        Current_Application: {
-          Current_Application_Details: {
-            Enquiry_Reason: "99",
-            Finance_Purpose: "99",
-            Amount_Financed: "0",
-            Duration_Of_Agreement: "0",
-            Current_Applicant_Details: {
-              Last_Name: "SINGH",
-              First_Name: "RAM",
-              Middle_Name1: "",
-              Gender_Code: "1",
-              IncomeTaxPan: "ABCPD1234E",
-              Date_Of_Birth_Applicant: "19876546",
-              Telephone_Number_Applicant_1st: "9876543210",
-              EMailId: "RAMSINGH@EMAIL.COM"
-            },
-            Current_Applicant_Address_Details: {
-              FlatNoPlotNoHouseNo: "ABC COLONY",
-              State: "27",
-              PINCode: "400612",
-              Country_Code: "IB"
-            }
-          }
-        },
-        CAIS_Account: {
-          CAIS_Summary: {
-            Credit_Account: {
-              CreditAccountTotal: "2",
-              CreditAccountActive: "1",
-              CreditAccountDefault: "0",
-              CreditAccountClosed: "1"
-            },
-            Total_Outstanding_Balance: {
-              Outstanding_Balance_Secured: "21234",
-              Outstanding_Balance_UnSecured: "0",
-              Outstanding_Balance_All: "21234"
-            }
+    },
+    mobile_age_info: {
+      code: "SUC",
+      data: {
+        is_ported: "Yes",
+        mobile_age: "15 to 16 Years",
+        number_active: "Yes",
+        number_valid: "Yes",
+        ported_region: "Delhi",
+        ported_telecom: "Airtel",
+        region: "Delhi",
+        roaming: "No",
+        telecom: "Vodafone"
+      }
+    },
+    gst_list: {
+      code: profileType === "business" ? "SUC" : "NRF",
+      data: profileType === "business" ? [
+        {
+          authorized_signatory: ["XXXXXXXX", "XXXXXXXXX", "XXXXXXXXX"],
+          business_constitution: "Private Limited Company",
+          business_details: [
+            { saccd: "998313", sdes: "Information technology (IT) consulting and support services" },
+            { saccd: "998599", sdes: "Other support services n.e.c." },
+            { saccd: "998598", sdes: "Other information services n.e.c." }
+          ],
+          business_nature: ["Supplier of Services", "Recipient of Goods or Services"],
+          can_flag: "NA",
+          central_jurisdiction: "Commissionerate - GAUTAM BUDDHA NAGAR, Division - DIVISION I GAUTAM BUDH NAGAR, Range - RANGE - 1",
+          compliance_rating: "NA",
+          current_registration_status: "Active",
+          filing_status: [
+            [
+              {
+                fy: "2022-2023",
+                taxp: "January",
+                mof: "ONLINE",
+                dof: "11/02/2023",
+                rtntype: "GSTR1",
+                arn: "NA",
+                status: "Filed"
+              },
+              {
+                fy: "2022-2023",
+                taxp: "January",
+                mof: "ONLINE",
+                dof: "16/02/2023",
+                rtntype: "GSTR3B",
+                arn: "NA",
+                status: "Filed"
+              }
+            ]
+          ],
+          gstin: "XXXXXXXXXX",
+          is_field_visit_conducted: "No",
+          legal_name: "XXXXXXX PRIVATE LIMITED",
+          mandate_e_invoice: "NA",
+          aggregate_turn_over: "NA",
+          primary_business_address: {
+            business_nature: "Supplier of Services, Recipient of Goods or Services",
+            detailed_address: "NA",
+            last_updated_date: "NA",
+            registered_address: "XXXXXXXX County, GREATER NOIDA, Greater Noida, Gautam Buddha Nagar, Uttar Pradesh, 201306"
           },
-          CAIS_Account_DETAILS: [
-            {
-              Identification_Number: "NBFXXXXXXXX",
-              Subscriber_Name: "XXXXXXXXXX",
-              Account_Number: "XXXXX4748",
-              Portfolio_Type: "I",
-              Account_Type: "06",
-              Open_Date: "20230627",
-              Highest_Credit_or_Original_Loan_Amount: "11234",
-              Terms_Duration: "010",
-              Account_Status: "13",
-              Current_Balance: "0",
-              Date_Reported: "20240531",
-              Date_Closed: "20240510",
-              CAIS_Holder_Details: [
-                {
-                  Surname_Non_Normalized: "RAM SINGH",
-                  First_Name_Non_Normalized: "",
-                  Middle_Name_1_Non_Normalized: "SHAM",
-                  Gender_Code: "1",
-                  Income_TAX_PAN: "ABCPD1234E",
-                  Date_of_birth: "19990101"
-                }
-              ],
-              CAIS_Holder_Address_Details: [
-                {
-                  First_Line_Of_Address_non_normalized: "ABC COLONY",
-                  State_non_normalized: "27",
-                  ZIP_Postal_Code_non_normalized: "400612"
-                }
-              ]
-            }
-          ]
-        },
-        TotalCAPS_Summary: {
-          TotalCAPSLast7Days: "6",
-          TotalCAPSLast30Days: "6",
-          TotalCAPSLast90Days: "6",
-          TotalCAPSLast180Days: "6"
-        },
-        SCORE: {
-          FCIREXScore: 999
+          other_business_address: {},
+          register_cancellation_date: "",
+          register_date: "31/01/XXXX",
+          state_jurisdiction: "State - Uttar Pradesh, Zone - Gautambudha Nagar, Range - Gautambudha Nagar(B), Sector - Sector-1, Gautambudha Nagar (Jurisdictional Office)",
+          tax_payer_type: "Regular",
+          trade_name: "XXXXX PRIVATE LIMITED",
+          gross_total_income: "NA",
+          gross_total_income_financial_year: "",
+          business_email: "XYZ@gmail.com",
+          business_mobile: "0987654432"
         }
-      }
+      ] : []
     },
-    additional_details: {
-      personal_information: {
-        full_name: "RAM SINGH",
-        gender: "Male",
-        age: "20",
-        date_of_birth: "1999-01-01",
-        income: "987987"
-      },
-      alternate_phone: [
-        {
-          serial_number: "1",
-          value: "00004311234"
-        },
-        {
-          serial_number: "2",
-          value: "00004311234"
-        },
-        {
-          serial_number: "3",
-          value: "9877654321"
-        },
-        {
-          serial_number: "4",
-          value: "01146534321"
-        },
-        {
-          serial_number: "5",
-          value: "1112011111111"
-        }
-      ],
-      email: [
-        {
-          serial_number: "1",
-          value: "RAM@GMAIL.COM"
-        }
-      ],
-      address: [
-        {
-          detailed_address: "11 ABC COLONY PHASE I ABC COLONY PHASE I",
-          state: "UP",
-          pincode: "202001",
-          type: "Primary",
-          date_of_reporting: "2024-07-18"
-        }
-      ],
-      document_data: {
-        pan: [
+    iec_list: {
+      code: profileType === "business" ? "SUC" : "NRF",
+      data: profileType === "business" ? {
+        iec_number: "0011223344",
+        pan_number: "ABCDPE1234E",
+        date_of_incorporation: "14/02/2019",
+        iec_issuance_date: "06/08/2019",
+        iec_status: "Valid",
+        del_status: "N",
+        file_number: "HYDQAZWSXCDF00123456AM12",
+        file_date: "Thu Jun 27 05:30:00 IST 2024",
+        dgft_ra_office: "RA HYDERABAD",
+        nature_of_firm: "Private Limited",
+        category_of_exporters: "Manufacturer Exporter",
+        firm_name: "ABC PRIVATE LIMITED",
+        address: "ROAD NO.60, HYDERABAD, TELANGANA, 500033",
+        firm_mobile: "9876543210",
+        firm_email: "email@mail.com",
+        branch_details: [
           {
-            serial_number: "1",
-            value: "ABCPD1234D"
+            branch_code: "1",
+            gstin: "12ABCDPE1234E1ZS",
+            branch_address: "BACHUPALLY- VILLAGE, HYDERABAD, TELANGANA, 500090"
+          }
+        ],
+        proprietor_partner_director_details: [
+          {
+            name: "RAM SINGH",
+            father_name: "SHAM SINGH",
+            pan_number: "ABCPD1234H",
+            address: "JUBILEEHILLS, HYDERABAD"
+          }
+        ],
+        rcmc_details: [
+          {
+            rcmc_number: "AB/123/2020-2021",
+            issue_date: "20/02/2020",
+            issue_authority: "Federation of Indian Export Organisations",
+            products_for_which_registered: "Aluminium windows and doors",
+            expiry_date: "31/03/2025",
+            firm_web: "email@mail.com",
+            firm_profile: "Manufacturer Exporter",
+            status: "Active",
+            source: "Issued through e-RCMC module",
+            exporter_type: "Manufacturer Exporter",
+            validity_period: "567",
+            validated_by_epc: "Y"
           }
         ]
+      } : {}
+    },
+    whatsapp_info: {
+      code: "SUC",
+      data: {
+        status: "Account Found",
+        is_business: "0"
       }
     },
+    revoke_info: {
+      code: "SUC",
+      data: {
+        revoke_date: "",
+        revoke_status: "No"
+      }
+    },
+    esic_info: {
+      code: profileType === "bluecollar" ? "SUC" : "NRF",
+      data: profileType === "bluecollar" ? {
+        esic_details: [
+          {
+            esic_number: "987654321",
+            name: "RAM SINGH",
+            employer_code: "12345678987654321",
+            employer_name: "ABC Private Limited",
+            mobile: "987654321",
+            uan_number: "",
+            bank_name: "ABC BANK OF INDIA",
+            branch_name: "Delhi",
+            bank_account_status: "Not Verified",
+            uhid_number: "",
+            date_of_birth: "01/01/1999",
+            registration_date: "28/10/2024",
+            dispensary_name: "Lahuravir, Varanasi, UP (ESIS Disp.)",
+            first_date_of_appointment: "19/10/2024",
+            employer_details: {
+              employer_code: "12345678987654321",
+              employer_name: "ABC Private Limited",
+              address: "Nirayan Sales & Marketing, Mehmoorgaj Varanasi",
+              state: "Uttar Pradesh",
+              district: "Varanasi",
+              pincode: "221001",
+              email: "abc@email.com",
+              mobile: ""
+            },
+            address: "House No 123, Chandauli, Mughalsarai, Uttar Pradesh, Varanasi, Uttar Pradesh",
+            age: "24",
+            gender: "Male"
+          }
+        ]
+      } : {},
+      datetime: "2024-12-24 07:15:53.41087"
+    },
     timestamp: new Date().toISOString()
+  });
+
+  // Calculate stats from response data
+  const calculateStats = (data: any) => {
+    const namesSources: string[] = [];
+    const addressesSources: string[] = [];
+    const gstinSources: string[] = [];
+    const esicSources: string[] = [];
+    const highlights: string[] = [];
+
+    // Count names
+    if (data.digital_payment_id_info?.data?.name) namesSources.push("Digital Payment ID");
+    if (data.lpg_info?.data?.length > 0) {
+      data.lpg_info.data.forEach((lpg: any) => {
+        if (lpg.name) namesSources.push(`LPG - ${lpg.gas_provider}`);
+      });
+    }
+    if (data.epfo_info?.data?.length > 0) {
+      data.epfo_info.data.forEach(() => namesSources.push("EPFO"));
+    }
+    if (data.msme_info?.data?.[0]?.owner_name) namesSources.push("MSME");
+    if (data.din_info?.data?.[0]?.data?.name) namesSources.push("DIN");
+
+    // Count addresses
+    if (data.digital_payment_id_info?.data?.address) addressesSources.push("Digital Payment ID");
+    if (data.lpg_info?.data?.length > 0) {
+      data.lpg_info.data.forEach((lpg: any) => {
+        if (lpg.address) addressesSources.push(`LPG - ${lpg.gas_provider}`);
+      });
+    }
+    if (data.msme_info?.data?.[0]?.flat_door_block_no) addressesSources.push("MSME");
+    if (data.gst_list?.data?.[0]?.primary_business_address?.registered_address) addressesSources.push("GST");
+    if (data.esic_info?.data?.esic_details?.[0]?.address) addressesSources.push("ESIC");
+
+    // Count GSTIN
+    if (data.gst_list?.data?.length > 0) {
+      data.gst_list.data.forEach(() => gstinSources.push("GST Registration"));
+    }
+
+    // Count ESIC
+    if (data.esic_info?.data?.esic_details?.length > 0) {
+      data.esic_info.data.esic_details.forEach(() => esicSources.push("ESIC Record"));
+    }
+
+    // Generate highlights
+    if (data.lpg_info?.data?.length > 1) {
+      highlights.push(`${data.lpg_info.data.length} LPG connections found`);
+    }
+    if (data.epfo_info?.data?.length > 0) {
+      highlights.push(`${data.epfo_info.data.length} EPFO establishments`);
+    }
+    if (data.mobile_age_info?.data?.mobile_age) {
+      highlights.push(`Mobile age: ${data.mobile_age_info.data.mobile_age}`);
+    }
+    if (data.telco_info?.data?.connection_type) {
+      highlights.push(`${data.telco_info.data.connection_type} connection`);
+    }
+    if (data.gst_list?.data?.length > 0) {
+      highlights.push("GST registered");
+    }
+    if (data.iec_list?.code === "SUC") {
+      highlights.push("IEC registered - Import/Export business");
+    }
+    if (data.whatsapp_info?.data?.status === "Account Found") {
+      highlights.push("WhatsApp verified");
+    }
+
+    return {
+      namesCount: namesSources.length,
+      namesSources,
+      addressesCount: addressesSources.length,
+      addressesSources,
+      gstinCount: gstinSources.length,
+      gstinSources,
+      esicCount: esicSources.length,
+      esicSources,
+      highlights
+    };
   };
+
+  const stats = responseData ? calculateStats(responseData) : null;
 
   const handleFetch = () => {
     setLoading(true);
     setTimeout(() => {
-      setResponseData(mockResponse);
+      setResponseData(getMockResponse(activeTab));
       setLoading(false);
     }, 1500);
   };
-
-  // Render Digital Payment ID Card
-  const renderDigitalPaymentCard = () => (
-    <Card>
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2">
-          <CreditCard className="h-5 w-5" />
-          Digital Payment ID
-        </CardTitle>
-      </CardHeader>
-      <CardContent>
-        <div className="grid md:grid-cols-2 gap-6">
-          <div className="space-y-4">
-            <div>
-              <p className="text-sm text-muted-foreground mb-1">Name</p>
-              <p className="font-semibold break-words">{maskData(responseData.digital_payment_id.name, showData)}</p>
-            </div>
-            <div>
-              <p className="text-sm text-muted-foreground mb-1">UPI ID</p>
-              <p className="font-mono text-sm break-all">{maskData(responseData.digital_payment_id.upi_id, showData)}</p>
-            </div>
-            <div>
-              <p className="text-sm text-muted-foreground mb-1">Contact</p>
-              <p className="break-words">{maskPhone(responseData.digital_payment_id.contact, showData)}</p>
-            </div>
-          </div>
-          <div className="space-y-4">
-            <div>
-              <p className="text-sm text-muted-foreground mb-1">Bank</p>
-              <p className="break-words">{responseData.digital_payment_id.bank}</p>
-            </div>
-            <div>
-              <p className="text-sm text-muted-foreground mb-1">Branch</p>
-              <p className="break-words">{responseData.digital_payment_id.branch}</p>
-            </div>
-            <div>
-              <p className="text-sm text-muted-foreground mb-1">Branch Address</p>
-              <p className="text-sm break-words">{maskData(responseData.digital_payment_id.address, showData)}</p>
-            </div>
-          </div>
-        </div>
-      </CardContent>
-    </Card>
-  );
-
-  // Render LPG Connections Card
-  const renderLPGCard = () => (
-    <Card>
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2">
-          <Fuel className="h-5 w-5" />
-          LPG Connection
-        </CardTitle>
-      </CardHeader>
-      <CardContent>
-        <div className="space-y-4">
-          {responseData.lpg_connections.map((lpg: any, idx: number) => (
-            <Card key={idx}>
-              <CardContent className="pt-6">
-                <div className="grid md:grid-cols-3 gap-4">
-                  <div>
-                    <p className="text-sm text-muted-foreground mb-1">Provider</p>
-                    <p className="font-semibold break-words">{lpg.provider}</p>
-                  </div>
-                  <div>
-                    <p className="text-sm text-muted-foreground mb-1">Consumer ID</p>
-                    <p className="font-mono text-sm break-all">{maskData(lpg.consumer_id, showData)}</p>
-                  </div>
-                  <div>
-                    <p className="text-sm text-muted-foreground mb-1">Distributor</p>
-                    <p className="text-sm break-words">{lpg.distributor}</p>
-                  </div>
-                  <div>
-                    <p className="text-sm text-muted-foreground mb-1">Contact</p>
-                    <p className="text-sm break-words">{maskPhone(lpg.distributor_contact, showData)}</p>
-                  </div>
-                  <div className="md:col-span-2">
-                    <p className="text-sm text-muted-foreground mb-1">Address</p>
-                    <p className="text-sm break-words">{lpg.address}</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      </CardContent>
-    </Card>
-  );
-
-  // Render EPFO Card
-  const renderEPFOCard = () => (
-    <Card>
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2">
-          <Briefcase className="h-5 w-5" />
-          EPFO Info
-        </CardTitle>
-      </CardHeader>
-      <CardContent className="space-y-4">
-        <div>
-          <p className="text-sm text-muted-foreground mb-1">UAN</p>
-          <p className="font-mono text-sm break-all">{maskData(responseData.epfo.uan, showData)}</p>
-        </div>
-        <div>
-          <p className="text-sm text-muted-foreground mb-1">Name</p>
-          <p className="break-words">{maskData(responseData.epfo.name, showData)}</p>
-        </div>
-        <div>
-          <p className="text-sm text-muted-foreground mb-1">Status</p>
-          <Badge variant={responseData.epfo.active ? "default" : "secondary"}>
-            {responseData.epfo.active ? "Active" : "Inactive"}
-          </Badge>
-        </div>
-      </CardContent>
-    </Card>
-  );
-
-  // Render Bureau Card
-  const renderBureauCard = () => (
-    <Card>
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2">
-          <FileText className="h-5 w-5" />
-          Bureau Check
-        </CardTitle>
-      </CardHeader>
-      <CardContent className="space-y-4">
-        <div className="grid md:grid-cols-2 gap-4">
-          <div>
-            <p className="text-sm text-muted-foreground mb-1">Name</p>
-            <p className="font-semibold break-words">{maskData(responseData.bureau_report.name, showData)}</p>
-          </div>
-          <div>
-            <p className="text-sm text-muted-foreground mb-1">Mobile</p>
-            <p className="break-words">{maskPhone(responseData.bureau_report.mobile, showData)}</p>
-          </div>
-          <div>
-            <p className="text-sm text-muted-foreground mb-1">PAN</p>
-            <p className="font-mono text-sm break-all">{maskData(responseData.bureau_report.pan, showData)}</p>
-          </div>
-          <div>
-            <p className="text-sm text-muted-foreground mb-1">Credit Score Range</p>
-            <div className="flex items-center gap-2">
-              <p className="text-2xl font-bold text-primary">{getCreditScoreBand(responseData.bureau_report.credit_score)}</p>
-            </div>
-          </div>
-        </div>
-
-        {/* Bureau Report Details */}
-        <div className="pt-4">
-          <Collapsible open={showFullBureauReport} onOpenChange={setShowFullBureauReport}>
-            <CollapsibleTrigger asChild>
-              <Button variant="outline" className="w-full">
-                {showFullBureauReport ? (
-                  <>
-                    <ChevronUp className="h-4 w-4 mr-2" />
-                    Hide Full Report
-                  </>
-                ) : (
-                  <>
-                    <ChevronDown className="h-4 w-4 mr-2" />
-                    Show Full Report
-                  </>
-                )}
-              </Button>
-            </CollapsibleTrigger>
-            <CollapsibleContent className="space-y-4 pt-4">
-              {/* Credit Profile Header */}
-              <div className="space-y-3 border-t pt-3">
-                <h4 className="font-semibold text-sm">Credit Profile</h4>
-                <div className="grid md:grid-cols-2 gap-3">
-                  <div>
-                    <p className="text-xs text-muted-foreground">Report Number</p>
-                    <p className="text-sm break-all">{responseData.bureau_report.credit_report.CreditProfileHeader.ReportNumber}</p>
-                  </div>
-                  <div>
-                    <p className="text-xs text-muted-foreground">Version</p>
-                    <p className="text-sm">{responseData.bureau_report.credit_report.CreditProfileHeader.Version}</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* CAIS Summary */}
-              <div className="space-y-3 border-t pt-3">
-                <h4 className="font-semibold text-sm">Account Summary</h4>
-                <div className="grid md:grid-cols-2 gap-3">
-                  <div>
-                    <p className="text-xs text-muted-foreground">Total Accounts</p>
-                    <p className="text-sm">{responseData.bureau_report.credit_report.CAIS_Account.CAIS_Summary.Credit_Account.CreditAccountTotal}</p>
-                  </div>
-                  <div>
-                    <p className="text-xs text-muted-foreground">Active Accounts</p>
-                    <p className="text-sm">{responseData.bureau_report.credit_report.CAIS_Account.CAIS_Summary.Credit_Account.CreditAccountActive}</p>
-                  </div>
-                  <div>
-                    <p className="text-xs text-muted-foreground">Total Outstanding</p>
-                    <p className="text-sm">₹{responseData.bureau_report.credit_report.CAIS_Account.CAIS_Summary.Total_Outstanding_Balance.Outstanding_Balance_All}</p>
-                  </div>
-                </div>
-              </div>
-            </CollapsibleContent>
-          </Collapsible>
-        </div>
-      </CardContent>
-    </Card>
-  );
-
-  // Render Telco Card
-  const renderTelcoCard = () => (
-    <Card>
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2">
-          <Phone className="h-5 w-5" />
-          Telco
-        </CardTitle>
-      </CardHeader>
-      <CardContent className="space-y-4">
-        <div className="grid md:grid-cols-2 gap-4">
-          <div>
-            <p className="text-sm text-muted-foreground mb-1">Operator</p>
-            <p className="break-words">{responseData.telco_info.operator}</p>
-          </div>
-          <div>
-            <p className="text-sm text-muted-foreground mb-1">Circle</p>
-            <p className="break-words">{responseData.telco_info.circle}</p>
-          </div>
-          <div>
-            <p className="text-sm text-muted-foreground mb-1">Mobile Age (Months)</p>
-            <p>{responseData.telco_info.mobile_age_months}</p>
-          </div>
-          <div>
-            <p className="text-sm text-muted-foreground mb-1">Status</p>
-            <Badge variant={responseData.telco_info.status === "Active" ? "default" : "secondary"}>
-              {responseData.telco_info.status}
-            </Badge>
-          </div>
-        </div>
-      </CardContent>
-    </Card>
-  );
-
-  // Render Additional Details Card
-  const renderAdditionalDetailsCard = () => (
-    <Card>
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2">
-          <FileText className="h-5 w-5" />
-          Additional Details
-        </CardTitle>
-      </CardHeader>
-      <CardContent className="space-y-4">
-        <div className="grid md:grid-cols-2 gap-4">
-          <div>
-            <p className="text-sm text-muted-foreground mb-1">Full Name</p>
-            <p className="font-semibold break-words">{maskData(responseData.additional_details.personal_information.full_name, showData)}</p>
-          </div>
-          <div>
-            <p className="text-sm text-muted-foreground mb-1">Gender</p>
-            <p className="break-words">{responseData.additional_details.personal_information.gender}</p>
-          </div>
-          <div>
-            <p className="text-sm text-muted-foreground mb-1">Age</p>
-            <p>{responseData.additional_details.personal_information.age}</p>
-          </div>
-          <div>
-            <p className="text-sm text-muted-foreground mb-1">Date of Birth</p>
-            <p className="break-words">{maskData(responseData.additional_details.personal_information.date_of_birth, showData)}</p>
-          </div>
-        </div>
-
-        {/* Show More Details */}
-        <div className="pt-4">
-          <Collapsible open={showFullAdditionalDetails} onOpenChange={setShowFullAdditionalDetails}>
-            <CollapsibleTrigger asChild>
-              <Button variant="outline" className="w-full">
-                {showFullAdditionalDetails ? (
-                  <>
-                    <ChevronUp className="h-4 w-4 mr-2" />
-                    Hide Details
-                  </>
-                ) : (
-                  <>
-                    <ChevronDown className="h-4 w-4 mr-2" />
-                    Show More Details
-                  </>
-                )}
-              </Button>
-            </CollapsibleTrigger>
-            <CollapsibleContent className="space-y-4 pt-4">
-              {/* Alternate Phones */}
-              {responseData.additional_details.alternate_phone && responseData.additional_details.alternate_phone.length > 0 && (
-                <div className="space-y-3 border-t pt-3">
-                  <h4 className="font-semibold text-sm">Alternate Phone Numbers</h4>
-                  <div className="space-y-2">
-                    {responseData.additional_details.alternate_phone.map((phone: any, idx: number) => (
-                      <p key={idx} className="text-sm break-words">{maskPhone(phone.value, showData)}</p>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* Email */}
-              {responseData.additional_details.email && responseData.additional_details.email.length > 0 && (
-                <div className="space-y-3 border-t pt-3">
-                  <h4 className="font-semibold text-sm">Email</h4>
-                  <div className="space-y-2">
-                    {responseData.additional_details.email.map((email: any, idx: number) => (
-                      <p key={idx} className="text-sm break-all">{maskEmail(email.value, showData)}</p>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* Address */}
-              {responseData.additional_details.address && responseData.additional_details.address.length > 0 && (
-                <div className="space-y-3 border-t pt-3">
-                  <h4 className="font-semibold text-sm">Address</h4>
-                  {responseData.additional_details.address.map((addr: any, idx: number) => (
-                    <div key={idx} className="bg-muted/50 p-3 rounded-lg space-y-2">
-                      <Badge variant="outline">{addr.type}</Badge>
-                      <p className="text-sm break-words">{addr.detailed_address}</p>
-                      <div className="grid md:grid-cols-2 gap-2">
-                        <p className="text-xs text-muted-foreground">State: {addr.state}</p>
-                        <p className="text-xs text-muted-foreground">Pincode: {addr.pincode}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </CollapsibleContent>
-          </Collapsible>
-        </div>
-      </CardContent>
-    </Card>
-  );
-
-  // Render ESIC Card
-  const renderESICCard = () => (
-    <Card>
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2">
-          <User className="h-5 w-5" />
-          ESIC
-        </CardTitle>
-      </CardHeader>
-      <CardContent className="space-y-4">
-        <div>
-          <p className="text-sm text-muted-foreground mb-1">Status</p>
-          <Badge variant={responseData.esic_info.registered ? "default" : "secondary"}>
-            {responseData.esic_info.registered ? "Registered" : "Not Registered"}
-          </Badge>
-        </div>
-        {responseData.esic_info.insurance_number && (
-          <div>
-            <p className="text-sm text-muted-foreground mb-1">Insurance Number</p>
-            <p className="font-mono text-sm break-all">{maskData(responseData.esic_info.insurance_number, showData)}</p>
-          </div>
-        )}
-
-        {/* ESIC Details */}
-        {responseData.esic_details && responseData.esic_details.length > 0 && (
-          <div className="pt-4">
-            <Collapsible open={showFullESICDetails} onOpenChange={setShowFullESICDetails}>
-              <CollapsibleTrigger asChild>
-                <Button variant="outline" className="w-full">
-                  {showFullESICDetails ? (
-                    <>
-                      <ChevronUp className="h-4 w-4 mr-2" />
-                      Hide Details
-                    </>
-                  ) : (
-                    <>
-                      <ChevronDown className="h-4 w-4 mr-2" />
-                      Show Details
-                    </>
-                  )}
-                </Button>
-              </CollapsibleTrigger>
-              <CollapsibleContent className="space-y-4 pt-4">
-                {responseData.esic_details.map((esic: any, idx: number) => (
-                  <div key={idx} className="space-y-3 border-t pt-3">
-                    <h4 className="font-semibold text-sm">Record {idx + 1}</h4>
-                    <div className="grid md:grid-cols-2 gap-3">
-                      <div>
-                        <p className="text-xs text-muted-foreground">ESIC Number</p>
-                        <p className="text-sm break-all">{maskData(esic.esic_number, showData)}</p>
-                      </div>
-                      <div>
-                        <p className="text-xs text-muted-foreground">Name</p>
-                        <p className="text-sm break-words">{maskData(esic.name, showData)}</p>
-                      </div>
-                      <div>
-                        <p className="text-xs text-muted-foreground">Employer</p>
-                        <p className="text-sm break-words">{esic.employer_name}</p>
-                      </div>
-                      <div>
-                        <p className="text-xs text-muted-foreground">Registration Date</p>
-                        <p className="text-sm">{esic.registration_date}</p>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </CollapsibleContent>
-            </Collapsible>
-          </div>
-        )}
-      </CardContent>
-    </Card>
-  );
-
-  // Render Director Info Card
-  const renderDirectorInfoCard = () => (
-    <Card>
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2">
-          <Building2 className="h-5 w-5" />
-          Director Info
-        </CardTitle>
-      </CardHeader>
-      <CardContent className="space-y-4">
-        <div>
-          <p className="text-sm text-muted-foreground mb-1">Is Director</p>
-          <Badge variant={responseData.director_info.is_director ? "default" : "secondary"}>
-            {responseData.director_info.is_director ? "Yes" : "No"}
-          </Badge>
-        </div>
-        {responseData.director_info.is_director && (
-          <>
-            <div>
-              <p className="text-sm text-muted-foreground mb-1">PAN</p>
-              <p className="font-mono text-sm break-all">{maskData(responseData.director_info.pan, showData)}</p>
-            </div>
-            <div>
-              <p className="text-sm text-muted-foreground mb-1">DIN</p>
-              <p className="font-mono text-sm break-all">{maskData(responseData.director_info.din, showData)}</p>
-            </div>
-            <div>
-              <p className="text-sm text-muted-foreground mb-1">Companies</p>
-              <div className="space-y-1">
-                {responseData.director_info.companies.map((company: string, idx: number) => (
-                  <Badge key={idx} variant="outline" className="mr-2">
-                    {company}
-                  </Badge>
-                ))}
-              </div>
-            </div>
-          </>
-        )}
-      </CardContent>
-    </Card>
-  );
-
-  // Render GST & IEC Card
-  const renderGSTIECCard = () => (
-    <Card>
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2">
-          <FileText className="h-5 w-5" />
-          GST & IEC Info
-        </CardTitle>
-      </CardHeader>
-      <CardContent className="space-y-4">
-        <div className="space-y-3">
-          <div>
-            <p className="text-sm text-muted-foreground mb-1">GST Status</p>
-            <Badge variant={responseData.gst_info.registered ? "default" : "secondary"}>
-              {responseData.gst_info.registered ? "Registered" : "Not Registered"}
-            </Badge>
-          </div>
-          {responseData.gst_info.registered && (
-            <>
-              <div>
-                <p className="text-sm text-muted-foreground mb-1">GSTIN</p>
-                <p className="font-mono text-sm break-all">{maskData(responseData.gst_info.gstin, showData)}</p>
-              </div>
-              <div>
-                <p className="text-sm text-muted-foreground mb-1">Trade Name</p>
-                <p className="break-words">{responseData.gst_info.trade_name}</p>
-              </div>
-            </>
-          )}
-        </div>
-
-        <div className="space-y-3 border-t pt-3">
-          <div>
-            <p className="text-sm text-muted-foreground mb-1">IEC Status</p>
-            <Badge variant={responseData.iec_info.registered ? "default" : "secondary"}>
-              {responseData.iec_info.registered ? "Registered" : "Not Registered"}
-            </Badge>
-          </div>
-          {responseData.iec_info.registered && (
-            <div>
-              <p className="text-sm text-muted-foreground mb-1">IEC Code</p>
-              <p className="font-mono text-sm break-all">{maskData(responseData.iec_info.iec_code, showData)}</p>
-            </div>
-          )}
-        </div>
-      </CardContent>
-    </Card>
-  );
-
-  // Render MSME Card
-  const renderMSMECard = () => (
-    <Card>
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2">
-          <Building2 className="h-5 w-5" />
-          MSME
-        </CardTitle>
-      </CardHeader>
-      <CardContent className="space-y-4">
-        <div>
-          <p className="text-sm text-muted-foreground mb-1">Status</p>
-          <Badge variant={responseData.msme_info.registered ? "default" : "secondary"}>
-            {responseData.msme_info.registered ? "Registered" : "Not Registered"}
-          </Badge>
-        </div>
-        {responseData.msme_info.udyam_number && (
-          <div>
-            <p className="text-sm text-muted-foreground mb-1">Udyam Number</p>
-            <p className="font-mono text-sm break-all">{responseData.msme_info.udyam_number}</p>
-          </div>
-        )}
-        {responseData.msme_info.enterprise_name && (
-          <div>
-            <p className="text-sm text-muted-foreground mb-1">Enterprise Name</p>
-            <p className="break-words">{responseData.msme_info.enterprise_name}</p>
-          </div>
-        )}
-
-        {responseData.msme_info.udyam_details && (
-          <div className="pt-4">
-            <Collapsible open={showUdyamDetails} onOpenChange={setShowUdyamDetails}>
-              <CollapsibleTrigger asChild>
-                <Button variant="outline" className="w-full">
-                  {showUdyamDetails ? (
-                    <>
-                      <ChevronUp className="h-4 w-4 mr-2" />
-                      Hide Details
-                    </>
-                  ) : (
-                    <>
-                      <ChevronDown className="h-4 w-4 mr-2" />
-                      Show Details
-                    </>
-                  )}
-                </Button>
-              </CollapsibleTrigger>
-              <CollapsibleContent className="space-y-4 pt-4">
-                <div className="space-y-3 border-t pt-3">
-                  <h4 className="font-semibold text-sm">Enterprise Information</h4>
-                  <div className="grid md:grid-cols-2 gap-3">
-                    <div>
-                      <p className="text-xs text-muted-foreground">Organisation Type</p>
-                      <p className="text-sm break-words">{responseData.msme_info.udyam_details.organisation_type}</p>
-                    </div>
-                    <div>
-                      <p className="text-xs text-muted-foreground">Service Type</p>
-                      <p className="text-sm break-words">{responseData.msme_info.udyam_details.service_type}</p>
-                    </div>
-                  </div>
-                </div>
-              </CollapsibleContent>
-            </Collapsible>
-          </div>
-        )}
-      </CardContent>
-    </Card>
-  );
 
   return (
     <div className="min-h-screen bg-background">
@@ -968,9 +540,10 @@ const CustomerProfiling = () => {
                   APIs Included
                 </h4>
                 <div className="flex flex-col items-end gap-1.5">
-                  <span className="text-sm font-medium text-foreground/80">Mobile Number</span>
-                  <span className="text-sm font-medium text-foreground/80">Email Verification</span>
-                  <span className="text-sm font-medium text-foreground/80">Address Lookup</span>
+                  <span className="text-sm font-medium text-foreground/80">Mobile Verification</span>
+                  <span className="text-sm font-medium text-foreground/80">LPG Verification</span>
+                  <span className="text-sm font-medium text-foreground/80">EPFO/ESIC Lookup</span>
+                  <span className="text-sm font-medium text-foreground/80">GST/IEC Details</span>
                 </div>
               </div>
             </div>
@@ -1006,140 +579,668 @@ const CustomerProfiling = () => {
 
           {responseData && (
             <div className="space-y-6 animate-fade-in">
-              <div className="flex justify-end mb-4">
+              <div className="flex justify-between items-center mb-4">
                 <Button variant="outline" size="sm" onClick={() => setShowData(!showData)}>
                   {showData ? <EyeOff className="h-4 w-4 mr-2" /> : <Eye className="h-4 w-4 mr-2" />}
                   {showData ? 'Hide' : 'Show'} Data
                 </Button>
               </div>
 
-              <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+              {/* Stats Section */}
+              {stats && (
+                <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-6">
+                  <Dialog open={statsDialogOpen} onOpenChange={setStatsDialogOpen}>
+                    <DialogTrigger asChild>
+                      <Card className="cursor-pointer hover:shadow-lg transition-all hover:scale-105" onClick={() => setSelectedStat("names")}>
+                        <CardContent className="pt-6">
+                          <div className="text-center">
+                            <p className="text-3xl font-bold text-primary">{stats.namesCount}</p>
+                            <p className="text-sm text-muted-foreground mt-1">Names Found</p>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </DialogTrigger>
+                    <DialogTrigger asChild>
+                      <Card className="cursor-pointer hover:shadow-lg transition-all hover:scale-105" onClick={() => setSelectedStat("addresses")}>
+                        <CardContent className="pt-6">
+                          <div className="text-center">
+                            <p className="text-3xl font-bold text-primary">{stats.addressesCount}</p>
+                            <p className="text-sm text-muted-foreground mt-1">Addresses Found</p>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </DialogTrigger>
+                    <DialogTrigger asChild>
+                      <Card className="cursor-pointer hover:shadow-lg transition-all hover:scale-105" onClick={() => setSelectedStat("gstin")}>
+                        <CardContent className="pt-6">
+                          <div className="text-center">
+                            <p className="text-3xl font-bold text-primary">{stats.gstinCount}</p>
+                            <p className="text-sm text-muted-foreground mt-1">GSTIN Found</p>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </DialogTrigger>
+                    <DialogTrigger asChild>
+                      <Card className="cursor-pointer hover:shadow-lg transition-all hover:scale-105" onClick={() => setSelectedStat("esic")}>
+                        <CardContent className="pt-6">
+                          <div className="text-center">
+                            <p className="text-3xl font-bold text-primary">{stats.esicCount}</p>
+                            <p className="text-sm text-muted-foreground mt-1">ESIC Found</p>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </DialogTrigger>
+                    <Card>
+                      <CardContent className="pt-6">
+                        <div className="text-center">
+                          <p className="text-3xl font-bold text-green-600">{stats.highlights.length}</p>
+                          <p className="text-sm text-muted-foreground mt-1">Highlights</p>
+                        </div>
+                      </CardContent>
+                    </Card>
+
+                    <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
+                      <DialogHeader>
+                        <DialogTitle>Data Sources</DialogTitle>
+                        <DialogDescription>
+                          {selectedStat === "names" && "Sources where names were found"}
+                          {selectedStat === "addresses" && "Sources where addresses were found"}
+                          {selectedStat === "gstin" && "Sources where GSTIN was found"}
+                          {selectedStat === "esic" && "Sources where ESIC was found"}
+                        </DialogDescription>
+                      </DialogHeader>
+                      <div className="space-y-2 mt-4">
+                        {selectedStat === "names" && stats.namesSources.map((source, idx) => (
+                          <div key={idx} className="flex items-center gap-2 p-3 bg-muted rounded-lg">
+                            <CheckCircle2 className="h-4 w-4 text-green-600" />
+                            <span>{source}</span>
+                          </div>
+                        ))}
+                        {selectedStat === "addresses" && stats.addressesSources.map((source, idx) => (
+                          <div key={idx} className="flex items-center gap-2 p-3 bg-muted rounded-lg">
+                            <MapPin className="h-4 w-4 text-blue-600" />
+                            <span>{source}</span>
+                          </div>
+                        ))}
+                        {selectedStat === "gstin" && stats.gstinSources.map((source, idx) => (
+                          <div key={idx} className="flex items-center gap-2 p-3 bg-muted rounded-lg">
+                            <Building2 className="h-4 w-4 text-purple-600" />
+                            <span>{source}</span>
+                          </div>
+                        ))}
+                        {selectedStat === "esic" && stats.esicSources.map((source, idx) => (
+                          <div key={idx} className="flex items-center gap-2 p-3 bg-muted rounded-lg">
+                            <FileText className="h-4 w-4 text-orange-600" />
+                            <span>{source}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </DialogContent>
+                  </Dialog>
+                </div>
+              )}
+
+              <Tabs value={activeTab} onValueChange={(value) => { setActiveTab(value); setResponseData(getMockResponse(value)); }} className="w-full">
                 <TabsList className="grid w-full grid-cols-3">
                   <TabsTrigger value="salaried">Salaried</TabsTrigger>
-                  <TabsTrigger value="blue-collar">Blue Collar</TabsTrigger>
-                  <TabsTrigger value="business">Business/Salaried</TabsTrigger>
+                  <TabsTrigger value="bluecollar">Blue Collar</TabsTrigger>
+                  <TabsTrigger value="business">Business</TabsTrigger>
                 </TabsList>
 
-                {/* Salaried Tab */}
-              <TabsContent value="salaried" className="space-y-6 mt-6">
-                {/* Key Highlights */}
-                <Card className="bg-gradient-to-br from-primary/5 to-primary/10 border-primary/20">
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-2 text-lg">
-                      <CheckCircle2 className="h-5 w-5 text-primary" />
-                      Key Highlights - Salaried
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="grid md:grid-cols-3 gap-4">
-                      <div className="bg-background/50 p-3 rounded-lg">
-                        <p className="text-xs text-muted-foreground mb-1">Employment Status</p>
-                        <p className="font-semibold text-sm">Active</p>
-                      </div>
-                      <div className="bg-background/50 p-3 rounded-lg">
-                        <p className="text-xs text-muted-foreground mb-1">EPFO Status</p>
-                        <p className="font-semibold text-sm">{responseData.epfo.active ? "Active" : "Inactive"}</p>
-                      </div>
-                      <div className="bg-background/50 p-3 rounded-lg">
-                        <p className="text-xs text-muted-foreground mb-1">Digital Payment</p>
-                        <p className="font-semibold text-sm">Verified</p>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-
-                {renderDigitalPaymentCard()}
-                {renderLPGCard()}
-                {renderEPFOCard()}
-                {renderBureauCard()}
-                {renderTelcoCard()}
-                {renderAdditionalDetailsCard()}
-              </TabsContent>
-
-                {/* Blue Collar Tab */}
-              <TabsContent value="blue-collar" className="space-y-6 mt-6">
-                {/* Key Highlights */}
-                <Card className="bg-gradient-to-br from-primary/5 to-primary/10 border-primary/20">
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-2 text-lg">
-                      <CheckCircle2 className="h-5 w-5 text-primary" />
-                      Key Highlights - Blue Collar
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="grid md:grid-cols-3 gap-4">
-                      <div className="bg-background/50 p-3 rounded-lg">
-                        <p className="text-xs text-muted-foreground mb-1">ESIC Status</p>
-                        <p className="font-semibold text-sm">{responseData.esic_info.registered ? "Registered" : "Not Registered"}</p>
-                      </div>
-                      <div className="bg-background/50 p-3 rounded-lg">
-                        <p className="text-xs text-muted-foreground mb-1">Bureau Check</p>
-                        <p className="font-semibold text-sm">Yes</p>
-                      </div>
-                      <div className="bg-background/50 p-3 rounded-lg">
-                        <p className="text-xs text-muted-foreground mb-1">LPG Connection</p>
-                        <p className="font-semibold text-sm">Found</p>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-
-                {renderDigitalPaymentCard()}
-                {renderLPGCard()}
-                {renderBureauCard()}
-                {renderESICCard()}
-                {renderEPFOCard()}
-                {renderTelcoCard()}
-                {renderAdditionalDetailsCard()}
-              </TabsContent>
-
-                {/* Business/Salaried Tab */}
-                <TabsContent value="business" className="space-y-6 mt-6">
-                  {/* Key Highlights */}
+                {/* Salaried Profile */}
+                <TabsContent value="salaried" className="space-y-6 mt-6">
                   <Card className="bg-gradient-to-br from-primary/5 to-primary/10 border-primary/20">
                     <CardHeader>
                       <CardTitle className="flex items-center gap-2 text-lg">
                         <CheckCircle2 className="h-5 w-5 text-primary" />
-                        Key Highlights - Business/Salaried
+                        Key Highlights - Salaried Profile
                       </CardTitle>
                     </CardHeader>
                     <CardContent>
                       <div className="grid md:grid-cols-3 gap-4">
-                        <div className="bg-background/50 p-3 rounded-lg">
-                          <p className="text-xs text-muted-foreground mb-1">Director Status</p>
-                          <p className="font-semibold text-sm">{responseData.director_info.is_director ? "Yes" : "No"}</p>
-                        </div>
-                        <div className="bg-background/50 p-3 rounded-lg">
-                          <p className="text-xs text-muted-foreground mb-1">GST Status</p>
-                          <p className="font-semibold text-sm">{responseData.gst_info.registered ? "Registered" : "Not Registered"}</p>
-                        </div>
-                        <div className="bg-background/50 p-3 rounded-lg">
-                          <p className="text-xs text-muted-foreground mb-1">MSME</p>
-                          <p className="font-semibold text-sm">Found</p>
-                        </div>
+                        {stats?.highlights.map((highlight, idx) => (
+                          <div key={idx} className="bg-background/50 p-3 rounded-lg">
+                            <p className="text-sm font-semibold">{highlight}</p>
+                          </div>
+                        ))}
                       </div>
                     </CardContent>
                   </Card>
 
-                  {renderDigitalPaymentCard()}
-                  {renderLPGCard()}
-                  {renderBureauCard()}
-                  {renderDirectorInfoCard()}
-                  {renderGSTIECCard()}
-                  {renderMSMECard()}
-                  {renderTelcoCard()}
-                  {renderAdditionalDetailsCard()}
+                  <p className="text-2xl font-bold">Profile Data</p>
+                  
+                  {/* Show appropriate cards based on profile */}
+                  <p className="text-sm text-muted-foreground">
+                    Data shown below represents a comprehensive salaried employee profile with multiple data verification points.
+                  </p>
+                </TabsContent>
+
+                {/* Blue Collar Profile */}
+                <TabsContent value="bluecollar" className="space-y-6 mt-6">
+                  <Card className="bg-gradient-to-br from-blue-500/5 to-blue-500/10 border-blue-500/20">
+                    <CardHeader>
+                      <CardTitle className="flex items-center gap-2 text-lg">
+                        <CheckCircle2 className="h-5 w-5 text-blue-600" />
+                        Key Highlights - Blue Collar Profile
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="grid md:grid-cols-3 gap-4">
+                        {stats?.highlights.map((highlight, idx) => (
+                          <div key={idx} className="bg-background/50 p-3 rounded-lg">
+                            <p className="text-sm font-semibold">{highlight}</p>
+                          </div>
+                        ))}
+                        {responseData.esic_info?.code === "SUC" && (
+                          <div className="bg-background/50 p-3 rounded-lg">
+                            <p className="text-xs text-muted-foreground mb-1">ESIC Status</p>
+                            <p className="font-semibold text-sm">Registered</p>
+                          </div>
+                        )}
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  <p className="text-2xl font-bold">Profile Data</p>
+
+                  {responseData.esic_info?.code === "SUC" && responseData.esic_info.data?.esic_details && (
+                    <Card>
+                      <CardHeader>
+                        <CardTitle className="flex items-center gap-2">
+                          <Shield className="h-5 w-5" />
+                          ESIC Records ({responseData.esic_info.data.esic_details.length})
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent className="space-y-4">
+                        {responseData.esic_info.data.esic_details.map((record: any, idx: number) => {
+                          const bankNotVerified = record.bank_account_status === "Not Verified";
+
+                          return (
+                            <Card key={idx} className={bankNotVerified ? "border-orange-200" : ""}>
+                              <CardHeader>
+                                <div className="flex justify-between items-start">
+                                  <div>
+                                    <CardTitle className="text-base">{maskData(record.name, showData)}</CardTitle>
+                                    <CardDescription>ESIC: {maskData(record.esic_number, showData)}</CardDescription>
+                                  </div>
+                                  {bankNotVerified && (
+                                    <Badge variant="outline" className="text-orange-600 border-orange-600 gap-1">
+                                      <AlertTriangle className="h-3 w-3" />
+                                      Bank Not Verified
+                                    </Badge>
+                                  )}
+                                </div>
+                              </CardHeader>
+                              <CardContent>
+                                <Collapsible open={expandedEsic[idx]} onOpenChange={(open) => setExpandedEsic({ ...expandedEsic, [idx]: open })}>
+                                  <div className="grid md:grid-cols-2 gap-4 mb-4">
+                                    <div>
+                                      <p className="text-sm text-muted-foreground mb-1">Employer</p>
+                                      <p className="text-sm font-semibold">{record.employer_name}</p>
+                                    </div>
+                                    <div>
+                                      <p className="text-sm text-muted-foreground mb-1">Mobile</p>
+                                      <p className="text-sm">{maskPhone(record.mobile, showData)}</p>
+                                    </div>
+                                    <div>
+                                      <p className="text-sm text-muted-foreground mb-1">Bank</p>
+                                      <p className="text-sm">{record.bank_name}</p>
+                                    </div>
+                                    <div>
+                                      <p className="text-sm text-muted-foreground mb-1">Branch</p>
+                                      <p className="text-sm">{record.branch_name}</p>
+                                    </div>
+                                  </div>
+
+                                  <CollapsibleTrigger asChild>
+                                    <Button variant="outline" size="sm" className="w-full">
+                                      {expandedEsic[idx] ? <ChevronUp className="h-4 w-4 mr-2" /> : <ChevronDown className="h-4 w-4 mr-2" />}
+                                      {expandedEsic[idx] ? "Show Less Details" : "Show More Details"}
+                                    </Button>
+                                  </CollapsibleTrigger>
+
+                                  <CollapsibleContent className="mt-4 space-y-4">
+                                    <div className="grid md:grid-cols-2 gap-4 pt-4 border-t">
+                                      <div>
+                                        <p className="text-sm text-muted-foreground mb-1">Date of Birth</p>
+                                        <p className="text-sm">{record.date_of_birth}</p>
+                                      </div>
+                                      <div>
+                                        <p className="text-sm text-muted-foreground mb-1">Age</p>
+                                        <p className="text-sm">{record.age} years</p>
+                                      </div>
+                                      <div>
+                                        <p className="text-sm text-muted-foreground mb-1">Gender</p>
+                                        <p className="text-sm">{record.gender}</p>
+                                      </div>
+                                      <div>
+                                        <p className="text-sm text-muted-foreground mb-1">Registration Date</p>
+                                        <p className="text-sm">{record.registration_date}</p>
+                                      </div>
+                                      <div>
+                                        <p className="text-sm text-muted-foreground mb-1">First Appointment</p>
+                                        <p className="text-sm">{record.first_date_of_appointment}</p>
+                                      </div>
+                                      <div>
+                                        <p className="text-sm text-muted-foreground mb-1">Dispensary</p>
+                                        <p className="text-sm">{record.dispensary_name}</p>
+                                      </div>
+                                      <div className="md:col-span-2">
+                                        <p className="text-sm text-muted-foreground mb-1">Address</p>
+                                        <p className="text-sm">{maskData(record.address, showData)}</p>
+                                      </div>
+                                      <div className="md:col-span-2">
+                                        <p className="text-sm font-semibold mb-2">Employer Details</p>
+                                        <div className="grid md:grid-cols-2 gap-2 text-sm bg-muted/50 p-3 rounded-lg">
+                                          <div><span className="text-muted-foreground">Name:</span> {record.employer_details?.employer_name}</div>
+                                          <div><span className="text-muted-foreground">Code:</span> {record.employer_details?.employer_code}</div>
+                                          <div><span className="text-muted-foreground">State:</span> {record.employer_details?.state}</div>
+                                          <div><span className="text-muted-foreground">District:</span> {record.employer_details?.district}</div>
+                                          <div><span className="text-muted-foreground">Pincode:</span> {record.employer_details?.pincode}</div>
+                                          <div><span className="text-muted-foreground">Email:</span> {maskEmail(record.employer_details?.email, showData)}</div>
+                                          <div className="md:col-span-2"><span className="text-muted-foreground">Address:</span> {record.employer_details?.address}</div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </CollapsibleContent>
+                                </Collapsible>
+                              </CardContent>
+                            </Card>
+                          );
+                        })}
+                      </CardContent>
+                    </Card>
+                  )}
+                </TabsContent>
+
+                {/* Business Profile */}
+                <TabsContent value="business" className="space-y-6 mt-6">
+                  <Card className="bg-gradient-to-br from-purple-500/5 to-purple-500/10 border-purple-500/20">
+                    <CardHeader>
+                      <CardTitle className="flex items-center gap-2 text-lg">
+                        <CheckCircle2 className="h-5 w-5 text-purple-600" />
+                        Key Highlights - Business Profile
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="grid md:grid-cols-3 gap-4">
+                        {stats?.highlights.map((highlight, idx) => (
+                          <div key={idx} className="bg-background/50 p-3 rounded-lg">
+                            <p className="text-sm font-semibold">{highlight}</p>
+                          </div>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  <p className="text-2xl font-bold">Business Data</p>
+
+                  {/* GST Information */}
+                  {responseData.gst_list?.code === "SUC" && responseData.gst_list.data?.length > 0 && (
+                    <Card>
+                      <CardHeader>
+                        <CardTitle className="flex items-center gap-2">
+                          <Building2 className="h-5 w-5" />
+                          GST Registrations ({responseData.gst_list.data.length})
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent className="space-y-4">
+                        {responseData.gst_list.data.map((gst: any, idx: number) => (
+                          <Card key={idx}>
+                            <CardHeader>
+                              <div className="flex justify-between items-start">
+                                <div>
+                                  <CardTitle className="text-base">{gst.trade_name}</CardTitle>
+                                  <CardDescription>GSTIN: {maskData(gst.gstin, showData)}</CardDescription>
+                                </div>
+                                <Badge variant={gst.current_registration_status === "Active" ? "default" : "secondary"}>
+                                  {gst.current_registration_status}
+                                </Badge>
+                              </div>
+                            </CardHeader>
+                            <CardContent>
+                              <Collapsible open={expandedGst[idx]} onOpenChange={(open) => setExpandedGst({ ...expandedGst, [idx]: open })}>
+                                <div className="grid md:grid-cols-2 gap-4 mb-4">
+                                  <div>
+                                    <p className="text-sm text-muted-foreground mb-1">Legal Name</p>
+                                    <p className="text-sm font-semibold">{gst.legal_name}</p>
+                                  </div>
+                                  <div>
+                                    <p className="text-sm text-muted-foreground mb-1">Business Constitution</p>
+                                    <p className="text-sm">{gst.business_constitution}</p>
+                                  </div>
+                                  <div>
+                                    <p className="text-sm text-muted-foreground mb-1">Registration Date</p>
+                                    <p className="text-sm">{gst.register_date}</p>
+                                  </div>
+                                  <div>
+                                    <p className="text-sm text-muted-foreground mb-1">Taxpayer Type</p>
+                                    <p className="text-sm">{gst.tax_payer_type}</p>
+                                  </div>
+                                </div>
+
+                                <CollapsibleTrigger asChild>
+                                  <Button variant="outline" size="sm" className="w-full">
+                                    {expandedGst[idx] ? <ChevronUp className="h-4 w-4 mr-2" /> : <ChevronDown className="h-4 w-4 mr-2" />}
+                                    {expandedGst[idx] ? "Show Less Details" : "Show More Details"}
+                                  </Button>
+                                </CollapsibleTrigger>
+
+                                <CollapsibleContent className="mt-4 space-y-4">
+                                  <div className="grid md:grid-cols-2 gap-4 pt-4 border-t">
+                                    <div>
+                                      <p className="text-sm text-muted-foreground mb-1">Business Email</p>
+                                      <p className="text-sm">{maskEmail(gst.business_email, showData)}</p>
+                                    </div>
+                                    <div>
+                                      <p className="text-sm text-muted-foreground mb-1">Business Mobile</p>
+                                      <p className="text-sm">{maskPhone(gst.business_mobile, showData)}</p>
+                                    </div>
+                                    <div className="md:col-span-2">
+                                      <p className="text-sm text-muted-foreground mb-1">Registered Address</p>
+                                      <p className="text-sm">{gst.primary_business_address?.registered_address}</p>
+                                    </div>
+                                    <div className="md:col-span-2">
+                                      <p className="text-sm text-muted-foreground mb-1">Business Nature</p>
+                                      <div className="flex flex-wrap gap-2 mt-2">
+                                        {gst.business_nature?.map((nature: string, nIdx: number) => (
+                                          <Badge key={nIdx} variant="outline">{nature}</Badge>
+                                        ))}
+                                      </div>
+                                    </div>
+                                    <div className="md:col-span-2">
+                                      <p className="text-sm text-muted-foreground mb-2">Business Details</p>
+                                      <div className="space-y-2">
+                                        {gst.business_details?.map((detail: any, dIdx: number) => (
+                                          <div key={dIdx} className="text-sm bg-muted/50 p-2 rounded">
+                                            <span className="font-semibold">{detail.saccd}:</span> {detail.sdes}
+                                          </div>
+                                        ))}
+                                      </div>
+                                    </div>
+                                    <div className="md:col-span-2">
+                                      <p className="text-sm text-muted-foreground mb-1">Central Jurisdiction</p>
+                                      <p className="text-sm">{gst.central_jurisdiction}</p>
+                                    </div>
+                                    <div className="md:col-span-2">
+                                      <p className="text-sm text-muted-foreground mb-1">State Jurisdiction</p>
+                                      <p className="text-sm">{gst.state_jurisdiction}</p>
+                                    </div>
+                                    <div>
+                                      <p className="text-sm text-muted-foreground mb-1">Aggregate Turnover</p>
+                                      <p className="text-sm">{gst.aggregate_turn_over}</p>
+                                    </div>
+                                    <div>
+                                      <p className="text-sm text-muted-foreground mb-1">Field Visit Conducted</p>
+                                      <p className="text-sm">{gst.is_field_visit_conducted}</p>
+                                    </div>
+                                    <div className="md:col-span-2">
+                                      <p className="text-sm text-muted-foreground mb-2">Authorized Signatories</p>
+                                      <div className="flex flex-wrap gap-2">
+                                        {gst.authorized_signatory?.map((signatory: string, sIdx: number) => (
+                                          <Badge key={sIdx} variant="secondary">{maskData(signatory, showData)}</Badge>
+                                        ))}
+                                      </div>
+                                    </div>
+                                  </div>
+                                </CollapsibleContent>
+                              </Collapsible>
+                            </CardContent>
+                          </Card>
+                        ))}
+                      </CardContent>
+                    </Card>
+                  )}
+
+                  {/* IEC Information */}
+                  {responseData.iec_list?.code === "SUC" && responseData.iec_list.data?.iec_number && (
+                    <Card>
+                      <CardHeader>
+                        <CardTitle className="flex items-center gap-2">
+                          <Building2 className="h-5 w-5" />
+                          IEC (Import Export Code) Details
+                          <Badge variant="default" className="ml-2">Import/Export Business</Badge>
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <Collapsible open={expandedIec} onOpenChange={setExpandedIec}>
+                          <div className="grid md:grid-cols-2 gap-4 mb-4">
+                            <div>
+                              <p className="text-sm text-muted-foreground mb-1">IEC Number</p>
+                              <p className="font-mono text-sm font-semibold">{maskData(responseData.iec_list.data.iec_number, showData)}</p>
+                            </div>
+                            <div>
+                              <p className="text-sm text-muted-foreground mb-1">PAN Number</p>
+                              <p className="font-mono text-sm">{maskData(responseData.iec_list.data.pan_number, showData)}</p>
+                            </div>
+                            <div>
+                              <p className="text-sm text-muted-foreground mb-1">Firm Name</p>
+                              <p className="text-sm font-semibold">{responseData.iec_list.data.firm_name}</p>
+                            </div>
+                            <div>
+                              <p className="text-sm text-muted-foreground mb-1">IEC Status</p>
+                              <Badge variant={responseData.iec_list.data.iec_status === "Valid" ? "default" : "secondary"}>
+                                {responseData.iec_list.data.iec_status}
+                              </Badge>
+                            </div>
+                          </div>
+
+                          <CollapsibleTrigger asChild>
+                            <Button variant="outline" size="sm" className="w-full">
+                              {expandedIec ? <ChevronUp className="h-4 w-4 mr-2" /> : <ChevronDown className="h-4 w-4 mr-2" />}
+                              {expandedIec ? "Show Less Details" : "Show More Details"}
+                            </Button>
+                          </CollapsibleTrigger>
+
+                          <CollapsibleContent className="mt-4 space-y-4">
+                            <div className="grid md:grid-cols-2 gap-4 pt-4 border-t">
+                              <div>
+                                <p className="text-sm text-muted-foreground mb-1">Date of Incorporation</p>
+                                <p className="text-sm">{responseData.iec_list.data.date_of_incorporation}</p>
+                              </div>
+                              <div>
+                                <p className="text-sm text-muted-foreground mb-1">IEC Issuance Date</p>
+                                <p className="text-sm">{responseData.iec_list.data.iec_issuance_date}</p>
+                              </div>
+                              <div>
+                                <p className="text-sm text-muted-foreground mb-1">Nature of Firm</p>
+                                <p className="text-sm">{responseData.iec_list.data.nature_of_firm}</p>
+                              </div>
+                              <div>
+                                <p className="text-sm text-muted-foreground mb-1">Category</p>
+                                <p className="text-sm">{responseData.iec_list.data.category_of_exporters}</p>
+                              </div>
+                              <div>
+                                <p className="text-sm text-muted-foreground mb-1">DGFT Office</p>
+                                <p className="text-sm">{responseData.iec_list.data.dgft_ra_office}</p>
+                              </div>
+                              <div>
+                                <p className="text-sm text-muted-foreground mb-1">Mobile</p>
+                                <p className="text-sm">{maskPhone(responseData.iec_list.data.firm_mobile, showData)}</p>
+                              </div>
+                              <div className="md:col-span-2">
+                                <p className="text-sm text-muted-foreground mb-1">Email</p>
+                                <p className="text-sm">{maskEmail(responseData.iec_list.data.firm_email, showData)}</p>
+                              </div>
+                              <div className="md:col-span-2">
+                                <p className="text-sm text-muted-foreground mb-1">Address</p>
+                                <p className="text-sm">{responseData.iec_list.data.address}</p>
+                              </div>
+
+                              {responseData.iec_list.data.branch_details?.length > 0 && (
+                                <div className="md:col-span-2">
+                                  <p className="text-sm font-semibold mb-2">Branch Details</p>
+                                  {responseData.iec_list.data.branch_details.map((branch: any, bIdx: number) => (
+                                    <div key={bIdx} className="bg-muted/50 p-3 rounded-lg mb-2">
+                                      <div className="grid md:grid-cols-2 gap-2 text-sm">
+                                        <div><span className="text-muted-foreground">Branch Code:</span> {branch.branch_code}</div>
+                                        <div><span className="text-muted-foreground">GSTIN:</span> {maskData(branch.gstin, showData)}</div>
+                                        <div className="md:col-span-2"><span className="text-muted-foreground">Address:</span> {branch.branch_address}</div>
+                                      </div>
+                                    </div>
+                                  ))}
+                                </div>
+                              )}
+
+                              {responseData.iec_list.data.proprietor_partner_director_details?.length > 0 && (
+                                <div className="md:col-span-2">
+                                  <p className="text-sm font-semibold mb-2">Director/Partner Details</p>
+                                  {responseData.iec_list.data.proprietor_partner_director_details.map((director: any, dIdx: number) => (
+                                    <div key={dIdx} className="bg-muted/50 p-3 rounded-lg mb-2">
+                                      <div className="grid md:grid-cols-2 gap-2 text-sm">
+                                        <div><span className="text-muted-foreground">Name:</span> {maskData(director.name, showData)}</div>
+                                        <div><span className="text-muted-foreground">Father Name:</span> {director.father_name}</div>
+                                        <div><span className="text-muted-foreground">PAN:</span> {maskData(director.pan_number, showData)}</div>
+                                        <div><span className="text-muted-foreground">Address:</span> {director.address}</div>
+                                      </div>
+                                    </div>
+                                  ))}
+                                </div>
+                              )}
+
+                              {responseData.iec_list.data.rcmc_details?.length > 0 && (
+                                <div className="md:col-span-2">
+                                  <p className="text-sm font-semibold mb-2">RCMC Details</p>
+                                  {responseData.iec_list.data.rcmc_details.map((rcmc: any, rIdx: number) => (
+                                    <div key={rIdx} className="bg-muted/50 p-3 rounded-lg mb-2">
+                                      <div className="grid md:grid-cols-2 gap-2 text-sm">
+                                        <div><span className="text-muted-foreground">RCMC Number:</span> {rcmc.rcmc_number}</div>
+                                        <div><span className="text-muted-foreground">Status:</span> <Badge variant="outline">{rcmc.status}</Badge></div>
+                                        <div><span className="text-muted-foreground">Issue Date:</span> {rcmc.issue_date}</div>
+                                        <div><span className="text-muted-foreground">Expiry Date:</span> {rcmc.expiry_date}</div>
+                                        <div><span className="text-muted-foreground">Issue Authority:</span> {rcmc.issue_authority}</div>
+                                        <div><span className="text-muted-foreground">Exporter Type:</span> {rcmc.exporter_type}</div>
+                                        <div className="md:col-span-2"><span className="text-muted-foreground">Products:</span> {rcmc.products_for_which_registered}</div>
+                                      </div>
+                                    </div>
+                                  ))}
+                                </div>
+                              )}
+                            </div>
+                          </CollapsibleContent>
+                        </Collapsible>
+                      </CardContent>
+                    </Card>
+                  )}
+
+                  {/* MSME Information */}
+                  {responseData.msme_info?.code === "SUC" && responseData.msme_info.data?.length > 0 && (
+                    <Card>
+                      <CardHeader>
+                        <CardTitle className="flex items-center gap-2">
+                          <Briefcase className="h-5 w-5" />
+                          MSME Registration
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        {responseData.msme_info.data.map((msme: any, idx: number) => (
+                          <Collapsible key={idx} open={expandedMsme} onOpenChange={setExpandedMsme}>
+                            <div className="grid md:grid-cols-2 gap-4 mb-4">
+                              <div>
+                                <p className="text-sm text-muted-foreground mb-1">Udyam Number</p>
+                                <p className="font-mono text-sm font-semibold">{msme.udyam_number}</p>
+                              </div>
+                              <div>
+                                <p className="text-sm text-muted-foreground mb-1">Enterprise Name</p>
+                                <p className="text-sm font-semibold">{msme.name_of_enterprise}</p>
+                              </div>
+                              <div>
+                                <p className="text-sm text-muted-foreground mb-1">Owner Name</p>
+                                <p className="text-sm">{maskData(msme.owner_name, showData)}</p>
+                              </div>
+                              <div>
+                                <p className="text-sm text-muted-foreground mb-1">Type</p>
+                                <Badge variant="outline">{msme.type_of_enterprise}</Badge>
+                              </div>
+                            </div>
+
+                            <CollapsibleTrigger asChild>
+                              <Button variant="outline" size="sm" className="w-full">
+                                {expandedMsme ? <ChevronUp className="h-4 w-4 mr-2" /> : <ChevronDown className="h-4 w-4 mr-2" />}
+                                {expandedMsme ? "Show Less Details" : "Show More Details"}
+                              </Button>
+                            </CollapsibleTrigger>
+
+                            <CollapsibleContent className="mt-4 space-y-4">
+                              <div className="grid md:grid-cols-2 gap-4 pt-4 border-t">
+                                <div>
+                                  <p className="text-sm text-muted-foreground mb-1">Major Activity</p>
+                                  <p className="text-sm">{msme.major_activity}</p>
+                                </div>
+                                <div>
+                                  <p className="text-sm text-muted-foreground mb-1">Organisation Type</p>
+                                  <p className="text-sm">{msme.type_of_organisation}</p>
+                                </div>
+                                <div>
+                                  <p className="text-sm text-muted-foreground mb-1">PAN</p>
+                                  <p className="font-mono text-sm">{maskData(msme.pan, showData)}</p>
+                                </div>
+                                <div>
+                                  <p className="text-sm text-muted-foreground mb-1">Mobile</p>
+                                  <p className="text-sm">{maskPhone(msme.mobile_no, showData)}</p>
+                                </div>
+                                <div>
+                                  <p className="text-sm text-muted-foreground mb-1">Email</p>
+                                  <p className="text-sm">{maskEmail(msme.email_id, showData)}</p>
+                                </div>
+                                <div>
+                                  <p className="text-sm text-muted-foreground mb-1">Date of Incorporation</p>
+                                  <p className="text-sm">{msme.date_of_incorporation}</p>
+                                </div>
+                                <div>
+                                  <p className="text-sm text-muted-foreground mb-1">Registration Date</p>
+                                  <p className="text-sm">{msme.date_of_udyam_registration}</p>
+                                </div>
+                                <div>
+                                  <p className="text-sm text-muted-foreground mb-1">Social Category</p>
+                                  <p className="text-sm">{msme.social_category}</p>
+                                </div>
+                                <div className="md:col-span-2">
+                                  <p className="text-sm text-muted-foreground mb-1">NIC Classification</p>
+                                  <div className="space-y-1 text-sm">
+                                    <div>{msme.nic_2_digit}</div>
+                                    <div>{msme.nic_4_digit}</div>
+                                    <div>{msme.nic_5_digit}</div>
+                                  </div>
+                                </div>
+                                <div className="md:col-span-2">
+                                  <p className="text-sm text-muted-foreground mb-1">Address</p>
+                                  <p className="text-sm">{`${msme.flat_door_block_no}, ${msme.name_of_premises_building}, ${msme.village_town}, ${msme.city}, ${msme.state} - ${msme.pin}`}</p>
+                                </div>
+                                <div className="md:col-span-2">
+                                  <p className="text-sm font-semibold mb-2">Employee Count</p>
+                                  <div className="grid grid-cols-4 gap-2">
+                                    <div className="bg-muted/50 p-2 rounded text-center">
+                                      <p className="text-xs text-muted-foreground">Male</p>
+                                      <p className="font-semibold">{msme.male}</p>
+                                    </div>
+                                    <div className="bg-muted/50 p-2 rounded text-center">
+                                      <p className="text-xs text-muted-foreground">Female</p>
+                                      <p className="font-semibold">{msme.female}</p>
+                                    </div>
+                                    <div className="bg-muted/50 p-2 rounded text-center">
+                                      <p className="text-xs text-muted-foreground">Other</p>
+                                      <p className="font-semibold">{msme.other}</p>
+                                    </div>
+                                    <div className="bg-muted/50 p-2 rounded text-center">
+                                      <p className="text-xs text-muted-foreground">Total</p>
+                                      <p className="font-semibold">{msme.total}</p>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </CollapsibleContent>
+                          </Collapsible>
+                        ))}
+                      </CardContent>
+                    </Card>
+                  )}
                 </TabsContent>
               </Tabs>
 
-              {/* Response Metadata */}
-              <Card className="bg-muted/50">
-                <CardContent className="pt-6">
-                  <p className="text-sm text-muted-foreground">
-                    Response Time: {new Date(responseData.timestamp).toLocaleString('en-IN')}
-                  </p>
-                </CardContent>
-              </Card>
+              <div className="text-sm text-muted-foreground text-center">
+                Response generated at: {new Date(responseData.timestamp).toLocaleString()}
+              </div>
             </div>
           )}
         </div>

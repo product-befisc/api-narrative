@@ -15,6 +15,9 @@ import trustiifyIcon from "@/assets/products/trustiify.svg";
 import financialStatementIcon from "@/assets/products/financial-statement.svg";
 import affordplanLogo from "@/assets/clients/affordplan.svg";
 import arthanFinanceLogo from "@/assets/clients/arthan-finance.svg";
+import ambitFinvestLogo from "@/assets/clients/ambit-finvest.avif";
+import olyvLogo from "@/assets/clients/olyv.png";
+import ckersFinanceLogo from "@/assets/clients/ckers-finance.jpeg";
 import bajajLogo from "@/assets/clients/bajaj.svg";
 import supermoneyLogo from "@/assets/clients/supermoney.png";
 import cashrichLogo from "@/assets/clients/cashrich.svg";
@@ -390,6 +393,9 @@ const Landing = () => {
                   { name: "Muthoot Capital", logo: muthootLogo },
                   { name: "Navi", logo: naviLogo },
                   { name: "Lendbox", logo: lendboxLogo },
+                  { name: "Ambit Finvest", logo: ambitFinvestLogo },
+                  { name: "Olyv", logo: olyvLogo },
+                  { name: "Ckers Finance", logo: ckersFinanceLogo },
                   { name: "Vastu Finance", logo: vastuFinanceLogo },
                   { name: "Arthan Finance", logo: arthanFinanceLogo },
                   { name: "Affordplan", logo: affordplanLogo },

@@ -1076,6 +1076,50 @@ const CustomerProfiling = () => {
                     </Card>
                   )}
 
+                  {/* EPFO Info */}
+                  {responseData.epfo_info?.code === "SUC" && responseData.epfo_info.data && (
+                    <Card>
+                      <CardHeader>
+                        <CardTitle className="flex items-center gap-2">
+                          <Briefcase className="h-5 w-5" />
+                          EPFO Info
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="grid md:grid-cols-2 gap-4">
+                          <div>
+                            <p className="text-sm text-muted-foreground mb-1">UAN</p>
+                            <p className="text-sm font-semibold">{maskData(responseData.epfo_info.data[0]?.uan, showData)}</p>
+                          </div>
+                          <div>
+                            <p className="text-sm text-muted-foreground mb-1">Guardian Name</p>
+                            <p className="text-sm">{maskData(responseData.epfo_info.data[0]?.guardian_name, showData)}</p>
+                          </div>
+                          <div className="md:col-span-2">
+                            <p className="text-sm text-muted-foreground mb-2">Establishment Names</p>
+                            <div className="flex flex-wrap gap-2">
+                              {responseData.epfo_info.data.map((emp: any, idx: number) => (
+                                <Badge key={idx} variant="outline">{emp.establishment_name}</Badge>
+                              ))}
+                            </div>
+                          </div>
+                          <div className="md:col-span-2">
+                            <p className="text-sm text-muted-foreground mb-2">Date of Joining</p>
+                            <div className="flex flex-wrap gap-2">
+                              {responseData.epfo_info.data.map((emp: any, idx: number) => (
+                                <Badge key={idx} variant="secondary">{emp.date_of_joining}</Badge>
+                              ))}
+                            </div>
+                          </div>
+                          <div>
+                            <p className="text-sm text-muted-foreground mb-1">Date of Exit</p>
+                            <p className="text-sm">{responseData.epfo_info.data.every((emp: any) => !emp.date_of_exit) ? "None" : responseData.epfo_info.data.map((emp: any) => emp.date_of_exit).filter(Boolean).join(", ")}</p>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  )}
+
                   {/* Profile Advance */}
                   {responseData.profile_advance?.full_name && (
                     <Card>

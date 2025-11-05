@@ -8,9 +8,34 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Navbar from "@/components/Navbar";
-import { ArrowLeft, User, CreditCard, Briefcase, Phone, MapPin, Building2, Fuel, CheckCircle2, Eye, EyeOff, FileText, ChevronDown, ChevronUp, AlertTriangle, Info, Shield } from "lucide-react";
+import {
+  ArrowLeft,
+  User,
+  CreditCard,
+  Briefcase,
+  Phone,
+  MapPin,
+  Building2,
+  Fuel,
+  CheckCircle2,
+  Eye,
+  EyeOff,
+  FileText,
+  ChevronDown,
+  ChevronUp,
+  AlertTriangle,
+  Info,
+  Shield,
+} from "lucide-react";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { maskData, maskEmail, maskPhone } from "@/lib/utils";
 
 const CustomerProfiling = () => {
@@ -42,8 +67,8 @@ const CustomerProfiling = () => {
         city: "NOIDA",
         centre: "Gautam Buddh Nagar",
         district: "Gautam Buddh Nagar",
-        bank: "Paytm Payments Bank"
-      }
+        bank: "Paytm Payments Bank",
+      },
     },
     lpg_info: {
       code: "SUC",
@@ -55,15 +80,15 @@ const CustomerProfiling = () => {
             consumer_mobile: "6789999999",
             consumer_id: "7500000901234567",
             consumer_status: "ACTIVE",
-            consumer_type: "Single Bottle Connection"
+            consumer_type: "Single Bottle Connection",
           },
           address: "123 ABC Colony XYZ",
           distributor_details: {
             distributor_code: "000987654",
             distributor_name: "GAYATRI INDANE SERVICE",
             distributor_contact: "1800987654",
-            distributor_address: "456 MNOP Marg XYZ"
-          }
+            distributor_address: "456 MNOP Marg XYZ",
+          },
         },
         {
           gas_provider: "Bharat Gas",
@@ -72,15 +97,15 @@ const CustomerProfiling = () => {
             consumer_mobile: "",
             consumer_id: "1234567890",
             consumer_status: "",
-            consumer_type: ""
+            consumer_type: "",
           },
           address: "123 ABC Colony XYZ",
           distributor_details: {
             distributor_code: "1234567",
             distributor_name: "CHANDAN GAS SERVICE",
             distributor_contact: "",
-            distributor_address: ""
-          }
+            distributor_address: "",
+          },
         },
         {
           gas_provider: "HP Gas",
@@ -89,120 +114,129 @@ const CustomerProfiling = () => {
             consumer_mobile: "",
             consumer_id: "",
             consumer_status: "",
-            consumer_type: ""
+            consumer_type: "",
           },
           address: "1XX ABC Colony GXXXX 123456",
           distributor_details: {
             distributor_code: "1234567",
             distributor_name: "CHITRA GAS SERVICE",
             distributor_contact: "",
-            distributor_address: ""
-          }
-        }
-      ]
+            distributor_address: "",
+          },
+        },
+      ],
     },
     msme_info: {
       code: profileType === "business" ? "SUC" : "NRF",
-      data: profileType === "business" ? [
-        {
-          udyam_number: "UDYAM-MH-11-12345678",
-          type_of_enterprise: "MICRO",
-          major_activity: "Services",
-          type_of_organisation: "Hindu Undivided Family",
-          name_of_enterprise: "ABC Enterprise",
-          owner_name: "Ram Singh",
-          pan: "ABCPD1234D",
-          do_you_have_gstin: "",
-          mobile_no: "9876543210",
-          email_id: "ram@email.com",
-          social_category: "General",
-          gender: "Male",
-          specially_abled_divyang: "No",
-          date_of_incorporation: "29/02/2024",
-          date_of_commencement_of_production_business: "",
-          male: "4",
-          female: "0",
-          other: "0",
-          total: "4",
-          unit_sn: "1",
-          unit_unit_name: "ABC Unit",
-          unit_flat: "123",
-          unit_building: "ABC colony",
-          "unit_village/town": "ABC",
-          unit_block: "ABC",
-          unit_road: "ABC colony",
-          unit_city: "ABC",
-          unit_pin: "121212",
-          unit_state: "Delhi",
-          unit_district: "ABC",
-          flat_door_block_no: "123",
-          name_of_premises_building: "ABC colony",
-          village_town: "ABC Village",
-          block: "ABC Block",
-          road_street_lane: "ABC colony",
-          city: "ABC",
-          state: "TELANGANA",
-          district: "Delhi",
-          pin: "121212",
-          mobile: "9876543210",
-          email: "ram@email.com",
-          "sno.": "",
-          nic_2_digit: "10 - Manufacture of food products",
-          nic_4_digit: "1079 - Manufacture of other food products n.e.c.",
-          nic_5_digit: "10796 - Manufacture of papads, appalam and similar food products",
-          activity: "Manufacturing",
-          gem_interest: "No",
-          treds_interest: "No",
-          ncs_interest: "No",
-          dic: "Delhi",
-          msme_di: "Delhi",
-          date_of_udyam_registration: "10/06/2025"
-        }
-      ] : []
+      data:
+        profileType === "business"
+          ? [
+              {
+                udyam_number: "UDYAM-MH-11-12345678",
+                type_of_enterprise: "MICRO",
+                major_activity: "Services",
+                type_of_organisation: "Hindu Undivided Family",
+                name_of_enterprise: "ABC Enterprise",
+                owner_name: "Ram Singh",
+                pan: "ABCPD1234D",
+                do_you_have_gstin: "",
+                mobile_no: "9876543210",
+                email_id: "ram@email.com",
+                social_category: "General",
+                gender: "Male",
+                specially_abled_divyang: "No",
+                date_of_incorporation: "29/02/2024",
+                date_of_commencement_of_production_business: "",
+                male: "4",
+                female: "0",
+                other: "0",
+                total: "4",
+                unit_sn: "1",
+                unit_unit_name: "ABC Unit",
+                unit_flat: "123",
+                unit_building: "ABC colony",
+                "unit_village/town": "ABC",
+                unit_block: "ABC",
+                unit_road: "ABC colony",
+                unit_city: "ABC",
+                unit_pin: "121212",
+                unit_state: "Delhi",
+                unit_district: "ABC",
+                flat_door_block_no: "123",
+                name_of_premises_building: "ABC colony",
+                village_town: "ABC Village",
+                block: "ABC Block",
+                road_street_lane: "ABC colony",
+                city: "ABC",
+                state: "TELANGANA",
+                district: "Delhi",
+                pin: "121212",
+                mobile: "9876543210",
+                email: "ram@email.com",
+                "sno.": "",
+                nic_2_digit: "10 - Manufacture of food products",
+                nic_4_digit: "1079 - Manufacture of other food products n.e.c.",
+                nic_5_digit: "10796 - Manufacture of papads, appalam and similar food products",
+                activity: "Manufacturing",
+                gem_interest: "No",
+                treds_interest: "No",
+                ncs_interest: "No",
+                dic: "Delhi",
+                msme_di: "Delhi",
+                date_of_udyam_registration: "10/06/2025",
+              },
+            ]
+          : [],
     },
     epfo_info: {
       code: profileType !== "business" ? "SUC" : "NRF",
-      data: profileType !== "business" ? [
-        {
-          uan: "111XXXXXXXXX",
-          name: "RAM RAM",
-          guardian_name: "SHIV RAM",
-          establishment_name: "ABCD PVT LTD.",
-          member_id: "ABCDE98765430000012345",
-          date_of_joining: "08/01/2019",
-          date_of_exit: "",
-          last_pf_submitted: "08/01/2019"
-        },
-        {
-          uan: "111XXXXXXXXX",
-          name: "RAM RAM",
-          guardian_name: "SHIV RAM",
-          establishment_name: "TEST FOUNDATION OF INDIA",
-          member_id: "EDCBA09876543210012345",
-          date_of_joining: "04/03/2018",
-          date_of_exit: "",
-          last_pf_submitted: "01/01/2019"
-        }
-      ] : []
+      data:
+        profileType !== "business"
+          ? [
+              {
+                uan: "111XXXXXXXXX",
+                name: "RAM RAM",
+                guardian_name: "SHIV RAM",
+                establishment_name: "ABCD PVT LTD.",
+                member_id: "ABCDE98765430000012345",
+                date_of_joining: "08/01/2019",
+                date_of_exit: "",
+                last_pf_submitted: "08/01/2019",
+              },
+              {
+                uan: "111XXXXXXXXX",
+                name: "RAM RAM",
+                guardian_name: "SHIV RAM",
+                establishment_name: "TEST FOUNDATION OF INDIA",
+                member_id: "EDCBA09876543210012345",
+                date_of_joining: "04/03/2018",
+                date_of_exit: "",
+                last_pf_submitted: "01/01/2019",
+              },
+            ]
+          : [],
     },
     director_pan_info: {
       code: profileType === "business" ? "SUC" : "NRF",
-      data: profileType === "business" ? ["ABCPD1234E"] : []
+      data: profileType === "business" ? ["ABCPD1234E"] : [],
     },
     din_info: {
       code: profileType === "business" ? "SUC" : "NRF",
-      data: profileType === "business" ? [
-        {
-          pan: "ABCPD1234E",
-          data: {
-            pan: "ABCPD1234D",
-            din: "87654321",
-            name: "RAM SINGH",
-            mobile: "987654321",
-            email: "ABC@GMAIL.COM"
-          }
-        }
-      ] : []
+      data:
+        profileType === "business"
+          ? [
+              {
+                pan: "ABCPD1234E",
+                data: {
+                  pan: "ABCPD1234D",
+                  din: "87654321",
+                  name: "RAM SINGH",
+                  mobile: "987654321",
+                  email: "ABC@GMAIL.COM",
+                },
+              },
+            ]
+          : [],
     },
     telco_info: {
       code: "SUC",
@@ -211,7 +245,7 @@ const CustomerProfiling = () => {
         subscriber_status: "CONNECTED",
         connection_status: {
           status_code: "DELIVERED",
-          error_code_id: ""
+          error_code_id: "",
         },
         connection_type: "prepaid",
         msisdn: {
@@ -221,7 +255,7 @@ const CustomerProfiling = () => {
           mnc: "109",
           imsi: "404109582773885",
           mcc: "404",
-          mcc_mnc: "40410"
+          mcc_mnc: "40410",
         },
         current_service_provider: {
           network_prefix: "81302",
@@ -231,7 +265,7 @@ const CustomerProfiling = () => {
           mnc: "109",
           country_prefix: "+91",
           country_code: "IN",
-          country_name: "India"
+          country_name: "India",
         },
         original_service_provider: {
           network_prefix: "95827",
@@ -241,10 +275,10 @@ const CustomerProfiling = () => {
           mnc: "109",
           country_prefix: "+91",
           country_code: "IN",
-          country_name: "India"
+          country_name: "India",
         },
-        is_roaming: false
-      }
+        is_roaming: false,
+      },
     },
     mobile_age_info: {
       code: "SUC",
@@ -257,250 +291,268 @@ const CustomerProfiling = () => {
         ported_telecom: "Airtel",
         region: "Delhi",
         roaming: "No",
-        telecom: "Vodafone"
-      }
+        telecom: "Vodafone",
+      },
     },
     gst_list: {
       code: profileType === "business" ? "SUC" : "NRF",
-      data: profileType === "business" ? [
-        {
-          authorized_signatory: ["XXXXXXXX", "XXXXXXXXX", "XXXXXXXXX"],
-          business_constitution: "Private Limited Company",
-          business_details: [
-            { saccd: "998313", sdes: "Information technology (IT) consulting and support services" },
-            { saccd: "998599", sdes: "Other support services n.e.c." },
-            { saccd: "998598", sdes: "Other information services n.e.c." }
-          ],
-          business_nature: ["Supplier of Services", "Recipient of Goods or Services"],
-          can_flag: "NA",
-          central_jurisdiction: "Commissionerate - GAUTAM BUDDHA NAGAR, Division - DIVISION I GAUTAM BUDH NAGAR, Range - RANGE - 1",
-          compliance_rating: "NA",
-          current_registration_status: "Active",
-          filing_status: [
-            [
+      data:
+        profileType === "business"
+          ? [
               {
-                fy: "2022-2023",
-                taxp: "January",
-                mof: "ONLINE",
-                dof: "11/02/2023",
-                rtntype: "GSTR1",
-                arn: "NA",
-                status: "Filed"
+                authorized_signatory: ["XXXXXXXX", "XXXXXXXXX", "XXXXXXXXX"],
+                business_constitution: "Private Limited Company",
+                business_details: [
+                  { saccd: "998313", sdes: "Information technology (IT) consulting and support services" },
+                  { saccd: "998599", sdes: "Other support services n.e.c." },
+                  { saccd: "998598", sdes: "Other information services n.e.c." },
+                ],
+                business_nature: ["Supplier of Services", "Recipient of Goods or Services"],
+                can_flag: "NA",
+                central_jurisdiction:
+                  "Commissionerate - GAUTAM BUDDHA NAGAR, Division - DIVISION I GAUTAM BUDH NAGAR, Range - RANGE - 1",
+                compliance_rating: "NA",
+                current_registration_status: "Active",
+                filing_status: [
+                  [
+                    {
+                      fy: "2022-2023",
+                      taxp: "January",
+                      mof: "ONLINE",
+                      dof: "11/02/2023",
+                      rtntype: "GSTR1",
+                      arn: "NA",
+                      status: "Filed",
+                    },
+                    {
+                      fy: "2022-2023",
+                      taxp: "January",
+                      mof: "ONLINE",
+                      dof: "16/02/2023",
+                      rtntype: "GSTR3B",
+                      arn: "NA",
+                      status: "Filed",
+                    },
+                  ],
+                ],
+                gstin: "XXXXXXXXXX",
+                is_field_visit_conducted: "No",
+                legal_name: "XXXXXXX PRIVATE LIMITED",
+                mandate_e_invoice: "NA",
+                aggregate_turn_over: "NA",
+                primary_business_address: {
+                  business_nature: "Supplier of Services, Recipient of Goods or Services",
+                  detailed_address: "NA",
+                  last_updated_date: "NA",
+                  registered_address:
+                    "XXXXXXXX County, GREATER NOIDA, Greater Noida, Gautam Buddha Nagar, Uttar Pradesh, 201306",
+                },
+                other_business_address: {},
+                register_cancellation_date: "",
+                register_date: "31/01/XXXX",
+                state_jurisdiction:
+                  "State - Uttar Pradesh, Zone - Gautambudha Nagar, Range - Gautambudha Nagar(B), Sector - Sector-1, Gautambudha Nagar (Jurisdictional Office)",
+                tax_payer_type: "Regular",
+                trade_name: "XXXXX PRIVATE LIMITED",
+                gross_total_income: "NA",
+                gross_total_income_financial_year: "",
+                business_email: "XYZ@gmail.com",
+                business_mobile: "0987654432",
               },
-              {
-                fy: "2022-2023",
-                taxp: "January",
-                mof: "ONLINE",
-                dof: "16/02/2023",
-                rtntype: "GSTR3B",
-                arn: "NA",
-                status: "Filed"
-              }
             ]
-          ],
-          gstin: "XXXXXXXXXX",
-          is_field_visit_conducted: "No",
-          legal_name: "XXXXXXX PRIVATE LIMITED",
-          mandate_e_invoice: "NA",
-          aggregate_turn_over: "NA",
-          primary_business_address: {
-            business_nature: "Supplier of Services, Recipient of Goods or Services",
-            detailed_address: "NA",
-            last_updated_date: "NA",
-            registered_address: "XXXXXXXX County, GREATER NOIDA, Greater Noida, Gautam Buddha Nagar, Uttar Pradesh, 201306"
-          },
-          other_business_address: {},
-          register_cancellation_date: "",
-          register_date: "31/01/XXXX",
-          state_jurisdiction: "State - Uttar Pradesh, Zone - Gautambudha Nagar, Range - Gautambudha Nagar(B), Sector - Sector-1, Gautambudha Nagar (Jurisdictional Office)",
-          tax_payer_type: "Regular",
-          trade_name: "XXXXX PRIVATE LIMITED",
-          gross_total_income: "NA",
-          gross_total_income_financial_year: "",
-          business_email: "XYZ@gmail.com",
-          business_mobile: "0987654432"
-        }
-      ] : []
+          : [],
     },
     iec_list: {
       code: profileType === "business" ? "SUC" : "NRF",
-      data: profileType === "business" ? {
-        iec_number: "0011223344",
-        pan_number: "ABCDPE1234E",
-        date_of_incorporation: "14/02/2019",
-        iec_issuance_date: "06/08/2019",
-        iec_status: "Valid",
-        del_status: "N",
-        file_number: "HYDQAZWSXCDF00123456AM12",
-        file_date: "Thu Jun 27 05:30:00 IST 2024",
-        dgft_ra_office: "RA HYDERABAD",
-        nature_of_firm: "Private Limited",
-        category_of_exporters: "Manufacturer Exporter",
-        firm_name: "ABC PRIVATE LIMITED",
-        address: "ROAD NO.60, HYDERABAD, TELANGANA, 500033",
-        firm_mobile: "9876543210",
-        firm_email: "email@mail.com",
-        branch_details: [
-          {
-            branch_code: "1",
-            gstin: "12ABCDPE1234E1ZS",
-            branch_address: "BACHUPALLY- VILLAGE, HYDERABAD, TELANGANA, 500090"
-          }
-        ],
-        proprietor_partner_director_details: [
-          {
-            name: "RAM SINGH",
-            father_name: "SHAM SINGH",
-            pan_number: "ABCPD1234H",
-            address: "JUBILEEHILLS, HYDERABAD"
-          }
-        ],
-        rcmc_details: [
-          {
-            rcmc_number: "AB/123/2020-2021",
-            issue_date: "20/02/2020",
-            issue_authority: "Federation of Indian Export Organisations",
-            products_for_which_registered: "Aluminium windows and doors",
-            expiry_date: "31/03/2025",
-            firm_web: "email@mail.com",
-            firm_profile: "Manufacturer Exporter",
-            status: "Active",
-            source: "Issued through e-RCMC module",
-            exporter_type: "Manufacturer Exporter",
-            validity_period: "567",
-            validated_by_epc: "Y"
-          }
-        ]
-      } : {}
+      data:
+        profileType === "business"
+          ? {
+              iec_number: "0011223344",
+              pan_number: "ABCDPE1234E",
+              date_of_incorporation: "14/02/2019",
+              iec_issuance_date: "06/08/2019",
+              iec_status: "Valid",
+              del_status: "N",
+              file_number: "HYDQAZWSXCDF00123456AM12",
+              file_date: "Thu Jun 27 05:30:00 IST 2024",
+              dgft_ra_office: "RA HYDERABAD",
+              nature_of_firm: "Private Limited",
+              category_of_exporters: "Manufacturer Exporter",
+              firm_name: "ABC PRIVATE LIMITED",
+              address: "ROAD NO.60, HYDERABAD, TELANGANA, 500033",
+              firm_mobile: "9876543210",
+              firm_email: "email@mail.com",
+              branch_details: [
+                {
+                  branch_code: "1",
+                  gstin: "12ABCDPE1234E1ZS",
+                  branch_address: "BACHUPALLY- VILLAGE, HYDERABAD, TELANGANA, 500090",
+                },
+              ],
+              proprietor_partner_director_details: [
+                {
+                  name: "RAM SINGH",
+                  father_name: "SHAM SINGH",
+                  pan_number: "ABCPD1234H",
+                  address: "JUBILEEHILLS, HYDERABAD",
+                },
+              ],
+              rcmc_details: [
+                {
+                  rcmc_number: "AB/123/2020-2021",
+                  issue_date: "20/02/2020",
+                  issue_authority: "Federation of Indian Export Organisations",
+                  products_for_which_registered: "Aluminium windows and doors",
+                  expiry_date: "31/03/2025",
+                  firm_web: "email@mail.com",
+                  firm_profile: "Manufacturer Exporter",
+                  status: "Active",
+                  source: "Issued through e-RCMC module",
+                  exporter_type: "Manufacturer Exporter",
+                  validity_period: "567",
+                  validated_by_epc: "Y",
+                },
+              ],
+            }
+          : {},
     },
     whatsapp_info: {
       code: "SUC",
       data: {
         status: "Account Found",
-        is_business: "0"
-      }
+        is_business: "0",
+      },
     },
     revoke_info: {
       code: "SUC",
       data: {
         revoke_date: "",
-        revoke_status: "No"
-      }
+        revoke_status: "No",
+      },
     },
     esic_info: {
       code: profileType === "salaried" ? "SUC" : profileType === "bluecollar" ? "SUC" : "NRF",
-      data: (profileType === "bluecollar" || profileType === "salaried") ? {
-        esic_details: [
-          {
-            esic_number: "987654321",
-            name: "RAM SINGH",
-            employer_code: "12345678987654321",
-            employer_name: "ABC Private Limited",
-            mobile: "987654321",
-            uan_number: "",
-            bank_name: "ABC BANK OF INDIA",
-            branch_name: "Delhi",
-            bank_account_status: "Not Verified",
-            uhid_number: "",
-            date_of_birth: "01/01/1999",
-            registration_date: "28/10/2024",
-            dispensary_name: "Lahuravir, Varanasi, UP (ESIS Disp.)",
-            first_date_of_appointment: "19/10/2024",
-            employer_details: {
-              employer_code: "12345678987654321",
-              employer_name: "ABC Private Limited",
-              address: "Nirayan Sales & Marketing, Mehmoorgaj Varanasi",
-              state: "Uttar Pradesh",
-              district: "Varanasi",
-              pincode: "221001",
-              email: "abc@email.com",
-              mobile: ""
-            },
-            address: "House No 123, Chandauli, Mughalsarai, Uttar Pradesh, Varanasi, Uttar Pradesh",
-            age: "24",
-            gender: "Male"
-          }
-        ]
-      } : {},
-      datetime: "2024-12-24 07:15:53.41087"
+      data:
+        profileType === "bluecollar" || profileType === "salaried"
+          ? {
+              esic_details: [
+                {
+                  esic_number: "987654321",
+                  name: "RAM SINGH",
+                  employer_code: "12345678987654321",
+                  employer_name: "ABC Private Limited",
+                  mobile: "987654321",
+                  uan_number: "",
+                  bank_name: "ABC BANK OF INDIA",
+                  branch_name: "Delhi",
+                  bank_account_status: "Not Verified",
+                  uhid_number: "",
+                  date_of_birth: "01/01/1999",
+                  registration_date: "28/10/2024",
+                  dispensary_name: "Lahuravir, Varanasi, UP (ESIS Disp.)",
+                  first_date_of_appointment: "19/10/2024",
+                  employer_details: {
+                    employer_code: "12345678987654321",
+                    employer_name: "ABC Private Limited",
+                    address: "Nirayan Sales & Marketing, Mehmoorgaj Varanasi",
+                    state: "Uttar Pradesh",
+                    district: "Varanasi",
+                    pincode: "221001",
+                    email: "abc@email.com",
+                    mobile: "",
+                  },
+                  address: "House No 123, Chandauli, Mughalsarai, Uttar Pradesh, Varanasi, Uttar Pradesh",
+                  age: "24",
+                  gender: "Male",
+                },
+              ],
+            }
+          : {},
+      datetime: "2024-12-24 07:15:53.41087",
     },
-    profile_advance: profileType === "salaried" ? {
-      full_name: "RAM SINGH",
-      gender: "Male",
-      age: "20",
-      date_of_birth: "1999-01-01",
-      income: "987987",
-      alternate_phones: ["4311234", "4311234", "9877654321", "1146534321", "1112011111111"],
-      email: "RAM@GMAIL.COM",
-      detailed_address: "11 ABC COLONY PHASE I ABC COLONY PHASE I",
-      address_state: "UP",
-      address_pincode: "202001",
-      address_type: "Primary",
-      address_date_of_reporting: "2024-07-18",
-      document_pan: "ABCPD1234D"
-    } : {},
-    bureau_data: profileType === "salaried" ? {
-      credit_score: "759",
-      fcirex_score: "999",
-      address: {
-        flat_house_no: "ABC COLONY",
-        building_society: "",
-        road_area_locality: "",
-        city: "",
-        landmark: "",
-        state_code: "27",
-        pin_code: "400612",
-        country_code: "IB",
-        first_line: "ABC COLONY",
-        second_line: "1981",
-        third_line: "MAHARASHTRA",
-        cais_city: "",
-        fifth_line: "",
-        cais_state_code: "27",
-        zip_postal_code: "400612",
-        cais_country_code: "IB",
-        address_indicator: "2",
-        residence_code: ""
-      },
-      credit_accounts: {
-        total: "2",
-        active: "1",
-        closed: "1",
-        default: "0"
-      },
-      account_details: {
-        identification_number: "NBFXXXXXXXX",
-        subscriber_name: "XXXXXXXXXX",
-        account_number: "XXXXX4748",
-        account_type: "6",
-        open_date: "20230627",
-        terms_duration_months: "10",
-        account_status: "13",
-        current_balance: "0",
-        date_closed: "20240510",
-        date_of_last_payment: "20240503",
-        amount_past_due: "0",
-        days_past_due: "0",
-        past_loan_account_number: "XXXXX4748",
-        past_loan_date_closed: "20240510",
-        highest_credit_original_loan: "11234",
-        repayment_tenure_months: "10",
-        payment_history_profile: "00000000000?????????????????????????",
-        past_loan_amount_past_due: "0",
-        credit_account_default: "0",
-        suit_filed_willful_default: "0",
-        default_amount_past_due: "0",
-        default_days_past_due: "0",
-        payment_rating: "0",
-        default_status_date: ""
-      },
-      contact: {
-        primary_mobile: "9876543210",
-        alternate_numbers: "",
-        email_address: "RAMSINGH@EMAIL.COM"
-      }
-    } : {},
-    timestamp: new Date().toISOString()
+    profile_advance:
+      profileType === "salaried"
+        ? {
+            full_name: "RAM SINGH",
+            gender: "Male",
+            age: "20",
+            date_of_birth: "1999-01-01",
+            income: "987987",
+            alternate_phones: ["4311234", "4311234", "9877654321", "1146534321", "1112011111111"],
+            email: "RAM@GMAIL.COM",
+            detailed_address: "11 ABC COLONY PHASE I ABC COLONY PHASE I",
+            address_state: "UP",
+            address_pincode: "202001",
+            address_type: "Primary",
+            address_date_of_reporting: "2024-07-18",
+            document_pan: "ABCPD1234D",
+          }
+        : {},
+    bureau_data:
+      profileType === "salaried"
+        ? {
+            credit_score: "700-750",
+            fcirex_score: "999",
+            address: {
+              flat_house_no: "ABC COLONY",
+              building_society: "",
+              road_area_locality: "",
+              city: "",
+              landmark: "",
+              state_code: "27",
+              pin_code: "400612",
+              country_code: "IB",
+              first_line: "ABC COLONY",
+              second_line: "1981",
+              third_line: "MAHARASHTRA",
+              cais_city: "",
+              fifth_line: "",
+              cais_state_code: "27",
+              zip_postal_code: "400612",
+              cais_country_code: "IB",
+              address_indicator: "2",
+              residence_code: "",
+            },
+            credit_accounts: {
+              total: "2",
+              active: "1",
+              closed: "1",
+              default: "0",
+            },
+            account_details: {
+              identification_number: "NBFXXXXXXXX",
+              subscriber_name: "XXXXXXXXXX",
+              account_number: "XXXXX4748",
+              account_type: "6",
+              open_date: "20230627",
+              terms_duration_months: "10",
+              account_status: "13",
+              current_balance: "0",
+              date_closed: "20240510",
+              date_of_last_payment: "20240503",
+              amount_past_due: "0",
+              days_past_due: "0",
+              past_loan_account_number: "XXXXX4748",
+              past_loan_date_closed: "20240510",
+              highest_credit_original_loan: "11234",
+              repayment_tenure_months: "10",
+              payment_history_profile: "00000000000?????????????????????????",
+              past_loan_amount_past_due: "0",
+              credit_account_default: "0",
+              suit_filed_willful_default: "0",
+              default_amount_past_due: "0",
+              default_days_past_due: "0",
+              payment_rating: "0",
+              default_status_date: "",
+            },
+            contact: {
+              primary_mobile: "9876543210",
+              alternate_numbers: "",
+              email_address: "RAMSINGH@EMAIL.COM",
+            },
+          }
+        : {},
+    timestamp: new Date().toISOString(),
   });
 
   // Calculate stats from response data
@@ -577,7 +629,7 @@ const CustomerProfiling = () => {
       gstinSources,
       esicCount: esicSources.length,
       esicSources,
-      highlights
+      highlights,
     };
   };
 
@@ -595,11 +647,7 @@ const CustomerProfiling = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
       <div className="container mx-auto px-4 py-8">
-        <Button
-          variant="ghost"
-          onClick={() => navigate("/product/id-proof?tab=solutions")}
-          className="mb-6"
-        >
+        <Button variant="ghost" onClick={() => navigate("/product/id-proof?tab=solutions")} className="mb-6">
           <ArrowLeft className="mr-2 h-4 w-4" />
           Back to ID Proof
         </Button>
@@ -612,9 +660,7 @@ const CustomerProfiling = () => {
                 <p className="text-muted-foreground">Comprehensive customer profile based on mobile number</p>
               </div>
               <div className="flex flex-col items-end gap-2 min-w-[200px]">
-                <h4 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-                  APIs Included
-                </h4>
+                <h4 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">APIs Included</h4>
                 <div className="flex flex-col items-end gap-1.5">
                   <span className="text-sm font-medium text-foreground/80">Mobile Verification</span>
                   <span className="text-sm font-medium text-foreground/80">LPG Verification</span>
@@ -647,7 +693,8 @@ const CustomerProfiling = () => {
               <div className="flex items-start space-x-2">
                 <Checkbox id="consent" checked={consent} onCheckedChange={(checked) => setConsent(checked === true)} />
                 <label htmlFor="consent" className="text-sm text-muted-foreground leading-relaxed cursor-pointer">
-                  I authorize BeFiSc to verify and fetch details linked to the information I've provided from authorized data sources for compliance and risk checks, in line with the DPDP Act, 2023.
+                  I authorize BeFiSc to verify and fetch details linked to the information I've provided from authorized
+                  data sources for compliance and risk checks, in line with the DPDP Act, 2023.
                 </label>
               </div>
             </CardContent>
@@ -658,7 +705,7 @@ const CustomerProfiling = () => {
               <div className="flex justify-between items-center mb-4">
                 <Button variant="outline" size="sm" onClick={() => setShowData(!showData)}>
                   {showData ? <EyeOff className="h-4 w-4 mr-2" /> : <Eye className="h-4 w-4 mr-2" />}
-                  {showData ? 'Hide' : 'Show'} Data
+                  {showData ? "Hide" : "Show"} Data
                 </Button>
               </div>
 
@@ -667,7 +714,10 @@ const CustomerProfiling = () => {
                 <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-6">
                   <Dialog open={statsDialogOpen} onOpenChange={setStatsDialogOpen}>
                     <DialogTrigger asChild>
-                      <Card className="cursor-pointer hover:shadow-lg transition-all hover:scale-105" onClick={() => setSelectedStat("names")}>
+                      <Card
+                        className="cursor-pointer hover:shadow-lg transition-all hover:scale-105"
+                        onClick={() => setSelectedStat("names")}
+                      >
                         <CardContent className="pt-6">
                           <div className="text-center">
                             <p className="text-3xl font-bold text-primary">{stats.namesCount}</p>
@@ -677,7 +727,10 @@ const CustomerProfiling = () => {
                       </Card>
                     </DialogTrigger>
                     <DialogTrigger asChild>
-                      <Card className="cursor-pointer hover:shadow-lg transition-all hover:scale-105" onClick={() => setSelectedStat("addresses")}>
+                      <Card
+                        className="cursor-pointer hover:shadow-lg transition-all hover:scale-105"
+                        onClick={() => setSelectedStat("addresses")}
+                      >
                         <CardContent className="pt-6">
                           <div className="text-center">
                             <p className="text-3xl font-bold text-primary">{stats.addressesCount}</p>
@@ -687,7 +740,10 @@ const CustomerProfiling = () => {
                       </Card>
                     </DialogTrigger>
                     <DialogTrigger asChild>
-                      <Card className="cursor-pointer hover:shadow-lg transition-all hover:scale-105" onClick={() => setSelectedStat("gstin")}>
+                      <Card
+                        className="cursor-pointer hover:shadow-lg transition-all hover:scale-105"
+                        onClick={() => setSelectedStat("gstin")}
+                      >
                         <CardContent className="pt-6">
                           <div className="text-center">
                             <p className="text-3xl font-bold text-primary">{stats.gstinCount}</p>
@@ -697,7 +753,10 @@ const CustomerProfiling = () => {
                       </Card>
                     </DialogTrigger>
                     <DialogTrigger asChild>
-                      <Card className="cursor-pointer hover:shadow-lg transition-all hover:scale-105" onClick={() => setSelectedStat("esic")}>
+                      <Card
+                        className="cursor-pointer hover:shadow-lg transition-all hover:scale-105"
+                        onClick={() => setSelectedStat("esic")}
+                      >
                         <CardContent className="pt-6">
                           <div className="text-center">
                             <p className="text-3xl font-bold text-primary">{stats.esicCount}</p>
@@ -726,37 +785,48 @@ const CustomerProfiling = () => {
                         </DialogDescription>
                       </DialogHeader>
                       <div className="space-y-2 mt-4">
-                        {selectedStat === "names" && stats.namesSources.map((source, idx) => (
-                          <div key={idx} className="flex items-center gap-2 p-3 bg-muted rounded-lg">
-                            <CheckCircle2 className="h-4 w-4 text-green-600" />
-                            <span>{source}</span>
-                          </div>
-                        ))}
-                        {selectedStat === "addresses" && stats.addressesSources.map((source, idx) => (
-                          <div key={idx} className="flex items-center gap-2 p-3 bg-muted rounded-lg">
-                            <MapPin className="h-4 w-4 text-blue-600" />
-                            <span>{source}</span>
-                          </div>
-                        ))}
-                        {selectedStat === "gstin" && stats.gstinSources.map((source, idx) => (
-                          <div key={idx} className="flex items-center gap-2 p-3 bg-muted rounded-lg">
-                            <Building2 className="h-4 w-4 text-purple-600" />
-                            <span>{source}</span>
-                          </div>
-                        ))}
-                        {selectedStat === "esic" && stats.esicSources.map((source, idx) => (
-                          <div key={idx} className="flex items-center gap-2 p-3 bg-muted rounded-lg">
-                            <FileText className="h-4 w-4 text-orange-600" />
-                            <span>{source}</span>
-                          </div>
-                        ))}
+                        {selectedStat === "names" &&
+                          stats.namesSources.map((source, idx) => (
+                            <div key={idx} className="flex items-center gap-2 p-3 bg-muted rounded-lg">
+                              <CheckCircle2 className="h-4 w-4 text-green-600" />
+                              <span>{source}</span>
+                            </div>
+                          ))}
+                        {selectedStat === "addresses" &&
+                          stats.addressesSources.map((source, idx) => (
+                            <div key={idx} className="flex items-center gap-2 p-3 bg-muted rounded-lg">
+                              <MapPin className="h-4 w-4 text-blue-600" />
+                              <span>{source}</span>
+                            </div>
+                          ))}
+                        {selectedStat === "gstin" &&
+                          stats.gstinSources.map((source, idx) => (
+                            <div key={idx} className="flex items-center gap-2 p-3 bg-muted rounded-lg">
+                              <Building2 className="h-4 w-4 text-purple-600" />
+                              <span>{source}</span>
+                            </div>
+                          ))}
+                        {selectedStat === "esic" &&
+                          stats.esicSources.map((source, idx) => (
+                            <div key={idx} className="flex items-center gap-2 p-3 bg-muted rounded-lg">
+                              <FileText className="h-4 w-4 text-orange-600" />
+                              <span>{source}</span>
+                            </div>
+                          ))}
                       </div>
                     </DialogContent>
                   </Dialog>
                 </div>
               )}
 
-              <Tabs value={activeTab} onValueChange={(value) => { setActiveTab(value); setResponseData(getMockResponse(value)); }} className="w-full">
+              <Tabs
+                value={activeTab}
+                onValueChange={(value) => {
+                  setActiveTab(value);
+                  setResponseData(getMockResponse(value));
+                }}
+                className="w-full"
+              >
                 <TabsList className="grid w-full grid-cols-3">
                   <TabsTrigger value="salaried">Salaried</TabsTrigger>
                   <TabsTrigger value="bluecollar">Blue Collar</TabsTrigger>
@@ -794,47 +864,55 @@ const CustomerProfiling = () => {
                     <CardContent>
                       <div className="space-y-3">
                         {/* Dual PF employment without exit */}
-                        {responseData.epfo_info?.data && responseData.epfo_info.data.length > 1 && 
-                         responseData.epfo_info.data.every((emp: any) => !emp.date_of_exit) && (
-                          <div className="flex items-start gap-2 p-3 rounded-lg bg-destructive/10 border border-destructive/20">
-                            <AlertTriangle className="h-4 w-4 text-destructive mt-0.5 flex-shrink-0" />
-                            <div>
-                              <p className="text-sm font-semibold text-destructive">Dual PF Employment Without Exit</p>
-                              <p className="text-xs text-muted-foreground mt-1">
-                                Multiple active EPFO records detected without exit dates
-                              </p>
+                        {responseData.epfo_info?.data &&
+                          responseData.epfo_info.data.length > 1 &&
+                          responseData.epfo_info.data.every((emp: any) => !emp.date_of_exit) && (
+                            <div className="flex items-start gap-2 p-3 rounded-lg bg-destructive/10 border border-destructive/20">
+                              <AlertTriangle className="h-4 w-4 text-destructive mt-0.5 flex-shrink-0" />
+                              <div>
+                                <p className="text-sm font-semibold text-destructive">
+                                  Dual PF Employment Without Exit
+                                </p>
+                                <p className="text-xs text-muted-foreground mt-1">
+                                  Multiple active EPFO records detected without exit dates
+                                </p>
+                              </div>
                             </div>
-                          </div>
-                        )}
+                          )}
 
                         {/* Employer name mismatch (EPFO vs ESIC) */}
-                        {responseData.epfo_info?.data?.[0]?.establishment_name && 
-                         responseData.esic_info?.data?.esic_details?.[0]?.employer_name &&
-                         responseData.epfo_info.data[0].establishment_name !== responseData.esic_info.data.esic_details[0].employer_name && (
-                          <div className="flex items-start gap-2 p-3 rounded-lg bg-destructive/10 border border-destructive/20">
-                            <AlertTriangle className="h-4 w-4 text-destructive mt-0.5 flex-shrink-0" />
-                            <div>
-                              <p className="text-sm font-semibold text-destructive">Employer Name Mismatch</p>
-                              <p className="text-xs text-muted-foreground mt-1">
-                                EPFO: {responseData.epfo_info.data[0].establishment_name} vs ESIC: {responseData.esic_info.data.esic_details[0].employer_name}
-                              </p>
+                        {responseData.epfo_info?.data?.[0]?.establishment_name &&
+                          responseData.esic_info?.data?.esic_details?.[0]?.employer_name &&
+                          responseData.epfo_info.data[0].establishment_name !==
+                            responseData.esic_info.data.esic_details[0].employer_name && (
+                            <div className="flex items-start gap-2 p-3 rounded-lg bg-destructive/10 border border-destructive/20">
+                              <AlertTriangle className="h-4 w-4 text-destructive mt-0.5 flex-shrink-0" />
+                              <div>
+                                <p className="text-sm font-semibold text-destructive">Employer Name Mismatch</p>
+                                <p className="text-xs text-muted-foreground mt-1">
+                                  EPFO: {responseData.epfo_info.data[0].establishment_name} vs ESIC:{" "}
+                                  {responseData.esic_info.data.esic_details[0].employer_name}
+                                </p>
+                              </div>
                             </div>
-                          </div>
-                        )}
+                          )}
 
                         {/* Multi-state address footprint */}
                         {(() => {
                           const states = new Set();
-                          if (responseData.digital_payment_id_info?.data?.state) states.add(responseData.digital_payment_id_info.data.state);
-                          if (responseData.profile_advance?.address_state) states.add(responseData.profile_advance.address_state);
-                          if (responseData.bureau_data?.address?.third_line) states.add(responseData.bureau_data.address.third_line);
+                          if (responseData.digital_payment_id_info?.data?.state)
+                            states.add(responseData.digital_payment_id_info.data.state);
+                          if (responseData.profile_advance?.address_state)
+                            states.add(responseData.profile_advance.address_state);
+                          if (responseData.bureau_data?.address?.third_line)
+                            states.add(responseData.bureau_data.address.third_line);
                           return states.size > 1 ? (
                             <div className="flex items-start gap-2 p-3 rounded-lg bg-destructive/10 border border-destructive/20">
                               <AlertTriangle className="h-4 w-4 text-destructive mt-0.5 flex-shrink-0" />
                               <div>
                                 <p className="text-sm font-semibold text-destructive">Multi-State Address Footprint</p>
                                 <p className="text-xs text-muted-foreground mt-1">
-                                  Addresses found across {states.size} different states: {Array.from(states).join(', ')}
+                                  Addresses found across {states.size} different states: {Array.from(states).join(", ")}
                                 </p>
                               </div>
                             </div>
@@ -842,50 +920,67 @@ const CustomerProfiling = () => {
                         })()}
 
                         {/* PAN variation - if different PANs found */}
-                        {responseData.profile_advance?.document_pan && 
-                         responseData.bureau_data?.account_details?.identification_number &&
-                         !responseData.bureau_data.account_details.identification_number.includes(responseData.profile_advance.document_pan.substring(0, 5)) && (
-                          <div className="flex items-start gap-2 p-3 rounded-lg bg-destructive/10 border border-destructive/20">
-                            <AlertTriangle className="h-4 w-4 text-destructive mt-0.5 flex-shrink-0" />
-                            <div>
-                              <p className="text-sm font-semibold text-destructive">PAN Variation Across Documents</p>
-                              <p className="text-xs text-muted-foreground mt-1">
-                                Possible PAN mismatch detected across different data sources
-                              </p>
+                        {responseData.profile_advance?.document_pan &&
+                          responseData.bureau_data?.account_details?.identification_number &&
+                          !responseData.bureau_data.account_details.identification_number.includes(
+                            responseData.profile_advance.document_pan.substring(0, 5),
+                          ) && (
+                            <div className="flex items-start gap-2 p-3 rounded-lg bg-destructive/10 border border-destructive/20">
+                              <AlertTriangle className="h-4 w-4 text-destructive mt-0.5 flex-shrink-0" />
+                              <div>
+                                <p className="text-sm font-semibold text-destructive">PAN Variation Across Documents</p>
+                                <p className="text-xs text-muted-foreground mt-1">
+                                  Possible PAN mismatch detected across different data sources
+                                </p>
+                              </div>
                             </div>
-                          </div>
-                        )}
+                          )}
 
                         {/* EPFO join date vs recent records mismatch */}
-                        {responseData.epfo_info?.data?.[0] && 
-                         responseData.esic_info?.data?.esic_details?.[0] && (
+                        {responseData.epfo_info?.data?.[0] &&
+                          responseData.esic_info?.data?.esic_details?.[0] &&
                           (() => {
-                            const epfoDate = new Date(responseData.epfo_info.data[0].date_of_joining.split('/').reverse().join('-'));
-                            const esicDate = new Date(responseData.esic_info.data.esic_details[0].first_date_of_appointment.split('/').reverse().join('-'));
+                            const epfoDate = new Date(
+                              responseData.epfo_info.data[0].date_of_joining.split("/").reverse().join("-"),
+                            );
+                            const esicDate = new Date(
+                              responseData.esic_info.data.esic_details[0].first_date_of_appointment
+                                .split("/")
+                                .reverse()
+                                .join("-"),
+                            );
                             const daysDiff = Math.abs((epfoDate.getTime() - esicDate.getTime()) / (1000 * 3600 * 24));
-                            
+
                             return daysDiff > 365 ? (
                               <div className="flex items-start gap-2 p-3 rounded-lg bg-destructive/10 border border-destructive/20">
                                 <AlertTriangle className="h-4 w-4 text-destructive mt-0.5 flex-shrink-0" />
                                 <div>
                                   <p className="text-sm font-semibold text-destructive">Employment Date Mismatch</p>
                                   <p className="text-xs text-muted-foreground mt-1">
-                                    Significant gap between EPFO join date and ESIC appointment date ({Math.floor(daysDiff)} days)
+                                    Significant gap between EPFO join date and ESIC appointment date (
+                                    {Math.floor(daysDiff)} days)
                                   </p>
                                 </div>
                               </div>
                             ) : null;
-                          })()
-                        )}
+                          })()}
 
                         {/* If no anomalies */}
-                        {!((responseData.epfo_info?.data && responseData.epfo_info.data.length > 1 && responseData.epfo_info.data.every((emp: any) => !emp.date_of_exit)) ||
-                           (responseData.epfo_info?.data?.[0]?.establishment_name && responseData.esic_info?.data?.esic_details?.[0]?.employer_name && 
-                            responseData.epfo_info.data[0].establishment_name !== responseData.esic_info.data.esic_details[0].employer_name)) && (
+                        {!(
+                          (responseData.epfo_info?.data &&
+                            responseData.epfo_info.data.length > 1 &&
+                            responseData.epfo_info.data.every((emp: any) => !emp.date_of_exit)) ||
+                          (responseData.epfo_info?.data?.[0]?.establishment_name &&
+                            responseData.esic_info?.data?.esic_details?.[0]?.employer_name &&
+                            responseData.epfo_info.data[0].establishment_name !==
+                              responseData.esic_info.data.esic_details[0].employer_name)
+                        ) && (
                           <div className="flex items-start gap-2 p-3 rounded-lg bg-green-50 border border-green-200 dark:bg-green-950/10 dark:border-green-800">
                             <CheckCircle2 className="h-4 w-4 text-green-600 mt-0.5 flex-shrink-0" />
                             <div>
-                              <p className="text-sm font-semibold text-green-700 dark:text-green-400">No Critical Anomalies Detected</p>
+                              <p className="text-sm font-semibold text-green-700 dark:text-green-400">
+                                No Critical Anomalies Detected
+                              </p>
                               <p className="text-xs text-muted-foreground mt-1">
                                 Profile data appears consistent across all verification sources
                               </p>
@@ -904,14 +999,16 @@ const CustomerProfiling = () => {
                       <CardHeader>
                         <CardTitle className="flex items-center gap-2">
                           <CreditCard className="h-5 w-5" />
-                          Digital Payment ID Info
+                          Digital Payment Information
                         </CardTitle>
                       </CardHeader>
                       <CardContent>
                         <div className="grid md:grid-cols-2 gap-4">
                           <div>
                             <p className="text-sm text-muted-foreground mb-1">Name</p>
-                            <p className="text-sm font-semibold">{maskData(responseData.digital_payment_id_info.data.name, showData)}</p>
+                            <p className="text-sm font-semibold">
+                              {maskData(responseData.digital_payment_id_info.data.name, showData)}
+                            </p>
                           </div>
                           <div>
                             <p className="text-sm text-muted-foreground mb-1">Bank</p>
@@ -923,7 +1020,9 @@ const CustomerProfiling = () => {
                           </div>
                           <div>
                             <p className="text-sm text-muted-foreground mb-1">Contact</p>
-                            <p className="text-sm">{maskPhone(responseData.digital_payment_id_info.data.contact, showData)}</p>
+                            <p className="text-sm">
+                              {maskPhone(responseData.digital_payment_id_info.data.contact, showData)}
+                            </p>
                           </div>
                           <div className="md:col-span-2">
                             <p className="text-sm text-muted-foreground mb-1">Branch Address</p>
@@ -952,14 +1051,16 @@ const CustomerProfiling = () => {
                       <CardHeader>
                         <CardTitle className="flex items-center gap-2">
                           <Phone className="h-5 w-5" />
-                          Telco Info
+                          Telcco Information
                         </CardTitle>
                       </CardHeader>
                       <CardContent>
                         <div className="grid md:grid-cols-2 gap-4">
                           <div>
                             <p className="text-sm text-muted-foreground mb-1">Mobile Number</p>
-                            <p className="text-sm font-semibold">{maskPhone(responseData.telco_info.data.msisdn.msisdn, showData)}</p>
+                            <p className="text-sm font-semibold">
+                              {maskPhone(responseData.telco_info.data.msisdn.msisdn, showData)}
+                            </p>
                           </div>
                           <div>
                             <p className="text-sm text-muted-foreground mb-1">Connection Type</p>
@@ -967,11 +1068,15 @@ const CustomerProfiling = () => {
                           </div>
                           <div>
                             <p className="text-sm text-muted-foreground mb-1">Current Network</p>
-                            <p className="text-sm">{responseData.telco_info.data.current_service_provider.network_name}</p>
+                            <p className="text-sm">
+                              {responseData.telco_info.data.current_service_provider.network_name}
+                            </p>
                           </div>
                           <div>
                             <p className="text-sm text-muted-foreground mb-1">Original Network</p>
-                            <p className="text-sm">{responseData.telco_info.data.original_service_provider.network_name}</p>
+                            <p className="text-sm">
+                              {responseData.telco_info.data.original_service_provider.network_name}
+                            </p>
                           </div>
                           <div>
                             <p className="text-sm text-muted-foreground mb-1">Roaming</p>
@@ -998,7 +1103,7 @@ const CustomerProfiling = () => {
                       <CardHeader>
                         <CardTitle className="flex items-center gap-2">
                           <Phone className="h-5 w-5" />
-                          Mobile Age Info
+                          Subscriber Age Data
                         </CardTitle>
                       </CardHeader>
                       <CardContent>
@@ -1017,7 +1122,11 @@ const CustomerProfiling = () => {
                           </div>
                           <div>
                             <p className="text-sm text-muted-foreground mb-1">Active</p>
-                            <Badge variant={responseData.mobile_age_info.data.number_active === "Yes" ? "default" : "destructive"}>
+                            <Badge
+                              variant={
+                                responseData.mobile_age_info.data.number_active === "Yes" ? "default" : "destructive"
+                              }
+                            >
                               {responseData.mobile_age_info.data.number_active}
                             </Badge>
                           </div>
@@ -1032,7 +1141,7 @@ const CustomerProfiling = () => {
                       <CardHeader>
                         <CardTitle className="flex items-center gap-2">
                           <Phone className="h-5 w-5" />
-                          WhatsApp Info
+                          WhatsApp Information
                         </CardTitle>
                       </CardHeader>
                       <CardContent>
@@ -1043,7 +1152,9 @@ const CustomerProfiling = () => {
                           </div>
                           <div>
                             <p className="text-sm text-muted-foreground mb-1">Is Business</p>
-                            <p className="text-sm">{responseData.whatsapp_info.data.is_business === "0" ? "0 (Personal)" : "1 (Business)"}</p>
+                            <p className="text-sm">
+                              {responseData.whatsapp_info.data.is_business === "0" ? "0 (Personal)" : "1 (Business)"}
+                            </p>
                           </div>
                         </div>
                       </CardContent>
@@ -1056,14 +1167,16 @@ const CustomerProfiling = () => {
                       <CardHeader>
                         <CardTitle className="flex items-center gap-2">
                           <Info className="h-5 w-5" />
-                          Revoke Info
+                          Revoke Information
                         </CardTitle>
                       </CardHeader>
                       <CardContent>
                         <div className="grid md:grid-cols-2 gap-4">
                           <div>
                             <p className="text-sm text-muted-foreground mb-1">Revoke Status</p>
-                            <Badge variant={responseData.revoke_info.data.revoke_status === "No" ? "default" : "destructive"}>
+                            <Badge
+                              variant={responseData.revoke_info.data.revoke_status === "No" ? "default" : "destructive"}
+                            >
                               {responseData.revoke_info.data.revoke_status}
                             </Badge>
                           </div>
@@ -1082,24 +1195,30 @@ const CustomerProfiling = () => {
                       <CardHeader>
                         <CardTitle className="flex items-center gap-2">
                           <Briefcase className="h-5 w-5" />
-                          EPFO Info
+                          EPFO Information
                         </CardTitle>
                       </CardHeader>
                       <CardContent>
                         <div className="grid md:grid-cols-2 gap-4">
                           <div>
                             <p className="text-sm text-muted-foreground mb-1">UAN</p>
-                            <p className="text-sm font-semibold">{maskData(responseData.epfo_info.data[0]?.uan, showData)}</p>
+                            <p className="text-sm font-semibold">
+                              {maskData(responseData.epfo_info.data[0]?.uan, showData)}
+                            </p>
                           </div>
                           <div>
                             <p className="text-sm text-muted-foreground mb-1">Guardian Name</p>
-                            <p className="text-sm">{maskData(responseData.epfo_info.data[0]?.guardian_name, showData)}</p>
+                            <p className="text-sm">
+                              {maskData(responseData.epfo_info.data[0]?.guardian_name, showData)}
+                            </p>
                           </div>
                           <div className="md:col-span-2">
                             <p className="text-sm text-muted-foreground mb-2">Establishment Names</p>
                             <div className="flex flex-wrap gap-2">
                               {responseData.epfo_info.data.map((emp: any, idx: number) => (
-                                <Badge key={idx} variant="outline">{emp.establishment_name}</Badge>
+                                <Badge key={idx} variant="outline">
+                                  {emp.establishment_name}
+                                </Badge>
                               ))}
                             </div>
                           </div>
@@ -1107,13 +1226,22 @@ const CustomerProfiling = () => {
                             <p className="text-sm text-muted-foreground mb-2">Date of Joining</p>
                             <div className="flex flex-wrap gap-2">
                               {responseData.epfo_info.data.map((emp: any, idx: number) => (
-                                <Badge key={idx} variant="secondary">{emp.date_of_joining}</Badge>
+                                <Badge key={idx} variant="secondary">
+                                  {emp.date_of_joining}
+                                </Badge>
                               ))}
                             </div>
                           </div>
                           <div>
                             <p className="text-sm text-muted-foreground mb-1">Date of Exit</p>
-                            <p className="text-sm">{responseData.epfo_info.data.every((emp: any) => !emp.date_of_exit) ? "None" : responseData.epfo_info.data.map((emp: any) => emp.date_of_exit).filter(Boolean).join(", ")}</p>
+                            <p className="text-sm">
+                              {responseData.epfo_info.data.every((emp: any) => !emp.date_of_exit)
+                                ? "None"
+                                : responseData.epfo_info.data
+                                    .map((emp: any) => emp.date_of_exit)
+                                    .filter(Boolean)
+                                    .join(", ")}
+                            </p>
                           </div>
                         </div>
                       </CardContent>
@@ -1126,14 +1254,16 @@ const CustomerProfiling = () => {
                       <CardHeader>
                         <CardTitle className="flex items-center gap-2">
                           <User className="h-5 w-5" />
-                          Profile Advance
+                          Additional Details
                         </CardTitle>
                       </CardHeader>
                       <CardContent>
                         <div className="grid md:grid-cols-2 gap-4">
                           <div>
                             <p className="text-sm text-muted-foreground mb-1">Full Name</p>
-                            <p className="text-sm font-semibold">{maskData(responseData.profile_advance.full_name, showData)}</p>
+                            <p className="text-sm font-semibold">
+                              {maskData(responseData.profile_advance.full_name, showData)}
+                            </p>
                           </div>
                           <div>
                             <p className="text-sm text-muted-foreground mb-1">Gender</p>
@@ -1163,7 +1293,9 @@ const CustomerProfiling = () => {
                             <p className="text-sm text-muted-foreground mb-1">Alternate Phones</p>
                             <div className="flex flex-wrap gap-2 mt-1">
                               {responseData.profile_advance.alternate_phones.map((phone: string, idx: number) => (
-                                <Badge key={idx} variant="outline">{maskPhone(phone, showData)}</Badge>
+                                <Badge key={idx} variant="outline">
+                                  {maskPhone(phone, showData)}
+                                </Badge>
                               ))}
                             </div>
                           </div>
@@ -1198,19 +1330,15 @@ const CustomerProfiling = () => {
                       <CardHeader>
                         <CardTitle className="flex items-center gap-2">
                           <FileText className="h-5 w-5" />
-                          Bureau Data
+                          Bureau Checks
                         </CardTitle>
                       </CardHeader>
                       <CardContent className="space-y-6">
                         {/* Credit Scores */}
                         <div className="grid md:grid-cols-2 gap-4 p-4 bg-muted/50 rounded-lg">
                           <div>
-                            <p className="text-sm text-muted-foreground mb-1">Credit Score</p>
+                            <p className="text-sm text-muted-foreground mb-1">Credit Check</p>
                             <p className="text-2xl font-bold text-primary">{responseData.bureau_data.credit_score}</p>
-                          </div>
-                          <div>
-                            <p className="text-sm text-muted-foreground mb-1">FCIREX Score</p>
-                            <p className="text-2xl font-bold text-primary">{responseData.bureau_data.fcirex_score}</p>
                           </div>
                         </div>
 
@@ -1254,7 +1382,9 @@ const CustomerProfiling = () => {
                               <p className="text-xs text-muted-foreground mt-1">Total</p>
                             </div>
                             <div className="p-3 bg-green-50 dark:bg-green-950/20 rounded-lg text-center">
-                              <p className="text-2xl font-bold text-green-600">{responseData.bureau_data.credit_accounts.active}</p>
+                              <p className="text-2xl font-bold text-green-600">
+                                {responseData.bureau_data.credit_accounts.active}
+                              </p>
                               <p className="text-xs text-muted-foreground mt-1">Active</p>
                             </div>
                             <div className="p-3 bg-muted/50 rounded-lg text-center">
@@ -1262,7 +1392,9 @@ const CustomerProfiling = () => {
                               <p className="text-xs text-muted-foreground mt-1">Closed</p>
                             </div>
                             <div className="p-3 bg-red-50 dark:bg-red-950/20 rounded-lg text-center">
-                              <p className="text-2xl font-bold text-red-600">{responseData.bureau_data.credit_accounts.default}</p>
+                              <p className="text-2xl font-bold text-red-600">
+                                {responseData.bureau_data.credit_accounts.default}
+                              </p>
                               <p className="text-xs text-muted-foreground mt-1">Default</p>
                             </div>
                           </div>
@@ -1274,11 +1406,15 @@ const CustomerProfiling = () => {
                           <div className="grid md:grid-cols-2 gap-4">
                             <div>
                               <p className="text-sm text-muted-foreground mb-1">Account Number</p>
-                              <p className="text-sm">{maskData(responseData.bureau_data.account_details.account_number, showData)}</p>
+                              <p className="text-sm">
+                                {maskData(responseData.bureau_data.account_details.account_number, showData)}
+                              </p>
                             </div>
                             <div>
                               <p className="text-sm text-muted-foreground mb-1">Subscriber Name</p>
-                              <p className="text-sm">{maskData(responseData.bureau_data.account_details.subscriber_name, showData)}</p>
+                              <p className="text-sm">
+                                {maskData(responseData.bureau_data.account_details.subscriber_name, showData)}
+                              </p>
                             </div>
                             <div>
                               <p className="text-sm text-muted-foreground mb-1">Open Date</p>
@@ -1290,15 +1426,25 @@ const CustomerProfiling = () => {
                             </div>
                             <div>
                               <p className="text-sm text-muted-foreground mb-1">Current Balance</p>
-                              <p className="text-sm font-semibold">₹{responseData.bureau_data.account_details.current_balance}</p>
+                              <p className="text-sm font-semibold">
+                                ₹{responseData.bureau_data.account_details.current_balance}
+                              </p>
                             </div>
                             <div>
                               <p className="text-sm text-muted-foreground mb-1">Highest Credit / Original Loan</p>
-                              <p className="text-sm">₹{responseData.bureau_data.account_details.highest_credit_original_loan}</p>
+                              <p className="text-sm">
+                                ₹{responseData.bureau_data.account_details.highest_credit_original_loan}
+                              </p>
                             </div>
                             <div>
                               <p className="text-sm text-muted-foreground mb-1">Payment Rating</p>
-                              <Badge variant={responseData.bureau_data.account_details.payment_rating === "0" ? "default" : "destructive"}>
+                              <Badge
+                                variant={
+                                  responseData.bureau_data.account_details.payment_rating === "0"
+                                    ? "default"
+                                    : "destructive"
+                                }
+                              >
                                 {responseData.bureau_data.account_details.payment_rating}
                               </Badge>
                             </div>
@@ -1315,11 +1461,15 @@ const CustomerProfiling = () => {
                           <div className="grid md:grid-cols-2 gap-4">
                             <div>
                               <p className="text-sm text-muted-foreground mb-1">Primary Mobile</p>
-                              <p className="text-sm">{maskPhone(responseData.bureau_data.contact.primary_mobile, showData)}</p>
+                              <p className="text-sm">
+                                {maskPhone(responseData.bureau_data.contact.primary_mobile, showData)}
+                              </p>
                             </div>
                             <div>
                               <p className="text-sm text-muted-foreground mb-1">Email Address</p>
-                              <p className="text-sm">{maskEmail(responseData.bureau_data.contact.email_address, showData)}</p>
+                              <p className="text-sm">
+                                {maskEmail(responseData.bureau_data.contact.email_address, showData)}
+                              </p>
                             </div>
                           </div>
                         </div>
@@ -1385,7 +1535,10 @@ const CustomerProfiling = () => {
                                 </div>
                               </CardHeader>
                               <CardContent>
-                                <Collapsible open={expandedEsic[idx]} onOpenChange={(open) => setExpandedEsic({ ...expandedEsic, [idx]: open })}>
+                                <Collapsible
+                                  open={expandedEsic[idx]}
+                                  onOpenChange={(open) => setExpandedEsic({ ...expandedEsic, [idx]: open })}
+                                >
                                   <div className="grid md:grid-cols-2 gap-4 mb-4">
                                     <div>
                                       <p className="text-sm text-muted-foreground mb-1">Employer</p>
@@ -1407,7 +1560,11 @@ const CustomerProfiling = () => {
 
                                   <CollapsibleTrigger asChild>
                                     <Button variant="outline" size="sm" className="w-full">
-                                      {expandedEsic[idx] ? <ChevronUp className="h-4 w-4 mr-2" /> : <ChevronDown className="h-4 w-4 mr-2" />}
+                                      {expandedEsic[idx] ? (
+                                        <ChevronUp className="h-4 w-4 mr-2" />
+                                      ) : (
+                                        <ChevronDown className="h-4 w-4 mr-2" />
+                                      )}
                                       {expandedEsic[idx] ? "Show Less Details" : "Show More Details"}
                                     </Button>
                                   </CollapsibleTrigger>
@@ -1445,13 +1602,34 @@ const CustomerProfiling = () => {
                                       <div className="md:col-span-2">
                                         <p className="text-sm font-semibold mb-2">Employer Details</p>
                                         <div className="grid md:grid-cols-2 gap-2 text-sm bg-muted/50 p-3 rounded-lg">
-                                          <div><span className="text-muted-foreground">Name:</span> {record.employer_details?.employer_name}</div>
-                                          <div><span className="text-muted-foreground">Code:</span> {record.employer_details?.employer_code}</div>
-                                          <div><span className="text-muted-foreground">State:</span> {record.employer_details?.state}</div>
-                                          <div><span className="text-muted-foreground">District:</span> {record.employer_details?.district}</div>
-                                          <div><span className="text-muted-foreground">Pincode:</span> {record.employer_details?.pincode}</div>
-                                          <div><span className="text-muted-foreground">Email:</span> {maskEmail(record.employer_details?.email, showData)}</div>
-                                          <div className="md:col-span-2"><span className="text-muted-foreground">Address:</span> {record.employer_details?.address}</div>
+                                          <div>
+                                            <span className="text-muted-foreground">Name:</span>{" "}
+                                            {record.employer_details?.employer_name}
+                                          </div>
+                                          <div>
+                                            <span className="text-muted-foreground">Code:</span>{" "}
+                                            {record.employer_details?.employer_code}
+                                          </div>
+                                          <div>
+                                            <span className="text-muted-foreground">State:</span>{" "}
+                                            {record.employer_details?.state}
+                                          </div>
+                                          <div>
+                                            <span className="text-muted-foreground">District:</span>{" "}
+                                            {record.employer_details?.district}
+                                          </div>
+                                          <div>
+                                            <span className="text-muted-foreground">Pincode:</span>{" "}
+                                            {record.employer_details?.pincode}
+                                          </div>
+                                          <div>
+                                            <span className="text-muted-foreground">Email:</span>{" "}
+                                            {maskEmail(record.employer_details?.email, showData)}
+                                          </div>
+                                          <div className="md:col-span-2">
+                                            <span className="text-muted-foreground">Address:</span>{" "}
+                                            {record.employer_details?.address}
+                                          </div>
                                         </div>
                                       </div>
                                     </div>
@@ -1512,7 +1690,10 @@ const CustomerProfiling = () => {
                               </div>
                             </CardHeader>
                             <CardContent>
-                              <Collapsible open={expandedGst[idx]} onOpenChange={(open) => setExpandedGst({ ...expandedGst, [idx]: open })}>
+                              <Collapsible
+                                open={expandedGst[idx]}
+                                onOpenChange={(open) => setExpandedGst({ ...expandedGst, [idx]: open })}
+                              >
                                 <div className="grid md:grid-cols-2 gap-4 mb-4">
                                   <div>
                                     <p className="text-sm text-muted-foreground mb-1">Legal Name</p>
@@ -1534,7 +1715,11 @@ const CustomerProfiling = () => {
 
                                 <CollapsibleTrigger asChild>
                                   <Button variant="outline" size="sm" className="w-full">
-                                    {expandedGst[idx] ? <ChevronUp className="h-4 w-4 mr-2" /> : <ChevronDown className="h-4 w-4 mr-2" />}
+                                    {expandedGst[idx] ? (
+                                      <ChevronUp className="h-4 w-4 mr-2" />
+                                    ) : (
+                                      <ChevronDown className="h-4 w-4 mr-2" />
+                                    )}
                                     {expandedGst[idx] ? "Show Less Details" : "Show More Details"}
                                   </Button>
                                 </CollapsibleTrigger>
@@ -1557,7 +1742,9 @@ const CustomerProfiling = () => {
                                       <p className="text-sm text-muted-foreground mb-1">Business Nature</p>
                                       <div className="flex flex-wrap gap-2 mt-2">
                                         {gst.business_nature?.map((nature: string, nIdx: number) => (
-                                          <Badge key={nIdx} variant="outline">{nature}</Badge>
+                                          <Badge key={nIdx} variant="outline">
+                                            {nature}
+                                          </Badge>
                                         ))}
                                       </div>
                                     </div>
@@ -1591,7 +1778,9 @@ const CustomerProfiling = () => {
                                       <p className="text-sm text-muted-foreground mb-2">Authorized Signatories</p>
                                       <div className="flex flex-wrap gap-2">
                                         {gst.authorized_signatory?.map((signatory: string, sIdx: number) => (
-                                          <Badge key={sIdx} variant="secondary">{maskData(signatory, showData)}</Badge>
+                                          <Badge key={sIdx} variant="secondary">
+                                            {maskData(signatory, showData)}
+                                          </Badge>
                                         ))}
                                       </div>
                                     </div>
@@ -1612,7 +1801,9 @@ const CustomerProfiling = () => {
                         <CardTitle className="flex items-center gap-2">
                           <Building2 className="h-5 w-5" />
                           IEC (Import Export Code) Details
-                          <Badge variant="default" className="ml-2">Import/Export Business</Badge>
+                          <Badge variant="default" className="ml-2">
+                            Import/Export Business
+                          </Badge>
                         </CardTitle>
                       </CardHeader>
                       <CardContent>
@@ -1620,11 +1811,15 @@ const CustomerProfiling = () => {
                           <div className="grid md:grid-cols-2 gap-4 mb-4">
                             <div>
                               <p className="text-sm text-muted-foreground mb-1">IEC Number</p>
-                              <p className="font-mono text-sm font-semibold">{maskData(responseData.iec_list.data.iec_number, showData)}</p>
+                              <p className="font-mono text-sm font-semibold">
+                                {maskData(responseData.iec_list.data.iec_number, showData)}
+                              </p>
                             </div>
                             <div>
                               <p className="text-sm text-muted-foreground mb-1">PAN Number</p>
-                              <p className="font-mono text-sm">{maskData(responseData.iec_list.data.pan_number, showData)}</p>
+                              <p className="font-mono text-sm">
+                                {maskData(responseData.iec_list.data.pan_number, showData)}
+                              </p>
                             </div>
                             <div>
                               <p className="text-sm text-muted-foreground mb-1">Firm Name</p>
@@ -1632,7 +1827,9 @@ const CustomerProfiling = () => {
                             </div>
                             <div>
                               <p className="text-sm text-muted-foreground mb-1">IEC Status</p>
-                              <Badge variant={responseData.iec_list.data.iec_status === "Valid" ? "default" : "secondary"}>
+                              <Badge
+                                variant={responseData.iec_list.data.iec_status === "Valid" ? "default" : "secondary"}
+                              >
                                 {responseData.iec_list.data.iec_status}
                               </Badge>
                             </div>
@@ -1640,7 +1837,11 @@ const CustomerProfiling = () => {
 
                           <CollapsibleTrigger asChild>
                             <Button variant="outline" size="sm" className="w-full">
-                              {expandedIec ? <ChevronUp className="h-4 w-4 mr-2" /> : <ChevronDown className="h-4 w-4 mr-2" />}
+                              {expandedIec ? (
+                                <ChevronUp className="h-4 w-4 mr-2" />
+                              ) : (
+                                <ChevronDown className="h-4 w-4 mr-2" />
+                              )}
                               {expandedIec ? "Show Less Details" : "Show More Details"}
                             </Button>
                           </CollapsibleTrigger>
@@ -1686,9 +1887,18 @@ const CustomerProfiling = () => {
                                   {responseData.iec_list.data.branch_details.map((branch: any, bIdx: number) => (
                                     <div key={bIdx} className="bg-muted/50 p-3 rounded-lg mb-2">
                                       <div className="grid md:grid-cols-2 gap-2 text-sm">
-                                        <div><span className="text-muted-foreground">Branch Code:</span> {branch.branch_code}</div>
-                                        <div><span className="text-muted-foreground">GSTIN:</span> {maskData(branch.gstin, showData)}</div>
-                                        <div className="md:col-span-2"><span className="text-muted-foreground">Address:</span> {branch.branch_address}</div>
+                                        <div>
+                                          <span className="text-muted-foreground">Branch Code:</span>{" "}
+                                          {branch.branch_code}
+                                        </div>
+                                        <div>
+                                          <span className="text-muted-foreground">GSTIN:</span>{" "}
+                                          {maskData(branch.gstin, showData)}
+                                        </div>
+                                        <div className="md:col-span-2">
+                                          <span className="text-muted-foreground">Address:</span>{" "}
+                                          {branch.branch_address}
+                                        </div>
                                       </div>
                                     </div>
                                   ))}
@@ -1698,16 +1908,29 @@ const CustomerProfiling = () => {
                               {responseData.iec_list.data.proprietor_partner_director_details?.length > 0 && (
                                 <div className="md:col-span-2">
                                   <p className="text-sm font-semibold mb-2">Director/Partner Details</p>
-                                  {responseData.iec_list.data.proprietor_partner_director_details.map((director: any, dIdx: number) => (
-                                    <div key={dIdx} className="bg-muted/50 p-3 rounded-lg mb-2">
-                                      <div className="grid md:grid-cols-2 gap-2 text-sm">
-                                        <div><span className="text-muted-foreground">Name:</span> {maskData(director.name, showData)}</div>
-                                        <div><span className="text-muted-foreground">Father Name:</span> {director.father_name}</div>
-                                        <div><span className="text-muted-foreground">PAN:</span> {maskData(director.pan_number, showData)}</div>
-                                        <div><span className="text-muted-foreground">Address:</span> {director.address}</div>
+                                  {responseData.iec_list.data.proprietor_partner_director_details.map(
+                                    (director: any, dIdx: number) => (
+                                      <div key={dIdx} className="bg-muted/50 p-3 rounded-lg mb-2">
+                                        <div className="grid md:grid-cols-2 gap-2 text-sm">
+                                          <div>
+                                            <span className="text-muted-foreground">Name:</span>{" "}
+                                            {maskData(director.name, showData)}
+                                          </div>
+                                          <div>
+                                            <span className="text-muted-foreground">Father Name:</span>{" "}
+                                            {director.father_name}
+                                          </div>
+                                          <div>
+                                            <span className="text-muted-foreground">PAN:</span>{" "}
+                                            {maskData(director.pan_number, showData)}
+                                          </div>
+                                          <div>
+                                            <span className="text-muted-foreground">Address:</span> {director.address}
+                                          </div>
+                                        </div>
                                       </div>
-                                    </div>
-                                  ))}
+                                    ),
+                                  )}
                                 </div>
                               )}
 
@@ -1717,13 +1940,31 @@ const CustomerProfiling = () => {
                                   {responseData.iec_list.data.rcmc_details.map((rcmc: any, rIdx: number) => (
                                     <div key={rIdx} className="bg-muted/50 p-3 rounded-lg mb-2">
                                       <div className="grid md:grid-cols-2 gap-2 text-sm">
-                                        <div><span className="text-muted-foreground">RCMC Number:</span> {rcmc.rcmc_number}</div>
-                                        <div><span className="text-muted-foreground">Status:</span> <Badge variant="outline">{rcmc.status}</Badge></div>
-                                        <div><span className="text-muted-foreground">Issue Date:</span> {rcmc.issue_date}</div>
-                                        <div><span className="text-muted-foreground">Expiry Date:</span> {rcmc.expiry_date}</div>
-                                        <div><span className="text-muted-foreground">Issue Authority:</span> {rcmc.issue_authority}</div>
-                                        <div><span className="text-muted-foreground">Exporter Type:</span> {rcmc.exporter_type}</div>
-                                        <div className="md:col-span-2"><span className="text-muted-foreground">Products:</span> {rcmc.products_for_which_registered}</div>
+                                        <div>
+                                          <span className="text-muted-foreground">RCMC Number:</span> {rcmc.rcmc_number}
+                                        </div>
+                                        <div>
+                                          <span className="text-muted-foreground">Status:</span>{" "}
+                                          <Badge variant="outline">{rcmc.status}</Badge>
+                                        </div>
+                                        <div>
+                                          <span className="text-muted-foreground">Issue Date:</span> {rcmc.issue_date}
+                                        </div>
+                                        <div>
+                                          <span className="text-muted-foreground">Expiry Date:</span> {rcmc.expiry_date}
+                                        </div>
+                                        <div>
+                                          <span className="text-muted-foreground">Issue Authority:</span>{" "}
+                                          {rcmc.issue_authority}
+                                        </div>
+                                        <div>
+                                          <span className="text-muted-foreground">Exporter Type:</span>{" "}
+                                          {rcmc.exporter_type}
+                                        </div>
+                                        <div className="md:col-span-2">
+                                          <span className="text-muted-foreground">Products:</span>{" "}
+                                          {rcmc.products_for_which_registered}
+                                        </div>
                                       </div>
                                     </div>
                                   ))}
@@ -1769,7 +2010,11 @@ const CustomerProfiling = () => {
 
                             <CollapsibleTrigger asChild>
                               <Button variant="outline" size="sm" className="w-full">
-                                {expandedMsme ? <ChevronUp className="h-4 w-4 mr-2" /> : <ChevronDown className="h-4 w-4 mr-2" />}
+                                {expandedMsme ? (
+                                  <ChevronUp className="h-4 w-4 mr-2" />
+                                ) : (
+                                  <ChevronDown className="h-4 w-4 mr-2" />
+                                )}
                                 {expandedMsme ? "Show Less Details" : "Show More Details"}
                               </Button>
                             </CollapsibleTrigger>

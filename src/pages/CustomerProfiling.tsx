@@ -1051,7 +1051,7 @@ const CustomerProfiling = () => {
                       <CardHeader>
                         <CardTitle className="flex items-center gap-2">
                           <Phone className="h-5 w-5" />
-                          Telcco Information
+                          Telco Information
                         </CardTitle>
                       </CardHeader>
                       <CardContent>

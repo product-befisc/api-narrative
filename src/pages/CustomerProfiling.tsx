@@ -388,8 +388,8 @@ const CustomerProfiling = () => {
       }
     },
     esic_info: {
-      code: profileType === "bluecollar" ? "SUC" : "NRF",
-      data: profileType === "bluecollar" ? {
+      code: profileType === "salaried" ? "SUC" : profileType === "bluecollar" ? "SUC" : "NRF",
+      data: (profileType === "bluecollar" || profileType === "salaried") ? {
         esic_details: [
           {
             esic_number: "987654321",
@@ -424,6 +424,82 @@ const CustomerProfiling = () => {
       } : {},
       datetime: "2024-12-24 07:15:53.41087"
     },
+    profile_advance: profileType === "salaried" ? {
+      full_name: "RAM SINGH",
+      gender: "Male",
+      age: "20",
+      date_of_birth: "1999-01-01",
+      income: "987987",
+      alternate_phones: ["4311234", "4311234", "9877654321", "1146534321", "1112011111111"],
+      email: "RAM@GMAIL.COM",
+      detailed_address: "11 ABC COLONY PHASE I ABC COLONY PHASE I",
+      address_state: "UP",
+      address_pincode: "202001",
+      address_type: "Primary",
+      address_date_of_reporting: "2024-07-18",
+      document_pan: "ABCPD1234D"
+    } : {},
+    bureau_data: profileType === "salaried" ? {
+      credit_score: "759",
+      fcirex_score: "999",
+      address: {
+        flat_house_no: "ABC COLONY",
+        building_society: "",
+        road_area_locality: "",
+        city: "",
+        landmark: "",
+        state_code: "27",
+        pin_code: "400612",
+        country_code: "IB",
+        first_line: "ABC COLONY",
+        second_line: "1981",
+        third_line: "MAHARASHTRA",
+        cais_city: "",
+        fifth_line: "",
+        cais_state_code: "27",
+        zip_postal_code: "400612",
+        cais_country_code: "IB",
+        address_indicator: "2",
+        residence_code: ""
+      },
+      credit_accounts: {
+        total: "2",
+        active: "1",
+        closed: "1",
+        default: "0"
+      },
+      account_details: {
+        identification_number: "NBFXXXXXXXX",
+        subscriber_name: "XXXXXXXXXX",
+        account_number: "XXXXX4748",
+        account_type: "6",
+        open_date: "20230627",
+        terms_duration_months: "10",
+        account_status: "13",
+        current_balance: "0",
+        date_closed: "20240510",
+        date_of_last_payment: "20240503",
+        amount_past_due: "0",
+        days_past_due: "0",
+        past_loan_account_number: "XXXXX4748",
+        past_loan_date_closed: "20240510",
+        highest_credit_original_loan: "11234",
+        repayment_tenure_months: "10",
+        payment_history_profile: "00000000000?????????????????????????",
+        past_loan_amount_past_due: "0",
+        credit_account_default: "0",
+        suit_filed_willful_default: "0",
+        default_amount_past_due: "0",
+        default_days_past_due: "0",
+        payment_rating: "0",
+        default_status_date: ""
+      },
+      contact: {
+        primary_mobile: "9876543210",
+        alternate_numbers: "",
+        email_address: "RAMSINGH@EMAIL.COM"
+      }
+    } : {},
     timestamp: new Date().toISOString()
   });
 
@@ -707,12 +783,505 @@ const CustomerProfiling = () => {
                     </CardContent>
                   </Card>
 
+                  {/* Scenarios/Insights Section */}
+                  <Card className="border-2 border-orange-200 bg-orange-50/50 dark:bg-orange-950/10">
+                    <CardHeader>
+                      <CardTitle className="flex items-center gap-2 text-lg">
+                        <AlertTriangle className="h-5 w-5 text-orange-600" />
+                        Risk Insights & Anomalies
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-3">
+                        {/* Dual PF employment without exit */}
+                        {responseData.epfo_info?.data && responseData.epfo_info.data.length > 1 && 
+                         responseData.epfo_info.data.every((emp: any) => !emp.date_of_exit) && (
+                          <div className="flex items-start gap-2 p-3 rounded-lg bg-destructive/10 border border-destructive/20">
+                            <AlertTriangle className="h-4 w-4 text-destructive mt-0.5 flex-shrink-0" />
+                            <div>
+                              <p className="text-sm font-semibold text-destructive">Dual PF Employment Without Exit</p>
+                              <p className="text-xs text-muted-foreground mt-1">
+                                Multiple active EPFO records detected without exit dates
+                              </p>
+                            </div>
+                          </div>
+                        )}
+
+                        {/* Employer name mismatch (EPFO vs ESIC) */}
+                        {responseData.epfo_info?.data?.[0]?.establishment_name && 
+                         responseData.esic_info?.data?.esic_details?.[0]?.employer_name &&
+                         responseData.epfo_info.data[0].establishment_name !== responseData.esic_info.data.esic_details[0].employer_name && (
+                          <div className="flex items-start gap-2 p-3 rounded-lg bg-destructive/10 border border-destructive/20">
+                            <AlertTriangle className="h-4 w-4 text-destructive mt-0.5 flex-shrink-0" />
+                            <div>
+                              <p className="text-sm font-semibold text-destructive">Employer Name Mismatch</p>
+                              <p className="text-xs text-muted-foreground mt-1">
+                                EPFO: {responseData.epfo_info.data[0].establishment_name} vs ESIC: {responseData.esic_info.data.esic_details[0].employer_name}
+                              </p>
+                            </div>
+                          </div>
+                        )}
+
+                        {/* Multi-state address footprint */}
+                        {(() => {
+                          const states = new Set();
+                          if (responseData.digital_payment_id_info?.data?.state) states.add(responseData.digital_payment_id_info.data.state);
+                          if (responseData.profile_advance?.address_state) states.add(responseData.profile_advance.address_state);
+                          if (responseData.bureau_data?.address?.third_line) states.add(responseData.bureau_data.address.third_line);
+                          return states.size > 1 ? (
+                            <div className="flex items-start gap-2 p-3 rounded-lg bg-destructive/10 border border-destructive/20">
+                              <AlertTriangle className="h-4 w-4 text-destructive mt-0.5 flex-shrink-0" />
+                              <div>
+                                <p className="text-sm font-semibold text-destructive">Multi-State Address Footprint</p>
+                                <p className="text-xs text-muted-foreground mt-1">
+                                  Addresses found across {states.size} different states: {Array.from(states).join(', ')}
+                                </p>
+                              </div>
+                            </div>
+                          ) : null;
+                        })()}
+
+                        {/* PAN variation - if different PANs found */}
+                        {responseData.profile_advance?.document_pan && 
+                         responseData.bureau_data?.account_details?.identification_number &&
+                         !responseData.bureau_data.account_details.identification_number.includes(responseData.profile_advance.document_pan.substring(0, 5)) && (
+                          <div className="flex items-start gap-2 p-3 rounded-lg bg-destructive/10 border border-destructive/20">
+                            <AlertTriangle className="h-4 w-4 text-destructive mt-0.5 flex-shrink-0" />
+                            <div>
+                              <p className="text-sm font-semibold text-destructive">PAN Variation Across Documents</p>
+                              <p className="text-xs text-muted-foreground mt-1">
+                                Possible PAN mismatch detected across different data sources
+                              </p>
+                            </div>
+                          </div>
+                        )}
+
+                        {/* EPFO join date vs recent records mismatch */}
+                        {responseData.epfo_info?.data?.[0] && 
+                         responseData.esic_info?.data?.esic_details?.[0] && (
+                          (() => {
+                            const epfoDate = new Date(responseData.epfo_info.data[0].date_of_joining.split('/').reverse().join('-'));
+                            const esicDate = new Date(responseData.esic_info.data.esic_details[0].first_date_of_appointment.split('/').reverse().join('-'));
+                            const daysDiff = Math.abs((epfoDate.getTime() - esicDate.getTime()) / (1000 * 3600 * 24));
+                            
+                            return daysDiff > 365 ? (
+                              <div className="flex items-start gap-2 p-3 rounded-lg bg-destructive/10 border border-destructive/20">
+                                <AlertTriangle className="h-4 w-4 text-destructive mt-0.5 flex-shrink-0" />
+                                <div>
+                                  <p className="text-sm font-semibold text-destructive">Employment Date Mismatch</p>
+                                  <p className="text-xs text-muted-foreground mt-1">
+                                    Significant gap between EPFO join date and ESIC appointment date ({Math.floor(daysDiff)} days)
+                                  </p>
+                                </div>
+                              </div>
+                            ) : null;
+                          })()
+                        )}
+
+                        {/* If no anomalies */}
+                        {!((responseData.epfo_info?.data && responseData.epfo_info.data.length > 1 && responseData.epfo_info.data.every((emp: any) => !emp.date_of_exit)) ||
+                           (responseData.epfo_info?.data?.[0]?.establishment_name && responseData.esic_info?.data?.esic_details?.[0]?.employer_name && 
+                            responseData.epfo_info.data[0].establishment_name !== responseData.esic_info.data.esic_details[0].employer_name)) && (
+                          <div className="flex items-start gap-2 p-3 rounded-lg bg-green-50 border border-green-200 dark:bg-green-950/10 dark:border-green-800">
+                            <CheckCircle2 className="h-4 w-4 text-green-600 mt-0.5 flex-shrink-0" />
+                            <div>
+                              <p className="text-sm font-semibold text-green-700 dark:text-green-400">No Critical Anomalies Detected</p>
+                              <p className="text-xs text-muted-foreground mt-1">
+                                Profile data appears consistent across all verification sources
+                              </p>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    </CardContent>
+                  </Card>
+
                   <p className="text-2xl font-bold">Profile Data</p>
-                  
-                  {/* Show appropriate cards based on profile */}
-                  <p className="text-sm text-muted-foreground">
-                    Data shown below represents a comprehensive salaried employee profile with multiple data verification points.
-                  </p>
+
+                  {/* Digital Payment ID Info */}
+                  {responseData.digital_payment_id_info?.code === "SUC" && (
+                    <Card>
+                      <CardHeader>
+                        <CardTitle className="flex items-center gap-2">
+                          <CreditCard className="h-5 w-5" />
+                          Digital Payment ID Info
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="grid md:grid-cols-2 gap-4">
+                          <div>
+                            <p className="text-sm text-muted-foreground mb-1">Name</p>
+                            <p className="text-sm font-semibold">{maskData(responseData.digital_payment_id_info.data.name, showData)}</p>
+                          </div>
+                          <div>
+                            <p className="text-sm text-muted-foreground mb-1">Bank</p>
+                            <p className="text-sm">{responseData.digital_payment_id_info.data.bank}</p>
+                          </div>
+                          <div>
+                            <p className="text-sm text-muted-foreground mb-1">Branch</p>
+                            <p className="text-sm">{responseData.digital_payment_id_info.data.branch}</p>
+                          </div>
+                          <div>
+                            <p className="text-sm text-muted-foreground mb-1">Contact</p>
+                            <p className="text-sm">{maskPhone(responseData.digital_payment_id_info.data.contact, showData)}</p>
+                          </div>
+                          <div className="md:col-span-2">
+                            <p className="text-sm text-muted-foreground mb-1">Branch Address</p>
+                            <p className="text-sm">{responseData.digital_payment_id_info.data.address}</p>
+                          </div>
+                          <div>
+                            <p className="text-sm text-muted-foreground mb-1">City</p>
+                            <p className="text-sm">{responseData.digital_payment_id_info.data.city}</p>
+                          </div>
+                          <div>
+                            <p className="text-sm text-muted-foreground mb-1">State</p>
+                            <p className="text-sm">{responseData.digital_payment_id_info.data.state}</p>
+                          </div>
+                          <div>
+                            <p className="text-sm text-muted-foreground mb-1">District</p>
+                            <p className="text-sm">{responseData.digital_payment_id_info.data.district}</p>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  )}
+
+                  {/* Telco Info */}
+                  {responseData.telco_info?.code === "SUC" && (
+                    <Card>
+                      <CardHeader>
+                        <CardTitle className="flex items-center gap-2">
+                          <Phone className="h-5 w-5" />
+                          Telco Info
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="grid md:grid-cols-2 gap-4">
+                          <div>
+                            <p className="text-sm text-muted-foreground mb-1">Mobile Number</p>
+                            <p className="text-sm font-semibold">{maskPhone(responseData.telco_info.data.msisdn.msisdn, showData)}</p>
+                          </div>
+                          <div>
+                            <p className="text-sm text-muted-foreground mb-1">Connection Type</p>
+                            <p className="text-sm capitalize">{responseData.telco_info.data.connection_type}</p>
+                          </div>
+                          <div>
+                            <p className="text-sm text-muted-foreground mb-1">Current Network</p>
+                            <p className="text-sm">{responseData.telco_info.data.current_service_provider.network_name}</p>
+                          </div>
+                          <div>
+                            <p className="text-sm text-muted-foreground mb-1">Original Network</p>
+                            <p className="text-sm">{responseData.telco_info.data.original_service_provider.network_name}</p>
+                          </div>
+                          <div>
+                            <p className="text-sm text-muted-foreground mb-1">Roaming</p>
+                            <p className="text-sm">{responseData.telco_info.data.is_roaming ? "Yes" : "No"}</p>
+                          </div>
+                          <div>
+                            <p className="text-sm text-muted-foreground mb-1">Valid</p>
+                            <Badge variant={responseData.telco_info.data.is_valid ? "default" : "destructive"}>
+                              {responseData.telco_info.data.is_valid ? "TRUE" : "FALSE"}
+                            </Badge>
+                          </div>
+                          <div>
+                            <p className="text-sm text-muted-foreground mb-1">Subscriber Status</p>
+                            <Badge variant="default">{responseData.telco_info.data.subscriber_status}</Badge>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  )}
+
+                  {/* Mobile Age Info */}
+                  {responseData.mobile_age_info?.code === "SUC" && (
+                    <Card>
+                      <CardHeader>
+                        <CardTitle className="flex items-center gap-2">
+                          <Phone className="h-5 w-5" />
+                          Mobile Age Info
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="grid md:grid-cols-2 gap-4">
+                          <div>
+                            <p className="text-sm text-muted-foreground mb-1">Ported</p>
+                            <p className="text-sm font-semibold">{responseData.mobile_age_info.data.is_ported}</p>
+                          </div>
+                          <div>
+                            <p className="text-sm text-muted-foreground mb-1">Age</p>
+                            <Badge variant="outline">{responseData.mobile_age_info.data.mobile_age}</Badge>
+                          </div>
+                          <div>
+                            <p className="text-sm text-muted-foreground mb-1">Region</p>
+                            <p className="text-sm">{responseData.mobile_age_info.data.region}</p>
+                          </div>
+                          <div>
+                            <p className="text-sm text-muted-foreground mb-1">Active</p>
+                            <Badge variant={responseData.mobile_age_info.data.number_active === "Yes" ? "default" : "destructive"}>
+                              {responseData.mobile_age_info.data.number_active}
+                            </Badge>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  )}
+
+                  {/* WhatsApp Info */}
+                  {responseData.whatsapp_info?.code === "SUC" && (
+                    <Card>
+                      <CardHeader>
+                        <CardTitle className="flex items-center gap-2">
+                          <Phone className="h-5 w-5" />
+                          WhatsApp Info
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="grid md:grid-cols-2 gap-4">
+                          <div>
+                            <p className="text-sm text-muted-foreground mb-1">Status</p>
+                            <Badge variant="default">{responseData.whatsapp_info.data.status}</Badge>
+                          </div>
+                          <div>
+                            <p className="text-sm text-muted-foreground mb-1">Is Business</p>
+                            <p className="text-sm">{responseData.whatsapp_info.data.is_business === "0" ? "0 (Personal)" : "1 (Business)"}</p>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  )}
+
+                  {/* Revoke Info */}
+                  {responseData.revoke_info?.code === "SUC" && (
+                    <Card>
+                      <CardHeader>
+                        <CardTitle className="flex items-center gap-2">
+                          <Info className="h-5 w-5" />
+                          Revoke Info
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="grid md:grid-cols-2 gap-4">
+                          <div>
+                            <p className="text-sm text-muted-foreground mb-1">Revoke Status</p>
+                            <Badge variant={responseData.revoke_info.data.revoke_status === "No" ? "default" : "destructive"}>
+                              {responseData.revoke_info.data.revoke_status}
+                            </Badge>
+                          </div>
+                          <div>
+                            <p className="text-sm text-muted-foreground mb-1">Revoke Date</p>
+                            <p className="text-sm">{responseData.revoke_info.data.revoke_date || "—"}</p>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  )}
+
+                  {/* Profile Advance */}
+                  {responseData.profile_advance?.full_name && (
+                    <Card>
+                      <CardHeader>
+                        <CardTitle className="flex items-center gap-2">
+                          <User className="h-5 w-5" />
+                          Profile Advance
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="grid md:grid-cols-2 gap-4">
+                          <div>
+                            <p className="text-sm text-muted-foreground mb-1">Full Name</p>
+                            <p className="text-sm font-semibold">{maskData(responseData.profile_advance.full_name, showData)}</p>
+                          </div>
+                          <div>
+                            <p className="text-sm text-muted-foreground mb-1">Gender</p>
+                            <p className="text-sm">{responseData.profile_advance.gender}</p>
+                          </div>
+                          <div>
+                            <p className="text-sm text-muted-foreground mb-1">Age</p>
+                            <p className="text-sm">{responseData.profile_advance.age}</p>
+                          </div>
+                          <div>
+                            <p className="text-sm text-muted-foreground mb-1">Date of Birth</p>
+                            <p className="text-sm">{responseData.profile_advance.date_of_birth}</p>
+                          </div>
+                          <div>
+                            <p className="text-sm text-muted-foreground mb-1">Income</p>
+                            <p className="text-sm font-semibold">₹{responseData.profile_advance.income}</p>
+                          </div>
+                          <div>
+                            <p className="text-sm text-muted-foreground mb-1">Email</p>
+                            <p className="text-sm">{maskEmail(responseData.profile_advance.email, showData)}</p>
+                          </div>
+                          <div>
+                            <p className="text-sm text-muted-foreground mb-1">Document (PAN)</p>
+                            <p className="text-sm">{maskData(responseData.profile_advance.document_pan, showData)}</p>
+                          </div>
+                          <div className="md:col-span-2">
+                            <p className="text-sm text-muted-foreground mb-1">Alternate Phones</p>
+                            <div className="flex flex-wrap gap-2 mt-1">
+                              {responseData.profile_advance.alternate_phones.map((phone: string, idx: number) => (
+                                <Badge key={idx} variant="outline">{maskPhone(phone, showData)}</Badge>
+                              ))}
+                            </div>
+                          </div>
+                          <div className="md:col-span-2">
+                            <p className="text-sm text-muted-foreground mb-1">Detailed Address</p>
+                            <p className="text-sm">{responseData.profile_advance.detailed_address}</p>
+                          </div>
+                          <div>
+                            <p className="text-sm text-muted-foreground mb-1">Address State</p>
+                            <p className="text-sm">{responseData.profile_advance.address_state}</p>
+                          </div>
+                          <div>
+                            <p className="text-sm text-muted-foreground mb-1">Address Pincode</p>
+                            <p className="text-sm">{responseData.profile_advance.address_pincode}</p>
+                          </div>
+                          <div>
+                            <p className="text-sm text-muted-foreground mb-1">Address Type</p>
+                            <p className="text-sm">{responseData.profile_advance.address_type}</p>
+                          </div>
+                          <div>
+                            <p className="text-sm text-muted-foreground mb-1">Date of Reporting</p>
+                            <p className="text-sm">{responseData.profile_advance.address_date_of_reporting}</p>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  )}
+
+                  {/* Bureau Data */}
+                  {responseData.bureau_data?.credit_score && (
+                    <Card>
+                      <CardHeader>
+                        <CardTitle className="flex items-center gap-2">
+                          <FileText className="h-5 w-5" />
+                          Bureau Data
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent className="space-y-6">
+                        {/* Credit Scores */}
+                        <div className="grid md:grid-cols-2 gap-4 p-4 bg-muted/50 rounded-lg">
+                          <div>
+                            <p className="text-sm text-muted-foreground mb-1">Credit Score</p>
+                            <p className="text-2xl font-bold text-primary">{responseData.bureau_data.credit_score}</p>
+                          </div>
+                          <div>
+                            <p className="text-sm text-muted-foreground mb-1">FCIREX Score</p>
+                            <p className="text-2xl font-bold text-primary">{responseData.bureau_data.fcirex_score}</p>
+                          </div>
+                        </div>
+
+                        {/* Address Details */}
+                        <div>
+                          <p className="text-sm font-semibold mb-3">Address Details</p>
+                          <div className="grid md:grid-cols-2 gap-4">
+                            <div>
+                              <p className="text-sm text-muted-foreground mb-1">Flat / House No</p>
+                              <p className="text-sm">{responseData.bureau_data.address.flat_house_no}</p>
+                            </div>
+                            <div>
+                              <p className="text-sm text-muted-foreground mb-1">First Line</p>
+                              <p className="text-sm">{responseData.bureau_data.address.first_line}</p>
+                            </div>
+                            <div>
+                              <p className="text-sm text-muted-foreground mb-1">Second Line</p>
+                              <p className="text-sm">{responseData.bureau_data.address.second_line}</p>
+                            </div>
+                            <div>
+                              <p className="text-sm text-muted-foreground mb-1">Third Line</p>
+                              <p className="text-sm">{responseData.bureau_data.address.third_line}</p>
+                            </div>
+                            <div>
+                              <p className="text-sm text-muted-foreground mb-1">PIN Code</p>
+                              <p className="text-sm">{responseData.bureau_data.address.pin_code}</p>
+                            </div>
+                            <div>
+                              <p className="text-sm text-muted-foreground mb-1">State Code</p>
+                              <p className="text-sm">{responseData.bureau_data.address.state_code}</p>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Credit Accounts Summary */}
+                        <div>
+                          <p className="text-sm font-semibold mb-3">Credit Accounts Summary</p>
+                          <div className="grid md:grid-cols-4 gap-4">
+                            <div className="p-3 bg-muted/50 rounded-lg text-center">
+                              <p className="text-2xl font-bold">{responseData.bureau_data.credit_accounts.total}</p>
+                              <p className="text-xs text-muted-foreground mt-1">Total</p>
+                            </div>
+                            <div className="p-3 bg-green-50 dark:bg-green-950/20 rounded-lg text-center">
+                              <p className="text-2xl font-bold text-green-600">{responseData.bureau_data.credit_accounts.active}</p>
+                              <p className="text-xs text-muted-foreground mt-1">Active</p>
+                            </div>
+                            <div className="p-3 bg-muted/50 rounded-lg text-center">
+                              <p className="text-2xl font-bold">{responseData.bureau_data.credit_accounts.closed}</p>
+                              <p className="text-xs text-muted-foreground mt-1">Closed</p>
+                            </div>
+                            <div className="p-3 bg-red-50 dark:bg-red-950/20 rounded-lg text-center">
+                              <p className="text-2xl font-bold text-red-600">{responseData.bureau_data.credit_accounts.default}</p>
+                              <p className="text-xs text-muted-foreground mt-1">Default</p>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Account Details */}
+                        <div>
+                          <p className="text-sm font-semibold mb-3">Account Details</p>
+                          <div className="grid md:grid-cols-2 gap-4">
+                            <div>
+                              <p className="text-sm text-muted-foreground mb-1">Account Number</p>
+                              <p className="text-sm">{maskData(responseData.bureau_data.account_details.account_number, showData)}</p>
+                            </div>
+                            <div>
+                              <p className="text-sm text-muted-foreground mb-1">Subscriber Name</p>
+                              <p className="text-sm">{maskData(responseData.bureau_data.account_details.subscriber_name, showData)}</p>
+                            </div>
+                            <div>
+                              <p className="text-sm text-muted-foreground mb-1">Open Date</p>
+                              <p className="text-sm">{responseData.bureau_data.account_details.open_date}</p>
+                            </div>
+                            <div>
+                              <p className="text-sm text-muted-foreground mb-1">Date Closed</p>
+                              <p className="text-sm">{responseData.bureau_data.account_details.date_closed}</p>
+                            </div>
+                            <div>
+                              <p className="text-sm text-muted-foreground mb-1">Current Balance</p>
+                              <p className="text-sm font-semibold">₹{responseData.bureau_data.account_details.current_balance}</p>
+                            </div>
+                            <div>
+                              <p className="text-sm text-muted-foreground mb-1">Highest Credit / Original Loan</p>
+                              <p className="text-sm">₹{responseData.bureau_data.account_details.highest_credit_original_loan}</p>
+                            </div>
+                            <div>
+                              <p className="text-sm text-muted-foreground mb-1">Payment Rating</p>
+                              <Badge variant={responseData.bureau_data.account_details.payment_rating === "0" ? "default" : "destructive"}>
+                                {responseData.bureau_data.account_details.payment_rating}
+                              </Badge>
+                            </div>
+                            <div>
+                              <p className="text-sm text-muted-foreground mb-1">Days Past Due</p>
+                              <p className="text-sm">{responseData.bureau_data.account_details.days_past_due}</p>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Contact Details */}
+                        <div>
+                          <p className="text-sm font-semibold mb-3">Contact Details</p>
+                          <div className="grid md:grid-cols-2 gap-4">
+                            <div>
+                              <p className="text-sm text-muted-foreground mb-1">Primary Mobile</p>
+                              <p className="text-sm">{maskPhone(responseData.bureau_data.contact.primary_mobile, showData)}</p>
+                            </div>
+                            <div>
+                              <p className="text-sm text-muted-foreground mb-1">Email Address</p>
+                              <p className="text-sm">{maskEmail(responseData.bureau_data.contact.email_address, showData)}</p>
+                            </div>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  )}
                 </TabsContent>
 
                 {/* Blue Collar Profile */}

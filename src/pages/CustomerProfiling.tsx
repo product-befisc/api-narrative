@@ -662,10 +662,14 @@ const CustomerProfiling = () => {
               <div className="flex flex-col items-end gap-2 min-w-[200px]">
                 <h4 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">APIs Included</h4>
                 <div className="flex flex-col items-end gap-1.5">
-                  <span className="text-sm font-medium text-foreground/80">Mobile Verification</span>
-                  <span className="text-sm font-medium text-foreground/80">LPG Verification</span>
-                  <span className="text-sm font-medium text-foreground/80">EPFO/ESIC Lookup</span>
-                  <span className="text-sm font-medium text-foreground/80">GST/IEC Details</span>
+                  <span className="text-sm font-medium text-foreground/80">Digital Payment ID Info</span>
+                  <span className="text-sm font-medium text-foreground/80">LPG Verification (Mobile)</span>
+                  <span className="text-sm font-medium text-foreground/80">UAN History - V3</span>
+                  <span className="text-sm font-medium text-foreground/80">Telco Advance</span>
+                  <span className="text-sm font-medium text-foreground/80">Mobile Age</span>
+                  <span className="text-sm font-medium text-foreground/80">Mobile Revoke v2</span>
+                  <span className="text-sm font-medium text-foreground/80">Validate WhatsApp</span>
+                  <span className="text-sm font-medium text-foreground/80">Mobile to ESIC details v2</span>
                 </div>
               </div>
             </div>

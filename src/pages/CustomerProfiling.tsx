@@ -1670,8 +1670,8 @@ const CustomerProfiling = () => {
                               </div>
                             </div>
                           )}
-                          </CardContent>
-                  </Card>
+                      </CardContent>
+                    </Card>
 
                   <p className="text-2xl font-bold">Profile Data</p>
 

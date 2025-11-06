@@ -1645,34 +1645,6 @@ const CustomerProfiling = () => {
                     </CardContent>
                   </Card>
 
-                  <Card className="border-2 border-orange-200 bg-orange-50/50 dark:bg-orange-950/10">
-                    <CardHeader>
-                      <CardTitle className="flex items-center gap-2 text-lg">
-                        <AlertTriangle className="h-5 w-5 text-orange-600" />
-                        Risk Insights & Anomalies
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="space-y-3">
-                        {/* Dual PF employment without exit */}
-                        {responseData.epfo_info?.data &&
-                          responseData.epfo_info.data.length > 1 &&
-                          responseData.epfo_info.data.every((emp: any) => !emp.date_of_exit) && (
-                            <div className="flex items-start gap-2 p-3 rounded-lg bg-destructive/10 border border-destructive/20">
-                              <AlertTriangle className="h-4 w-4 text-destructive mt-0.5 flex-shrink-0" />
-                              <div>
-                                <p className="text-sm font-semibold text-destructive">
-                                  Dual PF Employment Without Exit
-                                </p>
-                                <p className="text-xs text-muted-foreground mt-1">
-                                  Multiple active EPFO records detected without exit dates
-                                </p>
-                              </div>
-                            </div>
-                          )}
-                      </CardContent>
-                    </Card>
-
                   <p className="text-2xl font-bold">Profile Data</p>
 
                   {responseData.esic_info?.code === "SUC" && responseData.esic_info.data?.esic_details && (

@@ -487,9 +487,39 @@ const CustomerProfiling = () => {
             address_date_of_reporting: "2024-07-18",
             document_pan: "ABCPD1234D",
           }
-        : {},
+        : profileType === "bluecollar"
+        ? {
+            full_name: "RAM SINGH",
+            gender: "Male",
+            age: "24",
+            date_of_birth: "1999-01-01",
+            income: "456789",
+            alternate_phones: ["9876543210"],
+            email: "RAM@GMAIL.COM",
+            detailed_address: "House No 123, Chandauli, Mughalsarai, Uttar Pradesh",
+            address_state: "UP",
+            address_pincode: "221001",
+            address_type: "Primary",
+            address_date_of_reporting: "2024-10-18",
+            document_pan: "ABCPD1234D",
+          }
+        : {
+            full_name: "RAM SINGH",
+            gender: "Male",
+            age: "35",
+            date_of_birth: "1989-01-01",
+            income: "1500000",
+            alternate_phones: ["9876543210", "1146534321"],
+            email: "RAM@GMAIL.COM",
+            detailed_address: "BACHUPALLY VILLAGE, HYDERABAD",
+            address_state: "TELANGANA",
+            address_pincode: "500090",
+            address_type: "Business",
+            address_date_of_reporting: "2024-02-18",
+            document_pan: "ABCPD1234E",
+          },
     bureau_data:
-      profileType === "salaried"
+      profileType === "salaried" || profileType === "bluecollar" || profileType === "business"
         ? {
             credit_score: "700-750",
             fcirex_score: "999",
@@ -555,37 +585,111 @@ const CustomerProfiling = () => {
     timestamp: new Date().toISOString(),
   });
 
-  // Calculate stats from response data
+  // Calculate stats from response data with consistency scores
   const calculateStats = (data: any) => {
     const namesSources: string[] = [];
     const addressesSources: string[] = [];
     const gstinSources: string[] = [];
     const esicSources: string[] = [];
     const highlights: string[] = [];
+    const names: string[] = [];
+    const addresses: string[] = [];
 
-    // Count names
-    if (data.digital_payment_id_info?.data?.name) namesSources.push("Digital Payment ID");
+    // Collect names
+    if (data.digital_payment_id_info?.data?.name) {
+      namesSources.push("Digital Payment ID");
+      names.push(data.digital_payment_id_info.data.name.toUpperCase().trim());
+    }
     if (data.lpg_info?.data?.length > 0) {
       data.lpg_info.data.forEach((lpg: any) => {
-        if (lpg.name) namesSources.push(`LPG - ${lpg.gas_provider}`);
+        if (lpg.name) {
+          namesSources.push(`LPG - ${lpg.gas_provider}`);
+          names.push(lpg.name.toUpperCase().trim());
+        }
       });
     }
     if (data.epfo_info?.data?.length > 0) {
-      data.epfo_info.data.forEach(() => namesSources.push("EPFO"));
-    }
-    if (data.msme_info?.data?.[0]?.owner_name) namesSources.push("MSME");
-    if (data.din_info?.data?.[0]?.data?.name) namesSources.push("DIN");
-
-    // Count addresses
-    if (data.digital_payment_id_info?.data?.branchaddress) addressesSources.push("Digital Payment ID");
-    if (data.lpg_info?.data?.length > 0) {
-      data.lpg_info.data.forEach((lpg: any) => {
-        if (lpg.address) addressesSources.push(`LPG - ${lpg.gas_provider}`);
+      data.epfo_info.data.forEach((epfo: any) => {
+        if (epfo.name) {
+          namesSources.push("EPFO");
+          names.push(epfo.name.toUpperCase().trim());
+        }
       });
     }
-    if (data.msme_info?.data?.[0]?.flat_door_block_no) addressesSources.push("MSME");
-    if (data.gst_list?.data?.[0]?.primary_business_address?.registered_address) addressesSources.push("GST");
-    if (data.esic_info?.data?.esic_details?.[0]?.address) addressesSources.push("ESIC");
+    if (data.esic_info?.data?.esic_details?.length > 0) {
+      data.esic_info.data.esic_details.forEach((esic: any) => {
+        if (esic.name) {
+          namesSources.push("ESIC");
+          names.push(esic.name.toUpperCase().trim());
+        }
+      });
+    }
+    if (data.profile_advance?.full_name) {
+      namesSources.push("Profile Advance");
+      names.push(data.profile_advance.full_name.toUpperCase().trim());
+    }
+    if (data.msme_info?.data?.[0]?.owner_name) {
+      namesSources.push("MSME");
+      names.push(data.msme_info.data[0].owner_name.toUpperCase().trim());
+    }
+    if (data.din_info?.data?.[0]?.data?.name) {
+      namesSources.push("DIN");
+      names.push(data.din_info.data[0].data.name.toUpperCase().trim());
+    }
+
+    // Collect addresses
+    if (data.digital_payment_id_info?.data?.address) {
+      addressesSources.push("Digital Payment ID");
+      addresses.push(data.digital_payment_id_info.data.address.toUpperCase().trim());
+    }
+    if (data.lpg_info?.data?.length > 0) {
+      data.lpg_info.data.forEach((lpg: any) => {
+        if (lpg.address) {
+          addressesSources.push(`LPG - ${lpg.gas_provider}`);
+          addresses.push(lpg.address.toUpperCase().trim());
+        }
+      });
+    }
+    if (data.profile_advance?.detailed_address) {
+      addressesSources.push("Profile Advance");
+      addresses.push(data.profile_advance.detailed_address.toUpperCase().trim());
+    }
+    if (data.bureau_data?.address?.first_line) {
+      addressesSources.push("Bureau Data");
+      addresses.push(data.bureau_data.address.first_line.toUpperCase().trim());
+    }
+    if (data.msme_info?.data?.[0]?.flat_door_block_no) {
+      addressesSources.push("MSME");
+      const addr = `${data.msme_info.data[0].flat_door_block_no} ${data.msme_info.data[0].city || ''}`.toUpperCase().trim();
+      addresses.push(addr);
+    }
+    if (data.gst_list?.data?.[0]?.primary_business_address?.registered_address) {
+      addressesSources.push("GST");
+      addresses.push(data.gst_list.data[0].primary_business_address.registered_address.toUpperCase().trim());
+    }
+    if (data.esic_info?.data?.esic_details?.[0]?.address) {
+      addressesSources.push("ESIC");
+      addresses.push(data.esic_info.data.esic_details[0].address.toUpperCase().trim());
+    }
+
+    // Calculate name consistency
+    const uniqueNames = [...new Set(names)];
+    const mostCommonName = names.length > 0 ? names.reduce((a, b, i, arr) => 
+      arr.filter(v => v === a).length >= arr.filter(v => v === b).length ? a : b
+    ) : '';
+    const matchingNamesCount = names.filter(n => n === mostCommonName).length;
+    const nameConsistency = names.length > 0 ? Math.round((matchingNamesCount / names.length) * 100) : 0;
+
+    // Calculate address consistency (by checking common keywords)
+    const addressConsistency = addresses.length > 1 ? (() => {
+      const commonWords = addresses[0].split(/\s+/).filter(w => w.length > 3);
+      let totalMatches = 0;
+      addresses.forEach(addr => {
+        const matchCount = commonWords.filter(word => addr.includes(word)).length;
+        totalMatches += matchCount / commonWords.length;
+      });
+      return Math.round((totalMatches / addresses.length) * 100);
+    })() : addresses.length === 1 ? 100 : 0;
 
     // Count GSTIN
     if (data.gst_list?.data?.length > 0) {
@@ -630,6 +734,8 @@ const CustomerProfiling = () => {
       esicCount: esicSources.length,
       esicSources,
       highlights,
+      nameConsistency,
+      addressConsistency,
     };
   };
 
@@ -711,111 +817,150 @@ const CustomerProfiling = () => {
 
               {/* Stats Section */}
               {stats && (
-                <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-6">
-                  <Dialog open={statsDialogOpen} onOpenChange={setStatsDialogOpen}>
-                    <DialogTrigger asChild>
-                      <Card
-                        className="cursor-pointer hover:shadow-lg transition-all hover:scale-105"
-                        onClick={() => setSelectedStat("names")}
-                      >
-                        <CardContent className="pt-6">
-                          <div className="text-center">
-                            <p className="text-3xl font-bold text-primary">{stats.namesCount}</p>
-                            <p className="text-sm text-muted-foreground mt-1">Names Found</p>
-                          </div>
-                        </CardContent>
-                      </Card>
-                    </DialogTrigger>
-                    <DialogTrigger asChild>
-                      <Card
-                        className="cursor-pointer hover:shadow-lg transition-all hover:scale-105"
-                        onClick={() => setSelectedStat("addresses")}
-                      >
-                        <CardContent className="pt-6">
-                          <div className="text-center">
-                            <p className="text-3xl font-bold text-primary">{stats.addressesCount}</p>
-                            <p className="text-sm text-muted-foreground mt-1">Addresses Found</p>
-                          </div>
-                        </CardContent>
-                      </Card>
-                    </DialogTrigger>
-                    <DialogTrigger asChild>
-                      <Card
-                        className="cursor-pointer hover:shadow-lg transition-all hover:scale-105"
-                        onClick={() => setSelectedStat("gstin")}
-                      >
-                        <CardContent className="pt-6">
-                          <div className="text-center">
-                            <p className="text-3xl font-bold text-primary">{stats.gstinCount}</p>
-                            <p className="text-sm text-muted-foreground mt-1">GSTIN Found</p>
-                          </div>
-                        </CardContent>
-                      </Card>
-                    </DialogTrigger>
-                    <DialogTrigger asChild>
-                      <Card
-                        className="cursor-pointer hover:shadow-lg transition-all hover:scale-105"
-                        onClick={() => setSelectedStat("esic")}
-                      >
-                        <CardContent className="pt-6">
-                          <div className="text-center">
-                            <p className="text-3xl font-bold text-primary">{stats.esicCount}</p>
-                            <p className="text-sm text-muted-foreground mt-1">ESIC Found</p>
-                          </div>
-                        </CardContent>
-                      </Card>
-                    </DialogTrigger>
-                    <Card>
+                <div className="space-y-4 mb-6">
+                  {/* Consistency Scores */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <Card className="bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-950/20 dark:to-blue-900/20 border-blue-200">
                       <CardContent className="pt-6">
-                        <div className="text-center">
-                          <p className="text-3xl font-bold text-green-600">{stats.highlights.length}</p>
-                          <p className="text-sm text-muted-foreground mt-1">Highlights</p>
+                        <div className="flex items-center justify-between">
+                          <div>
+                            <p className="text-sm text-muted-foreground mb-1">Name Consistency</p>
+                            <p className="text-3xl font-bold text-blue-600">
+                              {stats.nameConsistency}%
+                            </p>
+                            <p className="text-xs text-muted-foreground mt-1">
+                              {stats.namesCount} names analyzed
+                            </p>
+                          </div>
+                          <User className="h-12 w-12 text-blue-400" />
                         </div>
                       </CardContent>
                     </Card>
+                    <Card className="bg-gradient-to-br from-green-50 to-green-100 dark:from-green-950/20 dark:to-green-900/20 border-green-200">
+                      <CardContent className="pt-6">
+                        <div className="flex items-center justify-between">
+                          <div>
+                            <p className="text-sm text-muted-foreground mb-1">Address Consistency</p>
+                            <p className="text-3xl font-bold text-green-600">
+                              {stats.addressConsistency}%
+                            </p>
+                            <p className="text-xs text-muted-foreground mt-1">
+                              {stats.addressesCount} addresses analyzed
+                            </p>
+                          </div>
+                          <MapPin className="h-12 w-12 text-green-400" />
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </div>
 
-                    <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
-                      <DialogHeader>
-                        <DialogTitle>Data Sources</DialogTitle>
-                        <DialogDescription>
-                          {selectedStat === "names" && "Sources where names were found"}
-                          {selectedStat === "addresses" && "Sources where addresses were found"}
-                          {selectedStat === "gstin" && "Sources where GSTIN was found"}
-                          {selectedStat === "esic" && "Sources where ESIC was found"}
-                        </DialogDescription>
-                      </DialogHeader>
-                      <div className="space-y-2 mt-4">
-                        {selectedStat === "names" &&
-                          stats.namesSources.map((source, idx) => (
-                            <div key={idx} className="flex items-center gap-2 p-3 bg-muted rounded-lg">
-                              <CheckCircle2 className="h-4 w-4 text-green-600" />
-                              <span>{source}</span>
+                  {/* Data Points */}
+                  <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+                    <Dialog open={statsDialogOpen} onOpenChange={setStatsDialogOpen}>
+                      <DialogTrigger asChild>
+                        <Card
+                          className="cursor-pointer hover:shadow-lg transition-all hover:scale-105"
+                          onClick={() => setSelectedStat("names")}
+                        >
+                          <CardContent className="pt-6">
+                            <div className="text-center">
+                              <p className="text-3xl font-bold text-primary">{stats.namesCount}</p>
+                              <p className="text-sm text-muted-foreground mt-1">Names Found</p>
                             </div>
-                          ))}
-                        {selectedStat === "addresses" &&
-                          stats.addressesSources.map((source, idx) => (
-                            <div key={idx} className="flex items-center gap-2 p-3 bg-muted rounded-lg">
-                              <MapPin className="h-4 w-4 text-blue-600" />
-                              <span>{source}</span>
+                          </CardContent>
+                        </Card>
+                      </DialogTrigger>
+                      <DialogTrigger asChild>
+                        <Card
+                          className="cursor-pointer hover:shadow-lg transition-all hover:scale-105"
+                          onClick={() => setSelectedStat("addresses")}
+                        >
+                          <CardContent className="pt-6">
+                            <div className="text-center">
+                              <p className="text-3xl font-bold text-primary">{stats.addressesCount}</p>
+                              <p className="text-sm text-muted-foreground mt-1">Addresses Found</p>
                             </div>
-                          ))}
-                        {selectedStat === "gstin" &&
-                          stats.gstinSources.map((source, idx) => (
-                            <div key={idx} className="flex items-center gap-2 p-3 bg-muted rounded-lg">
-                              <Building2 className="h-4 w-4 text-purple-600" />
-                              <span>{source}</span>
+                          </CardContent>
+                        </Card>
+                      </DialogTrigger>
+                      <DialogTrigger asChild>
+                        <Card
+                          className="cursor-pointer hover:shadow-lg transition-all hover:scale-105"
+                          onClick={() => setSelectedStat("gstin")}
+                        >
+                          <CardContent className="pt-6">
+                            <div className="text-center">
+                              <p className="text-3xl font-bold text-primary">{stats.gstinCount}</p>
+                              <p className="text-sm text-muted-foreground mt-1">GSTIN Found</p>
                             </div>
-                          ))}
-                        {selectedStat === "esic" &&
-                          stats.esicSources.map((source, idx) => (
-                            <div key={idx} className="flex items-center gap-2 p-3 bg-muted rounded-lg">
-                              <FileText className="h-4 w-4 text-orange-600" />
-                              <span>{source}</span>
+                          </CardContent>
+                        </Card>
+                      </DialogTrigger>
+                      <DialogTrigger asChild>
+                        <Card
+                          className="cursor-pointer hover:shadow-lg transition-all hover:scale-105"
+                          onClick={() => setSelectedStat("esic")}
+                        >
+                          <CardContent className="pt-6">
+                            <div className="text-center">
+                              <p className="text-3xl font-bold text-primary">{stats.esicCount}</p>
+                              <p className="text-sm text-muted-foreground mt-1">ESIC Found</p>
                             </div>
-                          ))}
-                      </div>
-                    </DialogContent>
-                  </Dialog>
+                          </CardContent>
+                        </Card>
+                      </DialogTrigger>
+                      <Card>
+                        <CardContent className="pt-6">
+                          <div className="text-center">
+                            <p className="text-3xl font-bold text-green-600">{stats.highlights.length}</p>
+                            <p className="text-sm text-muted-foreground mt-1">Highlights</p>
+                          </div>
+                        </CardContent>
+                      </Card>
+
+                      <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
+                        <DialogHeader>
+                          <DialogTitle>Data Sources</DialogTitle>
+                          <DialogDescription>
+                            {selectedStat === "names" && "Sources where names were found"}
+                            {selectedStat === "addresses" && "Sources where addresses were found"}
+                            {selectedStat === "gstin" && "Sources where GSTIN was found"}
+                            {selectedStat === "esic" && "Sources where ESIC was found"}
+                          </DialogDescription>
+                        </DialogHeader>
+                        <div className="space-y-2 mt-4">
+                          {selectedStat === "names" &&
+                            stats.namesSources.map((source, idx) => (
+                              <div key={idx} className="flex items-center gap-2 p-3 bg-muted rounded-lg">
+                                <CheckCircle2 className="h-4 w-4 text-green-600" />
+                                <span>{source}</span>
+                              </div>
+                            ))}
+                          {selectedStat === "addresses" &&
+                            stats.addressesSources.map((source, idx) => (
+                              <div key={idx} className="flex items-center gap-2 p-3 bg-muted rounded-lg">
+                                <MapPin className="h-4 w-4 text-blue-600" />
+                                <span>{source}</span>
+                              </div>
+                            ))}
+                          {selectedStat === "gstin" &&
+                            stats.gstinSources.map((source, idx) => (
+                              <div key={idx} className="flex items-center gap-2 p-3 bg-muted rounded-lg">
+                                <Building2 className="h-4 w-4 text-purple-600" />
+                                <span>{source}</span>
+                              </div>
+                            ))}
+                          {selectedStat === "esic" &&
+                            stats.esicSources.map((source, idx) => (
+                              <div key={idx} className="flex items-center gap-2 p-3 bg-muted rounded-lg">
+                                <FileText className="h-4 w-4 text-orange-600" />
+                                <span>{source}</span>
+                              </div>
+                            ))}
+                        </div>
+                      </DialogContent>
+                    </Dialog>
+                  </div>
                 </div>
               )}
 
@@ -1642,6 +1787,449 @@ const CustomerProfiling = () => {
                       </CardContent>
                     </Card>
                   )}
+                  
+                  {/* Digital Payment ID */}
+                  {responseData.digital_payment_id_info?.code === "SUC" && (
+                    <Card>
+                      <CardHeader>
+                        <CardTitle className="flex items-center gap-2">
+                          <CreditCard className="h-5 w-5" />
+                          Digital Payment ID Information
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="grid md:grid-cols-2 gap-4">
+                          <div>
+                            <p className="text-sm text-muted-foreground mb-1">Name</p>
+                            <p className="text-sm font-semibold">{maskData(responseData.digital_payment_id_info.data.name, showData)}</p>
+                          </div>
+                          <div>
+                            <p className="text-sm text-muted-foreground mb-1">Bank</p>
+                            <p className="text-sm">{responseData.digital_payment_id_info.data.bank}</p>
+                          </div>
+                          <div>
+                            <p className="text-sm text-muted-foreground mb-1">Branch</p>
+                            <p className="text-sm">{responseData.digital_payment_id_info.data.branch}</p>
+                          </div>
+                          <div>
+                            <p className="text-sm text-muted-foreground mb-1">Contact</p>
+                            <p className="text-sm">{maskPhone(responseData.digital_payment_id_info.data.contact, showData)}</p>
+                          </div>
+                          <div>
+                            <p className="text-sm text-muted-foreground mb-1">City</p>
+                            <p className="text-sm">{responseData.digital_payment_id_info.data.city}</p>
+                          </div>
+                          <div>
+                            <p className="text-sm text-muted-foreground mb-1">State</p>
+                            <p className="text-sm">{responseData.digital_payment_id_info.data.state}</p>
+                          </div>
+                          <div className="md:col-span-2">
+                            <p className="text-sm text-muted-foreground mb-1">Branch Address</p>
+                            <p className="text-sm">{responseData.digital_payment_id_info.data.address}</p>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  )}
+
+                  {/* LPG Info */}
+                  {responseData.lpg_info?.code === "SUC" && responseData.lpg_info.data?.length > 0 && (
+                    <Card>
+                      <CardHeader>
+                        <CardTitle className="flex items-center gap-2">
+                          <Fuel className="h-5 w-5" />
+                          LPG Connections ({responseData.lpg_info.data.length})
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent className="space-y-4">
+                        {responseData.lpg_info.data.map((lpg: any, idx: number) => (
+                          <Card key={idx}>
+                            <CardHeader>
+                              <div className="flex justify-between items-start">
+                                <div>
+                                  <CardTitle className="text-base">{lpg.gas_provider}</CardTitle>
+                                  <CardDescription>{maskData(lpg.name, showData)}</CardDescription>
+                                </div>
+                              </div>
+                            </CardHeader>
+                            <CardContent>
+                              <div className="grid md:grid-cols-2 gap-4">
+                                {lpg.consumer_details?.consumer_id && (
+                                  <div>
+                                    <p className="text-sm text-muted-foreground mb-1">Consumer ID</p>
+                                    <p className="text-sm font-mono">{maskData(lpg.consumer_details.consumer_id, showData)}</p>
+                                  </div>
+                                )}
+                                {lpg.consumer_details?.consumer_mobile && (
+                                  <div>
+                                    <p className="text-sm text-muted-foreground mb-1">Mobile</p>
+                                    <p className="text-sm">{maskPhone(lpg.consumer_details.consumer_mobile, showData)}</p>
+                                  </div>
+                                )}
+                                {lpg.consumer_details?.consumer_status && (
+                                  <div>
+                                    <p className="text-sm text-muted-foreground mb-1">Status</p>
+                                    <Badge variant={lpg.consumer_details.consumer_status === "ACTIVE" ? "default" : "secondary"}>
+                                      {lpg.consumer_details.consumer_status}
+                                    </Badge>
+                                  </div>
+                                )}
+                                {lpg.address && (
+                                  <div className="md:col-span-2">
+                                    <p className="text-sm text-muted-foreground mb-1">Address</p>
+                                    <p className="text-sm">{lpg.address}</p>
+                                  </div>
+                                )}
+                                {lpg.distributor_details?.distributor_name && (
+                                  <>
+                                    <div className="md:col-span-2 pt-2 border-t">
+                                      <p className="text-sm font-semibold mb-2">Distributor Details</p>
+                                    </div>
+                                    <div>
+                                      <p className="text-sm text-muted-foreground mb-1">Name</p>
+                                      <p className="text-sm">{lpg.distributor_details.distributor_name}</p>
+                                    </div>
+                                    {lpg.distributor_details.distributor_code && (
+                                      <div>
+                                        <p className="text-sm text-muted-foreground mb-1">Code</p>
+                                        <p className="text-sm">{lpg.distributor_details.distributor_code}</p>
+                                      </div>
+                                    )}
+                                    {lpg.distributor_details.distributor_contact && (
+                                      <div>
+                                        <p className="text-sm text-muted-foreground mb-1">Contact</p>
+                                        <p className="text-sm">{lpg.distributor_details.distributor_contact}</p>
+                                      </div>
+                                    )}
+                                    {lpg.distributor_details.distributor_address && (
+                                      <div className="md:col-span-2">
+                                        <p className="text-sm text-muted-foreground mb-1">Address</p>
+                                        <p className="text-sm">{lpg.distributor_details.distributor_address}</p>
+                                      </div>
+                                    )}
+                                  </>
+                                )}
+                              </div>
+                            </CardContent>
+                          </Card>
+                        ))}
+                      </CardContent>
+                    </Card>
+                  )}
+
+                  {/* Telco Information */}
+                  {responseData.telco_info?.code === "SUC" && (
+                    <Card>
+                      <CardHeader>
+                        <CardTitle className="flex items-center gap-2">
+                          <Phone className="h-5 w-5" />
+                          Telecom Information
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="grid md:grid-cols-2 gap-4">
+                          <div>
+                            <p className="text-sm text-muted-foreground mb-1">Mobile Number</p>
+                            <p className="text-sm font-mono">{maskPhone(responseData.telco_info.data.msisdn?.msisdn, showData)}</p>
+                          </div>
+                          <div>
+                            <p className="text-sm text-muted-foreground mb-1">Connection Type</p>
+                            <Badge>{responseData.telco_info.data.connection_type}</Badge>
+                          </div>
+                          <div>
+                            <p className="text-sm text-muted-foreground mb-1">Current Network</p>
+                            <p className="text-sm">{responseData.telco_info.data.current_service_provider?.network_name}</p>
+                          </div>
+                          <div>
+                            <p className="text-sm text-muted-foreground mb-1">Original Network</p>
+                            <p className="text-sm">{responseData.telco_info.data.original_service_provider?.network_name}</p>
+                          </div>
+                          <div>
+                            <p className="text-sm text-muted-foreground mb-1">Network Region</p>
+                            <p className="text-sm">{responseData.telco_info.data.current_service_provider?.network_region}</p>
+                          </div>
+                          <div>
+                            <p className="text-sm text-muted-foreground mb-1">Roaming</p>
+                            <Badge variant={responseData.telco_info.data.is_roaming ? "destructive" : "default"}>
+                              {responseData.telco_info.data.is_roaming ? "Yes" : "No"}
+                            </Badge>
+                          </div>
+                          <div>
+                            <p className="text-sm text-muted-foreground mb-1">Subscriber Status</p>
+                            <Badge variant="default">{responseData.telco_info.data.subscriber_status}</Badge>
+                          </div>
+                          <div>
+                            <p className="text-sm text-muted-foreground mb-1">Valid</p>
+                            <Badge variant={responseData.telco_info.data.is_valid ? "default" : "destructive"}>
+                              {responseData.telco_info.data.is_valid ? "TRUE" : "FALSE"}
+                            </Badge>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  )}
+
+                  {/* Mobile Age Info */}
+                  {responseData.mobile_age_info?.code === "SUC" && (
+                    <Card>
+                      <CardHeader>
+                        <CardTitle className="flex items-center gap-2">
+                          <Phone className="h-5 w-5" />
+                          Mobile Age & History
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="grid md:grid-cols-2 gap-4">
+                          <div>
+                            <p className="text-sm text-muted-foreground mb-1">Mobile Age</p>
+                            <p className="text-sm font-semibold">{responseData.mobile_age_info.data.mobile_age}</p>
+                          </div>
+                          <div>
+                            <p className="text-sm text-muted-foreground mb-1">Number Active</p>
+                            <Badge variant={responseData.mobile_age_info.data.number_active === "Yes" ? "default" : "secondary"}>
+                              {responseData.mobile_age_info.data.number_active}
+                            </Badge>
+                          </div>
+                          <div>
+                            <p className="text-sm text-muted-foreground mb-1">Ported</p>
+                            <Badge>{responseData.mobile_age_info.data.is_ported}</Badge>
+                          </div>
+                          {responseData.mobile_age_info.data.is_ported === "Yes" && (
+                            <>
+                              <div>
+                                <p className="text-sm text-muted-foreground mb-1">Ported From</p>
+                                <p className="text-sm">{responseData.mobile_age_info.data.telecom}</p>
+                              </div>
+                              <div>
+                                <p className="text-sm text-muted-foreground mb-1">Ported To</p>
+                                <p className="text-sm">{responseData.mobile_age_info.data.ported_telecom}</p>
+                              </div>
+                              <div>
+                                <p className="text-sm text-muted-foreground mb-1">Ported Region</p>
+                                <p className="text-sm">{responseData.mobile_age_info.data.ported_region}</p>
+                              </div>
+                            </>
+                          )}
+                          <div>
+                            <p className="text-sm text-muted-foreground mb-1">Region</p>
+                            <p className="text-sm">{responseData.mobile_age_info.data.region}</p>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  )}
+
+                  {/* WhatsApp Info */}
+                  {responseData.whatsapp_info?.code === "SUC" && (
+                    <Card>
+                      <CardHeader>
+                        <CardTitle className="flex items-center gap-2">
+                          <Phone className="h-5 w-5" />
+                          WhatsApp Information
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="grid md:grid-cols-2 gap-4">
+                          <div>
+                            <p className="text-sm text-muted-foreground mb-1">Status</p>
+                            <Badge variant={responseData.whatsapp_info.data.status === "Account Found" ? "default" : "secondary"}>
+                              {responseData.whatsapp_info.data.status}
+                            </Badge>
+                          </div>
+                          <div>
+                            <p className="text-sm text-muted-foreground mb-1">Account Type</p>
+                            <Badge>{responseData.whatsapp_info.data.is_business === "0" ? "Personal" : "Business"}</Badge>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  )}
+
+                  {/* Revoke Info */}
+                  {responseData.revoke_info?.code === "SUC" && (
+                    <Card>
+                      <CardHeader>
+                        <CardTitle className="flex items-center gap-2">
+                          <Shield className="h-5 w-5" />
+                          Revoke Information
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="grid md:grid-cols-2 gap-4">
+                          <div>
+                            <p className="text-sm text-muted-foreground mb-1">Revoke Status</p>
+                            <Badge variant={responseData.revoke_info.data.revoke_status === "No" ? "default" : "destructive"}>
+                              {responseData.revoke_info.data.revoke_status}
+                            </Badge>
+                          </div>
+                          {responseData.revoke_info.data.revoke_date && (
+                            <div>
+                              <p className="text-sm text-muted-foreground mb-1">Revoke Date</p>
+                              <p className="text-sm">{responseData.revoke_info.data.revoke_date}</p>
+                            </div>
+                          )}
+                        </div>
+                      </CardContent>
+                    </Card>
+                  )}
+
+                  {/* Profile Advance */}
+                  {responseData.profile_advance?.full_name && (
+                    <Card>
+                      <CardHeader>
+                        <CardTitle className="flex items-center gap-2">
+                          <User className="h-5 w-5" />
+                          Profile Advance Details
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="grid md:grid-cols-2 gap-4">
+                          <div>
+                            <p className="text-sm text-muted-foreground mb-1">Full Name</p>
+                            <p className="text-sm font-semibold">{maskData(responseData.profile_advance.full_name, showData)}</p>
+                          </div>
+                          <div>
+                            <p className="text-sm text-muted-foreground mb-1">Gender</p>
+                            <p className="text-sm">{responseData.profile_advance.gender}</p>
+                          </div>
+                          <div>
+                            <p className="text-sm text-muted-foreground mb-1">Age</p>
+                            <p className="text-sm">{responseData.profile_advance.age} years</p>
+                          </div>
+                          <div>
+                            <p className="text-sm text-muted-foreground mb-1">Date of Birth</p>
+                            <p className="text-sm">{responseData.profile_advance.date_of_birth}</p>
+                          </div>
+                          <div>
+                            <p className="text-sm text-muted-foreground mb-1">Income</p>
+                            <p className="text-sm font-semibold">₹{responseData.profile_advance.income}</p>
+                          </div>
+                          <div>
+                            <p className="text-sm text-muted-foreground mb-1">Email</p>
+                            <p className="text-sm">{maskEmail(responseData.profile_advance.email, showData)}</p>
+                          </div>
+                          <div>
+                            <p className="text-sm text-muted-foreground mb-1">Address Type</p>
+                            <Badge>{responseData.profile_advance.address_type}</Badge>
+                          </div>
+                          <div>
+                            <p className="text-sm text-muted-foreground mb-1">Address Pincode</p>
+                            <p className="text-sm">{responseData.profile_advance.address_pincode}</p>
+                          </div>
+                          <div className="md:col-span-2">
+                            <p className="text-sm text-muted-foreground mb-1">Detailed Address</p>
+                            <p className="text-sm">{responseData.profile_advance.detailed_address}</p>
+                          </div>
+                          <div>
+                            <p className="text-sm text-muted-foreground mb-1">Document (PAN)</p>
+                            <p className="text-sm font-mono">{maskData(responseData.profile_advance.document_pan, showData)}</p>
+                          </div>
+                          {responseData.profile_advance.alternate_phones?.length > 0 && (
+                            <div className="md:col-span-2">
+                              <p className="text-sm text-muted-foreground mb-1">Alternate Phones</p>
+                              <div className="flex flex-wrap gap-2">
+                                {responseData.profile_advance.alternate_phones.map((phone: string, idx: number) => (
+                                  <Badge key={idx} variant="outline">
+                                    {maskPhone(phone, showData)}
+                                  </Badge>
+                                ))}
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      </CardContent>
+                    </Card>
+                  )}
+
+                  {/* Bureau Data */}
+                  {responseData.bureau_data?.credit_score && (
+                    <Card>
+                      <CardHeader>
+                        <CardTitle className="flex items-center gap-2">
+                          <FileText className="h-5 w-5" />
+                          Bureau Data & Credit Information
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="space-y-6">
+                          <div className="grid md:grid-cols-2 gap-4">
+                            <div>
+                              <p className="text-sm text-muted-foreground mb-1">Credit Score</p>
+                              <p className="text-2xl font-bold text-primary">{responseData.bureau_data.credit_score}</p>
+                            </div>
+                            <div>
+                              <p className="text-sm text-muted-foreground mb-1">FCIREX Score</p>
+                              <p className="text-2xl font-bold text-green-600">{responseData.bureau_data.fcirex_score}</p>
+                            </div>
+                          </div>
+
+                          <div className="border-t pt-4">
+                            <p className="text-sm font-semibold mb-3">Credit Accounts Summary</p>
+                            <div className="grid md:grid-cols-4 gap-4">
+                              <div className="bg-muted/50 p-3 rounded-lg">
+                                <p className="text-xs text-muted-foreground mb-1">Total Accounts</p>
+                                <p className="text-lg font-semibold">{responseData.bureau_data.credit_accounts.total}</p>
+                              </div>
+                              <div className="bg-green-50 dark:bg-green-950/20 p-3 rounded-lg">
+                                <p className="text-xs text-muted-foreground mb-1">Active</p>
+                                <p className="text-lg font-semibold text-green-600">{responseData.bureau_data.credit_accounts.active}</p>
+                              </div>
+                              <div className="bg-muted/50 p-3 rounded-lg">
+                                <p className="text-xs text-muted-foreground mb-1">Closed</p>
+                                <p className="text-lg font-semibold">{responseData.bureau_data.credit_accounts.closed}</p>
+                              </div>
+                              <div className="bg-muted/50 p-3 rounded-lg">
+                                <p className="text-xs text-muted-foreground mb-1">Default</p>
+                                <p className="text-lg font-semibold">{responseData.bureau_data.credit_accounts.default}</p>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div className="border-t pt-4">
+                            <p className="text-sm font-semibold mb-3">Contact Information</p>
+                            <div className="grid md:grid-cols-2 gap-4">
+                              <div>
+                                <p className="text-sm text-muted-foreground mb-1">Primary Mobile</p>
+                                <p className="text-sm">{maskPhone(responseData.bureau_data.contact.primary_mobile, showData)}</p>
+                              </div>
+                              <div>
+                                <p className="text-sm text-muted-foreground mb-1">Email Address</p>
+                                <p className="text-sm">{maskEmail(responseData.bureau_data.contact.email_address, showData)}</p>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div className="border-t pt-4">
+                            <p className="text-sm font-semibold mb-3">Address Information</p>
+                            <div className="grid md:grid-cols-2 gap-4">
+                              <div>
+                                <p className="text-sm text-muted-foreground mb-1">Flat/House No</p>
+                                <p className="text-sm">{responseData.bureau_data.address.flat_house_no}</p>
+                              </div>
+                              <div>
+                                <p className="text-sm text-muted-foreground mb-1">PIN Code</p>
+                                <p className="text-sm">{responseData.bureau_data.address.pin_code}</p>
+                              </div>
+                              <div>
+                                <p className="text-sm text-muted-foreground mb-1">State Code</p>
+                                <p className="text-sm">{responseData.bureau_data.address.state_code}</p>
+                              </div>
+                              <div>
+                                <p className="text-sm text-muted-foreground mb-1">Country Code</p>
+                                <p className="text-sm">{responseData.bureau_data.address.country_code}</p>
+                              </div>
+                              <div className="md:col-span-2">
+                                <p className="text-sm text-muted-foreground mb-1">Full Address</p>
+                                <p className="text-sm">
+                                  {responseData.bureau_data.address.first_line}, {responseData.bureau_data.address.second_line}, {responseData.bureau_data.address.third_line}
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  )}
                 </TabsContent>
 
                 {/* Business Profile */}
@@ -1665,6 +2253,92 @@ const CustomerProfiling = () => {
                   </Card>
 
                   <p className="text-2xl font-bold">Business Data</p>
+
+                  {/* All data sections - same as bluecollar */}
+                  {responseData.digital_payment_id_info?.code === "SUC" && (
+                    <Card>
+                      <CardHeader>
+                        <CardTitle className="flex items-center gap-2">
+                          <CreditCard className="h-5 w-5" />
+                          Digital Payment ID Information
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="grid md:grid-cols-2 gap-4">
+                          <div>
+                            <p className="text-sm text-muted-foreground mb-1">Name</p>
+                            <p className="text-sm font-semibold">{maskData(responseData.digital_payment_id_info.data.name, showData)}</p>
+                          </div>
+                          <div>
+                            <p className="text-sm text-muted-foreground mb-1">Bank</p>
+                            <p className="text-sm">{responseData.digital_payment_id_info.data.bank}</p>
+                          </div>
+                          <div>
+                            <p className="text-sm text-muted-foreground mb-1">City</p>
+                            <p className="text-sm">{responseData.digital_payment_id_info.data.city}</p>
+                          </div>
+                          <div>
+                            <p className="text-sm text-muted-foreground mb-1">State</p>
+                            <p className="text-sm">{responseData.digital_payment_id_info.data.state}</p>
+                          </div>
+                          <div className="md:col-span-2">
+                            <p className="text-sm text-muted-foreground mb-1">Branch Address</p>
+                            <p className="text-sm">{responseData.digital_payment_id_info.data.address}</p>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  )}
+
+                  {responseData.telco_info?.code === "SUC" && (
+                    <Card>
+                      <CardHeader>
+                        <CardTitle className="flex items-center gap-2">
+                          <Phone className="h-5 w-5" />
+                          Telecom Information
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="grid md:grid-cols-2 gap-4">
+                          <div>
+                            <p className="text-sm text-muted-foreground mb-1">Connection Type</p>
+                            <Badge>{responseData.telco_info.data.connection_type}</Badge>
+                          </div>
+                          <div>
+                            <p className="text-sm text-muted-foreground mb-1">Current Network</p>
+                            <p className="text-sm">{responseData.telco_info.data.current_service_provider?.network_name}</p>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  )}
+
+                  {responseData.profile_advance?.full_name && (
+                    <Card>
+                      <CardHeader>
+                        <CardTitle className="flex items-center gap-2">
+                          <User className="h-5 w-5" />
+                          Profile Advance Details
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="grid md:grid-cols-2 gap-4">
+                          <div>
+                            <p className="text-sm text-muted-foreground mb-1">Full Name</p>
+                            <p className="text-sm font-semibold">{maskData(responseData.profile_advance.full_name, showData)}</p>
+                          </div>
+                          <div>
+                            <p className="text-sm text-muted-foreground mb-1">Income</p>
+                            <p className="text-sm font-semibold">₹{responseData.profile_advance.income}</p>
+                          </div>
+                          <div className="md:col-span-2">
+                            <p className="text-sm text-muted-foreground mb-1">Address</p>
+                            <p className="text-sm">{responseData.profile_advance.detailed_address}</p>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  )}
 
                   {/* GST Information */}
                   {responseData.gst_list?.code === "SUC" && responseData.gst_list.data?.length > 0 && (

@@ -488,36 +488,36 @@ const CustomerProfiling = () => {
             document_pan: "ABCPD1234D",
           }
         : profileType === "bluecollar"
-        ? {
-            full_name: "RAM SINGH",
-            gender: "Male",
-            age: "24",
-            date_of_birth: "1999-01-01",
-            income: "456789",
-            alternate_phones: ["9876543210"],
-            email: "RAM@GMAIL.COM",
-            detailed_address: "House No 123, Chandauli, Mughalsarai, Uttar Pradesh",
-            address_state: "UP",
-            address_pincode: "221001",
-            address_type: "Primary",
-            address_date_of_reporting: "2024-10-18",
-            document_pan: "ABCPD1234D",
-          }
-        : {
-            full_name: "RAM SINGH",
-            gender: "Male",
-            age: "35",
-            date_of_birth: "1989-01-01",
-            income: "1500000",
-            alternate_phones: ["9876543210", "1146534321"],
-            email: "RAM@GMAIL.COM",
-            detailed_address: "BACHUPALLY VILLAGE, HYDERABAD",
-            address_state: "TELANGANA",
-            address_pincode: "500090",
-            address_type: "Business",
-            address_date_of_reporting: "2024-02-18",
-            document_pan: "ABCPD1234E",
-          },
+          ? {
+              full_name: "RAM SINGH",
+              gender: "Male",
+              age: "24",
+              date_of_birth: "1999-01-01",
+              income: "456789",
+              alternate_phones: ["9876543210"],
+              email: "RAM@GMAIL.COM",
+              detailed_address: "House No 123, Chandauli, Mughalsarai, Uttar Pradesh",
+              address_state: "UP",
+              address_pincode: "221001",
+              address_type: "Primary",
+              address_date_of_reporting: "2024-10-18",
+              document_pan: "ABCPD1234D",
+            }
+          : {
+              full_name: "RAM SINGH",
+              gender: "Male",
+              age: "35",
+              date_of_birth: "1989-01-01",
+              income: "1500000",
+              alternate_phones: ["9876543210", "1146534321"],
+              email: "RAM@GMAIL.COM",
+              detailed_address: "BACHUPALLY VILLAGE, HYDERABAD",
+              address_state: "TELANGANA",
+              address_pincode: "500090",
+              address_type: "Business",
+              address_date_of_reporting: "2024-02-18",
+              document_pan: "ABCPD1234E",
+            },
     bureau_data:
       profileType === "salaried" || profileType === "bluecollar" || profileType === "business"
         ? {
@@ -660,7 +660,9 @@ const CustomerProfiling = () => {
     }
     if (data.msme_info?.data?.[0]?.flat_door_block_no) {
       addressesSources.push("MSME");
-      const addr = `${data.msme_info.data[0].flat_door_block_no} ${data.msme_info.data[0].city || ''}`.toUpperCase().trim();
+      const addr = `${data.msme_info.data[0].flat_door_block_no} ${data.msme_info.data[0].city || ""}`
+        .toUpperCase()
+        .trim();
       addresses.push(addr);
     }
     if (data.gst_list?.data?.[0]?.primary_business_address?.registered_address) {
@@ -674,22 +676,30 @@ const CustomerProfiling = () => {
 
     // Calculate name consistency
     const uniqueNames = [...new Set(names)];
-    const mostCommonName = names.length > 0 ? names.reduce((a, b, i, arr) => 
-      arr.filter(v => v === a).length >= arr.filter(v => v === b).length ? a : b
-    ) : '';
-    const matchingNamesCount = names.filter(n => n === mostCommonName).length;
+    const mostCommonName =
+      names.length > 0
+        ? names.reduce((a, b, i, arr) =>
+            arr.filter((v) => v === a).length >= arr.filter((v) => v === b).length ? a : b,
+          )
+        : "";
+    const matchingNamesCount = names.filter((n) => n === mostCommonName).length;
     const nameConsistency = names.length > 0 ? Math.round((matchingNamesCount / names.length) * 100) : 0;
 
     // Calculate address consistency (by checking common keywords)
-    const addressConsistency = addresses.length > 1 ? (() => {
-      const commonWords = addresses[0].split(/\s+/).filter(w => w.length > 3);
-      let totalMatches = 0;
-      addresses.forEach(addr => {
-        const matchCount = commonWords.filter(word => addr.includes(word)).length;
-        totalMatches += matchCount / commonWords.length;
-      });
-      return Math.round((totalMatches / addresses.length) * 100);
-    })() : addresses.length === 1 ? 100 : 0;
+    const addressConsistency =
+      addresses.length > 1
+        ? (() => {
+            const commonWords = addresses[0].split(/\s+/).filter((w) => w.length > 3);
+            let totalMatches = 0;
+            addresses.forEach((addr) => {
+              const matchCount = commonWords.filter((word) => addr.includes(word)).length;
+              totalMatches += matchCount / commonWords.length;
+            });
+            return Math.round((totalMatches / addresses.length) * 100);
+          })()
+        : addresses.length === 1
+          ? 100
+          : 0;
 
     // Count GSTIN
     if (data.gst_list?.data?.length > 0) {
@@ -765,9 +775,7 @@ const CustomerProfiling = () => {
                 <h1 className="text-4xl font-bold">Customer Profiling</h1>
                 <p className="text-muted-foreground">Comprehensive customer profile based on mobile number</p>
               </div>
-              <div className="flex flex-col items-end gap-2 min-w-[200px]">
-                
-              </div>
+              <div className="flex flex-col items-end gap-2 min-w-[200px]"></div>
             </div>
           </div>
 
@@ -819,12 +827,8 @@ const CustomerProfiling = () => {
                         <div className="flex items-center justify-between">
                           <div>
                             <p className="text-sm text-muted-foreground mb-1">Name Consistency</p>
-                            <p className="text-3xl font-bold text-blue-600">
-                              {stats.nameConsistency}%
-                            </p>
-                            <p className="text-xs text-muted-foreground mt-1">
-                              {stats.namesCount} names analyzed
-                            </p>
+                            <p className="text-3xl font-bold text-blue-600">{stats.nameConsistency}%</p>
+                            <p className="text-xs text-muted-foreground mt-1">{stats.namesCount} names analyzed</p>
                           </div>
                           <User className="h-12 w-12 text-blue-400" />
                         </div>
@@ -835,9 +839,7 @@ const CustomerProfiling = () => {
                         <div className="flex items-center justify-between">
                           <div>
                             <p className="text-sm text-muted-foreground mb-1">Address Consistency</p>
-                            <p className="text-3xl font-bold text-green-600">
-                              {stats.addressConsistency}%
-                            </p>
+                            <p className="text-3xl font-bold text-green-600">{stats.addressConsistency}%</p>
                             <p className="text-xs text-muted-foreground mt-1">
                               {stats.addressesCount} addresses analyzed
                             </p>
@@ -1641,30 +1643,7 @@ const CustomerProfiling = () => {
                         )}
                       </div>
                     </CardContent>
-                    
                   </Card>
- <Card className="border-2 border-orange-200 bg-orange-50/50 dark:bg-orange-950/10">
-                    <CardHeader>
-                      <CardTitle className="flex items-center gap-2 text-lg">
-                        <AlertTriangle className="h-5 w-5 text-orange-600" />
-                        Risk Insights & Anomalies
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="space-y-3">
-                    
-                            <div className="flex items-start gap-2 p-3 rounded-lg bg-destructive/10 border border-destructive/20">
-                              <AlertTriangle className="h-4 w-4 text-destructive mt-0.5 flex-shrink-0" />
-                              <div>
-                                <p className="text-sm font-semibold text-destructive">
-                                  Dual PF Employment Without Exit
-                                </p>
-                                <p className="text-xs text-muted-foreground mt-1">
-                                  Multiple active EPFO records detected without exit dates
-                                </p>
-                              </div>
-                            </div>
-                  
 
                   <p className="text-2xl font-bold">Profile Data</p>
 
@@ -1804,7 +1783,7 @@ const CustomerProfiling = () => {
                       </CardContent>
                     </Card>
                   )}
-                  
+
                   {/* Digital Payment ID */}
                   {responseData.digital_payment_id_info?.code === "SUC" && (
                     <Card>
@@ -1818,7 +1797,9 @@ const CustomerProfiling = () => {
                         <div className="grid md:grid-cols-2 gap-4">
                           <div>
                             <p className="text-sm text-muted-foreground mb-1">Name</p>
-                            <p className="text-sm font-semibold">{maskData(responseData.digital_payment_id_info.data.name, showData)}</p>
+                            <p className="text-sm font-semibold">
+                              {maskData(responseData.digital_payment_id_info.data.name, showData)}
+                            </p>
                           </div>
                           <div>
                             <p className="text-sm text-muted-foreground mb-1">Bank</p>
@@ -1830,7 +1811,9 @@ const CustomerProfiling = () => {
                           </div>
                           <div>
                             <p className="text-sm text-muted-foreground mb-1">Contact</p>
-                            <p className="text-sm">{maskPhone(responseData.digital_payment_id_info.data.contact, showData)}</p>
+                            <p className="text-sm">
+                              {maskPhone(responseData.digital_payment_id_info.data.contact, showData)}
+                            </p>
                           </div>
                           <div>
                             <p className="text-sm text-muted-foreground mb-1">City</p>
@@ -1874,19 +1857,27 @@ const CustomerProfiling = () => {
                                 {lpg.consumer_details?.consumer_id && (
                                   <div>
                                     <p className="text-sm text-muted-foreground mb-1">Consumer ID</p>
-                                    <p className="text-sm font-mono">{maskData(lpg.consumer_details.consumer_id, showData)}</p>
+                                    <p className="text-sm font-mono">
+                                      {maskData(lpg.consumer_details.consumer_id, showData)}
+                                    </p>
                                   </div>
                                 )}
                                 {lpg.consumer_details?.consumer_mobile && (
                                   <div>
                                     <p className="text-sm text-muted-foreground mb-1">Mobile</p>
-                                    <p className="text-sm">{maskPhone(lpg.consumer_details.consumer_mobile, showData)}</p>
+                                    <p className="text-sm">
+                                      {maskPhone(lpg.consumer_details.consumer_mobile, showData)}
+                                    </p>
                                   </div>
                                 )}
                                 {lpg.consumer_details?.consumer_status && (
                                   <div>
                                     <p className="text-sm text-muted-foreground mb-1">Status</p>
-                                    <Badge variant={lpg.consumer_details.consumer_status === "ACTIVE" ? "default" : "secondary"}>
+                                    <Badge
+                                      variant={
+                                        lpg.consumer_details.consumer_status === "ACTIVE" ? "default" : "secondary"
+                                      }
+                                    >
                                       {lpg.consumer_details.consumer_status}
                                     </Badge>
                                   </div>
@@ -1947,7 +1938,9 @@ const CustomerProfiling = () => {
                         <div className="grid md:grid-cols-2 gap-4">
                           <div>
                             <p className="text-sm text-muted-foreground mb-1">Mobile Number</p>
-                            <p className="text-sm font-mono">{maskPhone(responseData.telco_info.data.msisdn?.msisdn, showData)}</p>
+                            <p className="text-sm font-mono">
+                              {maskPhone(responseData.telco_info.data.msisdn?.msisdn, showData)}
+                            </p>
                           </div>
                           <div>
                             <p className="text-sm text-muted-foreground mb-1">Connection Type</p>
@@ -1955,15 +1948,21 @@ const CustomerProfiling = () => {
                           </div>
                           <div>
                             <p className="text-sm text-muted-foreground mb-1">Current Network</p>
-                            <p className="text-sm">{responseData.telco_info.data.current_service_provider?.network_name}</p>
+                            <p className="text-sm">
+                              {responseData.telco_info.data.current_service_provider?.network_name}
+                            </p>
                           </div>
                           <div>
                             <p className="text-sm text-muted-foreground mb-1">Original Network</p>
-                            <p className="text-sm">{responseData.telco_info.data.original_service_provider?.network_name}</p>
+                            <p className="text-sm">
+                              {responseData.telco_info.data.original_service_provider?.network_name}
+                            </p>
                           </div>
                           <div>
                             <p className="text-sm text-muted-foreground mb-1">Network Region</p>
-                            <p className="text-sm">{responseData.telco_info.data.current_service_provider?.network_region}</p>
+                            <p className="text-sm">
+                              {responseData.telco_info.data.current_service_provider?.network_region}
+                            </p>
                           </div>
                           <div>
                             <p className="text-sm text-muted-foreground mb-1">Roaming</p>
@@ -2003,7 +2002,11 @@ const CustomerProfiling = () => {
                           </div>
                           <div>
                             <p className="text-sm text-muted-foreground mb-1">Number Active</p>
-                            <Badge variant={responseData.mobile_age_info.data.number_active === "Yes" ? "default" : "secondary"}>
+                            <Badge
+                              variant={
+                                responseData.mobile_age_info.data.number_active === "Yes" ? "default" : "secondary"
+                              }
+                            >
                               {responseData.mobile_age_info.data.number_active}
                             </Badge>
                           </div>
@@ -2049,13 +2052,19 @@ const CustomerProfiling = () => {
                         <div className="grid md:grid-cols-2 gap-4">
                           <div>
                             <p className="text-sm text-muted-foreground mb-1">Status</p>
-                            <Badge variant={responseData.whatsapp_info.data.status === "Account Found" ? "default" : "secondary"}>
+                            <Badge
+                              variant={
+                                responseData.whatsapp_info.data.status === "Account Found" ? "default" : "secondary"
+                              }
+                            >
                               {responseData.whatsapp_info.data.status}
                             </Badge>
                           </div>
                           <div>
                             <p className="text-sm text-muted-foreground mb-1">Account Type</p>
-                            <Badge>{responseData.whatsapp_info.data.is_business === "0" ? "Personal" : "Business"}</Badge>
+                            <Badge>
+                              {responseData.whatsapp_info.data.is_business === "0" ? "Personal" : "Business"}
+                            </Badge>
                           </div>
                         </div>
                       </CardContent>
@@ -2075,7 +2084,9 @@ const CustomerProfiling = () => {
                         <div className="grid md:grid-cols-2 gap-4">
                           <div>
                             <p className="text-sm text-muted-foreground mb-1">Revoke Status</p>
-                            <Badge variant={responseData.revoke_info.data.revoke_status === "No" ? "default" : "destructive"}>
+                            <Badge
+                              variant={responseData.revoke_info.data.revoke_status === "No" ? "default" : "destructive"}
+                            >
                               {responseData.revoke_info.data.revoke_status}
                             </Badge>
                           </div>
@@ -2103,7 +2114,9 @@ const CustomerProfiling = () => {
                         <div className="grid md:grid-cols-2 gap-4">
                           <div>
                             <p className="text-sm text-muted-foreground mb-1">Full Name</p>
-                            <p className="text-sm font-semibold">{maskData(responseData.profile_advance.full_name, showData)}</p>
+                            <p className="text-sm font-semibold">
+                              {maskData(responseData.profile_advance.full_name, showData)}
+                            </p>
                           </div>
                           <div>
                             <p className="text-sm text-muted-foreground mb-1">Gender</p>
@@ -2139,7 +2152,9 @@ const CustomerProfiling = () => {
                           </div>
                           <div>
                             <p className="text-sm text-muted-foreground mb-1">Document (PAN)</p>
-                            <p className="text-sm font-mono">{maskData(responseData.profile_advance.document_pan, showData)}</p>
+                            <p className="text-sm font-mono">
+                              {maskData(responseData.profile_advance.document_pan, showData)}
+                            </p>
                           </div>
                           {responseData.profile_advance.alternate_phones?.length > 0 && (
                             <div className="md:col-span-2">
@@ -2176,7 +2191,9 @@ const CustomerProfiling = () => {
                             </div>
                             <div>
                               <p className="text-sm text-muted-foreground mb-1">FCIREX Score</p>
-                              <p className="text-2xl font-bold text-green-600">{responseData.bureau_data.fcirex_score}</p>
+                              <p className="text-2xl font-bold text-green-600">
+                                {responseData.bureau_data.fcirex_score}
+                              </p>
                             </div>
                           </div>
 
@@ -2185,19 +2202,27 @@ const CustomerProfiling = () => {
                             <div className="grid md:grid-cols-4 gap-4">
                               <div className="bg-muted/50 p-3 rounded-lg">
                                 <p className="text-xs text-muted-foreground mb-1">Total Accounts</p>
-                                <p className="text-lg font-semibold">{responseData.bureau_data.credit_accounts.total}</p>
+                                <p className="text-lg font-semibold">
+                                  {responseData.bureau_data.credit_accounts.total}
+                                </p>
                               </div>
                               <div className="bg-green-50 dark:bg-green-950/20 p-3 rounded-lg">
                                 <p className="text-xs text-muted-foreground mb-1">Active</p>
-                                <p className="text-lg font-semibold text-green-600">{responseData.bureau_data.credit_accounts.active}</p>
+                                <p className="text-lg font-semibold text-green-600">
+                                  {responseData.bureau_data.credit_accounts.active}
+                                </p>
                               </div>
                               <div className="bg-muted/50 p-3 rounded-lg">
                                 <p className="text-xs text-muted-foreground mb-1">Closed</p>
-                                <p className="text-lg font-semibold">{responseData.bureau_data.credit_accounts.closed}</p>
+                                <p className="text-lg font-semibold">
+                                  {responseData.bureau_data.credit_accounts.closed}
+                                </p>
                               </div>
                               <div className="bg-muted/50 p-3 rounded-lg">
                                 <p className="text-xs text-muted-foreground mb-1">Default</p>
-                                <p className="text-lg font-semibold">{responseData.bureau_data.credit_accounts.default}</p>
+                                <p className="text-lg font-semibold">
+                                  {responseData.bureau_data.credit_accounts.default}
+                                </p>
                               </div>
                             </div>
                           </div>
@@ -2207,11 +2232,15 @@ const CustomerProfiling = () => {
                             <div className="grid md:grid-cols-2 gap-4">
                               <div>
                                 <p className="text-sm text-muted-foreground mb-1">Primary Mobile</p>
-                                <p className="text-sm">{maskPhone(responseData.bureau_data.contact.primary_mobile, showData)}</p>
+                                <p className="text-sm">
+                                  {maskPhone(responseData.bureau_data.contact.primary_mobile, showData)}
+                                </p>
                               </div>
                               <div>
                                 <p className="text-sm text-muted-foreground mb-1">Email Address</p>
-                                <p className="text-sm">{maskEmail(responseData.bureau_data.contact.email_address, showData)}</p>
+                                <p className="text-sm">
+                                  {maskEmail(responseData.bureau_data.contact.email_address, showData)}
+                                </p>
                               </div>
                             </div>
                           </div>
@@ -2238,7 +2267,9 @@ const CustomerProfiling = () => {
                               <div className="md:col-span-2">
                                 <p className="text-sm text-muted-foreground mb-1">Full Address</p>
                                 <p className="text-sm">
-                                  {responseData.bureau_data.address.first_line}, {responseData.bureau_data.address.second_line}, {responseData.bureau_data.address.third_line}
+                                  {responseData.bureau_data.address.first_line},{" "}
+                                  {responseData.bureau_data.address.second_line},{" "}
+                                  {responseData.bureau_data.address.third_line}
                                 </p>
                               </div>
                             </div>
@@ -2284,7 +2315,9 @@ const CustomerProfiling = () => {
                         <div className="grid md:grid-cols-2 gap-4">
                           <div>
                             <p className="text-sm text-muted-foreground mb-1">Name</p>
-                            <p className="text-sm font-semibold">{maskData(responseData.digital_payment_id_info.data.name, showData)}</p>
+                            <p className="text-sm font-semibold">
+                              {maskData(responseData.digital_payment_id_info.data.name, showData)}
+                            </p>
                           </div>
                           <div>
                             <p className="text-sm text-muted-foreground mb-1">Bank</p>
@@ -2323,7 +2356,9 @@ const CustomerProfiling = () => {
                           </div>
                           <div>
                             <p className="text-sm text-muted-foreground mb-1">Current Network</p>
-                            <p className="text-sm">{responseData.telco_info.data.current_service_provider?.network_name}</p>
+                            <p className="text-sm">
+                              {responseData.telco_info.data.current_service_provider?.network_name}
+                            </p>
                           </div>
                         </div>
                       </CardContent>
@@ -2342,7 +2377,9 @@ const CustomerProfiling = () => {
                         <div className="grid md:grid-cols-2 gap-4">
                           <div>
                             <p className="text-sm text-muted-foreground mb-1">Full Name</p>
-                            <p className="text-sm font-semibold">{maskData(responseData.profile_advance.full_name, showData)}</p>
+                            <p className="text-sm font-semibold">
+                              {maskData(responseData.profile_advance.full_name, showData)}
+                            </p>
                           </div>
                           <div>
                             <p className="text-sm text-muted-foreground mb-1">Income</p>

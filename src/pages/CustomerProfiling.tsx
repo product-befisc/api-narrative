@@ -766,13 +766,7 @@ const CustomerProfiling = () => {
                 <p className="text-muted-foreground">Comprehensive customer profile based on mobile number</p>
               </div>
               <div className="flex flex-col items-end gap-2 min-w-[200px]">
-                <h4 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">APIs Included</h4>
-                <div className="flex flex-col items-end gap-1.5">
-                  <span className="text-sm font-medium text-foreground/80">Mobile Verification</span>
-                  <span className="text-sm font-medium text-foreground/80">LPG Verification</span>
-                  <span className="text-sm font-medium text-foreground/80">EPFO/ESIC Lookup</span>
-                  <span className="text-sm font-medium text-foreground/80">GST/IEC Details</span>
-                </div>
+                
               </div>
             </div>
           </div>

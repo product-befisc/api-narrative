@@ -1645,6 +1645,142 @@ const CustomerProfiling = () => {
                     </CardContent>
                   </Card>
 
+                  {/* Risk Insights & Anomalies - Blue Collar */}
+                  <Card className="border-2 border-orange-200 bg-orange-50/50 dark:bg-orange-950/10">
+                    <CardHeader>
+                      <CardTitle className="flex items-center gap-2 text-lg">
+                        <AlertTriangle className="h-5 w-5 text-orange-600" />
+                        Risk Insights & Anomalies
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-3">
+                        {/* Multiple LPG connections on same address */}
+                        {responseData.lpg_info?.data && responseData.lpg_info.data.length > 1 && (
+                          <div className="flex items-start gap-2 p-3 rounded-lg bg-destructive/10 border border-destructive/20">
+                            <AlertTriangle className="h-4 w-4 text-destructive mt-0.5 flex-shrink-0" />
+                            <div>
+                              <p className="text-sm font-semibold text-destructive">
+                                Multiple LPG Connections on Same Address
+                              </p>
+                              <p className="text-xs text-muted-foreground mt-1">
+                                {responseData.lpg_info.data.length} LPG connections found linked to similar addresses
+                              </p>
+                            </div>
+                          </div>
+                        )}
+
+                        {/* Name variation across welfare and finance layers */}
+                        {(() => {
+                          const names = new Set();
+                          if (responseData.lpg_info?.data) {
+                            responseData.lpg_info.data.forEach((lpg: any) => names.add(lpg.name?.toUpperCase()));
+                          }
+                          if (responseData.esic_info?.data?.esic_details) {
+                            responseData.esic_info.data.esic_details.forEach((esic: any) =>
+                              names.add(esic.name?.toUpperCase()),
+                            );
+                          }
+                          if (responseData.digital_payment_id_info?.data?.name) {
+                            names.add(responseData.digital_payment_id_info.data.name.toUpperCase());
+                          }
+                          return names.size > 2 ? (
+                            <div className="flex items-start gap-2 p-3 rounded-lg bg-destructive/10 border border-destructive/20">
+                              <AlertTriangle className="h-4 w-4 text-destructive mt-0.5 flex-shrink-0" />
+                              <div>
+                                <p className="text-sm font-semibold text-destructive">
+                                  Name Variation Across Welfare and Finance Layers
+                                </p>
+                                <p className="text-xs text-muted-foreground mt-1">
+                                  {names.size} different name variations found across ESIC, LPG, and financial records
+                                </p>
+                              </div>
+                            </div>
+                          ) : null;
+                        })()}
+
+                        {/* Paytm Payments Bank linkage with government IDs */}
+                        {responseData.digital_payment_id_info?.data?.bank?.includes("Paytm") && (
+                          <div className="flex items-start gap-2 p-3 rounded-lg bg-destructive/10 border border-destructive/20">
+                            <AlertTriangle className="h-4 w-4 text-destructive mt-0.5 flex-shrink-0" />
+                            <div>
+                              <p className="text-sm font-semibold text-destructive">
+                                Paytm Payments Bank Linkage with Government IDs
+                              </p>
+                              <p className="text-xs text-muted-foreground mt-1">
+                                Digital payment bank detected as primary financial institution for government welfare schemes
+                              </p>
+                            </div>
+                          </div>
+                        )}
+
+                        {/* Old ported prepaid SIM used as KYC number */}
+                        {responseData.telco_info?.ported === "Yes" &&
+                          responseData.mobile_age_info?.age?.includes("15") && (
+                            <div className="flex items-start gap-2 p-3 rounded-lg bg-destructive/10 border border-destructive/20">
+                              <AlertTriangle className="h-4 w-4 text-destructive mt-0.5 flex-shrink-0" />
+                              <div>
+                                <p className="text-sm font-semibold text-destructive">
+                                  Old Ported Prepaid SIM Used as KYC Number
+                                </p>
+                                <p className="text-xs text-muted-foreground mt-1">
+                                  Mobile number is {responseData.mobile_age_info.age} old, ported from{" "}
+                                  {responseData.telco_info.original_network} to {responseData.telco_info.current_network}
+                                </p>
+                              </div>
+                            </div>
+                          )}
+
+                        {/* Inconsistent gender/name mapping */}
+                        {(() => {
+                          const maleIndicators = ["RAM", "RAMESH", "SHAM", "KUMAR"];
+                          const femaleGender =
+                            responseData.profile_advance?.gender?.toLowerCase() === "female" ||
+                            responseData.esic_info?.data?.esic_details?.some(
+                              (e: any) => e.gender?.toLowerCase() === "female",
+                            );
+                          const maleName =
+                            responseData.digital_payment_id_info?.data?.name &&
+                            maleIndicators.some((indicator) =>
+                              responseData.digital_payment_id_info.data.name.toUpperCase().includes(indicator),
+                            );
+
+                          return femaleGender && maleName ? (
+                            <div className="flex items-start gap-2 p-3 rounded-lg bg-destructive/10 border border-destructive/20">
+                              <AlertTriangle className="h-4 w-4 text-destructive mt-0.5 flex-shrink-0" />
+                              <div>
+                                <p className="text-sm font-semibold text-destructive">
+                                  Inconsistent Gender/Name Mapping
+                                </p>
+                                <p className="text-xs text-muted-foreground mt-1">
+                                  Gender and name patterns show inconsistency across documents
+                                </p>
+                              </div>
+                            </div>
+                          ) : null;
+                        })()}
+
+                        {/* If no anomalies */}
+                        {!responseData.lpg_info?.data?.length ||
+                        (responseData.lpg_info.data.length <= 1 &&
+                          !responseData.digital_payment_id_info?.data?.bank?.includes("Paytm") &&
+                          !(responseData.telco_info?.ported === "Yes" && responseData.mobile_age_info?.age?.includes("15"))) ? (
+                          <div className="flex items-start gap-2 p-3 rounded-lg bg-green-50 dark:bg-green-950/20 border border-green-200">
+                            <CheckCircle2 className="h-4 w-4 text-green-600 mt-0.5 flex-shrink-0" />
+                            <div>
+                              <p className="text-sm font-semibold text-green-700 dark:text-green-400">
+                                No Critical Anomalies Detected
+                              </p>
+                              <p className="text-xs text-muted-foreground mt-1">
+                                Profile data appears consistent across verification sources
+                              </p>
+                            </div>
+                          </div>
+                        ) : null}
+                      </div>
+                    </CardContent>
+                  </Card>
+
                   <p className="text-2xl font-bold">Profile Data</p>
 
                   {responseData.esic_info?.code === "SUC" && responseData.esic_info.data?.esic_details && (
@@ -2296,6 +2432,165 @@ const CustomerProfiling = () => {
                             <p className="text-sm font-semibold">{highlight}</p>
                           </div>
                         ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  {/* Risk Insights & Anomalies - Business */}
+                  <Card className="border-2 border-orange-200 bg-orange-50/50 dark:bg-orange-950/10">
+                    <CardHeader>
+                      <CardTitle className="flex items-center gap-2 text-lg">
+                        <AlertTriangle className="h-5 w-5 text-orange-600" />
+                        Risk Insights & Anomalies
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-3">
+                        {/* Business structure mismatch (HUF vs Pvt Ltd) */}
+                        {(() => {
+                          const gstTypes = new Set();
+                          if (responseData.gstin_info?.data) {
+                            responseData.gstin_info.data.forEach((gst: any) => {
+                              if (gst.legal_name?.includes("HUF")) gstTypes.add("HUF");
+                              if (gst.legal_name?.includes("PRIVATE LIMITED") || gst.legal_name?.includes("PVT LTD"))
+                                gstTypes.add("Private Limited");
+                              if (gst.legal_name?.includes("LLP")) gstTypes.add("LLP");
+                            });
+                          }
+                          return gstTypes.size > 1 ? (
+                            <div className="flex items-start gap-2 p-3 rounded-lg bg-destructive/10 border border-destructive/20">
+                              <AlertTriangle className="h-4 w-4 text-destructive mt-0.5 flex-shrink-0" />
+                              <div>
+                                <p className="text-sm font-semibold text-destructive">
+                                  Business Structure Mismatch (HUF vs Pvt Ltd)
+                                </p>
+                                <p className="text-xs text-muted-foreground mt-1">
+                                  Multiple business structures detected: {Array.from(gstTypes).join(", ")}
+                                </p>
+                              </div>
+                            </div>
+                          ) : null;
+                        })()}
+
+                        {/* Multi-state footprint with unlinked compliance */}
+                        {(() => {
+                          const states = new Set();
+                          if (responseData.gstin_info?.data) {
+                            responseData.gstin_info.data.forEach((gst: any) => {
+                              if (gst.state_jurisdiction) states.add(gst.state_jurisdiction);
+                            });
+                          }
+                          if (responseData.msme_info?.data?.plant_details) {
+                            responseData.msme_info.data.plant_details.forEach((plant: any) => {
+                              if (plant.state) states.add(plant.state);
+                            });
+                          }
+                          return states.size > 2 ? (
+                            <div className="flex items-start gap-2 p-3 rounded-lg bg-destructive/10 border border-destructive/20">
+                              <AlertTriangle className="h-4 w-4 text-destructive mt-0.5 flex-shrink-0" />
+                              <div>
+                                <p className="text-sm font-semibold text-destructive">
+                                  Multi-State Footprint with Unlinked Compliance
+                                </p>
+                                <p className="text-xs text-muted-foreground mt-1">
+                                  Business operations detected across {states.size} states without clear linkage
+                                </p>
+                              </div>
+                            </div>
+                          ) : null;
+                        })()}
+
+                        {/* Personal emails used in company records */}
+                        {(() => {
+                          const personalDomains = ["gmail.com", "yahoo.com", "hotmail.com", "outlook.com", "rediffmail.com"];
+                          const hasPersonalEmail =
+                            responseData.gstin_info?.data?.some((gst: any) =>
+                              personalDomains.some((domain) => gst.email?.toLowerCase().includes(domain)),
+                            ) ||
+                            responseData.msme_info?.data?.email_id?.toLowerCase().match(/gmail|yahoo|hotmail|outlook|rediffmail/);
+
+                          return hasPersonalEmail ? (
+                            <div className="flex items-start gap-2 p-3 rounded-lg bg-destructive/10 border border-destructive/20">
+                              <AlertTriangle className="h-4 w-4 text-destructive mt-0.5 flex-shrink-0" />
+                              <div>
+                                <p className="text-sm font-semibold text-destructive">
+                                  Personal Emails Used in Company Records
+                                </p>
+                                <p className="text-xs text-muted-foreground mt-1">
+                                  Business communications linked to personal email domains instead of corporate domain
+                                </p>
+                              </div>
+                            </div>
+                          ) : null;
+                        })()}
+
+                        {/* Udyam registered but not yet operational */}
+                        {responseData.msme_info?.data?.date_of_commencement &&
+                          (() => {
+                            const commencementDate = new Date(responseData.msme_info.data.date_of_commencement);
+                            const today = new Date();
+                            const daysSince = (today.getTime() - commencementDate.getTime()) / (1000 * 3600 * 24);
+
+                            return daysSince < 180 && daysSince > 0 ? (
+                              <div className="flex items-start gap-2 p-3 rounded-lg bg-destructive/10 border border-destructive/20">
+                                <AlertTriangle className="h-4 w-4 text-destructive mt-0.5 flex-shrink-0" />
+                                <div>
+                                  <p className="text-sm font-semibold text-destructive">
+                                    Udyam Registered but Not Yet Operational
+                                  </p>
+                                  <p className="text-xs text-muted-foreground mt-1">
+                                    MSME registered only {Math.floor(daysSince)} days ago, still in early operational phase
+                                  </p>
+                                </div>
+                              </div>
+                            ) : null;
+                          })()}
+
+                        {/* Director PAN vs MSME PAN mismatch */}
+                        {responseData.msme_info?.data?.pan &&
+                          responseData.profile_advance?.document_pan &&
+                          responseData.msme_info.data.pan !== responseData.profile_advance.document_pan && (
+                            <div className="flex items-start gap-2 p-3 rounded-lg bg-destructive/10 border border-destructive/20">
+                              <AlertTriangle className="h-4 w-4 text-destructive mt-0.5 flex-shrink-0" />
+                              <div>
+                                <p className="text-sm font-semibold text-destructive">Director PAN vs MSME PAN Mismatch</p>
+                                <p className="text-xs text-muted-foreground mt-1">
+                                  MSME PAN differs from director/promoter PAN in profile records
+                                </p>
+                              </div>
+                            </div>
+                          )}
+
+                        {/* GST Active but low filing trail */}
+                        {responseData.gstin_info?.data?.some(
+                          (gst: any) => gst.status === "Active" && (!gst.last_update_date || gst.last_update_date < "2024-01-01"),
+                        ) && (
+                          <div className="flex items-start gap-2 p-3 rounded-lg bg-destructive/10 border border-destructive/20">
+                            <AlertTriangle className="h-4 w-4 text-destructive mt-0.5 flex-shrink-0" />
+                            <div>
+                              <p className="text-sm font-semibold text-destructive">GST Active but Low Filing Trail</p>
+                              <p className="text-xs text-muted-foreground mt-1">
+                                GST registration shows active status but limited recent filing activity detected
+                              </p>
+                            </div>
+                          </div>
+                        )}
+
+                        {/* If no anomalies */}
+                        {!responseData.gstin_info?.data?.length ||
+                        (!responseData.msme_info?.data && responseData.gstin_info.data.length <= 1) ? (
+                          <div className="flex items-start gap-2 p-3 rounded-lg bg-green-50 dark:bg-green-950/20 border border-green-200">
+                            <CheckCircle2 className="h-4 w-4 text-green-600 mt-0.5 flex-shrink-0" />
+                            <div>
+                              <p className="text-sm font-semibold text-green-700 dark:text-green-400">
+                                No Critical Anomalies Detected
+                              </p>
+                              <p className="text-xs text-muted-foreground mt-1">
+                                Business compliance data appears consistent across verification sources
+                              </p>
+                            </div>
+                          </div>
+                        ) : null}
                       </div>
                     </CardContent>
                   </Card>

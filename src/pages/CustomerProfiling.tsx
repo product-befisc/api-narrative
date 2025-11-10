@@ -759,6 +759,8 @@ const CustomerProfiling = () => {
     }, 1500);
   };
 
+  const [apisExpanded, setApisExpanded] = useState(false);
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
@@ -768,7 +770,9 @@ const CustomerProfiling = () => {
           Back to ID Proof
         </Button>
 
-        <div className="max-w-6xl mx-auto space-y-6">
+        <div className="flex gap-6 max-w-7xl mx-auto">
+          {/* Main Content */}
+          <div className="flex-1 space-y-6 min-w-0">
           <div className="mb-8">
             <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6">
               <div className="flex-1">
@@ -3124,6 +3128,96 @@ const CustomerProfiling = () => {
               </div>
             </div>
           )}
+          </div>
+
+          {/* APIs Included Sidebar */}
+          <div className="w-80 flex-shrink-0 sticky top-8 self-start">
+            <Card>
+              <Collapsible open={apisExpanded} onOpenChange={setApisExpanded}>
+                <CardHeader className="pb-3">
+                  <CollapsibleTrigger className="flex items-center justify-between w-full hover:opacity-80 transition-opacity">
+                    <CardTitle className="text-lg">APIs Included</CardTitle>
+                    {apisExpanded ? <ChevronUp className="h-5 w-5" /> : <ChevronDown className="h-5 w-5" />}
+                  </CollapsibleTrigger>
+                </CardHeader>
+                <CollapsibleContent>
+                  <CardContent className="space-y-4 max-h-[calc(100vh-12rem)] overflow-y-auto">
+                    {/* Matchers APIs */}
+                    <div className="space-y-2">
+                      <h3 className="font-semibold text-sm text-primary">Matchers APIs</h3>
+                      <div className="space-y-1 pl-3 border-l-2 border-muted">
+                        <p className="text-sm text-muted-foreground">Address Match</p>
+                        <p className="text-sm text-muted-foreground">Name Match</p>
+                      </div>
+                    </div>
+
+                    {/* Profession Check */}
+                    <div className="space-y-2">
+                      <h3 className="font-semibold text-sm text-primary">Profession Check</h3>
+                      <div className="space-y-1 pl-3 border-l-2 border-muted">
+                        <p className="text-sm text-muted-foreground">UAN History - V3</p>
+                        <p className="text-sm text-muted-foreground">ESIC Number to ESIC Details V2</p>
+                      </div>
+                    </div>
+
+                    {/* Business APIs */}
+                    <div className="space-y-2">
+                      <h3 className="font-semibold text-sm text-primary">Business APIs</h3>
+                      <div className="space-y-1 pl-3 border-l-2 border-muted">
+                        <p className="text-sm text-muted-foreground">GST (Advance) V2</p>
+                        <p className="text-sm text-muted-foreground">IEC to IE Details Advance</p>
+                        <p className="text-sm text-muted-foreground">Udyam Detail V2</p>
+                        <p className="text-sm text-muted-foreground">PAN to DIN Details</p>
+                      </div>
+                    </div>
+
+                    {/* Fraud Check */}
+                    <div className="space-y-2">
+                      <h3 className="font-semibold text-sm text-primary">Fraud Check</h3>
+                      <div className="space-y-1 pl-3 border-l-2 border-muted">
+                        <p className="text-sm text-muted-foreground">Mobile Revoke V2</p>
+                        <p className="text-sm text-muted-foreground">Mobile Age</p>
+                        <p className="text-sm text-muted-foreground">Address Tracing</p>
+                      </div>
+                    </div>
+
+                    {/* Utility */}
+                    <div className="space-y-2">
+                      <h3 className="font-semibold text-sm text-primary">Utility</h3>
+                      <div className="space-y-1 pl-3 border-l-2 border-muted">
+                        <p className="text-sm text-muted-foreground">LPG Verification (Mobile)</p>
+                      </div>
+                    </div>
+
+                    {/* Digital Footprint APIs */}
+                    <div className="space-y-2">
+                      <h3 className="font-semibold text-sm text-primary">Digital Footprint APIs</h3>
+                      <div className="space-y-1 pl-3 border-l-2 border-muted">
+                        <p className="text-sm text-muted-foreground">Validate WhatsApp</p>
+                      </div>
+                    </div>
+
+                    {/* Financial Check */}
+                    <div className="space-y-2">
+                      <h3 className="font-semibold text-sm text-primary">Financial Check</h3>
+                      <div className="space-y-1 pl-3 border-l-2 border-muted">
+                        <p className="text-sm text-muted-foreground">Experian</p>
+                      </div>
+                    </div>
+
+                    {/* Identity */}
+                    <div className="space-y-2">
+                      <h3 className="font-semibold text-sm text-primary">Identity</h3>
+                      <div className="space-y-1 pl-3 border-l-2 border-muted">
+                        <p className="text-sm text-muted-foreground">Profile Advance v2</p>
+                        <p className="text-sm text-muted-foreground">Mobile to DL</p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </CollapsibleContent>
+              </Collapsible>
+            </Card>
+          </div>
         </div>
       </div>
     </div>

@@ -508,7 +508,27 @@ export const apiCatalogData: CategoryData[] = [
           datetime: "2024-01-16 11:33:35.931273"
         }
       },
-      { id: "pan-to-fathers-name", name: "PAN to Father's Name", category: "kyc" },
+      { 
+        id: "pan-to-fathers-name", 
+        name: "PAN to Father's Name", 
+        category: "kyc",
+        requestSample: {
+          pan: "ABCDE1234F"
+        },
+        responseSample: {
+          txn_id: "f6e7d8c9-567i-69j3-1k23-456789012345",
+          api_category: "KYC",
+          api_name: "PAN to Father's Name",
+          billable: true,
+          message: "Success",
+          status: 1,
+          result: {
+            pan: "ABCDE1234F",
+            father_name: "RAMESH KUMAR"
+          },
+          datetime: "2025-06-19 17:00:15.123456"
+        }
+      },
       { 
         id: "pan-to-name-dob", 
         name: "PAN to Name and DOB", 

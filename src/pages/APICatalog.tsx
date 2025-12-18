@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import { ChevronDown, ChevronRight, Search, User, Building2, Smartphone, DollarSign, Car, Briefcase, MoreHorizontal, ArrowLeft, Eye, EyeOff, CheckCircle2, Circle, FileText, ExternalLink } from "lucide-react";
+import { ChevronDown, ChevronRight, Search, User, Building2, Smartphone, DollarSign, Car, Briefcase, MoreHorizontal, ArrowLeft, Eye, EyeOff, CheckCircle2, Circle, FileText, ExternalLink, Upload, ImageIcon } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -39,6 +39,10 @@ const APICatalog = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const [stepResponses, setStepResponses] = useState<Record<number, any>>({});
   const [stepFormData, setStepFormData] = useState<Record<number, Record<string, any>>>({});
+  
+  // Dual-image states
+  const [image1Preview, setImage1Preview] = useState<string | null>(null);
+  const [image2Preview, setImage2Preview] = useState<string | null>(null);
 
   // Filter APIs based on search query
   const filteredData = useMemo(() => {
@@ -87,6 +91,8 @@ const APICatalog = () => {
     setCurrentStep(1);
     setStepResponses({});
     setStepFormData({});
+    setImage1Preview(null);
+    setImage2Preview(null);
     
     // Initialize form data with sample values
     if (api.isMultiStep && api.steps) {
@@ -614,7 +620,97 @@ const APICatalog = () => {
                       <CardTitle>Enter {selectedAPI.name} Details</CardTitle>
                     </CardHeader>
                     <CardContent className="space-y-4">
-                      {selectedAPI.requestSample && Object.keys(selectedAPI.requestSample).length > 0 ? (
+                      {/* Dual Image Input for Face Match */}
+                      {selectedAPI.inputType === "dual-image" ? (
+                        <>
+                          <div className="grid grid-cols-2 gap-6">
+                            {/* Image 1 */}
+                            <div className="space-y-3">
+                              <Label>Image 1</Label>
+                              <div 
+                                className="border-2 border-dashed border-border rounded-lg p-6 flex flex-col items-center justify-center min-h-[200px] bg-muted/30 hover:bg-muted/50 transition-colors cursor-pointer"
+                                onClick={() => document.getElementById('image1-upload')?.click()}
+                              >
+                                {image1Preview ? (
+                                  <img src={image1Preview} alt="Image 1" className="max-h-[180px] max-w-full object-contain rounded-md" />
+                                ) : (
+                                  <>
+                                    <ImageIcon className="h-12 w-12 text-muted-foreground mb-3" />
+                                    <p className="text-sm text-muted-foreground text-center">Click to upload first image</p>
+                                  </>
+                                )}
+                                <input
+                                  id="image1-upload"
+                                  type="file"
+                                  accept="image/*"
+                                  className="hidden"
+                                  onChange={(e) => {
+                                    const file = e.target.files?.[0];
+                                    if (file) {
+                                      const reader = new FileReader();
+                                      reader.onload = (ev) => setImage1Preview(ev.target?.result as string);
+                                      reader.readAsDataURL(file);
+                                    }
+                                  }}
+                                />
+                              </div>
+                            </div>
+                            
+                            {/* Image 2 */}
+                            <div className="space-y-3">
+                              <Label>Image 2</Label>
+                              <div 
+                                className="border-2 border-dashed border-border rounded-lg p-6 flex flex-col items-center justify-center min-h-[200px] bg-muted/30 hover:bg-muted/50 transition-colors cursor-pointer"
+                                onClick={() => document.getElementById('image2-upload')?.click()}
+                              >
+                                {image2Preview ? (
+                                  <img src={image2Preview} alt="Image 2" className="max-h-[180px] max-w-full object-contain rounded-md" />
+                                ) : (
+                                  <>
+                                    <ImageIcon className="h-12 w-12 text-muted-foreground mb-3" />
+                                    <p className="text-sm text-muted-foreground text-center">Click to upload second image</p>
+                                  </>
+                                )}
+                                <input
+                                  id="image2-upload"
+                                  type="file"
+                                  accept="image/*"
+                                  className="hidden"
+                                  onChange={(e) => {
+                                    const file = e.target.files?.[0];
+                                    if (file) {
+                                      const reader = new FileReader();
+                                      reader.onload = (ev) => setImage2Preview(ev.target?.result as string);
+                                      reader.readAsDataURL(file);
+                                    }
+                                  }}
+                                />
+                              </div>
+                            </div>
+                          </div>
+                          
+                          <div className="flex gap-4 items-center pt-4">
+                            <Button 
+                              onClick={handleFetch} 
+                              disabled={isFetching || !consent || !image1Preview || !image2Preview}
+                              className="flex-shrink-0"
+                            >
+                              {isFetching ? 'Verifying...' : 'Verify'}
+                            </Button>
+                          </div>
+
+                          <div className="flex items-start space-x-2 pt-2">
+                            <Checkbox 
+                              id="consent" 
+                              checked={consent} 
+                              onCheckedChange={(checked) => setConsent(checked === true)} 
+                            />
+                            <label htmlFor="consent" className="text-sm text-muted-foreground leading-relaxed cursor-pointer">
+                              I authorize BeFiSc to verify and fetch details linked to the information I've provided from authorized data sources for compliance and risk checks, in line with the DPDP Act, 2023.
+                            </label>
+                          </div>
+                        </>
+                      ) : selectedAPI.requestSample && Object.keys(selectedAPI.requestSample).length > 0 ? (
                         <>
                           <div className="space-y-4">
                             {Object.entries(selectedAPI.requestSample).map(([key, value]) => 

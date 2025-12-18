@@ -14,6 +14,7 @@ export interface APIItem {
   responseSample?: any;
   isMultiStep?: boolean;
   steps?: APIStep[];
+  inputType?: "dual-image" | "single-image" | "form";
 }
 
 export interface CategoryData {
@@ -928,7 +929,30 @@ export const apiCatalogData: CategoryData[] = [
           datetime: "2025-02-04 13:12:40.120628"
         }
       },
-      { id: "face-match", name: "Face Match", category: "kyc" },
+      { 
+        id: "face-match", 
+        name: "Face Match", 
+        category: "kyc",
+        inputType: "dual-image",
+        requestSample: {
+          image1_base64: "<base_64_of_image_1>",
+          image2_base64: "<base_64_of_image_2>",
+          consent: "Y",
+          consent_text: "We confirm obtaining valid customer consent to access/process their image data. Consent remains valid, informed, and unwithdrawn."
+        },
+        responseSample: {
+          txn_id: "a1b2c3d4-567e-89f0-1234-567890abcdef",
+          api_category: "KYC",
+          api_name: "Face Match",
+          billable: true,
+          message: "Success",
+          status: 1,
+          result: {
+            similarity: "97.0"
+          },
+          datetime: "2025-06-19 17:15:30.123456"
+        }
+      },
       { 
         id: "liveness-check", 
         name: "Liveness Check", 

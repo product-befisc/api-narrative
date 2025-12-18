@@ -629,7 +629,13 @@ const APICatalog = () => {
                               <Label>Image 1</Label>
                               <div 
                                 className="border-2 border-dashed border-border rounded-lg p-6 flex flex-col items-center justify-center min-h-[200px] bg-muted/30 hover:bg-muted/50 transition-colors cursor-pointer"
-                                onClick={() => document.getElementById('image1-upload')?.click()}
+                                onClick={() => {
+                                  // Set default images for both when clicking on first image
+                                  const defaultImage1 = "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face";
+                                  const defaultImage2 = "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face";
+                                  setImage1Preview(defaultImage1);
+                                  setImage2Preview(defaultImage2);
+                                }}
                               >
                                 {image1Preview ? (
                                   <img src={image1Preview} alt="Image 1" className="max-h-[180px] max-w-full object-contain rounded-md" />
@@ -639,20 +645,6 @@ const APICatalog = () => {
                                     <p className="text-sm text-muted-foreground text-center">Click to upload first image</p>
                                   </>
                                 )}
-                                <input
-                                  id="image1-upload"
-                                  type="file"
-                                  accept="image/*"
-                                  className="hidden"
-                                  onChange={(e) => {
-                                    const file = e.target.files?.[0];
-                                    if (file) {
-                                      const reader = new FileReader();
-                                      reader.onload = (ev) => setImage1Preview(ev.target?.result as string);
-                                      reader.readAsDataURL(file);
-                                    }
-                                  }}
-                                />
                               </div>
                             </div>
                             
@@ -661,7 +653,6 @@ const APICatalog = () => {
                               <Label>Image 2</Label>
                               <div 
                                 className="border-2 border-dashed border-border rounded-lg p-6 flex flex-col items-center justify-center min-h-[200px] bg-muted/30 hover:bg-muted/50 transition-colors cursor-pointer"
-                                onClick={() => document.getElementById('image2-upload')?.click()}
                               >
                                 {image2Preview ? (
                                   <img src={image2Preview} alt="Image 2" className="max-h-[180px] max-w-full object-contain rounded-md" />
@@ -671,20 +662,6 @@ const APICatalog = () => {
                                     <p className="text-sm text-muted-foreground text-center">Click to upload second image</p>
                                   </>
                                 )}
-                                <input
-                                  id="image2-upload"
-                                  type="file"
-                                  accept="image/*"
-                                  className="hidden"
-                                  onChange={(e) => {
-                                    const file = e.target.files?.[0];
-                                    if (file) {
-                                      const reader = new FileReader();
-                                      reader.onload = (ev) => setImage2Preview(ev.target?.result as string);
-                                      reader.readAsDataURL(file);
-                                    }
-                                  }}
-                                />
                               </div>
                             </div>
                           </div>

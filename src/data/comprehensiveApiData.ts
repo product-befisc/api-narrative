@@ -1,6 +1,7 @@
 export interface APIStep {
   stepNumber: number;
   stepName: string;
+  description?: string;
   requestSample: any;
   responseSample: any;
 }
@@ -972,6 +973,61 @@ export const apiCatalogData: CategoryData[] = [
     name: "KYB",
     apis: [
       { 
+        id: "gst-verification-mobile-otp", 
+        name: "GST Verification with Mobile OTP", 
+        category: "kyb",
+        isMultiStep: true,
+        steps: [
+          {
+            stepNumber: 1,
+            stepName: "Mobile Verification",
+            description: "Send OTP to registered mobile number",
+            requestSample: {
+              gst_no: "09ABCPD1233E1ZA",
+              consent_text: "We confirm obtaining valid customer consent to access/process their gst data. Consent remains valid, informed, and unwithdrawn."
+            },
+            responseSample: {
+              txn_id: "a1b2c3d4-e5f6-7890-abcd-123456789012",
+              api_category: "Know Your Business (KYB)",
+              api_name: "GST Verification with Mobile OTP",
+              billable: true,
+              message: "Success",
+              status: 1,
+              result: {
+                gst_no: "09ABCPD1233E1ZA",
+                reference_id: "reference_id_ljAGFaCfCcuNVKACyZps",
+                masked_mobile: "XXXXXX4207",
+                message: "OTP Sent Successfully"
+              },
+              datetime: "2025-06-19 15:30:22.456789"
+            }
+          },
+          {
+            stepNumber: 2,
+            stepName: "OTP Verification",
+            description: "Verify OTP and get GST verification result",
+            requestSample: {
+              reference_id: "reference_id_KlLfYMFKAsedkzMHhoFY",
+              otp: "3204"
+            },
+            responseSample: {
+              txn_id: "b2c3d4e5-f6a7-8901-bcde-234567890123",
+              api_category: "Know Your Business (KYB)",
+              api_name: "GST Verification with Mobile OTP",
+              billable: true,
+              message: "Success",
+              status: 1,
+              result: {
+                gst_no: "24AAFCE7342B1Z2",
+                reference_id: "reference_id_UCazgcWtMNVmlJRlTQrD",
+                message: "Verified"
+              },
+              datetime: "2025-06-19 15:31:45.789012"
+            }
+          }
+        ]
+      },
+      {
         id: "gst-basic", 
         name: "GST (Basic)", 
         category: "kyb",

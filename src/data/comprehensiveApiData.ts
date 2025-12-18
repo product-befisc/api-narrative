@@ -1339,7 +1339,640 @@ export const apiCatalogData: CategoryData[] = [
         }
       },
       { 
-        id: "mobile-to-gst-check", 
+        id: "gst-to-cin-details", 
+        name: "GST TO CIN Details", 
+        category: "kyb",
+        requestSample: {
+          gst_no: "01ABCPD1234E1AB",
+          consent_text: "We confirm obtaining valid customer consent to access/process their GST data. Consent remains valid, informed, and unwithdrawn."
+        },
+        responseSample: {
+          txn_id: "d4e5f6a7-b8c9-0123-def4-567890123456",
+          api_category: "Know Your Business (KYB)",
+          api_name: "GST TO CIN Details",
+          billable: true,
+          message: "Success",
+          status: 1,
+          result: {
+            numberOfMembers: "",
+            subCategory: "Non-government company",
+            class: "Private",
+            companyType: "Company",
+            companyName: "ABC PRIVATE LIMITED",
+            paidUpCapital: "100000",
+            authorisedCapital: "100000",
+            whetherListed: "N",
+            dateOfIncorporation: "01/01/2003",
+            lastAgmDate: "",
+            registrationNumber: "012345",
+            registeredAddress: "A-123, Vadodara, VADODARA, Gujarat, India, 390018",
+            activeCompliance: "",
+            suspendedAtStockExchange: "",
+            balanceSheetDate: "01/01/2011",
+            category: "Company limited by shares",
+            status: "Active",
+            cin: "U32100UP2022PTC123456",
+            rocOffice: "ROC Ahmedabad",
+            countryOfIncorporation: "Indian",
+            descriptionOfMainDivision: "",
+            addressOtherThanRegisteredOffice: "A-123, Vadodara, VADODARA, Gujarat, India, 390018",
+            emailID: "ramsingh@gmail.com",
+            splitAddress: {
+              district: "Vadodara",
+              state: "Gujarat",
+              city: "VADODARA",
+              pincode: "390018",
+              country: "India",
+              addressLine: "A-123"
+            },
+            natureOfBusiness: "",
+            noOfDirectors: 1,
+            statusForEfiling: "",
+            statusUnderCirp: "",
+            pan: "",
+            directorDetails: [
+              {
+                din: "06123456",
+                designation: "Director",
+                dateOfAppointment: "01/01/2010",
+                address: " Gujarat, India, 390018",
+                name: "RAM SINGH",
+                whetherDscRegistered: "",
+                dscExpiryDate: "",
+                pan: "ABCPD1234E",
+                noOfCompanies: 1,
+                fatherName: "SHAM SINGH",
+                dob: "01/01/1999",
+                splitAddress: {
+                  district: "",
+                  state: "Gujarat",
+                  city: "",
+                  pincode: "390018",
+                  country: "India",
+                  addressLine: "A-123"
+                }
+              }
+            ]
+          },
+          datetime: "2024-09-15 11:30:45.123456"
+        }
+      },
+      { 
+        id: "gst-to-cin", 
+        name: "GST TO CIN", 
+        category: "kyb",
+        requestSample: {
+          gst_no: "01ABCPD1234E1AB",
+          consent_text: "We confirm obtaining valid customer consent to access/process their GST data. Consent remains valid, informed, and unwithdrawn."
+        },
+        responseSample: {
+          txn_id: "e5f6a7b8-c9d0-1234-ef56-789012345678",
+          api_category: "Know Your Business (KYB)",
+          api_name: "GST TO CIN",
+          billable: true,
+          message: "Success",
+          status: 1,
+          result: {
+            gst_no: "01ABCPD1234E1AB",
+            cin: "U32100UP2022PTC123456",
+            status: "Active"
+          },
+          datetime: "2024-09-20 14:22:18.654321"
+        }
+      },
+      { 
+        id: "gst-to-mcc", 
+        name: "GST To MCC", 
+        category: "kyb",
+        requestSample: {
+          gst_no: "01ABCPD1234E1AB",
+          consent_text: "We confirm obtaining valid customer consent to access/process their GST data. Consent remains valid, informed, and unwithdrawn."
+        },
+        responseSample: {
+          txn_id: "f6a7b8c9-d0e1-2345-f678-901234567890",
+          api_category: "Know Your Business (KYB)",
+          api_name: "GST To MCC",
+          billable: true,
+          message: "Success",
+          status: 1,
+          result: {
+            business_details: [
+              {
+                gdes: "OTHER LEAD-ACID ACCUMULATORS",
+                hsncd: "85072000",
+                mcc_code: "3674"
+              },
+              {
+                gdes: "LEAD-ACID, OF A KIND USED FOR STARTING PISTON ENGINES",
+                hsncd: "85071000",
+                mcc_code: "3621"
+              },
+              {
+                gdes: "ELECTRIC INVERTER",
+                hsncd: "85044010",
+                mcc_code: "3641"
+              },
+              {
+                saccd: "00440262",
+                sdes: "TRANSPORT OF GOODS BY ROAD",
+                mcc_code: ""
+              },
+              {
+                saccd: "00440014",
+                sdes: "COURIER AGENCY",
+                mcc_code: ""
+              }
+            ]
+          },
+          datetime: "2024-10-05 16:45:30.789012"
+        }
+      },
+      { 
+        id: "hsn-to-mcc", 
+        name: "HSN To MCC", 
+        category: "kyb",
+        requestSample: {
+          hsn_code: "12345678",
+          consent_text: "We confirm obtaining valid customer consent to access/process their GST data. Consent remains valid, informed, and unwithdrawn."
+        },
+        responseSample: {
+          txn_id: "a7b8c9d0-e1f2-3456-7890-123456789abc",
+          api_category: "Know Your Business (KYB)",
+          api_name: "HSN To MCC",
+          billable: true,
+          message: "Success",
+          status: 1,
+          result: {
+            hsn_description: "STRUCTURES (EXCLUDING PREFABRICATED BUILDINGS OF HEADING 9406) AND PARTS OF STRUCTURES (FOR EXAMPLE, BRIDGES AND BRIDGE-SECTIONS, LOCK-GATES, TOWERS, LATTICE MASTS, ROOFS, ROOFING FRAME-WORKS, DOORS AND WINDOWS AND THEIR FRAMES AND THRESHOLDS FOR DOORS, SHUTTERS, BALUSTRADES, PILLARS AND COLUMNS), OF IRON OR STEEL; PLATES, RODS, ANGLES, SHAPES, SECTIONS, TUBES AND THE LIKE, PREPARED FOR USE IN STRUCTURES, OF IRON OR STEEL - BRIDGES AND BRIDGE-SECTIONS",
+            mcc_code: "1234"
+          },
+          datetime: "2024-10-10 09:15:22.456789"
+        }
+      },
+      { 
+        id: "pan-to-din", 
+        name: "PAN to DIN", 
+        category: "kyb",
+        requestSample: {
+          pan: "ABCPD1234D",
+          consent_text: "I give my consent to PAN to DIN API to fetch my info"
+        },
+        responseSample: {
+          txn_id: "b8c9d0e1-f2a3-4567-8901-23456789abcd",
+          api_category: "Know Your Business (KYB)",
+          api_name: "PAN to DIN",
+          billable: true,
+          message: "Success",
+          status: 1,
+          result: {
+            name: "RAM SINGH",
+            din: "098123456"
+          },
+          datetime: "2024-10-15 11:30:45.123456"
+        }
+      },
+      { 
+        id: "pan-to-din-details", 
+        name: "PAN to DIN Details", 
+        category: "kyb",
+        requestSample: {
+          pan: "ABCPD1234D",
+          consent_text: "I give my consent to PAN to DIN API to fetch my info"
+        },
+        responseSample: {
+          txn_id: "c9d0e1f2-a3b4-5678-9012-3456789abcde",
+          api_category: "Know Your Business (KYB)",
+          api_name: "PAN to DIN Details",
+          billable: true,
+          message: "Success",
+          status: 1,
+          result: {
+            pan: "ABCPD1234D",
+            din: "87654321",
+            name: "RAM SINGH",
+            mobile: "987654321",
+            email: "abc@gmail.com"
+          },
+          datetime: "2024-10-20 14:22:18.654321"
+        }
+      },
+      { 
+        id: "pan-to-cin", 
+        name: "PAN to CIN", 
+        category: "kyb",
+        requestSample: {
+          pan: "ABCPD1234D",
+          consent_text: "We confirm obtaining valid customer consent to access/process their PAN data. Consent remains valid, informed, and unwithdrawn."
+        },
+        responseSample: {
+          txn_id: "d0e1f2a3-b4c5-6789-0123-456789abcdef",
+          api_category: "Know Your Business (KYB)",
+          api_name: "PAN to CIN",
+          billable: true,
+          message: "Success",
+          status: 1,
+          result: {
+            cin: [
+              "U65432TG2010PTC098765",
+              "U65432TG2010PTC987654"
+            ],
+            cin_details: [
+              {
+                cin: "U65432TG2010PTC098765",
+                entity_name: "ABC PRIVATE LIMITED"
+              },
+              {
+                cin: "U65432TG2010PTC987654",
+                entity_name: "XYZ PRIVATE LIMITED"
+              }
+            ]
+          },
+          datetime: "2024-10-25 16:45:30.789012"
+        }
+      },
+      { 
+        id: "din-mobile-lookup", 
+        name: "DIN Mobile Lookup", 
+        category: "kyb",
+        requestSample: {
+          din: "87654321",
+          consent: "Y",
+          consent_text: "We confirm obtaining valid customer consent to access/process their DIN data. Consent remains valid, informed, and unwithdrawn."
+        },
+        responseSample: {
+          txn_id: "e1f2a3b4-c5d6-7890-1234-56789abcdef0",
+          api_category: "Know Your Business (KYB)",
+          api_name: "DIN Mobile Lookup",
+          billable: true,
+          message: "Success",
+          status: 1,
+          result: {
+            din: "87654321",
+            mobile: "9876543210"
+          },
+          datetime: "2024-11-01 09:15:22.456789"
+        }
+      },
+      { 
+        id: "din-contact-lookup", 
+        name: "DIN Contact Lookup", 
+        category: "kyb",
+        requestSample: {
+          din: "87654321",
+          consent: "Y",
+          consent_text: "We confirm obtaining valid customer consent to access/process their DIN data. Consent remains valid, informed, and unwithdrawn."
+        },
+        responseSample: {
+          txn_id: "f2a3b4c5-d6e7-8901-2345-6789abcdef01",
+          api_category: "Know Your Business (KYB)",
+          api_name: "DIN Contact Lookup",
+          billable: true,
+          message: "Success",
+          status: 1,
+          result: {
+            din: "87654321",
+            mobile: "9876543210",
+            email: "abc@gmail.com"
+          },
+          datetime: "2024-11-05 11:30:45.123456"
+        }
+      },
+      { 
+        id: "din-to-pan", 
+        name: "DIN to PAN", 
+        category: "kyb",
+        requestSample: {
+          din: "87654321",
+          consent: "Y",
+          consent_text: "We confirm obtaining valid customer consent to access/process their DIN data. Consent remains valid, informed, and unwithdrawn."
+        },
+        responseSample: {
+          txn_id: "a3b4c5d6-e7f8-9012-3456-789abcdef012",
+          api_category: "Know Your Business (KYB)",
+          api_name: "DIN to PAN",
+          billable: true,
+          message: "Success",
+          status: 1,
+          result: {
+            name: "RAM SINGH",
+            pan: "ABCPD1234D"
+          },
+          datetime: "2024-11-10 14:22:18.654321"
+        }
+      },
+      { 
+        id: "din-details", 
+        name: "DIN Details", 
+        category: "kyb",
+        requestSample: {
+          din: "98765432",
+          consent: "Y",
+          consent_text: "We confirm obtaining valid customer consent to access/process their DIN data. Consent remains valid, informed, and unwithdrawn."
+        },
+        responseSample: {
+          txn_id: "b4c5d6e7-f8a9-0123-4567-89abcdef0123",
+          api_category: "Know Your Business (KYB)",
+          api_name: "DIN Details",
+          billable: true,
+          message: "Success",
+          status: 1,
+          result: {
+            din: "98765432",
+            full_name: "RAM SINGH",
+            pan: "ABCPD1234A",
+            email: "RAM@Email.com",
+            mobile: "+919876543210",
+            nationality: "Indian",
+            gender: "Male",
+            address: "",
+            companies: [
+              {
+                cin: "U12344DL2021PTC123456",
+                company_name: "ABC PRIVATE LIMITED",
+                company_status: "Strike Off",
+                category: "Promoter",
+                date_of_current_designation: "01/01/2021",
+                original_date_of_appointment: "01/01/2021",
+                date_of_cessation: ""
+              }
+            ]
+          },
+          datetime: "2024-11-15 16:45:30.789012"
+        }
+      },
+      { 
+        id: "cin-to-pan", 
+        name: "CIN to PAN", 
+        category: "kyb",
+        requestSample: {
+          cin: "U32100UP2022PTC123456",
+          consent: "Y",
+          consent_text: "We confirm obtaining valid customer consent to access/process their CIN data. Consent remains valid, informed, and unwithdrawn."
+        },
+        responseSample: {
+          txn_id: "c5d6e7f8-a9b0-1234-5678-9abcdef01234",
+          api_category: "Know Your Business (KYB)",
+          api_name: "CIN to PAN",
+          billable: true,
+          message: "Success",
+          status: 1,
+          result: {
+            pan: "AAGCF0886N",
+            entity_name: "ABC PRIVATE LIMITED"
+          },
+          datetime: "2024-11-20 09:15:22.456789"
+        }
+      },
+      { 
+        id: "cin-to-gst", 
+        name: "CIN to GST", 
+        category: "kyb",
+        requestSample: {
+          cin_no: "U32100UP2022PTC123456",
+          consent: "Y",
+          consent_text: "We confirm obtaining valid customer consent to access/process their CIN data. Consent remains valid, informed, and unwithdrawn."
+        },
+        responseSample: {
+          txn_id: "d6e7f8a9-b0c1-2345-6789-abcdef012345",
+          api_category: "Know Your Business (KYB)",
+          api_name: "CIN to GST",
+          billable: true,
+          message: "Success",
+          status: 1,
+          result: {
+            cin: "U45400DL2013PTC260687",
+            gst_data: [
+              {
+                gst_no: "01ABCPD1234E1AB",
+                legal_name: "ABC PRIVATE LIMITED",
+                trade_name: "ABC PRIVATE LIMITED"
+              }
+            ]
+          },
+          datetime: "2024-11-25 11:30:45.123456"
+        }
+      },
+      { 
+        id: "cin-to-gst-details", 
+        name: "CIN to GST Details", 
+        category: "kyb",
+        requestSample: {
+          cin_no: "U32100UP2022PTC123456",
+          consent: "Y",
+          consent_text: "We confirm obtaining valid customer consent to access/process their CIN data. Consent remains valid, informed, and unwithdrawn."
+        },
+        responseSample: {
+          txn_id: "e7f8a9b0-c1d2-3456-789a-bcdef0123456",
+          api_category: "Know Your Business (KYB)",
+          api_name: "CIN to GST Details",
+          billable: true,
+          message: "Success",
+          status: 1,
+          result: {
+            gst_data: [
+              {
+                gst_no: "01ABCPD1234E1AB",
+                aggregate_turn_over: "Slab: Rs. 0 to 40 lakhs",
+                authorized_signatory: ["RAM SINGH"],
+                business_constitution: "Private Limited Company",
+                business_details: {
+                  bzgddtls: [
+                    {
+                      gdes: "OTHER FRUIT, FRESH",
+                      hsncd: "0810"
+                    },
+                    {
+                      gdes: "POLISHES AND CREAMS, FOR FOOTWEAR, FURNITURE, FLOORS, COACHWORK, GLASS OR METAL, SCOURING PASTES AND POWDERS AND SIMILAR PREPARATIONS",
+                      hsncd: "34054000"
+                    }
+                  ]
+                },
+                business_nature: ["Retail Business"],
+                can_flag: "NA",
+                central_jurisdiction: "State - CBIC,Zone - AHMEDABAD,Commissionerate - GANDHINAGAR,Division - DIVISION KALOL,Range - RANGE I",
+                compliance_rating: "NA",
+                current_registration_status: "Active",
+                filing_status: [
+                  {
+                    fy: "2022-2023",
+                    taxp: "January",
+                    mof: "ONLINE",
+                    dof: "11/02/2023",
+                    rtntype: "GSTR1",
+                    arn: "NA",
+                    status: "Filed"
+                  },
+                  {
+                    fy: "2022-2023",
+                    taxp: "January",
+                    mof: "ONLINE",
+                    dof: "16/02/2023",
+                    rtntype: "GSTR3B",
+                    arn: "NA",
+                    status: "Filed"
+                  }
+                ],
+                gstin: "01ABCPD1234E1AB",
+                is_field_visit_conducted: "No",
+                legal_name: "ABC PRIVATE LIMITED",
+                mandate_e_invoice: "No",
+                other_business_address: {},
+                primary_business_address: {
+                  business_nature: "Retail Business",
+                  detailed_address: "NA",
+                  last_updated_date: "NA",
+                  registered_address: "A-112 County, Greater Noida, Gandhinagar, Gujarat, 382721"
+                },
+                register_cancellation_date: "",
+                register_date: "01/01/1999",
+                state_jurisdiction: "State - Gujarat,Division - Division - 3,Range - Range - 7,Unit - Ghatak 25 (Kalol) (Jurisdictional Office)",
+                tax_payer_type: "Regular",
+                trade_name: "ABC PRIVATE LIMITED",
+                gross_total_income: "NA",
+                gross_total_income_financial_year: "2019-2020"
+              }
+            ]
+          },
+          datetime: "2024-12-01 14:22:18.654321"
+        }
+      },
+      { 
+        id: "cin-number-lookup", 
+        name: "CIN Number Lookup", 
+        category: "kyb",
+        requestSample: {
+          cin: "U32100UP2022PTC123456",
+          consent_text: "I give my consent to cin-number-lookup api to verify cin details"
+        },
+        responseSample: {
+          txn_id: "f8a9b0c1-d2e3-4567-89ab-cdef01234567",
+          api_category: "Know Your Business (KYB)",
+          api_name: "CIN Number Lookup",
+          billable: true,
+          message: "Success",
+          status: 1,
+          result: {
+            paidUpCapital: "999999",
+            authorisedCapital: "999999",
+            whetherListed: "N",
+            dateOfIncorporation: "22/09/2021",
+            lastAgmDate: "",
+            registrationNumber: "123456",
+            registeredAddress: "ABC - 1, NOIDA, Uttar Pradesh, India, 201306",
+            activeCompliance: "",
+            suspendedAtStockExchange: "",
+            balanceSheetDate: "",
+            category: "Company limited by shares",
+            status: "Active",
+            cin: "U32100UP2022PTC123456",
+            rocOffice: "ROC Kanpur",
+            countryOfIncorporation: "Indian",
+            descriptionOfMainDivision: "REAL ESTATE,RENTING AND BUSINESS ACTIVITIES",
+            addressOtherThanRegisteredOffice: "",
+            emailID: "abcd@gmail.com",
+            splitAddress: {
+              district: "Gautam Buddha Nagar",
+              state: "Uttar Pradesh",
+              city: "NOIDA",
+              pincode: "201306",
+              country: "India",
+              addressLine: "ABC - 1"
+            },
+            natureOfBusiness: "",
+            noOfDirectors: 1,
+            statusForEfiling: "",
+            statusUnderCirp: "",
+            pan: "",
+            directorDetails: [
+              {
+                din: "09917123",
+                designation: "Individual Promoter",
+                dateOfAppointment: "22/09/2021",
+                address: "ABC - 1, NOIDA, Uttar Pradesh, India, 201306",
+                name: "RAM SHAM",
+                whetherDscRegistered: "",
+                dscExpiryDate: "",
+                pan: "ABCPG02420D",
+                noOfCompanies: 1,
+                fatherName: "RAM SHAM",
+                dob: "01/01/1999",
+                splitAddress: {
+                  district: "Noida",
+                  state: "Uttar Pradesh",
+                  city: "",
+                  pincode: "202020",
+                  country: "India",
+                  addressLine: "ABC - 1"
+                }
+              }
+            ]
+          },
+          datetime: "2024-12-05 16:45:30.789012"
+        }
+      },
+      { 
+        id: "entity-name-to-cin-lookup", 
+        name: "Entity Name to CIN Lookup", 
+        category: "kyb",
+        requestSample: {
+          company: "XYZ"
+        },
+        responseSample: {
+          txn_id: "a9b0c1d2-e3f4-5678-9abc-def012345678",
+          api_category: "Know Your Business (KYB)",
+          api_name: "Entity Name to CIN Lookup",
+          billable: true,
+          message: "Success",
+          status: 1,
+          result: [
+            {
+              cin: "U67120DL1996PTC078853",
+              company: "HCL CAPITAL PRIVATE LIMITED",
+              state: "Delhi",
+              incorporation_date: "14/05/1996",
+              company_status: "Allocated"
+            },
+            {
+              cin: "U64200DL1995PLC066326",
+              company: "HCL CELLSTAR LIMITED",
+              state: "",
+              incorporation_date: "14/03/1995",
+              company_status: "Reserved"
+            },
+            {
+              cin: "U51909WB2009PTC136779",
+              company: "HCL COAL INTERNATIONAL PRIVATE LIMITED",
+              state: "Karnataka",
+              incorporation_date: "14/07/2009",
+              company_status: "Allocated"
+            },
+            {
+              cin: "U32109DL1993PLC053246",
+              company: "HCL COMMUNICATION LIMITED",
+              state: "",
+              incorporation_date: "26/04/1993",
+              company_status: "Reserved"
+            },
+            {
+              cin: "U74899DL1993PLC056665",
+              company: "HCL COMNET SYSTEMS & SERVICES LIMITED",
+              state: "Delhi",
+              incorporation_date: "29/12/1993",
+              company_status: "Allocated"
+            },
+            {
+              cin: "U74120DL2008PTC183849",
+              company: "HCL CORPORATION PRIVATE LIMITED",
+              state: "Delhi",
+              incorporation_date: "30/09/2008",
+              company_status: "Allocated"
+            }
+          ],
+          datetime: "2024-12-10 09:15:22.456789"
+        }
+      },
+      { 
+        id: "mobile-to-gst-check",
         name: "Mobile to GST Check", 
         category: "kyb",
         requestSample: {

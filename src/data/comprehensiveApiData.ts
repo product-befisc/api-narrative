@@ -3305,6 +3305,50 @@ export const apiCatalogData: CategoryData[] = [
           datetime: "2024-05-13 13:39:31.289326"
         }
       },
+      { 
+        id: "geo-location-v2", 
+        name: "Geo Location V2", 
+        category: "mobile-360",
+        requestSample: {
+          ip_address: "123.123.123.123",
+          consent_text: "We confirm obtaining valid customer consent to access/process their ip data. Consent remains valid, informed, and unwithdrawn."
+        },
+        responseSample: {
+          txn_id: "f1a2b3c4-d5e6-7890-abcd-ef1234567890",
+          api_category: "Digital Footprint Lookup",
+          api_name: "Geo Location V2",
+          billable: true,
+          message: "Success",
+          status: 1,
+          result: {
+            ip: "123.123.123.123",
+            address: "Sector 26, Delhi, Delhi, India"
+          },
+          datetime: "2025-06-19 14:30:22.456789"
+        }
+      },
+      { 
+        id: "geo-coding", 
+        name: "Geo Coding", 
+        category: "mobile-360",
+        requestSample: {
+          lat: "28.6376135",
+          lon: "77.2839919",
+          consent_text: "We confirm obtaining valid customer consent to access/process their lat/long data. Consent remains valid, informed, and unwithdrawn."
+        },
+        responseSample: {
+          txn_id: "a1b2c3d4-e5f6-7890-abcd-123456789012",
+          api_category: "Digital Footprint Lookup",
+          api_name: "Geo Coding",
+          billable: true,
+          message: "Success",
+          status: 1,
+          result: {
+            address: "Patparganj Industrial Area, Laxmi Nagar, Delhi, 110092, India"
+          },
+          datetime: "2025-06-19 14:35:45.789012"
+        }
+      },
     ],
   },
   {

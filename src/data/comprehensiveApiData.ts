@@ -1,9 +1,18 @@
+export interface APIStep {
+  stepNumber: number;
+  stepName: string;
+  requestSample: any;
+  responseSample: any;
+}
+
 export interface APIItem {
   id: string;
   name: string;
   category: string;
   requestSample?: any;
   responseSample?: any;
+  isMultiStep?: boolean;
+  steps?: APIStep[];
 }
 
 export interface CategoryData {
@@ -2737,6 +2746,58 @@ export const apiCatalogData: CategoryData[] = [
           },
           datetime: "2025-01-18 05:25:54.628497"
         }
+      },
+      { 
+        id: "udyam-certificate-advance", 
+        name: "Udyam Certificate Advance", 
+        category: "kyb",
+        isMultiStep: true,
+        steps: [
+          {
+            stepNumber: 1,
+            stepName: "Mobile Verification",
+            requestSample: {
+              mobile_number: "9876543210",
+              udyam_number: "UDYAM-UP-28-0161234",
+              consent: "Y",
+              consent_text: "We confirm obtaining valid customer consent to access/process their udyam data. Consent remains valid, informed, and unwithdrawn."
+            },
+            responseSample: {
+              txn_id: "b1c2d3e4-f5a6-7890-abcd-ef1234567890",
+              api_category: "Know Your Business (KYB)",
+              api_name: "Udyam Certificate Advance - Step 1",
+              billable: false,
+              message: "OTP sent to your registered Mobile No",
+              status: 1,
+              result: {
+                message: "OTP sent to your registered Mobile No",
+                reference_id: "referenceId_696d6862676b7835706c6b746c6575327"
+              },
+              datetime: "2025-06-19 12:56:58.123456"
+            }
+          },
+          {
+            stepNumber: 2,
+            stepName: "OTP Verification",
+            requestSample: {
+              otp: "945748",
+              reference_id: "referenceId_6174626d6671776c6e6263",
+              consent_text: "We confirm obtaining valid customer consent to access/process their udyam data. Consent remains valid, informed, and unwithdrawn."
+            },
+            responseSample: {
+              txn_id: "c2d3e4f5-a6b7-8901-cdef-234567890abc",
+              api_category: "Know Your Business (KYB)",
+              api_name: "Udyam Certificate Advance - Step 2",
+              billable: true,
+              message: "Success",
+              status: 1,
+              result: {
+                pdf_url: "https://udyam-certificate-advance.s3.amazonaws.com/udyam_annexure_pdfs/19284448-afc1-4375-afc3-bb7962588e4d.pdf?X-Amz-Algorithm=AWS4-H6&X-Amz-Credential=AKIATIVAEBPCL4NH27WN%2F20250619%2Fap-south-1%2Fs3%2Faws4_request&X-Amz-Date=20250619T125658Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=7a27f440f02616d8aec43093297cd74bae11670fb70ed92e430c6eb43f1bc123"
+              },
+              datetime: "2025-06-19 12:57:15.789012"
+            }
+          }
+        ]
       },
     ],
   },

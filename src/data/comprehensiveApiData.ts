@@ -3476,8 +3476,54 @@ export const apiCatalogData: CategoryData[] = [
         }
       },
       { 
+        id: "land-verification-gujarat", 
+        name: "Land Verification (Gujarat)", 
+        category: "utility",
+        requestSample: {
+          district_name: "ahmadabad",
+          taluka_name: "ahmadabad",
+          village_name: "ahmadabad",
+          block: "15",
+          owner_name: "RAM SINGH",
+          consent: "Y",
+          consent_text: "We confirm obtaining valid customer consent to access/process their land verification data. Consent remains valid, informed, and unwithdrawn."
+        },
+        responseSample: {
+          txn_id: "e5d6f7g8-456h-58i2-0j12-345678901234",
+          api_category: "Utility Verification",
+          api_name: "Land Verification (Gujarat)",
+          billable: true,
+          message: "Success",
+          status: 1,
+          result: {
+            location: {
+              state: "ahmadabad",
+              district_name: "ahmadabad",
+              taluka_name: "ahmadabad",
+              village_name: "ahmadabad",
+              block_number: "15"
+            },
+            search_parameters: {
+              searched_owner_name: "ram singh"
+            },
+            ownership_records: [
+              {
+                owner_name: "Ram Singh Private Limited",
+                owner_name_gujarati: "",
+                name_match_score: 21
+              }
+            ],
+            land_summary: {
+              total_land_area: "0-20-24",
+              annual_assessment: "20.25"
+            }
+          },
+          datetime: "2025-06-19 16:45:30.123456"
+        }
+      },
+      { 
         id: "lpg-verification-mobile", 
-        name: "LPG Verification (Mobile)", 
+        name: "LPG Verification (Mobile)",
         category: "utility",
         requestSample: {
           mobile: "987687XXXX",

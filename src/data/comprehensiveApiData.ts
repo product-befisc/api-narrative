@@ -124,7 +124,70 @@ export const apiCatalogData: CategoryData[] = [
         }
       },
       { 
-        id: "pan-supreme-v2", 
+        id: "pan-advance-v4", 
+        name: "PAN (Advance) V4", 
+        category: "kyc",
+        requestSample: {
+          pan: "ABCPD1234F",
+          consent_text: "We confirm obtaining valid customer consent to access/process their pan data. Consent remains valid, informed, and unwithdrawn."
+        },
+        responseSample: {
+          api_category: "Know Your Customer (KYC)",
+          api_name: "PAN Verification (Advance) - V4",
+          billable: true,
+          txn_id: "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+          message: "Success",
+          status: 1,
+          result: {
+            name: "RAM SINGH",
+            pan: "ABCPD1234F",
+            typeOfHolder: "Individual or Person",
+            first_name: "RAM",
+            middle_name: "",
+            last_name: "SINGH",
+            title: "Shri",
+            panStatus: "VALID",
+            panStatusCode: "E",
+            aadhaarSeedingStatus: "Successful",
+            aadhaarSeedingStatusCode: "Y",
+            lastUpdatedOn: "",
+            isIndividual: true,
+            isValid: true
+          },
+          datetime: "2024-06-15 10:30:45.123456"
+        }
+      },
+      { 
+        id: "pan-supreme-v1", 
+        name: "PAN (Supreme) - V1", 
+        category: "kyc",
+        requestSample: {
+          pan: "ABCDE1234F",
+          consent_text: "We confirm obtaining valid customer consent to access/process their PAN. Consent remains valid, informed, and unwithdrawn."
+        },
+        responseSample: {
+          api_category: "Know Your Customer (KYC)",
+          api_name: "PAN Verification Supreme - V1",
+          billable: true,
+          txn_id: "f1e2d3c4-b5a6-7890-fedc-ba0987654321",
+          message: "Success",
+          status: 1,
+          result: {
+            pan: "ABCDE1234F",
+            first_name: "RAM",
+            middle_name: "",
+            last_name: "SINGH",
+            full_name: "RAM SINGH",
+            gender: "M",
+            dob: "1999-01-01",
+            aadhaar: "XXXXXXXX1234",
+            category: "Person"
+          },
+          datetime: "2024-07-20 14:22:18.654321"
+        }
+      },
+      { 
+        id: "pan-supreme-v2",
         name: "PAN (Supreme) - V2", 
         category: "kyc",
         requestSample: {
@@ -165,7 +228,43 @@ export const apiCatalogData: CategoryData[] = [
         }
       },
       { 
-        id: "pan-premium", 
+        id: "pan-supreme-v3", 
+        name: "PAN (Supreme) - V3", 
+        category: "kyc",
+        requestSample: {
+          pan: "ABCPD1234K",
+          mobile: "9876543210",
+          consent_text: "We confirm obtaining valid customer consent to access/process their mobile/pan data. Consent remains valid, informed, and unwithdrawn."
+        },
+        responseSample: {
+          api_category: "Know Your Customer (KYC)",
+          api_name: "PAN Verification Supreme - V3",
+          billable: true,
+          txn_id: "d4e5f6a7-b8c9-0123-4567-89abcdef0123",
+          message: "Success",
+          status: 1,
+          result: {
+            full_name: "RAM SINGH",
+            first_name: "RAM",
+            middle_name: "",
+            last_name: "SINGH",
+            masked_aadhaar: "XXXXXXXX1234",
+            address: {
+              line_1: "123-A",
+              line_2: "ABC LANE",
+              street_name: "ABC STREET",
+              zip: "1010101",
+              city: "ABC City",
+              state: "Delhi",
+              country: "INDIA",
+              full: "ABC Delhi INDIA 110091"
+            }
+          },
+          datetime: "2024-08-10 16:45:30.789012"
+        }
+      },
+      { 
+        id: "pan-premium",
         name: "PAN (Premium)", 
         category: "kyc",
         requestSample: {

@@ -1277,42 +1277,7 @@ export const apiCatalogData: CategoryData[] = [
         }
       },
       { 
-        id: "turnover", 
-        name: "Turnover", 
-        category: "kyb",
-        requestSample: {
-          gst_no: "37ABCPD1234E1ZI",
-          year: "2024-25",
-          consent: "Y",
-          consent_text: "We confirm obtaining valid customer consent to access/process their GST data. Consent remains valid, informed, and unwithdrawn."
-        },
-        responseSample: {
-          api_category: "Know Your Business (KYB)",
-          api_name: "Turnover",
-          billable: true,
-          txn_id: "172452fe-8587-4665-8a8e-95b1f7da5b62",
-          message: "Success",
-          status: 1,
-          result: {
-            estimated_turnover: 1000,
-            turnover: 1000,
-            year: "2025-26",
-            till_date: "10/10/2025",
-            total_estimated_turnover: 1000,
-            total_turnover: 1000,
-            gst_status: "Active",
-            legal_name: "RAM SINGH",
-            trade_name: "ABC TECH",
-            register_date: "01/01/2020",
-            tax_payer_type: "Regular",
-            authorized_signatory: ["RAM SINGH"],
-            business_nature: ["Supplier of Services"]
-          },
-          datetime: "2025-08-06 06:18:55.353720"
-        }
-      },
-      { 
-        id: "gst-to-business-contact-v1", 
+        id: "gst-to-business-contact-v1",
         name: "GST to Business Contact V1", 
         category: "kyb",
         requestSample: {
@@ -4037,85 +4002,6 @@ export const apiCatalogData: CategoryData[] = [
         }
       },
       { id: "tampering-check", name: "Tampering Check", category: "fraud-check" },
-      { 
-        id: "address-tracing", 
-        name: "Address Tracing", 
-        category: "fraud-check",
-        requestSample: {
-          mobile: "98876543210",
-          consent: "Y",
-          consent_text: "We confirm obtaining valid customer consent to access/process their Mobile Number. Consent remains valid, informed, and unwithdrawn."
-        },
-        responseSample: {
-          txn_id: "9633fa4a-0080-492d-a166-98f616b19980",
-          api_category: "Fraud Check",
-          api_name: "Address Tracing",
-          billable: true,
-          message: "Success",
-          status: 1,
-          result: {
-            mobile: "98876543210",
-            addresses: [
-              {
-                address1: "1-ABC",
-                address2: "1st Floot",
-                email: "ram@email.com",
-                fname: "RAM",
-                lname: "SINGH",
-                mobile: "98876543210",
-                city: "Delhi",
-                state: "Delhi",
-                pincode: "101010",
-                country: "India",
-                country_code: "IN",
-                state_code: "DL",
-                isd_code: "+91",
-                is_primary: 1,
-                last_delivery_at: null,
-                type: "home",
-                tags: "home",
-                created_at: "2025-01-01T12:38:17.487Z",
-                updated_at: "2025-01-01T12:38:17.487Z"
-              }
-            ]
-          },
-          datetime: "2025-07-18 16:01:17.486133"
-        }
-      },
-      { 
-        id: "buying-capacity", 
-        name: "Buying Capacity", 
-        category: "fraud-check",
-        requestSample: {
-          mobile: "9876543210",
-          consent: "Y",
-          consent_text: "We confirm obtaining valid customer consent to access/process their mobile number. Consent remains valid, informed, and unwithdrawn."
-        },
-        responseSample: {
-          txn_id: "c20711ba-5108-47d8-bfc4-a283125bdab8",
-          api_category: "Fraud Check",
-          api_name: "Buying Capacity",
-          billable: true,
-          message: "Success",
-          status: 1,
-          result: {
-            total_orders: "2",
-            average_order_value: "999",
-            total_order_value: "1998",
-            cod_percentage: "100",
-            prepaid_percentage: "0",
-            delivery_success_rate: "0",
-            order_categories_12_mon: {
-              clothing_and_accessories: {
-                orders: 2
-              }
-            },
-            total_order_value_12_mon: "1998",
-            total_orders_12_mon: "2"
-          },
-          datetime: "2025-08-18 06:59:31.459096"
-        }
-      },
       { id: "bank-statement-analysis-v2", name: "Bank Statement Analysis V2", category: "fraud-check" },
     ],
   },
@@ -4886,29 +4772,6 @@ export const apiCatalogData: CategoryData[] = [
     apis: [
       { id: "uan-passbook", name: "UAN Passbook", category: "profession-check" },
       { 
-        id: "uan-validation", 
-        name: "UAN Validation", 
-        category: "profession-check",
-        requestSample: {
-          uan: "123456789012",
-          consent: "Y",
-          consent_text: "We confirm obtaining valid customer consent to access/process their UAN data. Consent remains valid, informed, and unwithdrawn."
-        },
-        responseSample: {
-          api_category: "Employment",
-          api_name: "UAN Validation",
-          billable: true,
-          txn_id: "c31099b7-c7d4-436c-9d84-5f06c58a71aa",
-          message: "Success",
-          status: 1,
-          result: {
-            uan: "123456789012",
-            is_valid: true
-          },
-          datetime: "2024-12-11 14:57:04.278763"
-        }
-      },
-      { 
         id: "mobile-to-uan-lookup", 
         name: "Mobile to UAN Lookup", 
         category: "profession-check",
@@ -4928,84 +4791,7 @@ export const apiCatalogData: CategoryData[] = [
           datetime: "2023-05-18 03:38:14.169701"
         }
       },
-      { 
-        id: "pan-to-uan-lookup", 
-        name: "PAN to UAN Lookup", 
-        category: "profession-check",
-        requestSample: {
-          pan: "ABCDEF1234G"
-        },
-        responseSample: {
-          api_category: "UAN",
-          api_name: "PAN to UAN",
-          billable: true,
-          txn_id: "aad8d1d4-de48-4b6e-8d96-6d68bd82e298",
-          message: "Success",
-          status: "1",
-          result: {
-            pan: "ABCDEF1234G",
-            uan: "100415012345"
-          },
-          datetime: "2024-02-28 10:16:29.575878"
-        }
-      },
-      { 
-        id: "aadhaar-to-uan-lookup", 
-        name: "Aadhaar to UAN Lookup", 
-        category: "profession-check",
-        requestSample: {
-          aadhaar: "346987654321"
-        },
-        responseSample: {
-          api_category: "UAN",
-          api_name: "Aadhaar to UAN",
-          billable: true,
-          txn_id: "c0c699fc-949a-4882-8171-ba1943910985",
-          message: "Success",
-          status: 1,
-          result: {
-            aadhaar: "346987654321",
-            uan: "102012345678"
-          },
-          datetime: "2024-04-26 09:25:19.971378"
-        }
-      },
-      { 
-        id: "uan-history", 
-        name: "UAN History", 
-        category: "profession-check",
-        requestSample: {
-          uan: "10000431XXXX"
-        },
-        responseSample: {
-          txn_id: "16ed1938-a85c-43a8-aa26-db68010b4e7e",
-          api_category: "Employment history",
-          api_name: "UAN",
-          billable: true,
-          message: "Record found successfully",
-          status: 1,
-          result: {
-            name: "RAMESH KUMAR",
-            dob: "01/01/1900",
-            employment_history: [
-              {
-                company_name: "THOMSON DIGITAL",
-                company_address: "129, NSEZ, NOIDA, GAUTAM BUDDHA NAGAR, NOIDA, UTTAR PRADESH, 201305"
-              },
-              {
-                company_name: "CREDENC WEB TECHNOLOGIES PRIVATE LIMITED",
-                company_address: "2ND FLOOR, DLF CENTRE, SANSAD MARG, CENTRAL, DELHI, DELHI, 110001"
-              },
-              {
-                company_name: "GLOBAL CONTENT TRANSFORMATION (PVT) LTD.",
-                company_address: "2310 DOON EXPRESS BUSINESS PARK, BUILDING 2000 SAHARANPUR ROAD, DEHRADUN, OPP. TRANSPORT NAGAR DEHRADUN, UTTARAKHAND, 248001"
-              }
-            ]
-          },
-          datetime: "2023-11-17 04:07:25.614332"
-        }
-      },
-      { 
+      {
         id: "uan-history-v2", 
         name: "UAN History - V2", 
         category: "profession-check",

@@ -1272,6 +1272,73 @@ export const apiCatalogData: CategoryData[] = [
         }
       },
       { 
+        id: "email-to-gst-lookup", 
+        name: "Email to GST Lookup", 
+        category: "kyb",
+        requestSample: {
+          email: "abcd@email.com",
+          consent_text: "We confirm obtaining valid customer consent to access/process their email data. Consent remains valid, informed, and unwithdrawn."
+        },
+        responseSample: {
+          txn_id: "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+          api_category: "Know Your Business (KYB)",
+          api_name: "Email to GST Lookup",
+          billable: true,
+          message: "Success",
+          status: 1,
+          result: {
+            gstin: "19ABCCD8111Q1ZZ",
+            legal_name: "ABC PRIVATE LIMITED",
+            trade_name: "ABC PRIVATE LIMITED"
+          },
+          datetime: "2024-06-15 10:30:45.123456"
+        }
+      },
+      { 
+        id: "gst-to-pan", 
+        name: "GST to PAN", 
+        category: "kyb",
+        requestSample: {
+          gst_no: "01ABCPD1234E1AB",
+          consent_text: "We confirm obtaining valid customer consent to access/process their GST data. Consent remains valid, informed, and unwithdrawn."
+        },
+        responseSample: {
+          txn_id: "b2c3d4e5-f6a7-8901-bcde-f23456789012",
+          api_category: "Know Your Business (KYB)",
+          api_name: "GST to PAN",
+          billable: true,
+          message: "Success",
+          status: 1,
+          result: {
+            gst_no: "01ABCPD1234E1AB",
+            gst_status: "Active",
+            pan: "ABCPD1234E"
+          },
+          datetime: "2024-07-20 14:22:18.654321"
+        }
+      },
+      { 
+        id: "pan-to-gst-lookup", 
+        name: "PAN to GST Number Lookup", 
+        category: "kyb",
+        requestSample: {
+          pan_number: "ABEPG1234D"
+        },
+        responseSample: {
+          txn_id: "c3d4e5f6-a7b8-9012-cdef-345678901234",
+          api_category: "Know Your Business (KYB)",
+          api_name: "PAN to GST Number Lookup",
+          billable: true,
+          message: "Success",
+          status: 1,
+          result: {
+            gstin: "09BZEPG1234D1ZU",
+            status: "Inactive"
+          },
+          datetime: "2024-08-10 16:45:30.789012"
+        }
+      },
+      { 
         id: "mobile-to-gst-check", 
         name: "Mobile to GST Check", 
         category: "kyb",

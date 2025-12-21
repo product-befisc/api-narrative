@@ -18,6 +18,7 @@ export const EmailVerificationModal = ({ open, onVerified }: EmailVerificationMo
 
   const ALLOWED_PASSWORD = "portal@Befisc34";
   const WHITELISTED_EMAIL_PASSWORD = "access@Befisc23";
+  const USER_PASSWORD = "Befisc@123";
 
   const handleVerify = () => {
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
@@ -31,7 +32,8 @@ export const EmailVerificationModal = ({ open, onVerified }: EmailVerificationMo
 
     // Check if email is from befisc.com domain or whitelisted
     const domain = email.split('@')[1]?.toLowerCase();
-    const isWhitelisted = email.toLowerCase() === 'sukhjinder@finfactor.in'|| email.toLowerCase() === 'gaurav.singh@easebuzz.in' ;
+    const isWhitelisted = email.toLowerCase() === 'sukhjinder@finfactor.in' || email.toLowerCase() === 'gaurav.singh@easebuzz.in';
+    const isUserEmail = email.toLowerCase() === 'user@befisc.com';
     
     if (domain !== 'befisc.com' && !isWhitelisted) {
       toast({
@@ -53,7 +55,12 @@ export const EmailVerificationModal = ({ open, onVerified }: EmailVerificationMo
     }
 
     // Validate password based on email
-    const correctPassword = isWhitelisted ? WHITELISTED_EMAIL_PASSWORD : ALLOWED_PASSWORD;
+    let correctPassword = ALLOWED_PASSWORD;
+    if (isWhitelisted) {
+      correctPassword = WHITELISTED_EMAIL_PASSWORD;
+    } else if (isUserEmail) {
+      correctPassword = USER_PASSWORD;
+    }
     if (password !== correctPassword) {
       toast({
         title: "Invalid Password",

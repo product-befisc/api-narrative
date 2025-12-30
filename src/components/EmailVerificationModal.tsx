@@ -19,6 +19,7 @@ export const EmailVerificationModal = ({ open, onVerified }: EmailVerificationMo
   const ALLOWED_PASSWORD = "portal@Befisc34";
   const WHITELISTED_EMAIL_PASSWORD = "access@Befisc23";
   const USER_PASSWORD = "Befisc@123";
+  const SPINNY_PASSWORD = "portal@befisc123";
 
   const handleVerify = () => {
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
@@ -35,8 +36,9 @@ export const EmailVerificationModal = ({ open, onVerified }: EmailVerificationMo
     const isWhitelisted =
       email.toLowerCase() === "sukhjinder@finfactor.in" || email.toLowerCase() === "gaurav.singh@easebuzz.in";
     const isUserEmail = email.toLowerCase() === "user@befisc.com";
+    const isSpinnyEmail = email.toLowerCase() === "user@spinny.com";
 
-    if (domain !== "befisc.com" && !isWhitelisted) {
+    if (domain !== "befisc.com" && !isWhitelisted && !isSpinnyEmail) {
       toast({
         title: "Access Restricted",
         description: "Only @befisc.com emails are allowed. Please contact support@befisc.com for access.",
@@ -61,6 +63,8 @@ export const EmailVerificationModal = ({ open, onVerified }: EmailVerificationMo
       correctPassword = WHITELISTED_EMAIL_PASSWORD;
     } else if (isUserEmail) {
       correctPassword = USER_PASSWORD;
+    } else if (isSpinnyEmail) {
+      correctPassword = SPINNY_PASSWORD;
     }
     if (password !== correctPassword) {
       toast({

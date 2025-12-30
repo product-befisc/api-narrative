@@ -31,11 +31,12 @@ export const EmailVerificationModal = ({ open, onVerified }: EmailVerificationMo
     }
 
     // Check if email is from befisc.com domain or whitelisted
-    const domain = email.split('@')[1]?.toLowerCase();
-    const isWhitelisted = email.toLowerCase() === 'sukhjinder@finfactor.in' || email.toLowerCase() === 'gaurav.singh@easebuzz.in';
-    const isUserEmail = email.toLowerCase() === 'user@befisc.com';
-    
-    if (domain !== 'befisc.com' && !isWhitelisted) {
+    const domain = email.split("@")[1]?.toLowerCase();
+    const isWhitelisted =
+      email.toLowerCase() === "sukhjinder@finfactor.in" || email.toLowerCase() === "gaurav.singh@easebuzz.in";
+    const isUserEmail = email.toLowerCase() === "user@befisc.com" || "user@spinny.com";
+
+    if (domain !== "befisc.com" && !isWhitelisted) {
       toast({
         title: "Access Restricted",
         description: "Only @befisc.com emails are allowed. Please contact support@befisc.com for access.",
@@ -84,7 +85,7 @@ export const EmailVerificationModal = ({ open, onVerified }: EmailVerificationMo
 
   return (
     <Dialog open={open} onOpenChange={() => {}}>
-      <DialogContent 
+      <DialogContent
         className="sm:max-w-md border-2 border-primary/20 bg-background/95 backdrop-blur-xl shadow-2xl animate-scale-in"
         hideClose
       >
@@ -96,19 +97,13 @@ export const EmailVerificationModal = ({ open, onVerified }: EmailVerificationMo
 
           {/* Email & Password Step */}
           <div className="space-y-2">
-            <h2 className="text-2xl font-bold text-foreground">
-              Verify your Email to Continue
-            </h2>
-            <p className="text-muted-foreground">
-              Enter your @befisc.com email and password to access the portal.
-            </p>
+            <h2 className="text-2xl font-bold text-foreground">Verify your Email to Continue</h2>
+            <p className="text-muted-foreground">Enter your @befisc.com email and password to access the portal.</p>
           </div>
 
           <div className="w-full space-y-4">
             <div className="space-y-2 text-left">
-              <label className="text-sm font-semibold text-foreground">
-                Enter your email address
-              </label>
+              <label className="text-sm font-semibold text-foreground">Enter your email address</label>
               <Input
                 type="email"
                 placeholder="you@befisc.com"
@@ -119,9 +114,7 @@ export const EmailVerificationModal = ({ open, onVerified }: EmailVerificationMo
             </div>
 
             <div className="space-y-2 text-left">
-              <label className="text-sm font-semibold text-foreground">
-                Enter password
-              </label>
+              <label className="text-sm font-semibold text-foreground">Enter password</label>
               <Input
                 type="password"
                 placeholder="Enter password"

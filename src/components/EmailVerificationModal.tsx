@@ -34,7 +34,9 @@ export const EmailVerificationModal = ({ open, onVerified }: EmailVerificationMo
     // Check if email is from befisc.com domain or whitelisted
     const domain = email.split("@")[1]?.toLowerCase();
     const isWhitelisted =
-      email.toLowerCase() === "sukhjinder@finfactor.in" || email.toLowerCase() === "gaurav.singh@easebuzz.in";
+      email.toLowerCase() === "sukhjinder@finfactor.in" ||
+      email.toLowerCase() === "gaurav.singh@easebuzz.in" ||
+      email.toLowerCase() === "sukhjinder@finfactor.in";
     const isUserEmail = email.toLowerCase() === "user@befisc.com";
     const isSpinnyEmail = email.toLowerCase() === "user@spinny.com";
 

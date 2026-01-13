@@ -35,7 +35,8 @@ export const EmailVerificationModal = ({ open, onVerified }: EmailVerificationMo
     const domain = email.split("@")[1]?.toLowerCase();
     const isWhitelisted =
       email.toLowerCase() === "sukhjinder@finfactor.in" ||
-      email.toLowerCase() === "gaurav.singh@easebuzz.in";
+      email.toLowerCase() === "gaurav.singh@easebuzz.in" ||
+      email.toLowerCase() === "prateek.singh@rezo.ai";
     const isUserEmail = email.toLowerCase() === "user@befisc.com";
     const isSpinnyEmail = email.toLowerCase() === "user@spinny.com";
 

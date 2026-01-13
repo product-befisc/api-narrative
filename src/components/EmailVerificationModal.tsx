@@ -36,7 +36,6 @@ export const EmailVerificationModal = ({ open, onVerified }: EmailVerificationMo
     const isWhitelisted =
       email.toLowerCase() === "sukhjinder@finfactor.in" ||
       email.toLowerCase() === "gaurav.singh@easebuzz.in" ||
-      email.toLowerCase() === "prateek.singh@rezo.ai";
     const isUserEmail = email.toLowerCase() === "user@befisc.com";
     const isSpinnyEmail = email.toLowerCase() === "user@spinny.com";
 

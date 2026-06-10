@@ -265,7 +265,7 @@ const Landing = () => {
               {/* 50M+ API Calls Monthly */}
               <div className="group relative bg-background/60 backdrop-blur-sm rounded-2xl p-8 border border-border/50 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 hover:-translate-y-1">
                 <div className="flex flex-col items-center justify-center h-full min-h-[140px]">
-                  <div className="text-4xl md:text-5xl font-bold text-primary mb-2">50M+</div>
+                  <div className="text-4xl md:text-5xl font-bold text-primary mb-2">110M+</div>
                   <div className="text-sm font-medium text-muted-foreground uppercase tracking-wide text-center">
                     API Calls Monthly
                   </div>
@@ -578,7 +578,7 @@ const Landing = () => {
               <div className="h-48 md:h-64 w-full overflow-hidden bg-muted">
                 <img src={linkedinBanner} alt="BeFiSc Banner" className="w-full h-full object-contain" />
               </div>
-              
+
               {/* Profile Section */}
               <div className="px-8 pb-8">
                 {/* Profile Image - Overlapping Banner */}
@@ -587,36 +587,34 @@ const Landing = () => {
                     <img src={founderPhoto} alt="Shobhit Goyal" className="w-full h-full object-cover" />
                   </div>
                 </div>
-                
+
                 {/* Name and Title */}
                 <div className="mb-4">
                   <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-1">Shobhit Goyal</h3>
-                  <p className="text-muted-foreground font-medium mb-2">Founder & CEO, BeFiSc (Beyond Financial Score)</p>
+                  <p className="text-muted-foreground font-medium mb-2">
+                    Founder & CEO, BeFiSc (Beyond Financial Score)
+                  </p>
                 </div>
-                
+
                 {/* Quote */}
                 <blockquote className="text-lg md:text-xl text-foreground italic mb-6">
                   "Making digital trust effortless, one verification at a time."
                 </blockquote>
-                
+
                 {/* Action Buttons */}
                 <div className="flex flex-wrap gap-4">
-                  <Button 
-                    variant="outline" 
-                    className="gap-2"
-                    asChild
-                  >
+                  <Button variant="outline" className="gap-2" asChild>
                     <a href="https://www.linkedin.com/in/shobhitgoyal07/" target="_blank" rel="noopener noreferrer">
                       <Linkedin className="w-5 h-5" />
                       LinkedIn
                     </a>
                   </Button>
-                  <Button 
-                    variant="outline" 
-                    className="gap-2"
-                    asChild
-                  >
-                    <a href="https://takh7ucwgg0.typeform.com/to/kG2iZbDL?typeform-source=www.linkedin.com" target="_blank" rel="noopener noreferrer">
+                  <Button variant="outline" className="gap-2" asChild>
+                    <a
+                      href="https://takh7ucwgg0.typeform.com/to/kG2iZbDL?typeform-source=www.linkedin.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
                       <Newspaper className="w-5 h-5" />
                       Newsletter
                     </a>

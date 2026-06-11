@@ -245,7 +245,7 @@ const Landing = () => {
               {/* 145+ Clients */}
               <div className="group relative bg-background/60 backdrop-blur-sm rounded-2xl p-8 border border-border/50 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 hover:-translate-y-1">
                 <div className="flex flex-col items-center justify-center h-full min-h-[140px]">
-                  <div className="text-4xl md:text-5xl font-bold text-primary mb-2">200+</div>
+                  <div className="text-4xl md:text-5xl font-bold text-primary mb-2">250+</div>
                   <div className="text-sm font-medium text-muted-foreground uppercase tracking-wide text-center">
                     Clients
                   </div>

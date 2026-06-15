@@ -454,10 +454,12 @@ const Landing = () => {
               },
               {
                 title: "Marketplace & E-commerce",
-                cols: "grid-cols-1 md:grid-cols-1",
-                maxW: "max-w-xs",
+                cols: "grid-cols-2 md:grid-cols-3",
+                maxW: "max-w-3xl",
                 items: [
                   { name: "Indiamart", logo: indiamartLogo },
+                  { name: "Droom", logo: droomAsset.url },
+                  { name: "Agrizy", logo: agrizyAsset.url },
                 ],
               },
               {

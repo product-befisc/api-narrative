@@ -50,6 +50,11 @@ import bajajAutoNewAsset from "@/assets/clients/bajaj-auto-new.png.asset.json";
 import qubeHealthAsset from "@/assets/clients/qube-health.webp.asset.json";
 import paytmInsuranceAsset from "@/assets/clients/paytm-insurance.svg.asset.json";
 import circolifeAsset from "@/assets/clients/circolife.jpg.asset.json";
+import bikebazaarAsset from "@/assets/clients/bikebazaar.png.asset.json";
+import basicHomeLoanAsset from "@/assets/clients/basic-home-loan.svg.asset.json";
+import switchmyloanAsset from "@/assets/clients/switchmyloan.webp.asset.json";
+import pointoAsset from "@/assets/clients/pointo.avif.asset.json";
+import prudigitalAsset from "@/assets/clients/prudigital.png.asset.json";
 
 const Landing = () => {
   const navigate = useNavigate();
@@ -433,11 +438,16 @@ const Landing = () => {
               },
               {
                 title: "Fintech",
-                cols: "grid-cols-2 md:grid-cols-2",
-                maxW: "max-w-2xl",
+                cols: "grid-cols-2 md:grid-cols-3 lg:grid-cols-4",
+                maxW: "max-w-5xl",
                 items: [
+                  { name: "BikeBazaar", logo: bikebazaarAsset.url },
+                  { name: "BASIC Home Loan", logo: basicHomeLoanAsset.url },
                   { name: "Affordplan", logo: affordplanLogo },
+                  { name: "Pointo", logo: pointoAsset.url },
+                  { name: "SwitchMyLoan", logo: switchmyloanAsset.url },
                   { name: "Swipe Loan", logo: swipeloanLogo },
+                  { name: "Prudigital Media (Kredbharat)", logo: prudigitalAsset.url },
                 ],
               },
               {

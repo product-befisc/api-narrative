@@ -29,6 +29,10 @@ import swipeloanLogo from "@/assets/clients/swipeloan.png";
 import pjCapitalLogo from "@/assets/clients/pj-capital.png";
 import piceLogo from "@/assets/clients/pice.png";
 import vastuFinanceLogo from "@/assets/clients/vastu-finance.png";
+import muthootCapitalAsset from "@/assets/clients/muthoot-capital.png.asset.json";
+import kanakadurgaAsset from "@/assets/clients/kanakadurga-finance.png.asset.json";
+import shriramAsset from "@/assets/clients/shriram-finance.jpg.asset.json";
+import bajajAutoAsset from "@/assets/clients/bajaj-auto-credit.png.asset.json";
 
 const Landing = () => {
   const navigate = useNavigate();
@@ -364,11 +368,14 @@ const Landing = () => {
                 maxW: "max-w-6xl",
                 items: [
                   { name: "Bajaj Finserv", logo: bajajLogo },
-                  { name: "Muthoot Capital", logo: muthootLogo },
+                  { name: "Bajaj Auto Finance", logo: bajajAutoAsset.url },
+                  { name: "Shri Ram Finance", logo: shriramAsset.url },
+                  { name: "Muthoot Capital", logo: muthootCapitalAsset.url },
                   { name: "Vastu Housing", logo: vastuFinanceLogo },
                   { name: "Ambit Finvest", logo: ambitFinvestLogo },
                   { name: "Varthana", logo: varthanaLogo },
                   { name: "Snapmint", logo: snapmintLogo },
+                  { name: "Kanakadurga Finance", logo: kanakadurgaAsset.url },
                   { name: "cKers Finance", logo: ckersFinanceLogo },
                   { name: "ePayLater", logo: epaylaterLogo },
                   { name: "PJ Credit Capital", logo: pjCapitalLogo },

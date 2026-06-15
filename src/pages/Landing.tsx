@@ -457,6 +457,15 @@ const Landing = () => {
                 ],
               },
               {
+                title: "Investment & Securities",
+                cols: "grid-cols-2 md:grid-cols-2",
+                maxW: "max-w-2xl",
+                items: [
+                  { name: "INDmoney", logo: indmoneyAsset.url },
+                  { name: "Sahi (Aaritya Technologies)", logo: sahiAsset.url },
+                ],
+              },
+              {
                 title: "Marketplace & E-commerce",
                 cols: "grid-cols-2 md:grid-cols-3",
                 maxW: "max-w-3xl",

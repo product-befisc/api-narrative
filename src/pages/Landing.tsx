@@ -33,6 +33,7 @@ import muthootCapitalAsset from "@/assets/clients/muthoot-capital.png.asset.json
 import kanakadurgaAsset from "@/assets/clients/kanakadurga-finance.png.asset.json";
 import shriramAsset from "@/assets/clients/shriram-finance.jpg.asset.json";
 import bajajAutoAsset from "@/assets/clients/bajaj-auto-credit.png.asset.json";
+import idfcFirstBankAsset from "@/assets/clients/idfc-first-bank.png.asset.json";
 
 const Landing = () => {
   const navigate = useNavigate();
@@ -389,6 +390,14 @@ const Landing = () => {
                   { name: "Go Digit Life Insurance", logo: godigitLogo },
                   { name: "Go Digit General Insurance", logo: godigitLogo },
                   { name: "HealthCred", logo: healthcredLogo },
+                ],
+              },
+              {
+                title: "Banks",
+                cols: "grid-cols-1 md:grid-cols-1",
+                maxW: "max-w-xs",
+                items: [
+                  { name: "IDFC First Bank", logo: idfcFirstBankAsset.url },
                 ],
               },
               {

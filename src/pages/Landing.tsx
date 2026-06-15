@@ -428,7 +428,9 @@ const Landing = () => {
               {
                 title: "Insurance",
                 cols: "grid-cols-2 md:grid-cols-3 lg:grid-cols-3",
-                maxW: "max-w-4xl",
+                maxW: "max-w-full",
+                marquee: true,
+                singleRow: true,
                 items: [
                   { name: "Go Digit Life Insurance", logo: godigitLogo },
                   { name: "Go Digit General Insurance", logo: godigitLogo },
@@ -441,7 +443,9 @@ const Landing = () => {
               {
                 title: "Fintech",
                 cols: "grid-cols-2 md:grid-cols-3 lg:grid-cols-4",
-                maxW: "max-w-5xl",
+                maxW: "max-w-full",
+                marquee: true,
+                singleRow: true,
                 items: [
                   { name: "BikeBazaar", logo: bikebazaarAsset.url },
                   { name: "BASIC Home Loan", logo: basicHomeLoanAsset.url },

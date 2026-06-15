@@ -397,6 +397,7 @@ const Landing = () => {
                 cols: "grid-cols-2 md:grid-cols-4 lg:grid-cols-5",
                 maxW: "max-w-6xl",
                 items: [
+                  { name: "IDFC First Bank", logo: idfcFirstBankAsset.url },
                   { name: "Bajaj Finserv", logo: bajajLogo },
                   { name: "Bajaj Auto Finance", logo: bajajAutoNewAsset.url },
                   { name: "Shri Ram Finance", logo: shriramAsset.url },
@@ -434,14 +435,6 @@ const Landing = () => {
                   { name: "Paytm Insurance", logo: paytmInsuranceAsset.url },
                   { name: "Qube Health", logo: qubeHealthAsset.url },
                   { name: "HealthCred", logo: healthcredLogo },
-                ],
-              },
-              {
-                title: "Banks",
-                cols: "grid-cols-1 md:grid-cols-1",
-                maxW: "max-w-xs",
-                items: [
-                  { name: "IDFC First Bank", logo: idfcFirstBankAsset.url },
                 ],
               },
               {

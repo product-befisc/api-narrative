@@ -393,7 +393,7 @@ const Landing = () => {
           <div className="max-w-7xl mx-auto space-y-16">
             {[
               {
-                title: "NBFC & Lending",
+                title: "Bank, NBFC & Lending",
                 cols: "grid-cols-2 md:grid-cols-4 lg:grid-cols-5",
                 maxW: "max-w-6xl",
                 items: [

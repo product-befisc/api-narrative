@@ -395,7 +395,8 @@ const Landing = () => {
               {
                 title: "Bank, NBFC & Lending",
                 cols: "grid-cols-2 md:grid-cols-4 lg:grid-cols-5",
-                maxW: "max-w-6xl",
+                maxW: "max-w-full",
+                marquee: true,
                 items: [
                   { name: "IDFC First Bank", logo: idfcFirstBankAsset.url },
                   { name: "Bajaj Finserv", logo: bajajLogo },

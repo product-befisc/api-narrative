@@ -382,7 +382,7 @@ const Landing = () => {
                 maxW: "max-w-6xl",
                 items: [
                   { name: "Bajaj Finserv", logo: bajajLogo },
-                  { name: "Bajaj Auto Finance", logo: bajajAutoAsset.url },
+                  { name: "Bajaj Auto Finance", logo: bajajAutoNewAsset.url },
                   { name: "Shri Ram Finance", logo: shriramAsset.url },
                   { name: "Muthoot Capital", logo: muthootCapitalAsset.url },
                   { name: "Vastu Housing", logo: vastuFinanceLogo },
@@ -399,6 +399,12 @@ const Landing = () => {
                   { name: "Unigold Finance", logo: unigoldAsset.url },
                   { name: "Cashflo", logo: cashfloAsset.url },
                   { name: "Finfactor", logo: finfactorAsset.url },
+                  { name: "IndiaP2P", logo: indiaP2pAsset.url },
+                  { name: "Vallabhi Capital", logo: vallabhiAsset.url },
+                  { name: "Arogya Finance", logo: arogyaAsset.url },
+                  { name: "Aspire Finance", logo: aspireAsset.url },
+                  { name: "Del Capital", logo: delcapitalAsset.url },
+                  { name: "Rupie Finance", logo: rupieAsset.url },
                 ],
               },
               {

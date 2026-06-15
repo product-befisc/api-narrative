@@ -47,6 +47,9 @@ import arogyaAsset from "@/assets/clients/arogya-finance.png.asset.json";
 import vallabhiAsset from "@/assets/clients/vallabhi.webp.asset.json";
 import indiaP2pAsset from "@/assets/clients/indiap2p.png.asset.json";
 import bajajAutoNewAsset from "@/assets/clients/bajaj-auto-new.png.asset.json";
+import qubeHealthAsset from "@/assets/clients/qube-health.webp.asset.json";
+import paytmInsuranceAsset from "@/assets/clients/paytm-insurance.svg.asset.json";
+import circolifeAsset from "@/assets/clients/circolife.jpg.asset.json";
 
 const Landing = () => {
   const navigate = useNavigate();

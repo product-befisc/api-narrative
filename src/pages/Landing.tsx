@@ -34,6 +34,12 @@ import kanakadurgaAsset from "@/assets/clients/kanakadurga-finance.png.asset.jso
 import shriramAsset from "@/assets/clients/shriram-finance.jpg.asset.json";
 import bajajAutoAsset from "@/assets/clients/bajaj-auto-credit.png.asset.json";
 import idfcFirstBankAsset from "@/assets/clients/idfc-first-bank.png.asset.json";
+import finfactorAsset from "@/assets/clients/finfactor.jpg.asset.json";
+import cashfloAsset from "@/assets/clients/cashflo.webp.asset.json";
+import unigoldAsset from "@/assets/clients/unigold-finance.png.asset.json";
+import strideoneAsset from "@/assets/clients/strideone.png.asset.json";
+import srifinAsset from "@/assets/clients/srifin.jpg.asset.json";
+import creditWiseAsset from "@/assets/clients/credit-wise-capital.webp.asset.json";
 
 const Landing = () => {
   const navigate = useNavigate();
@@ -380,6 +386,12 @@ const Landing = () => {
                   { name: "cKers Finance", logo: ckersFinanceLogo },
                   { name: "ePayLater", logo: epaylaterLogo },
                   { name: "PJ Credit Capital", logo: pjCapitalLogo },
+                  { name: "Credit Wise Capital", logo: creditWiseAsset.url },
+                  { name: "SriFin Credit", logo: srifinAsset.url },
+                  { name: "StrideOne", logo: strideoneAsset.url },
+                  { name: "Unigold Finance", logo: unigoldAsset.url },
+                  { name: "Cashflo", logo: cashfloAsset.url },
+                  { name: "Finfactor", logo: finfactorAsset.url },
                 ],
               },
               {

@@ -488,6 +488,15 @@ const Landing = () => {
                   { name: "MTM Pay", logo: mtmpayAsset.url },
                 ],
               },
+              {
+                title: "Others",
+                cols: "grid-cols-2 md:grid-cols-2",
+                maxW: "max-w-2xl",
+                items: [
+                  { name: "Delhivery", logo: delhiveryAsset.url },
+                  { name: "ALLEN Career Institute", logo: allenAsset.url },
+                ],
+              },
             ].map((section, idx) => (
               <div key={section.title} className="animate-fade-in" style={{ animationDelay: `${idx * 0.15}s` }}>
                 <div className="text-center mb-8">

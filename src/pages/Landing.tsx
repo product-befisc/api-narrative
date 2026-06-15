@@ -51,6 +51,8 @@ import qubeHealthAsset from "@/assets/clients/qube-health.webp.asset.json";
 import paytmInsuranceAsset from "@/assets/clients/paytm-insurance.svg.asset.json";
 import circolifeAsset from "@/assets/clients/circolife.jpg.asset.json";
 import agrizyAsset from "@/assets/clients/agrizy.png.asset.json";
+import cashfreeAsset from "@/assets/clients/cashfree.webp.asset.json";
+import mtmpayAsset from "@/assets/clients/mtmpay.jpg.asset.json";
 import droomAsset from "@/assets/clients/droom.png.asset.json";
 import bikebazaarAsset from "@/assets/clients/bikebazaar.png.asset.json";
 import basicHomeLoanAsset from "@/assets/clients/basic-home-loan.svg.asset.json";
@@ -464,11 +466,13 @@ const Landing = () => {
               },
               {
                 title: "Payment Aggregator",
-                cols: "grid-cols-2 md:grid-cols-2",
-                maxW: "max-w-2xl",
+                cols: "grid-cols-2 md:grid-cols-4",
+                maxW: "max-w-5xl",
                 items: [
+                  { name: "Cashfree Payments", logo: cashfreeAsset.url },
                   { name: "SabPaisa", logo: sabpaisaLogo },
                   { name: "Pice", logo: piceLogo },
+                  { name: "MTM Pay", logo: mtmpayAsset.url },
                 ],
               },
             ].map((section, idx) => (

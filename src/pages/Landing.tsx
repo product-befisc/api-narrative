@@ -47,6 +47,9 @@ import arogyaAsset from "@/assets/clients/arogya-finance.png.asset.json";
 import vallabhiAsset from "@/assets/clients/vallabhi.webp.asset.json";
 import indiaP2pAsset from "@/assets/clients/indiap2p.png.asset.json";
 import bajajAutoNewAsset from "@/assets/clients/bajaj-auto-new.png.asset.json";
+import qubeHealthAsset from "@/assets/clients/qube-health.webp.asset.json";
+import paytmInsuranceAsset from "@/assets/clients/paytm-insurance.svg.asset.json";
+import circolifeAsset from "@/assets/clients/circolife.jpg.asset.json";
 
 const Landing = () => {
   const navigate = useNavigate();
@@ -409,11 +412,14 @@ const Landing = () => {
               },
               {
                 title: "Insurance",
-                cols: "grid-cols-2 md:grid-cols-3",
-                maxW: "max-w-3xl",
+                cols: "grid-cols-2 md:grid-cols-3 lg:grid-cols-3",
+                maxW: "max-w-4xl",
                 items: [
                   { name: "Go Digit Life Insurance", logo: godigitLogo },
                   { name: "Go Digit General Insurance", logo: godigitLogo },
+                  { name: "Circolife", logo: circolifeAsset.url },
+                  { name: "Paytm Insurance", logo: paytmInsuranceAsset.url },
+                  { name: "Qube Health", logo: qubeHealthAsset.url },
                   { name: "HealthCred", logo: healthcredLogo },
                 ],
               },

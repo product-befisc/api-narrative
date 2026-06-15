@@ -395,7 +395,8 @@ const Landing = () => {
               {
                 title: "Bank, NBFC & Lending",
                 cols: "grid-cols-2 md:grid-cols-4 lg:grid-cols-5",
-                maxW: "max-w-6xl",
+                maxW: "max-w-full",
+                marquee: true,
                 items: [
                   { name: "IDFC First Bank", logo: idfcFirstBankAsset.url },
                   { name: "Bajaj Finserv", logo: bajajLogo },
@@ -490,34 +491,66 @@ const Landing = () => {
                   { name: "ALLEN Career Institute", logo: allenAsset.url },
                 ],
               },
-            ].map((section, idx) => (
-              <div key={section.title} className="animate-fade-in" style={{ animationDelay: `${idx * 0.15}s` }}>
-                <div className="text-center mb-8">
-                  <h3 className="text-2xl font-bold text-primary mb-2">{section.title}</h3>
-                  <div className="h-1 w-32 bg-gradient-to-r from-transparent via-primary to-transparent mx-auto"></div>
-                </div>
-                <div className={`grid ${section.cols} gap-4 ${section.maxW} mx-auto`}>
-                  {section.items.map((company, i) => (
-                    <div
-                      key={i}
-                      className="group bg-card rounded-xl p-6 border border-border/50 hover:border-primary/50 transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:shadow-primary/10"
-                      style={{ animationDelay: `${i * 0.05}s` }}
-                    >
-                      <div className="flex flex-col items-center justify-center gap-3 h-full">
-                        <div className="w-16 h-16 flex items-center justify-center">
-                          <img
-                            src={company.logo}
-                            alt={company.name}
-                            className="max-w-full max-h-full object-contain group-hover:scale-110 transition-transform duration-300"
-                          />
-                        </div>
-                        <span className="font-semibold text-foreground text-center text-xs">{company.name}</span>
-                      </div>
+            ].map((section, idx) => {
+              const LogoCard = ({ company, i }: { company: { name: string; logo: string }; i: number }) => (
+                <div
+                  key={i}
+                  className="group bg-card rounded-xl p-6 border border-border/50 hover:border-primary/50 transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:shadow-primary/10"
+                  style={{ animationDelay: `${i * 0.05}s` }}
+                >
+                  <div className="flex flex-col items-center justify-center gap-3 h-full">
+                    <div className="w-16 h-16 flex items-center justify-center">
+                      <img
+                        src={company.logo}
+                        alt={company.name}
+                        className="max-w-full max-h-full object-contain group-hover:scale-110 transition-transform duration-300"
+                      />
                     </div>
-                  ))}
+                    <span className="font-semibold text-foreground text-center text-xs">{company.name}</span>
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+
+              return (
+                <div key={section.title} className="animate-fade-in" style={{ animationDelay: `${idx * 0.15}s` }}>
+                  <div className="text-center mb-8">
+                    <h3 className="text-2xl font-bold text-primary mb-2">{section.title}</h3>
+                    <div className="h-1 w-32 bg-gradient-to-r from-transparent via-primary to-transparent mx-auto"></div>
+                  </div>
+                  {section.marquee ? (
+                    (() => {
+                      const mid = Math.ceil(section.items.length / 2);
+                      const row1 = section.items.slice(0, mid);
+                      const row2 = section.items.slice(mid);
+                      return (
+                        <div className="space-y-4 marquee-mask overflow-hidden">
+                          {[
+                            { items: row1, cls: "animate-marquee" },
+                            { items: row2, cls: "animate-marquee-reverse" },
+                          ].map((row, ri) => (
+                            <div key={ri} className="flex w-max gap-4 hover:[animation-play-state:paused]">
+                              <div className={`flex gap-4 shrink-0 ${row.cls}`}>
+                                {[...row.items, ...row.items].map((company, i) => (
+                                  <div key={i} className="w-48 shrink-0">
+                                    <LogoCard company={company} i={i} />
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      );
+                    })()
+                  ) : (
+                    <div className={`grid ${section.cols} gap-4 ${section.maxW} mx-auto`}>
+                      {section.items.map((company, i) => (
+                        <LogoCard key={i} company={company} i={i} />
+                      ))}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>

@@ -51,6 +51,8 @@ import qubeHealthAsset from "@/assets/clients/qube-health.webp.asset.json";
 import paytmInsuranceAsset from "@/assets/clients/paytm-insurance.svg.asset.json";
 import circolifeAsset from "@/assets/clients/circolife.jpg.asset.json";
 import agrizyAsset from "@/assets/clients/agrizy.png.asset.json";
+import delhiveryAsset from "@/assets/clients/delhivery.webp.asset.json";
+import allenAsset from "@/assets/clients/allen.png.asset.json";
 import indmoneyAsset from "@/assets/clients/indmoney.png.asset.json";
 import sahiAsset from "@/assets/clients/sahi.png.asset.json";
 import cashfreeAsset from "@/assets/clients/cashfree.webp.asset.json";

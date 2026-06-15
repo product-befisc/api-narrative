@@ -412,11 +412,14 @@ const Landing = () => {
               },
               {
                 title: "Insurance",
-                cols: "grid-cols-2 md:grid-cols-3",
-                maxW: "max-w-3xl",
+                cols: "grid-cols-2 md:grid-cols-3 lg:grid-cols-3",
+                maxW: "max-w-4xl",
                 items: [
                   { name: "Go Digit Life Insurance", logo: godigitLogo },
                   { name: "Go Digit General Insurance", logo: godigitLogo },
+                  { name: "Circolife", logo: circolifeAsset.url },
+                  { name: "Paytm Insurance", logo: paytmInsuranceAsset.url },
+                  { name: "Qube Health", logo: qubeHealthAsset.url },
                   { name: "HealthCred", logo: healthcredLogo },
                 ],
               },

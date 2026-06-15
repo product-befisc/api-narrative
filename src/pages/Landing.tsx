@@ -34,6 +34,12 @@ import kanakadurgaAsset from "@/assets/clients/kanakadurga-finance.png.asset.jso
 import shriramAsset from "@/assets/clients/shriram-finance.jpg.asset.json";
 import bajajAutoAsset from "@/assets/clients/bajaj-auto-credit.png.asset.json";
 import idfcFirstBankAsset from "@/assets/clients/idfc-first-bank.png.asset.json";
+import finfactorAsset from "@/assets/clients/finfactor.jpg.asset.json";
+import cashfloAsset from "@/assets/clients/cashflo.webp.asset.json";
+import unigoldAsset from "@/assets/clients/unigold-finance.png.asset.json";
+import strideoneAsset from "@/assets/clients/strideone.png.asset.json";
+import srifinAsset from "@/assets/clients/srifin.jpg.asset.json";
+import creditWiseAsset from "@/assets/clients/credit-wise-capital.webp.asset.json";
 
 const Landing = () => {
   const navigate = useNavigate();

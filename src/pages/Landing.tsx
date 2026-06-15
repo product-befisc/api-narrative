@@ -50,6 +50,8 @@ import bajajAutoNewAsset from "@/assets/clients/bajaj-auto-new.png.asset.json";
 import qubeHealthAsset from "@/assets/clients/qube-health.webp.asset.json";
 import paytmInsuranceAsset from "@/assets/clients/paytm-insurance.svg.asset.json";
 import circolifeAsset from "@/assets/clients/circolife.jpg.asset.json";
+import agrizyAsset from "@/assets/clients/agrizy.png.asset.json";
+import droomAsset from "@/assets/clients/droom.png.asset.json";
 import bikebazaarAsset from "@/assets/clients/bikebazaar.png.asset.json";
 import basicHomeLoanAsset from "@/assets/clients/basic-home-loan.svg.asset.json";
 import switchmyloanAsset from "@/assets/clients/switchmyloan.webp.asset.json";
@@ -452,10 +454,12 @@ const Landing = () => {
               },
               {
                 title: "Marketplace & E-commerce",
-                cols: "grid-cols-1 md:grid-cols-1",
-                maxW: "max-w-xs",
+                cols: "grid-cols-2 md:grid-cols-3",
+                maxW: "max-w-3xl",
                 items: [
                   { name: "Indiamart", logo: indiamartLogo },
+                  { name: "Droom", logo: droomAsset.url },
+                  { name: "Agrizy", logo: agrizyAsset.url },
                 ],
               },
               {

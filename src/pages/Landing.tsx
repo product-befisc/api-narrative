@@ -438,11 +438,16 @@ const Landing = () => {
               },
               {
                 title: "Fintech",
-                cols: "grid-cols-2 md:grid-cols-2",
-                maxW: "max-w-2xl",
+                cols: "grid-cols-2 md:grid-cols-3 lg:grid-cols-4",
+                maxW: "max-w-5xl",
                 items: [
+                  { name: "BikeBazaar", logo: bikebazaarAsset.url },
+                  { name: "BASIC Home Loan", logo: basicHomeLoanAsset.url },
                   { name: "Affordplan", logo: affordplanLogo },
+                  { name: "Pointo", logo: pointoAsset.url },
+                  { name: "SwitchMyLoan", logo: switchmyloanAsset.url },
                   { name: "Swipe Loan", logo: swipeloanLogo },
+                  { name: "Prudigital Media (Kredbharat)", logo: prudigitalAsset.url },
                 ],
               },
               {

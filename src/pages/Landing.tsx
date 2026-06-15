@@ -466,11 +466,13 @@ const Landing = () => {
               },
               {
                 title: "Payment Aggregator",
-                cols: "grid-cols-2 md:grid-cols-2",
-                maxW: "max-w-2xl",
+                cols: "grid-cols-2 md:grid-cols-4",
+                maxW: "max-w-5xl",
                 items: [
+                  { name: "Cashfree Payments", logo: cashfreeAsset.url },
                   { name: "SabPaisa", logo: sabpaisaLogo },
                   { name: "Pice", logo: piceLogo },
+                  { name: "MTM Pay", logo: mtmpayAsset.url },
                 ],
               },
             ].map((section, idx) => (

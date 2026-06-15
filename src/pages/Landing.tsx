@@ -386,6 +386,13 @@ const Landing = () => {
                   { name: "cKers Finance", logo: ckersFinanceLogo },
                   { name: "ePayLater", logo: epaylaterLogo },
                   { name: "PJ Credit Capital", logo: pjCapitalLogo },
+                  { name: "Credit Wise Capital", logo: creditWiseAsset.url },
+                  { name: "SriFin Credit", logo: srifinAsset.url },
+                  { name: "StrideOne", logo: strideoneAsset.url },
+                  { name: "Unigold Finance", logo: unigoldAsset.url },
+                  { name: "ePayLater", logo: epaylaterLogo },
+                  { name: "Cashflo", logo: cashfloAsset.url },
+                  { name: "Finfactor", logo: finfactorAsset.url },
                 ],
               },
               {

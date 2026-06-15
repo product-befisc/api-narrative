@@ -40,6 +40,13 @@ import unigoldAsset from "@/assets/clients/unigold-finance.png.asset.json";
 import strideoneAsset from "@/assets/clients/strideone.png.asset.json";
 import srifinAsset from "@/assets/clients/srifin.jpg.asset.json";
 import creditWiseAsset from "@/assets/clients/credit-wise-capital.webp.asset.json";
+import rupieAsset from "@/assets/clients/rupie-finance.png.asset.json";
+import delcapitalAsset from "@/assets/clients/delcapital.svg.asset.json";
+import aspireAsset from "@/assets/clients/aspire-finance.png.asset.json";
+import arogyaAsset from "@/assets/clients/arogya-finance.png.asset.json";
+import vallabhiAsset from "@/assets/clients/vallabhi.webp.asset.json";
+import indiaP2pAsset from "@/assets/clients/indiap2p.png.asset.json";
+import bajajAutoNewAsset from "@/assets/clients/bajaj-auto-new.png.asset.json";
 
 const Landing = () => {
   const navigate = useNavigate();
@@ -375,7 +382,7 @@ const Landing = () => {
                 maxW: "max-w-6xl",
                 items: [
                   { name: "Bajaj Finserv", logo: bajajLogo },
-                  { name: "Bajaj Auto Finance", logo: bajajAutoAsset.url },
+                  { name: "Bajaj Auto Finance", logo: bajajAutoNewAsset.url },
                   { name: "Shri Ram Finance", logo: shriramAsset.url },
                   { name: "Muthoot Capital", logo: muthootCapitalAsset.url },
                   { name: "Vastu Housing", logo: vastuFinanceLogo },
@@ -392,6 +399,12 @@ const Landing = () => {
                   { name: "Unigold Finance", logo: unigoldAsset.url },
                   { name: "Cashflo", logo: cashfloAsset.url },
                   { name: "Finfactor", logo: finfactorAsset.url },
+                  { name: "IndiaP2P", logo: indiaP2pAsset.url },
+                  { name: "Vallabhi Capital", logo: vallabhiAsset.url },
+                  { name: "Arogya Finance", logo: arogyaAsset.url },
+                  { name: "Aspire Finance", logo: aspireAsset.url },
+                  { name: "Del Capital", logo: delcapitalAsset.url },
+                  { name: "Rupie Finance", logo: rupieAsset.url },
                 ],
               },
               {

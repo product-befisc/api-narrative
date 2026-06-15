@@ -428,7 +428,9 @@ const Landing = () => {
               {
                 title: "Insurance",
                 cols: "grid-cols-2 md:grid-cols-3 lg:grid-cols-3",
-                maxW: "max-w-4xl",
+                maxW: "max-w-full",
+                marquee: true,
+                singleRow: true,
                 items: [
                   { name: "Go Digit Life Insurance", logo: godigitLogo },
                   { name: "Go Digit General Insurance", logo: godigitLogo },
@@ -441,7 +443,9 @@ const Landing = () => {
               {
                 title: "Fintech",
                 cols: "grid-cols-2 md:grid-cols-3 lg:grid-cols-4",
-                maxW: "max-w-5xl",
+                maxW: "max-w-full",
+                marquee: true,
+                singleRow: true,
                 items: [
                   { name: "BikeBazaar", logo: bikebazaarAsset.url },
                   { name: "BASIC Home Loan", logo: basicHomeLoanAsset.url },
@@ -519,15 +523,18 @@ const Landing = () => {
                   </div>
                   {section.marquee ? (
                     (() => {
-                      const mid = Math.ceil(section.items.length / 2);
-                      const row1 = section.items.slice(0, mid);
-                      const row2 = section.items.slice(mid);
+                      const rows = section.singleRow
+                        ? [{ items: section.items, cls: "animate-marquee" }]
+                        : (() => {
+                            const mid = Math.ceil(section.items.length / 2);
+                            return [
+                              { items: section.items.slice(0, mid), cls: "animate-marquee" },
+                              { items: section.items.slice(mid), cls: "animate-marquee-reverse" },
+                            ];
+                          })();
                       return (
                         <div className="space-y-4 marquee-mask overflow-hidden">
-                          {[
-                            { items: row1, cls: "animate-marquee" },
-                            { items: row2, cls: "animate-marquee-reverse" },
-                          ].map((row, ri) => (
+                          {rows.map((row, ri) => (
                             <div key={ri} className="flex w-max gap-4 hover:[animation-play-state:paused]">
                               <div className={`flex gap-4 shrink-0 ${row.cls}`}>
                                 {[...row.items, ...row.items].map((company, i) => (

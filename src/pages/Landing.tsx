@@ -446,6 +446,7 @@ const Landing = () => {
                 maxW: "max-w-full",
                 marquee: true,
                 singleRow: true,
+                reverse: true,
                 items: [
                   { name: "BikeBazaar", logo: bikebazaarAsset.url },
                   { name: "BASIC Home Loan", logo: basicHomeLoanAsset.url },
@@ -524,7 +525,7 @@ const Landing = () => {
                   {section.marquee ? (
                     (() => {
                       const rows = section.singleRow
-                        ? [{ items: section.items, cls: "animate-marquee" }]
+                        ? [{ items: section.items, cls: section.reverse ? "animate-marquee-reverse" : "animate-marquee" }]
                         : (() => {
                             const mid = Math.ceil(section.items.length / 2);
                             return [

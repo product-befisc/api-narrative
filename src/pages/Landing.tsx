@@ -446,6 +446,7 @@ const Landing = () => {
                 maxW: "max-w-full",
                 marquee: true,
                 singleRow: true,
+                reverse: true,
                 items: [
                   { name: "BikeBazaar", logo: bikebazaarAsset.url },
                   { name: "BASIC Home Loan", logo: basicHomeLoanAsset.url },

@@ -500,18 +500,18 @@ const Landing = () => {
               const LogoCard = ({ company, i }: { company: { name: string; logo: string }; i: number }) => (
                 <div
                   key={i}
-                  className="group bg-card rounded-xl p-6 border border-border/50 hover:border-primary/50 transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:shadow-primary/10"
+                  className="group bg-card rounded-lg p-3 border border-border/50 hover:border-primary/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/10"
                   style={{ animationDelay: `${i * 0.05}s` }}
                 >
-                  <div className="flex flex-col items-center justify-center gap-3 h-full">
-                    <div className="w-16 h-16 flex items-center justify-center">
+                  <div className="flex flex-col items-center justify-center gap-2 h-full">
+                    <div className="w-12 h-12 flex items-center justify-center">
                       <img
                         src={company.logo}
                         alt={company.name}
                         className="max-w-full max-h-full object-contain group-hover:scale-110 transition-transform duration-300"
                       />
                     </div>
-                    <span className="font-semibold text-foreground text-center text-xs">{company.name}</span>
+                    <span className="font-medium text-foreground text-center text-[11px] leading-tight">{company.name}</span>
                   </div>
                 </div>
               );

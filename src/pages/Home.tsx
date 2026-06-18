@@ -136,6 +136,8 @@ const Home = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const defaultTab = searchParams.get('tab') || 'products';
+  const [openSuiteId, setOpenSuiteId] = useState<string | null>(null);
+  const openSuite = suites.find((s) => s.id === openSuiteId) || null;
 
   return (
     <div className="min-h-screen bg-background">
@@ -159,38 +161,68 @@ const Home = () => {
 
           <TabsContent value="products" className="mt-0">
             <h2 className="text-3xl font-bold text-foreground mb-8 text-center">Product Suites</h2>
-            <div className="space-y-10 max-w-6xl mx-auto">
+            <div className="grid gap-6 grid-cols-2 lg:grid-cols-4 max-w-6xl mx-auto">
               {suites.map((suite) => {
                 const Icon = suite.icon;
                 return (
-                  <section key={suite.id}>
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                        <Icon className="h-5 w-5 text-primary" />
+                  <Card
+                    key={suite.id}
+                    className="p-6 cursor-pointer border-2 hover:border-primary hover:shadow-lg transition-all hover:-translate-y-1 group"
+                    onClick={() => setOpenSuiteId(suite.id)}
+                  >
+                    <div className="flex flex-col items-start gap-3">
+                      <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <Icon className="h-6 w-6 text-primary" />
                       </div>
                       <div>
-                        <h3 className="text-2xl font-bold text-foreground leading-tight">{suite.title}</h3>
-                        <p className="text-sm text-muted-foreground">{suite.tagline}</p>
+                        <h3 className="font-semibold text-foreground leading-tight mb-1">{suite.title}</h3>
+                        <p className="text-xs text-muted-foreground leading-snug">{suite.tagline}</p>
                       </div>
+                      <span className="text-[11px] text-primary font-medium mt-1">
+                        {suite.items.length} {suite.items.length === 1 ? 'product' : 'products'} →
+                      </span>
                     </div>
+                  </Card>
+                );
+              })}
+            </div>
 
-                    <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-                      {suite.items.map((item) => (
+            <Dialog open={openSuiteId !== null} onOpenChange={(o) => !o && setOpenSuiteId(null)}>
+              <DialogContent className="max-w-3xl">
+                {openSuite && (
+                  <>
+                    <DialogHeader>
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                          <openSuite.icon className="h-5 w-5 text-primary" />
+                        </div>
+                        <div className="text-left">
+                          <DialogTitle className="text-2xl">{openSuite.title}</DialogTitle>
+                          <DialogDescription>{openSuite.tagline}</DialogDescription>
+                        </div>
+                      </div>
+                    </DialogHeader>
+                    <div className="grid gap-3 sm:grid-cols-2 mt-4">
+                      {openSuite.items.map((item) => (
                         <Card
                           key={item.path + item.name}
                           className="p-4 cursor-pointer border hover:border-primary hover:shadow-md transition-all"
-                          onClick={() => navigate(item.path)}
+                          onClick={() => {
+                            setOpenSuiteId(null);
+                            navigate(item.path);
+                          }}
                         >
                           <h4 className="font-semibold text-foreground text-sm mb-1">{item.name}</h4>
                           <p className="text-xs text-muted-foreground leading-snug">{item.description}</p>
                         </Card>
                       ))}
                     </div>
-                  </section>
-                );
-              })}
-            </div>
+                  </>
+                )}
+              </DialogContent>
+            </Dialog>
           </TabsContent>
+
 
           <TabsContent value="solutions" className="mt-0">
             <h2 className="text-3xl font-bold text-foreground mb-8 text-center">Our Solutions</h2>

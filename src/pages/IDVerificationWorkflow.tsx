@@ -121,7 +121,7 @@ const IDVerificationWorkflow = () => {
         <Button
           variant="ghost"
           className="mb-6"
-          onClick={() => navigate('/product/id-proof')}
+          onClick={() => navigate('/home')}
         >
           <ArrowLeft className="mr-2 h-4 w-4" />
           Back to ID Proof

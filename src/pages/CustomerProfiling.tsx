@@ -765,7 +765,7 @@ const CustomerProfiling = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
       <div className="container mx-auto px-4 py-8">
-        <Button variant="ghost" onClick={() => navigate("/product/id-proof?tab=solutions")} className="mb-6">
+        <Button variant="ghost" onClick={() => navigate('/home')} className="mb-6">
           <ArrowLeft className="mr-2 h-4 w-4" />
           Back to ID Proof
         </Button>

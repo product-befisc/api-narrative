@@ -5,7 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Landing from "./pages/Landing";
 import Home from "./pages/Home";
-import IDProof from "./pages/IDProof";
+
 import IDVerificationWorkflow from "./pages/IDVerificationWorkflow";
 import BounceProof from "./pages/BounceProof";
 import TamperProof from "./pages/TamperProof";
@@ -45,7 +45,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Landing />} />
           <Route path="/home" element={<Home />} />
-          <Route path="/product/id-proof" element={<IDProof />} />
+          
           <Route path="/product/id-proof/api-catalog" element={<APICatalog />} />
           <Route path="/product/id-proof/vehicle-verification" element={<VehicleVerification />} />
           <Route path="/product/id-proof/digilocker-aadhaar" element={<DigiLockerAadhaar />} />

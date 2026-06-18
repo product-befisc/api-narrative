@@ -409,7 +409,7 @@ const APICatalog = () => {
           {/* Back Button */}
           <Button
             variant="ghost"
-            onClick={() => navigate("/product/id-proof")}
+            onClick={() => navigate('/home')}
             className="mb-6 text-muted-foreground hover:text-foreground"
           >
             <ArrowLeft className="h-4 w-4 mr-2" />

@@ -121,54 +121,101 @@ const suites: Suite[] = [
   },
 ];
 
+const solutions = [
+  { name: 'Vehicle Verification', icon: Car, description: 'Complete vehicle verification with RC, Challan & Chassis', path: '/product/id-proof/vehicle-verification' },
+  { name: 'PAN Profiling', icon: CreditCard, description: 'PAN card verification & profiling', path: '/product/id-proof/pan-verification' },
+  { name: 'Customer Profiling', icon: User, description: 'Profile insights via mobile', path: '/product/id-proof/customer-profiling' },
+  { name: 'Business Profiling', icon: Building, description: 'Company data visualization', path: '/product/id-proof/business-profiling' },
+  { name: 'Address Tracing', icon: MapPin, description: 'Address mapping via mobile', path: '/product/id-proof/address-tracing' },
+  { name: 'Employment Verification', icon: Briefcase, description: 'UAN & employment history verification', path: '/product/id-proof/employment-verification' },
+];
+
 const Home = () => {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const defaultTab = searchParams.get('tab') || 'products';
 
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
 
       <div className="container mx-auto px-4 py-12">
-        <div className="text-center mb-12">
+        <div className="text-center mb-10">
           <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-3">
-            Product Suites
+            Explore the Platform
           </h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Eight focused suites covering the full verification stack — pick a suite to explore its APIs.
+            Browse our product suites or jump into a ready-made solution.
           </p>
         </div>
 
-        <div className="space-y-10 max-w-6xl mx-auto">
-          {suites.map((suite) => {
-            const Icon = suite.icon;
-            return (
-              <section key={suite.id}>
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                    <Icon className="h-5 w-5 text-primary" />
-                  </div>
-                  <div>
-                    <h2 className="text-2xl font-bold text-foreground leading-tight">{suite.title}</h2>
-                    <p className="text-sm text-muted-foreground">{suite.tagline}</p>
-                  </div>
-                </div>
+        <Tabs defaultValue={defaultTab} className="w-full">
+          <TabsList className="grid w-full max-w-md mx-auto grid-cols-2 mb-10">
+            <TabsTrigger value="products" className="text-base">Products</TabsTrigger>
+            <TabsTrigger value="solutions" className="text-base">Solutions</TabsTrigger>
+          </TabsList>
 
-                <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-                  {suite.items.map((item) => (
-                    <Card
-                      key={item.path + item.name}
-                      className="p-4 cursor-pointer border hover:border-primary hover:shadow-md transition-all"
-                      onClick={() => navigate(item.path)}
-                    >
-                      <h3 className="font-semibold text-foreground text-sm mb-1">{item.name}</h3>
-                      <p className="text-xs text-muted-foreground leading-snug">{item.description}</p>
-                    </Card>
-                  ))}
-                </div>
-              </section>
-            );
-          })}
-        </div>
+          <TabsContent value="products" className="mt-0">
+            <h2 className="text-3xl font-bold text-foreground mb-8 text-center">Product Suites</h2>
+            <div className="space-y-10 max-w-6xl mx-auto">
+              {suites.map((suite) => {
+                const Icon = suite.icon;
+                return (
+                  <section key={suite.id}>
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                        <Icon className="h-5 w-5 text-primary" />
+                      </div>
+                      <div>
+                        <h3 className="text-2xl font-bold text-foreground leading-tight">{suite.title}</h3>
+                        <p className="text-sm text-muted-foreground">{suite.tagline}</p>
+                      </div>
+                    </div>
+
+                    <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                      {suite.items.map((item) => (
+                        <Card
+                          key={item.path + item.name}
+                          className="p-4 cursor-pointer border hover:border-primary hover:shadow-md transition-all"
+                          onClick={() => navigate(item.path)}
+                        >
+                          <h4 className="font-semibold text-foreground text-sm mb-1">{item.name}</h4>
+                          <p className="text-xs text-muted-foreground leading-snug">{item.description}</p>
+                        </Card>
+                      ))}
+                    </div>
+                  </section>
+                );
+              })}
+            </div>
+          </TabsContent>
+
+          <TabsContent value="solutions" className="mt-0">
+            <h2 className="text-3xl font-bold text-foreground mb-8 text-center">Our Solutions</h2>
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto">
+              {solutions.map((solution, index) => {
+                const Icon = solution.icon;
+                return (
+                  <Card
+                    key={index}
+                    className="p-6 hover:shadow-lg transition-all hover:scale-[1.02] cursor-pointer border-2 hover:border-primary group"
+                    onClick={() => navigate(solution.path)}
+                  >
+                    <div className="flex items-start gap-4">
+                      <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                        <Icon className="h-6 w-6 text-primary" />
+                      </div>
+                      <div>
+                        <h3 className="font-semibold text-foreground mb-1">{solution.name}</h3>
+                        <p className="text-sm text-muted-foreground">{solution.description}</p>
+                      </div>
+                    </div>
+                  </Card>
+                );
+              })}
+            </div>
+          </TabsContent>
+        </Tabs>
       </div>
     </div>
   );

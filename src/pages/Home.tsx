@@ -1,5 +1,6 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Card } from '@/components/ui/card';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import Navbar from '@/components/Navbar';
 import {
   Briefcase,
@@ -10,6 +11,10 @@ import {
   Banknote,
   Phone,
   Flame,
+  CreditCard,
+  User,
+  Building,
+  MapPin,
   type LucideIcon,
 } from 'lucide-react';
 

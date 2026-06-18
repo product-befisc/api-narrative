@@ -5,7 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Landing from "./pages/Landing";
 import Home from "./pages/Home";
-import IDProof from "./pages/IDProof";
+
 import IDVerificationWorkflow from "./pages/IDVerificationWorkflow";
 import BounceProof from "./pages/BounceProof";
 import TamperProof from "./pages/TamperProof";

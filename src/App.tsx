@@ -45,7 +45,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Landing />} />
           <Route path="/home" element={<Home />} />
-          <Route path="/product/id-proof" element={<IDProof />} />
+          
           <Route path="/product/id-proof/api-catalog" element={<APICatalog />} />
           <Route path="/product/id-proof/vehicle-verification" element={<VehicleVerification />} />
           <Route path="/product/id-proof/digilocker-aadhaar" element={<DigiLockerAadhaar />} />

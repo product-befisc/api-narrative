@@ -301,7 +301,7 @@ const Landing = () => {
               {/* ISO 27001:2022 Certified */}
               <div className="group relative bg-background/60 backdrop-blur-sm rounded-xl p-5 border border-border/50 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 hover:-translate-y-1">
                 <div className="flex flex-col items-center justify-center h-full min-h-[100px] gap-2">
-                  <img src={isoBadge} alt="ISO 27001:2022 Certified" className="h-12 w-auto object-contain" />
+                  <img src={isoBadge} alt="ISO 27001:2022 Certified" className="h-16 w-auto object-contain" />
                   <div className="text-xs font-medium text-muted-foreground uppercase tracking-wide text-center">
                     Certified
                   </div>
@@ -311,7 +311,7 @@ const Landing = () => {
               {/* CISA Certified 2022 */}
               <div className="group relative bg-background/60 backdrop-blur-sm rounded-xl p-5 border border-border/50 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 hover:-translate-y-1">
                 <div className="flex flex-col items-center justify-center h-full min-h-[100px] gap-2">
-                  <img src={cisaBadge} alt="CISA Certified 2022" className="h-12 w-auto object-contain" />
+                  <img src={cisaBadge} alt="CISA Certified 2022" className="h-16 w-auto object-contain" />
                   <div className="text-xs font-medium text-muted-foreground uppercase tracking-wide text-center">
                     CISA Certified 2022
                   </div>
@@ -343,7 +343,7 @@ const Landing = () => {
               {/* Fintech CX Awardee */}
               <div className="group relative bg-background/60 backdrop-blur-sm rounded-xl p-5 border border-border/50 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 hover:-translate-y-1">
                 <div className="flex flex-col items-center justify-center h-full min-h-[100px] gap-2">
-                  <img src={fintechBadge} alt="Fintech CX Awardee 2024" className="h-12 w-auto object-contain" />
+                  <img src={fintechBadge} alt="Fintech CX Awardee 2024" className="h-16 w-auto object-contain" />
                   <div className="text-xs font-medium text-muted-foreground uppercase tracking-wide text-center">
                     Fintech CX Awardee
                   </div>

@@ -313,7 +313,7 @@ const Landing = () => {
                 <div className="flex flex-col items-center justify-center h-full min-h-[100px] gap-2">
                   <img src={cisaBadge} alt="CISA Certified 2022" className="h-12 w-auto object-contain" />
                   <div className="text-xs font-medium text-muted-foreground uppercase tracking-wide text-center">
-                    Certified 2022
+                    CISA Certified 2022
                   </div>
                 </div>
               </div>
@@ -512,7 +512,9 @@ const Landing = () => {
                         className="max-w-full max-h-full object-contain group-hover:scale-110 transition-transform duration-300"
                       />
                     </div>
-                    <span className="font-medium text-foreground text-center text-[11px] leading-tight">{company.name}</span>
+                    <span className="font-medium text-foreground text-center text-[11px] leading-tight">
+                      {company.name}
+                    </span>
                   </div>
                 </div>
               );
@@ -526,7 +528,12 @@ const Landing = () => {
                   {section.marquee ? (
                     (() => {
                       const rows = section.singleRow
-                        ? [{ items: section.items, cls: section.reverse ? "animate-marquee-reverse" : "animate-marquee" }]
+                        ? [
+                            {
+                              items: section.items,
+                              cls: section.reverse ? "animate-marquee-reverse" : "animate-marquee",
+                            },
+                          ]
                         : (() => {
                             const mid = Math.ceil(section.items.length / 2);
                             return [

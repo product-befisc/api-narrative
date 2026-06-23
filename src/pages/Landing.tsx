@@ -345,7 +345,7 @@ const Landing = () => {
                 <div className="flex flex-col items-center justify-center h-full min-h-[100px] gap-2">
                   <img src={fintechBadge} alt="Fintech CX Awardee 2024" className="h-12 w-auto object-contain" />
                   <div className="text-xs font-medium text-muted-foreground uppercase tracking-wide text-center">
-                    Awardee
+                    Fintech CX Awardee
                   </div>
                 </div>
               </div>

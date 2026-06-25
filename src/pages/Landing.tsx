@@ -455,7 +455,7 @@ const Landing = () => {
                   { name: "Pointo", logo: pointoAsset.url },
                   { name: "SwitchMyLoan", logo: switchmyloanAsset.url },
                   { name: "Swipe Loan", logo: swipeloanLogo },
-                  { name: "Prudigital Media (Kredbharat)", logo: prudigitalAsset.url },
+                  { name: "Prudigital Media", logo: prudigitalAsset.url },
                 ],
               },
               {

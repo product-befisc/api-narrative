@@ -464,7 +464,7 @@ const Landing = () => {
                 maxW: "max-w-2xl",
                 items: [
                   { name: "INDmoney", logo: indmoneyAsset.url },
-                  { name: "Sahi (Aaritya Technologies)", logo: sahiAsset.url },
+                  { name: "Sahi", logo: sahiAsset.url },
                 ],
               },
               {
